@@ -10,7 +10,9 @@ namespace BanleWebsite.Controllers
     public class QuanliController : Controller
     {
         CategoryServices _categoryServices = new CategoryServices();
+
         ProductServices _productService = new ProductServices();
+
         // GET: Quanli
         public ActionResult Index()
         {
@@ -31,5 +33,35 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public ActionResult UpdateCategory()
+        {
+            List<Category> categoryList =_categoryServices.getAll();
+            ViewBag.categoryList = categoryList;
+
+            List<Category> categoryNoPreList = new List<Category>();
+            ViewBag.categoryNoPreList = categoryNoPreList;
+            foreach (var itemCategory in categoryList)
+            {
+                if (itemCategory.PreCateID == null)
+                {
+                    categoryNoPreList.Add(itemCategory);
+                }
+            }
+
+
+
+            //foreach (var itemCategoryNoPre in categoryNoPreList)
+            //{
+            //    foreach (var itemCategory in categoryList)
+            //    {
+            //        if (itemCategory.PreCateID == itemCategoryNoPre.ID) { }
+
+            //    }
+            //}
+
+            //Product p = null;
+            //ViewBag.pro1 = p;
+            return View();
+        }
     }
 }
