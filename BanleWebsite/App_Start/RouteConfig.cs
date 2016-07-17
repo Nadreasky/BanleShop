@@ -18,6 +18,11 @@ namespace BanleWebsite
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "SanPhamDetail",
+                url: "Sanpham/{id}",
+                defaults: new { controller = "Sanpham", action = "Index" }
+            );
         }
     }
 }

@@ -285,11 +285,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sanpham\Index.cshtml" />
     <Content Include="Views\Danhmuc\Index.cshtml" />
+    <Content Include="Views\Quanli\Category.cshtml" />
+    <Content Include="Views\Quanli\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
-    <Folder Include="Views\Quanli\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

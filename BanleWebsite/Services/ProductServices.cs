@@ -9,6 +9,7 @@ namespace BanleWebsite.Services
     public class ProductServices
     {
         ProductRepository _productRepository;
+        CategoryServices _categoryServices;
         
         public ProductServices()
         {
@@ -78,6 +79,78 @@ namespace BanleWebsite.Services
         public void delete(Product p)
         {
             _productRepository.Delete(p);
+        }
+
+        public List<Product> getRelativeProducts(int id)
+        {
+            Product mainProduct = findByID(id);
+            List<Product> relativeProducts = new List<Product>();
+            List<Product> allProduct = getAll();
+            int count = 0;
+
+            int indexOfMainProduct = allProduct.IndexOf(mainProduct);
+
+            for (int i = indexOfMainProduct + 1; i < allProduct.Count && count < 4; i++)
+            {
+
+                Product p = allProduct.ElementAt(i);
+                if (p.CateID == mainProduct.CateID)
+                {
+                    relativeProducts.Add(p);
+                    count++;
+                }
+            }
+
+            count = 0;
+
+            for (int i = indexOfMainProduct - 1; i >= 0 && count < 4; i--)
+            {
+
+                Product p = allProduct.ElementAt(i);
+                if (p.CateID == mainProduct.CateID)
+                {
+                    relativeProducts.Add(p);
+                    count++;
+                }
+            }
+
+            return relativeProducts;
+
+        }
+
+        public List<Category> getProductTree(int id)
+        {
+            List<Category> productTree = new List<Category>();
+            _categoryServices = new CategoryServices();
+
+            Product mainProduct = findByID(id);
+
+            if (mainProduct != null)
+            {
+                Category mainProCate = _categoryServices.findByid(mainProduct.CateID);
+
+                productTree.Add(mainProCate);
+                Category tmp = new Category();
+
+                tmp = mainProCate;
+
+
+
+                while (tmp != null && tmp.PreCateID != SLIMCONFIG.NONE_PRE_CATEGORY)
+                {
+                    if (tmp.PreCateID != SLIMCONFIG.NONE_PRE_CATEGORY && tmp.PreCateID != null)
+                    {
+
+                        Category c = _categoryServices.findByid(tmp.PreCateID.Value);
+                        productTree.Add(c);
+                        tmp = c;
+                    }
+                }
+
+
+            }
+
+            return productTree;
         }
     }
 }
