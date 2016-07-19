@@ -5,16 +5,20 @@
     List<Product> products = ViewBag.products;
 }
 
-<h2>Product</h2>
+
+<head>
+    <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
+</head>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
 
 <div class="container">
     <div class="row">
@@ -39,12 +43,106 @@
                 </select>
                 <label>Số lượng</label>
                 <input class="form-control" id="quantity" name="quantity" />
-                <button type="submit"
+                <label>Hình ảnh sản phẩm</label><br />
+                <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
+                <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
+                <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
+                <label>Description</label>
+                <textarea name="description" id="description" class="form-control" rows="10"></textarea>
+
+                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Add" />
+
              }
         </div>
         <div class="col-md-8">
-            loohe
+            <table class="table" id="productTable">
+                <thead>
+                    <tr>
+                        <th hidden="hidden">ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        for (int i = 0; i < products.Count; i++)
+                        {
+                            Product p = products.ElementAt(i);
+                            <tr>
+                                <td hidden="hidden">@p.ID</td>
+                                <td>@p.Name</td>
+                                <td>@p.Price</td>
+                                <td>@p.Quantity</td>
+                                <td rowspan="2"><button style="margin-top:50px;" class="btn btn-warning" onclick="editProduct(@p.ID)">Edit</button></td>
+                                <td rowspan="2"><button style="margin-top:50px;" class="btn btn-danger" onclick="deleteProduct(@p.ID)">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <span>1.</span><img src="@p.Img1" style="height:100px;width:100px;" />
+                                    <span>2.</span><img src="@p.Img2" style="height:100px;width:100px;" />
+                                    <span>3.</span><img src="@p.Img3" style="height:100px;width:100px;" />
+                                    @*<img src="@p.Img4" style="height:100px;width:100px;"/>*@
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+<script>
+    CKEDITOR.replace('description')
+</script>
 
+<script>
+    function editProduct(id)
+    {
+       jQuery.ajax({
+            url: "/Quanli/getProductInfo",
+            data: {
+                format: 'json',
+                proId:id
+            },
+            error: function() {
+                alert("Problem");
+            },
+            success: function (data) {
+                var proObj = JSON.parse(data);
+                var jq = jQuery.noConflict();
+
+                jq("#id").val(proObj.ID);
+                jq("#productName").val(proObj.Name);
+                jq("#productPrice").val(proObj.Price);
+                jq("#productCateID").val(proObj.CateID);
+                jq("#quantity").val(proObj.Quantity);
+                jq("#trend").val(proObj.Trend);
+                CKEDITOR.instances['description'].setData(proObj.Descriptions);
+                jq("#btnAddProduct").val("Update");
+            }
+        })
+    }
+
+    function deleteProduct(id) {
+        jQuery.ajax({
+            url: "/Quanli/deleteProduct",
+            data: {
+                format: 'json',
+                proId: id
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (data) {
+                if (data === "Success") {
+                    location.href = location.href;
+                }
+            },
+            type: 'POST'
+        })
+    }
+</script>

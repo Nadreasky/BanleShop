@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BanleWebsite.Services;
 
 namespace BanleWebsite.Controllers
 {
     public class HomeController : Controller
     {
+        ProductServices _productServices;
         public ActionResult Index()
         {
+            _productServices = new ProductServices();
+            List<Product> allProduct = _productServices.getAll();
             return View();
         }
 

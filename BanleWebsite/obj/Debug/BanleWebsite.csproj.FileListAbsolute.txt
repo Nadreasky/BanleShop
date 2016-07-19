@@ -67,6 +67,7 @@ E:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\Microsoft.Owin.Security
 E:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.csprojResolveAssemblyReference.cache
 E:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.dll
 E:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.pdb
+F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.csprojResolveAssemblyReference.cache
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\roslyn\csc.exe
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -133,6 +134,5 @@ F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\Microsoft.Owin.Security
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\Microsoft.Owin.Security.Google.xml
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\Microsoft.Owin.Security.Twitter.xml
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.csprojResolveAssemblyReference.cache
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.dll
 F:\Comm Projects\BanleShop\BanleWebsite\BanleWebsite\obj\Debug\BanleWebsite.pdb

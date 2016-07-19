@@ -63,5 +63,10 @@ namespace BanleWebsite.Services
                 _categoryRepository.Update(c);
             }
         }
+
+        public void delete(Category c)
+        {
+            _categoryRepository.Delete(c);
+        }
     }
 }

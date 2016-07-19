@@ -1,6 +1,189 @@
 ﻿
 @{
-    ViewBag.Title = "Category";
+    ViewBag.Title = "Quản lí danh mục";
+    List<Category> categories = ViewBag.categories;
 }
 
-<h2>Category</h2>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+<div class="container">
+    @{
+        if (!"".Equals(ViewBag.Error))
+        {
+            <div class="alert alert-danger">
+                <strong>@Html.Raw(ViewBag.Error)</strong>
+            </div>
+        }
+
+    }
+    <div class="col-md-4">
+        <h2>Thêm Category mới</h2>
+        @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input id="id" name="id" class="form-control" type="hidden" />
+            <label>Tên Category</label>
+            <input id="categoryName" name="categoryName" class="form-control" />
+            <input id="preCateID" name="preCateID" class="form-control" value="@SLIMCONFIG.NONE_PRE_CATEGORY" type="hidden" />
+
+            <input id="btnAddCategory" type="submit" class="btn btn-success" value="Add" />
+        }
+    </div>
+    <div class="col-md-8">
+        <table class="table" id="categoryTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < categories.Count; i++)
+                    {
+                        Category c = categories.ElementAt(i);
+                        if (c.PreCateID == SLIMCONFIG.NONE_PRE_CATEGORY)
+                        {
+                            <tr>
+                                <td>@c.ID</td>
+                                <td>@c.Name</td>
+                                <td><button class="btn btn-warning" onclick="editCategory(@c.ID)">Edit</button></td>
+                                <td><button class="btn btn-danger" onclick="deleteCategory(@c.ID)">Delete</button></td>
+                                <td>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                for (int j = 0; j < categories.Count; j++)
+                                                {
+                                                    Category sc = categories.ElementAt(j);
+                                                    if (sc.PreCateID == c.ID)
+                                                    {
+                                                        <tr>
+                                                            <td><input id="subCateName+@sc.ID" class="form-control" disabled="disabled" value="@sc.Name" /></td>
+                                                            <td><button id="btnEditSubCate+@sc.ID" class="btn btn-warning" onclick="editSubCategory(@sc.ID)">Edit</button></td>
+                                                            <td><button class="btn btn-danger" onclick="deleteCategory(@sc.ID)">Delete</button></td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                <tr>
+                                                    @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+                                                        <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
+                                                        <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@c.ID" /></td>
+                                                        <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
+                                                        <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
+                                                    }
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                                                    }
+                                                }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function editCategory(id)
+    {
+        jQuery.ajax({
+            url: "/Quanli/getCategoryInfo",
+            data: {
+                format: 'json',
+                cateID: id,
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function(data)
+            {
+                var jq = jQuery.noConflict();
+                var cateObj = JSON.parse(data);
+                jq("#id").val(cateObj.ID);
+                jq("#categoryName").val(cateObj.Name);
+
+                jq("#btnAddCategory").val("Update");
+            },
+            type: 'GET'
+        })
+    }
+
+    var editable = false;
+    function editSubCategory(id)
+    {
+        if(editable == false)
+        {
+            var btn = document.getElementById("btnEditSubCate+"+id).firstChild;
+            btn.data = btn.data = "Edit" ? "Update" : "Edit";
+            var x = document.getElementById("subCateName+"+id).disabled = false;
+            editable = true;
+        }
+        else
+        {
+            var subCateName = document.getElementById("subCateName+"+id).value;
+            //alert(subCateName);
+            jQuery.ajax({
+                url: "/Quanli/editSubCate",
+                data: {
+                    format: 'json',
+                    id: id,
+                    name: subCateName
+                },
+                error: function() {
+                    alert("Problem");
+                },
+                success: function(data) {
+                    if (data === "success")
+                    {
+
+                        editable = false;
+                        var x = document.getElementById("subCateName+" + id).disabled = true;
+                        location.href = location.href;
+                    }
+                },
+                type: 'POST'
+            })
+        }
+    }
+
+    function deleteCategory(id)
+    {
+       jQuery.ajax({
+            url: "/Quanli/deleteCategory",
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function(data)
+            {
+                if (data === "Success")
+                {
+                    location.href = location.href;
+                }
+            },
+            type: 'POST'
+        })
+    }
+</script>

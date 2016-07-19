@@ -1,6 +1,10 @@
-﻿
+﻿@using BanleWebsite.Services;
 @{
-    ViewBag.Title = "Index";
+    Product mainProduct = ViewBag.mainProduct;
+    ViewBag.Title = "Your Fashion " + " - " + mainProduct.Name;
+    List<Product> relativeProducts = ViewBag.relativeProducts;
+    List<Category> proTree = ViewBag.proTree;
+    ProductServices _productServices = new ProductServices();
 }
 
 
@@ -10,16 +14,46 @@
             <div class="wrapper_w">
                 <div class="pull-left">
                     <div class="breadcrumbs">
-                        <a class="home" href="http://demo.ethemeuk.com/buyshop/woocommerce/demo">Home</a><span>›</span>
-                        <a href="index90fa.html?product_cat=women">Women</a><span>›</span>
-                        <a href="index3a7f.html?product_cat=dresses">Dresses</a><span>›</span>
-                        <a href="index1e07.html?product_cat=prom-dresses">Prom Dresses</a><span>›</span>
-                        <a href="#">A.L.C &#8211; Gerry Dress</a>
+                        <a class="home" href="/">Home</a><span>›</span>
+                        @{ 
+                            for (int i = proTree.Count - 1; i >= 0; i--)
+                            {
+                                Category c = proTree.ElementAt(i);
+                                <a href="/danhmuc/@c.ID">@c.Name</a><span>></span>
+                            }
+                        }
+                        <a href="#">@mainProduct.Name</a>
                     </div>
                 </div>
                 <div class="pull-right">
                     <div class="direction-nav">
-                        <span class="prev">
+                        @{
+                            Product prevProduct = _productServices.findByID(mainProduct.ID - 1);
+                            if (prevProduct != null)
+                            {
+                                <span class="prev">
+                                    <a href="/sanpham/@prevProduct.ID" rel="prev">
+                                        <i class="icon-left-thin"></i>
+                                    </a>
+                                    <div class="small_preview prev hidden-phone hidden-tablet" style="display: none;">
+                                        <img width="150" height="150" src="@prevProduct.Img1" class="attachment-thumbnail wp-post-image" alt="@prevProduct.Name" />
+                                    </div>
+                                </span>
+                            }
+                            Product nextProduct = _productServices.findByID(mainProduct.ID + 1);
+                            if (nextProduct != null)
+                            {
+                                <span class="next">
+                                    <a href="/sanpham/@nextProduct.ID" rel="next">
+                                        <i class="icon-right-thin"></i>
+                                    </a>
+                                    <div class="small_preview next hidden-phone hidden-tablet" style="display: none;">
+                                        <img width="150" height="150" src="@nextProduct.Img1" class="attachment-thumbnail wp-post-image" alt="@nextProduct.Name" />
+                                    </div>
+                                </span>
+                            }
+                        }
+                        @*<span class="prev">
                             <a href="indexa932.html?product=azrouel-dress" rel="prev">
                                 <i class="icon-left-thin"></i>
                             </a>
@@ -34,7 +68,7 @@
                             <div class="small_preview next hidden-phone hidden-tablet" style="display: none;">
                                 <img width="150" height="150" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-87-150x150.jpg" class="attachment-thumbnail wp-post-image" alt="woclo_01_1 (87)" />
                             </div>
-                        </span>
+                        </span>*@
 
                     </div>
                 </div>
@@ -54,16 +88,27 @@
                                 <div class="flexslider more-views">
 
                                     <ul class="slides">
-
-                                        <li><a href="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg" class="cloud-zoom-gallery" title="wclo_ad_1_1 (22)" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: 'http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg'" alt="" width="62" height="62"><img src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-63x63.jpg" /></a></li></li>
-                                        <li><a href="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-23.jpg" class="cloud-zoom-gallery" title="wclo_ad_1_1 (23)" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: 'http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-23.jpg'" alt="" width="62" height="62"><img src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-23-63x63.jpg" /></a></li></li>
+                                        @if (!"".Equals(mainProduct.Img1))
+                                        {
+                                            <li><a href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" class="cloud-zoom-gallery" title="@mainProduct.Name Img_1" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: '@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1'" alt="" width="62" height="62"><img src="@mainProduct.Img1" /></a></li>
+                                        }
+                                        @if (!"".Equals(mainProduct.Img2))
+                                        {
+                                            <li><a href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img2" class="cloud-zoom-gallery" title="@mainProduct.Name Img_2" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: '@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img2'" alt="" width="62" height="62"><img src="@mainProduct.Img2" /></a></li>
+                                        }
+                                        @if (!"".Equals(mainProduct.Img3))
+                                        {
+                                            <li><a href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img3" class="cloud-zoom-gallery" title="@mainProduct.Name Img_3" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: '@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img3'" alt="" width="62" height="62"><img src="@mainProduct.Img3" /></a></li>
+                                        }
+                                        @*<li><a href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB" class="cloud-zoom-gallery" title="wclo_ad_1_1 (22)" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: 'http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg'" alt="" width="62" height="62"><img src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-63x63.jpg" /></a></li></li>
+                                        <li><a href="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-23.jpg" class="cloud-zoom-gallery" title="wclo_ad_1_1 (23)" rel="prettyPhoto[product-gallery]" data-rel="useZoom: 'zoom1', smallImage: 'http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-23.jpg'" alt="" width="62" height="62"><img src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-23-63x63.jpg" /></a></li></li>*@
                                     </ul>
 
                                 </div>
                             </div>
 
                             <div class="span4">
-                                <div class="product-image"><a class="cloud-zoom" href="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title="wclo_ad_1_1 (22)"><img alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg" /></a></div>
+                                <div class="product-image"><a class="cloud-zoom" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
                             </div>
 
                         </div>
@@ -100,18 +145,20 @@
                             </div>
                         </div>
                         <div class="product_info_left">
-                            <div class="product-name"><h1>A.L.C &#8211; Gerry Dress</h1></div><div itemprop="productID" class="sku_wrapper">SKU: <span class="sku"><b>13</b></span></div><div class="short-description">
-                                <p>Silver, metallic-blue and metallic-lavender silk-blend jacquard, graphic pattern, pleated ruffle along collar, long sleeves with button-fastening cuffs, buckle-fastening silver skinny belt, large pleated rosettes at hips, pleated ruffle around back, vent at back hem, fully lined.</p>
+                            <div class="product-name"><h1>@mainProduct.Name</h1></div>
+                            <div itemprop="productID" class="sku_wrapper">SKU: <span class="sku"><b>13</b></span></div>
+                            <div class="short-description">
+                                <p>@Html.Raw(mainProduct.Descriptions)</p>
                             </div>
                             <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
-                                <span class="amount">&pound;260.00</span>
+                                <span class="amount">@mainProduct.Price VND</span>
                                 <meta itemprop="price" content="260" />
                                 <meta itemprop="priceCurrency" content="GBP" />
                                 <link itemprop="availability" href="http://schema.org/InStock" />
 
                             </div>
-                            <p class="stock in-stock">999967 in stock</p>
+                            <p class="stock in-stock">@mainProduct.Quantity in stock</p>
 
 
                             <div class="add-to-cart">
@@ -178,7 +225,7 @@
 
                             <h2>Product Description</h2>
 
-                            <p>Silver, metallic-blue and metallic-lavender silk-blend jacquard, graphic pattern, pleated ruffle along collar, long sleeves with button-fastening cuffs, buckle-fastening silver skinny belt, large pleated rosettes at hips, pleated ruffle around back, vent at back hem, fully lined. Concealed button fastenings through front. 58% silk, 37% metal, 5% polyester; lining: 92% polyester, 8% elastane. Dry clean. Zip and hook fastening at back. 100% silk. Specialist clean.</p>
+                            <p>@Html.Raw(mainProduct.Descriptions)</p>
                         </div>
                         <div id="tabreviews" class="tab-pane ">
                             <div id="reviews">
@@ -278,1097 +325,106 @@
                             <div class="row ">
                                 <div class="product_outer carousel_items">
 
+                                    @{
+                                        for (int i = 0; i < relativeProducts.Count; i++)
+                                        {
+                                            Product p = relativeProducts.ElementAt(i);
+
+                                            <div class="span3 product carousel_item post-723 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-dress product_tag-sexy product_tag-style shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-dress product-tag-sexy product-tag-style instock">
 
 
-                                    <div class="span3 product carousel_item post-835 type-product status-publish has-post-thumbnail product_cat-jeans product_cat-shirts product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-jeans product-cat-shirts product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="index0728.html?product=tie-dye-silk-top"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-42-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (42)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index0728.html?product=tie-dye-silk-top">
-                                                    Tie-dye silk top
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="835">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;290.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="indexcb38.html?product=a-l-c-gerry-dress&amp;add-to-cart=835" rel="nofollow" data-product_id="835" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396621151</span>
-                                        <span class="sort-price hidden">290</span>
-                                        <span class="sort-product_name hidden">Tie-dye silk top</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-43.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-43-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-42.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-42-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="index0728.html?product=tie-dye-silk-top">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-42-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (42)" />
-                                                    </a>
+                                                <div class="product-image-wrapper onhover animate scale">
+                                                    <a href="/sanpham/@p.ID"><img width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" /></a>
                                                 </div>
+
 
                                                 <div class="wrapper-hover">
 
                                                     <div class="product-name">
-                                                        <a href="index0728.html?product=tie-dye-silk-top">
-                                                            Tie-dye silk top
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="835">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;290.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="indexcb38.html?product=a-l-c-gerry-dress&amp;add-to-cart=835" rel="nofollow" data-product_id="835" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index18e0.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=835" data-product-id="835" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-723 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-dress product_tag-sexy product_tag-style shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-dress product-tag-sexy product-tag-style instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="index8017.html?product=rose-print-bandage-dress"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-55-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (55)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index8017.html?product=rose-print-bandage-dress">
-                                                    Rose-print bandage dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;350.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396618878</span>
-                                        <span class="sort-price hidden">350</span>
-                                        <span class="sort-product_name hidden">Rose-print bandage dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-57.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-57-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-56.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-56-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-55.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-55-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="index8017.html?product=rose-print-bandage-dress">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-55-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (55)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index8017.html?product=rose-print-bandage-dress">
-                                                            Rose-print bandage dress
+                                                        <a href="/sanpham/@p.ID">
+                                                            @p.Name
                                                         </a>
                                                     </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Quick View</a>
                                                     <div class="wrapper">
 
 
-                                                        <div class="product-price"><span class="amount">&pound;350.00</span></div>
+                                                        <div class="product-price"><span class="amount">@p.Price VND</span></div>
 
 
                                                         <div class="product-tocart"><a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
+                                                        <div class="clearfix"></div>
                                                     </div>
-                                                    <div class="clearfix"></div>
 
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index8968.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=723" data-product-id="723" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-722 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-dress product_tag-sexy product_tag-silk product_tag-strapless sale featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-dress product-tag-sexy product-tag-silk product-tag-strapless instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="sale_discount img-rounded">-16%</div><div class="label_sale_top_right">Sale!</div>		<a href="indexe99b.html?product=petites-mink-twill-jacket"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-60-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (60)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexe99b.html?product=petites-mink-twill-jacket">
-                                                    Petites Mink Twill Jacket
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="722">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><del><span class="amount">&pound;120.00</span></del> <ins><span class="amount">&pound;100.00</span></ins></div>
-
-
-                                                <div class="product-tocart"><a href="indexb6d1.html?product=a-l-c-gerry-dress&amp;add-to-cart=722" rel="nofollow" data-product_id="722" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396618772</span>
-                                        <span class="sort-price hidden">100</span>
-                                        <span class="sort-product_name hidden">Petites Mink Twill Jacket</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-61.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-61-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-60.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-60-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-59.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-59-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="sale_discount img-rounded">-16%</div><div class="label_sale_top_right">Sale!</div>				<a href="indexe99b.html?product=petites-mink-twill-jacket">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-60-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (60)" />
-                                                    </a>
                                                 </div>
 
-                                                <div class="wrapper-hover">
 
-                                                    <div class="product-name">
-                                                        <a href="indexe99b.html?product=petites-mink-twill-jacket">
-                                                            Petites Mink Twill Jacket
+                                                <span class="sort-date hidden">1396618878</span>
+                                                <span class="sort-price hidden">@p.Price</span>
+                                                <span class="sort-product_name hidden">@p.Name</span>
+                                                <span class="sort-rating hidden">0</span>
+
+                                            </div>
+
+                                            <div class="preview hidden-tablet hidden-phone " style="display: none;">
+                                                <div class="wrapper">
+
+                                                    <div class="col-1">
+
+
+                                                        <a class="image" data-rel="@p.Img1" href="#">
+                                                            <img class="thumb" alt="" src="@p.Img1" />
                                                         </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="722">Quick View</a>
-                                                    <div class="wrapper">
 
 
-                                                        <div class="product-price"><del><span class="amount">&pound;120.00</span></del> <ins><span class="amount">&pound;100.00</span></ins></div>
-
-
-                                                        <div class="product-tocart"><a href="indexb6d1.html?product=a-l-c-gerry-dress&amp;add-to-cart=722" rel="nofollow" data-product_id="722" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexe075.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=722" data-product-id="722" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-824 type-product status-publish has-post-thumbnail product_cat-coats product_cat-dresses product_cat-evening-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-coats product-cat-dresses product-cat-evening-dresses product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="index8483.html?product=hand-embellished-pleated-crepe-and-satin-dress"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-58-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (58)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index8483.html?product=hand-embellished-pleated-crepe-and-satin-dress">
-                                                    Hand-embellished pleated crepe and satin dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="824">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;1,400.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index9755.html?product=a-l-c-gerry-dress&amp;add-to-cart=824" rel="nofollow" data-product_id="824" data-product_sku="9" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396619777</span>
-                                        <span class="sort-price hidden">1400</span>
-                                        <span class="sort-product_name hidden">Hand-embellished pleated crepe and satin dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-60.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-60-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-59.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-59-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-58.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-58-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="index8483.html?product=hand-embellished-pleated-crepe-and-satin-dress">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-58-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (58)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index8483.html?product=hand-embellished-pleated-crepe-and-satin-dress">
-                                                            Hand-embellished pleated crepe and satin dress
+                                                        <a class="image" data-rel="@p.Img2" href="#">
+                                                            <img class="thumb" alt="" src="@p.Img2" />
                                                         </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="824">Quick View</a>
-                                                    <div class="wrapper">
 
 
-                                                        <div class="product-price"><span class="amount">&pound;1,400.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index9755.html?product=a-l-c-gerry-dress&amp;add-to-cart=824" rel="nofollow" data-product_id="824" data-product_sku="9" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index162b.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=824" data-product-id="824" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-721 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-dress product_tag-sexy product_tag-style sale shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-dress product-tag-sexy product-tag-style instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="sale_discount img-rounded">-20%</div><div class="label_sale_top_right">Sale!</div>		<a href="index4442.html?product=contrasting-ruffle-cocktail"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-70-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (70)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index4442.html?product=contrasting-ruffle-cocktail">
-                                                    Contrasting Ruffle Cocktail
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="721">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><del><span class="amount">&pound;175.00</span></del> <ins><span class="amount">&pound;140.00</span></ins></div>
-
-
-                                                <div class="product-tocart"><a href="index73fd.html?product=a-l-c-gerry-dress&amp;add-to-cart=721" rel="nofollow" data-product_id="721" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396618526</span>
-                                        <span class="sort-price hidden">140</span>
-                                        <span class="sort-product_name hidden">Contrasting Ruffle Cocktail</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-72.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-72-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-71.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-71-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-70.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-70-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="sale_discount img-rounded">-20%</div><div class="label_sale_top_right">Sale!</div>				<a href="index4442.html?product=contrasting-ruffle-cocktail">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-70-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (70)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index4442.html?product=contrasting-ruffle-cocktail">
-                                                            Contrasting Ruffle Cocktail
+                                                        <a class="image" data-rel="@p.Img3" href="#">
+                                                            <img class="thumb" alt="" src="@p.Img3" />
                                                         </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="721">Quick View</a>
-                                                    <div class="wrapper">
 
-
-                                                        <div class="product-price"><del><span class="amount">&pound;175.00</span></del> <ins><span class="amount">&pound;140.00</span></ins></div>
-
-
-                                                        <div class="product-tocart"><a href="index73fd.html?product=a-l-c-gerry-dress&amp;add-to-cart=721" rel="nofollow" data-product_id="721" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
 
                                                     </div>
-                                                    <div class="clearfix"></div>
+                                                    <div class="col-2 with_media">
+                                                        <div class="big_image">
+                                                            <a href="/sanpham/@p.ID">
 
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index5008.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=721" data-product-id="721" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                                <img width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            </a>
+                                                        </div>
 
+                                                        <div class="wrapper-hover">
 
-                                    <div class="span3 product carousel_item post-829 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="indexfdb7.html?product=laced-paneled-bandage-dress"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-15-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (15)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexfdb7.html?product=laced-paneled-bandage-dress">
-                                                    Laced-paneled bandage dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="829">Quick View</a>
-                                            <div class="wrapper">
+                                                            <div class="product-name">
+                                                                <a href="/sanpham/@p.ID">
+                                                                    @p.Name
+                                                                </a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Quick View</a>
+                                                            <div class="wrapper">
 
 
-                                                <div class="product-price"><span class="amount">&pound;2,300.00</span></div>
+                                                                <div class="product-price"><span class="amount">@p.Price</span></div>
 
 
-                                                <div class="product-tocart"><a href="index7f82.html?product=a-l-c-gerry-dress&amp;add-to-cart=829" rel="nofollow" data-product_id="829" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
+                                                                <div class="product-tocart"><a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
 
-                                        </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
 
-
-                                        <span class="sort-date hidden">1396620433</span>
-                                        <span class="sort-price hidden">2300</span>
-                                        <span class="sort-product_name hidden">Laced-paneled bandage dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-16.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-16-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-15.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-15-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="indexfdb7.html?product=laced-paneled-bandage-dress">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-15-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (15)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexfdb7.html?product=laced-paneled-bandage-dress">
-                                                            Laced-paneled bandage dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="829">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;2,300.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index7f82.html?product=a-l-c-gerry-dress&amp;add-to-cart=829" rel="nofollow" data-product_id="829" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index6eb3.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=829" data-product-id="829" data-product-type="simple">Add to Wishlist</a>
+                                                            <div class="product-link">
+                                                                <a class="wft_add_to_wishlist" href="index8968.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=723" data-product-id="723" data-product-type="simple">Add to Wishlist</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        }
 
 
-                                    <div class="span3 product carousel_item post-828 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
 
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="index9c5d.html?product=cozy-draped-silk-blend-cardigan"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-71-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (71)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index9c5d.html?product=cozy-draped-silk-blend-cardigan">
-                                                    Cozy draped silk-blend cardigan
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="828">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;750.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index2639.html?product=a-l-c-gerry-dress&amp;add-to-cart=828" rel="nofollow" data-product_id="828" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396620325</span>
-                                        <span class="sort-price hidden">750</span>
-                                        <span class="sort-product_name hidden">Cozy draped silk-blend cardigan</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-72.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-72-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-71.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-71-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-70.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-70-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="index9c5d.html?product=cozy-draped-silk-blend-cardigan">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-71-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (71)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index9c5d.html?product=cozy-draped-silk-blend-cardigan">
-                                                            Cozy draped silk-blend cardigan
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="828">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;750.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index2639.html?product=a-l-c-gerry-dress&amp;add-to-cart=828" rel="nofollow" data-product_id="828" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexf36c.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=828" data-product-id="828" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-826 type-product status-publish has-post-thumbnail product_cat-coats product_cat-dresses product_cat-evening-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-coats product-cat-dresses product-cat-evening-dresses product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="indexf59a.html?product=embellished-bandage-dress"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-34-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (34)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexf59a.html?product=embellished-bandage-dress">
-                                                    Embellished bandage dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="826">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;1,200.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index016d.html?product=a-l-c-gerry-dress&amp;add-to-cart=826" rel="nofollow" data-product_id="826" data-product_sku="9" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396619930</span>
-                                        <span class="sort-price hidden">1200</span>
-                                        <span class="sort-product_name hidden">Embellished bandage dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-35.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-35-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-34.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-34-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="indexf59a.html?product=embellished-bandage-dress">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-34-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (34)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexf59a.html?product=embellished-bandage-dress">
-                                                            Embellished bandage dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="826">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;1,200.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index016d.html?product=a-l-c-gerry-dress&amp;add-to-cart=826" rel="nofollow" data-product_id="826" data-product_sku="9" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index3d01.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=826" data-product-id="826" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-831 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="index9102.html?product=beaded-silk-dress"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-20-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (20)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index9102.html?product=beaded-silk-dress">
-                                                    Beaded silk dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="831">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;650.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index093f.html?product=a-l-c-gerry-dress&amp;add-to-cart=831" rel="nofollow" data-product_id="831" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396620601</span>
-                                        <span class="sort-price hidden">650</span>
-                                        <span class="sort-product_name hidden">Beaded silk dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-21.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-21-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-20.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-20-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="index9102.html?product=beaded-silk-dress">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-20-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (20)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index9102.html?product=beaded-silk-dress">
-                                                            Beaded silk dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="831">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;650.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index093f.html?product=a-l-c-gerry-dress&amp;add-to-cart=831" rel="nofollow" data-product_id="831" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index4ccd.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=831" data-product-id="831" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-125 type-product status-publish has-post-thumbnail product_cat-coats product_cat-dresses product_cat-evening-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-coats product-cat-dresses product-cat-evening-dresses product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_video_bot_right">Video</div>		<a href="index17db.html?product=carven-gabardine-dress"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-24-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (24)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index17db.html?product=carven-gabardine-dress">
-                                                    Carven &#8211; Gabardine Dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="125">Quick View</a>
-                                            <div class="wrapper">
-
-                                                <div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
-                                                <div class="product-price"><span class="amount">&pound;167.50</span></div>
-
-
-                                                <div class="product-tocart"><a href="indexfb98.html?product=a-l-c-gerry-dress&amp;add-to-cart=125" rel="nofollow" data-product_id="125" data-product_sku="8" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1386768102</span>
-                                        <span class="sort-price hidden">167.50</span>
-                                        <span class="sort-product_name hidden">Carven &#8211; Gabardine Dress</span>
-                                        <span class="sort-rating hidden">4</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-25.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-25-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-24.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-24-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_video_bot_right">Video</div>				<a href="index17db.html?product=carven-gabardine-dress">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-24-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (24)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index17db.html?product=carven-gabardine-dress">
-                                                            Carven &#8211; Gabardine Dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="125">Quick View</a>
-                                                    <div class="wrapper">
-
-                                                        <div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">4.00</strong> out of 5</span></div>
-                                                        <div class="product-price"><span class="amount">&pound;167.50</span></div>
-
-
-                                                        <div class="product-tocart"><a href="indexfb98.html?product=a-l-c-gerry-dress&amp;add-to-cart=125" rel="nofollow" data-product_id="125" data-product_sku="8" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexcb29.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=125" data-product-id="125" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-96 type-product status-publish has-post-thumbnail product_cat-lingerie product_cat-shorts product_cat-skirts product_cat-women sale featured shipping-taxable purchasable product-type-simple product-cat-lingerie product-cat-shorts product-cat-skirts product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="sale_discount img-rounded">-20%</div><div class="label_sale_top_right">Sale!</div>		<a href="index23b4.html?product=embroidered-lace-thong"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-87-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (87)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index23b4.html?product=embroidered-lace-thong">
-                                                    Embroidered lace thong
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="96">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><del><span class="amount">&pound;16.75</span></del> <ins><span class="amount">&pound;13.40</span></ins></div>
-
-
-                                                <div class="product-tocart"><a href="index27e8.html?product=a-l-c-gerry-dress&amp;add-to-cart=96" rel="nofollow" data-product_id="96" data-product_sku="27" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1386767808</span>
-                                        <span class="sort-price hidden">13.40</span>
-                                        <span class="sort-product_name hidden">Embroidered lace thong</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/wocload_01_1_44_.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/wocload_01_1_44_-63x84.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/wocload_01_1_45_.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/wocload_01_1_45_-63x84.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/wocload_01_1_42_.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/wocload_01_1_42_-63x84.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="sale_discount img-rounded">-20%</div><div class="label_sale_top_right">Sale!</div>				<a href="index23b4.html?product=embroidered-lace-thong">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-87-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (87)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index23b4.html?product=embroidered-lace-thong">
-                                                            Embroidered lace thong
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="96">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><del><span class="amount">&pound;16.75</span></del> <ins><span class="amount">&pound;13.40</span></ins></div>
-
-
-                                                        <div class="product-tocart"><a href="index27e8.html?product=a-l-c-gerry-dress&amp;add-to-cart=96" rel="nofollow" data-product_id="96" data-product_sku="27" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexad3a.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=96" data-product-id="96" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="span3 product carousel_item post-832 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-jeans product_cat-shirts product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-jeans product-cat-shirts product-cat-women instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <a href="indexfa03.html?product=twill-crop-jacket"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-73-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (73)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexfa03.html?product=twill-crop-jacket">
-                                                    Twill Crop Jacket
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="832">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;40.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index509a.html?product=a-l-c-gerry-dress&amp;add-to-cart=832" rel="nofollow" data-product_id="832" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396620706</span>
-                                        <span class="sort-price hidden">40</span>
-                                        <span class="sort-product_name hidden">Twill Crop Jacket</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-74.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-74-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-73.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-73-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-75.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-75-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <a href="indexfa03.html?product=twill-crop-jacket">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-73-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (73)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexfa03.html?product=twill-crop-jacket">
-                                                            Twill Crop Jacket
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="832">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;40.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index509a.html?product=a-l-c-gerry-dress&amp;add-to-cart=832" rel="nofollow" data-product_id="832" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index7655.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=832" data-product-id="832" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    }
 
                                 </div>
                             </div>
