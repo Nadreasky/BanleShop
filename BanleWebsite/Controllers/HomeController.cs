@@ -14,6 +14,7 @@ namespace BanleWebsite.Controllers
         {
             _productServices = new ProductServices();
             List<Product> allProduct = _productServices.getAll();
+            ViewBag.allProduct = allProduct;
             return View();
         }
 
