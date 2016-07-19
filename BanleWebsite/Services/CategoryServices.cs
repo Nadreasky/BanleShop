@@ -98,6 +98,9 @@ namespace BanleWebsite.Services
                 return categoryTreeRecursion;
             
             return getCategoryTreeRecursion(findByid(id).PreCateID.Value);
+        public void delete(Category c)
+        {
+            _categoryRepository.Delete(c);
         }
     }
 }

@@ -14,15 +14,21 @@ namespace BanleWebsite
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "DanhMuc",
+                url: "DanhMuc/{id}",
+                defaults: new { controller = "DanhMuc", action = "Index" }
             );
             routes.MapRoute(
                 name: "SanPhamDetail",
                 url: "Sanpham/{id}",
                 defaults: new { controller = "Sanpham", action = "Index" }
             );
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+            
         }
     }
 }

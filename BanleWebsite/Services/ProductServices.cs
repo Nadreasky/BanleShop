@@ -152,5 +152,15 @@ namespace BanleWebsite.Services
 
             return productTree;
         }
+
+        public bool isProductHasImage(int id)
+        {
+            Product p = findByID(id);
+            if ((p != null) && ((p.Img1 != null) || (p.Img2 != null) || (p.Img3 != null)))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
