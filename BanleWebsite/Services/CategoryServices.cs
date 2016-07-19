@@ -94,10 +94,11 @@ namespace BanleWebsite.Services
         public List<Category> getCategoryTreeRecursion(int id)
         {
             categoryTreeRecursion.Add(findByid(id));
-            if(findByid(id).PreCateID.Value == SLIMCONFIG.NONE_PRE_CATEGORY)
+            if (findByid(id).PreCateID.Value == SLIMCONFIG.NONE_PRE_CATEGORY)
                 return categoryTreeRecursion;
-            
+
             return getCategoryTreeRecursion(findByid(id).PreCateID.Value);
+        }
         public void delete(Category c)
         {
             _categoryRepository.Delete(c);
