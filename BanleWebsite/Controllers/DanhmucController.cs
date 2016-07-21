@@ -21,6 +21,9 @@ namespace BanleWebsite.Controllers
             List<Category> categoryTree = _categoryServices.getCategoryTree(id.Value);
             ViewBag.categoryTree = categoryTree;
 
+            Category mainCate = _categoryServices.findByid(id.Value);
+            ViewBag.mainCate = mainCate;
+
             return View();
         }
     }

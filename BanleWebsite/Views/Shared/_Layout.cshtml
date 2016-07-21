@@ -40,13 +40,18 @@
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <link rel="shortcut icon" href="~/Content/Buyshop/wp-content/themes/buyshop/img/favicon.ico" />
+    <link rel="shortcut icon" href="~/Content/SiteImages/favi.png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>
         @ViewBag.Title
     </title>
 
+    <style>
+        @@font-face{
+            font-family: VNOswald; src: url('/Content/font/VNF-Oswald Regular.ttf');
+        }
+    </style>
 
 
     <link rel="stylesheet" href="~/Content/Buyshop/wp-content/plugins/sitepress-multilingual-cms/res/css/language-selector3294.css?v=3.0.1" type="text/css" media="all" />
@@ -486,7 +491,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
     <!--[if IE 8]><link rel="stylesheet" type="text/css" href="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/plugins/js_composer/assets/css/vc-ie8.css" media="screen"><![endif]-->
     <style type="text/css" data-type="vc_shortcodes-custom-css">
         .vc_custom_1408126589913 {
-            background-image: url(/Content/Buyshop/wp-content/uploads/2013/12/parallax-bg1a525.jpg?id=1290) !important;
+            background-image: url(/Content/SiteImages/tphcm.jpg) !important;
             background-position: 0 0 !important;
             background-repeat: no-repeat !important;
             background: fixed;
@@ -519,7 +524,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
     <div id="wrap">
 
         <div id="right_toolbar" class="hidden-phone hidden-tablet">
-            <div><a href="http://demo.ethemeuk.com/buyshop/woocommerce/demo"><img src="~/Content/Buyshop/wp-content/themes/buyshop/img/logo_small.png" width="52" height="142" alt=""></a></div>
+            <div><a href="http://demo.ethemeuk.com/buyshop/woocommerce/demo"><img src="~/Content/SiteImages/logo_rightbar.png" width="52" height="142" alt=""></a></div>
 
             <div id="shopping_cart-3" class="woocommerce widget_shopping_cart">
                 <div class="shoppingcart">
@@ -595,7 +600,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                         </div>
                         <div class="spy-left">
                             <div class="spy_logo">
-                                <a href="/"><img src="~/Content/Buyshop/wp-content/themes/buyshop/img/logo.png" alt=""></a>
+                                <a href="/"><img src="~/Content/SiteImages/logo.png" alt="" style="margin-top:15px;"></a>
                             </div>
                         </div>
 
@@ -620,7 +625,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
             <div class="container" id="logo_area">
                 <div class="wrapper_w">
                     <div id="logo">
-                        <a href="/"><img src="~/Content/Buyshop/wp-content/themes/buyshop/img/logo.png" alt=""></a>
+                        <a href="/"><img src="~/Content/SiteImages/logo.png" alt="" width="250"></a>
                     </div>
 
                     <div class="pull-right padding-1">
@@ -772,15 +777,15 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                 @{
                                     foreach (var item in categoryListNoPre)
                                     {
-                                        <li id="menu-item-928" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-928">
-                                            <a href="/danhmuc/@item.ID"><span>@item.Name</span></a>
+                                        <li id="menu-item-928" class="dropdown menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-1062 dropdown">
+                                            <a href="/danhmuc/@item.ID"><span style="font-family:VNOswald;">@item.Name</span></a>
                                             <ul class="level0">
                                                 <ul class="shadow">
                                                     <li class="row_middle">
                                                         <ul class="rows_outer">
                                                             <li>
                                                                 <ul class="menu_row">
-                                                                    <li id="menu-item-951" class="col menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-parent-item menu-item-951">
+                                                                    <li id="menu-item-951" class="col menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-parent-item menu-item-929">
                                                                         <a href="#" class="title">	<span></span>	</a>
                                                                         <ul class="level1">
                                                                             @{
@@ -788,14 +793,20 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                                                 {
                                                                                     if (item2.PreCateID == item.ID)
                                                                                     {
-                                                                                        <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		<a href="/danhmuc/@item2.ID">		<span>@item2.Name</span>		</a>		</li>
+                                                                                        <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		
+                                                                                            <a href="/danhmuc/@item2.ID">		
+                                                                                                <span>@item2.Name</span>		
+                                                                                            </a>		
+                                                                                        </li>
                                                                                     }
                                                                                 }
                                                                             }
                                                                             
-                                                                              </ul>
+                                                                        </ul>
                                                                     </li>
-                                                                    <li id="menu-item-952" class="image-item menu-item menu-item-type-custom menu-item-object-custom menu-item-952">	<a href="#">	<img src="~/Content/Buyshop/wp-content/uploads/2014/07/bigstock-Elegant-man-in-suit-44860783.jpg" alt=" " />	</a>	</li>
+                                                                    @*<li id="menu-item-952" class="image-item menu-item menu-item-type-custom menu-item-object-custom menu-item-952">	
+                                                                        <a href="#"><img src="~/Content/Buyshop/wp-content/uploads/2014/07/bigstock-Elegant-man-in-suit-44860783.jpg" alt="" /></a>
+                                                                    </li>*@
                                                                 </ul>
                                                             </li>
                                                         </ul>

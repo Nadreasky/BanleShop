@@ -1,6 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    Category mainCate = ViewBag.mainCate;
+    ViewBag.Title = mainCate.Name;
     List<Category> categoryTree = ViewBag.categoryTree;
     List<Product> productList = ViewBag.productList;
 }
@@ -53,7 +54,7 @@
 
                 </div>
                 <div class="line1"></div>
-                <div class="listing_header_row2">
+                @*<div class="listing_header_row2">
                     <div class="pull-left">
                         <p class="woocommerce-result-count">
                             Showing 1–9 of 18 results
@@ -66,7 +67,7 @@
                             <a class="next page-numbers" href="index55d1.html?product_cat=dresses&amp;paged=2">&rarr;</a>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="clearfix"></div>
 
 
@@ -305,7 +306,7 @@
             <div id="column_left" class="span3">
                 <div class="row">
                     <div class="span3">
-                        <div id="product_categories-3" class="block woocommerce widget_product_categories">
+                        @*<div id="product_categories-3" class="block woocommerce widget_product_categories">
                             <div class="block-title"><strong><span>Listing</span></strong></div><ul class="product-categories collapsed-menu">
                                 <li class="level1 cat-item cat-item-38">
                                     <a href="indexefad.html?product_cat=man">Man</a><span class="collapse_button">+</span><ul class="level1 children" style="display: none;">
@@ -334,7 +335,9 @@
                                     </ul>
                                 </li>
                             </ul><div class="clearfix"></div>
-                        </div><!-- //sidebar-widget --><div id="woocommerce_price_filter-2" class="block woocommerce widget_price_filter">
+                        </div>*@
+                        <!-- //sidebar-widget -->
+                        @*<div id="woocommerce_price_filter-2" class="block woocommerce widget_price_filter">
                             <div class="block-title"><strong><span>Filter by price</span></strong></div><form method="get" action="http://demo.ethemeuk.com/buyshop/woocommerce/demo?product_cat=dresses">
                                 <div class="price_slider_wrapper">
                                     <div class="price_slider" style="display:none;"></div>
@@ -350,7 +353,8 @@
                                     </div>
                                 </div>
                             </form><div class="clearfix"></div>
-                        </div><!-- //sidebar-widget --><div id="tag_cloud-2" class="block widget_tag_cloud">
+                        </div>*@<!-- //sidebar-widget -->
+                        <div id="tag_cloud-2" class="block widget_tag_cloud">
                             <div class="block-title"><strong><span>Popular Tags</span></strong></div><div class="tagcloud">
                                 <a href='index85f0.html?product_tag=club-dresses' class='tag-link-28' title='24 topics' style='font-size: 20.504854368932pt;'>Club Dresses</a>
                                 <a href='index58b0.html?product_tag=coats' class='tag-link-32' title='7 topics' style='font-size: 13.708737864078pt;'>Coats</a>
