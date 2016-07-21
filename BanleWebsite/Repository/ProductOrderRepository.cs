@@ -5,29 +5,29 @@ using System.Web;
 
 namespace BanleWebsite.Repository
 {
-    public class ProductRepository : IRepository<Product>
+    public class ProductOrderRepository : IRepository<ProductOrder>
     {
-        BanleShopEntities _productContext;
-
-        public ProductRepository()
+        BanleShopEntities _productOrderContext;
+        
+        public ProductOrderRepository()
         {
-            _productContext = new BanleShopEntities();
+            _productOrderContext = new BanleShopEntities();
         }
 
-        public IEnumerable<Product> List
+        public IEnumerable<ProductOrder> List
         {
             get
             {
-                return _productContext.Products;
+                return _productOrderContext.ProductOrders;
             }
         }
 
-        public void Add(Product entity)
+        public void Add(ProductOrder entity)
         {
-            _productContext.Products.Add(entity);
+            _productOrderContext.ProductOrders.Add(entity);
             try
             {
-                _productContext.SaveChanges();
+                _productOrderContext.SaveChanges();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
@@ -48,32 +48,28 @@ namespace BanleWebsite.Repository
             }
         }
 
-        public void Delete(Product entity)
+        public void Delete(ProductOrder entity)
         {
-            _productContext.Products.Remove(entity);
-            _productContext.SaveChanges();
+            _productOrderContext.ProductOrders.Remove(entity);
+            _productOrderContext.SaveChanges();
         }
 
-        public Product FindById(int Id)
+        public ProductOrder FindById(int Id)
         {
-            var result = (from r in _productContext.Products where r.ID == Id select r).FirstOrDefault();
+            var result = (from r in _productOrderContext.ProductOrders where r.ID == Id select r).FirstOrDefault();
             return result;
+        }
+
+        public void Update(ProductOrder entity)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Product entity)
         {
-            _productContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            _productContext.SaveChanges();
+            _productOrderContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            _productOrderContext.SaveChanges();
         }
 
-        public List<Product> getByCategoryId(int cateId)
-        {
-            var result = (from r in _productContext.Products where r.CateID == cateId select r).ToList();
-            if (result == null)
-            {
-                result = new List<Product>();
-            }
-            return result;
-        }
     }
 }

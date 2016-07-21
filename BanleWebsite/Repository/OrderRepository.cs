@@ -5,29 +5,29 @@ using System.Web;
 
 namespace BanleWebsite.Repository
 {
-    public class ProductRepository : IRepository<Product>
+    public class OrderRepository : IRepository<Order>
     {
-        BanleShopEntities _productContext;
+        BanleShopEntities _orderContext;
 
-        public ProductRepository()
+        public OrderRepository()
         {
-            _productContext = new BanleShopEntities();
+            _orderContext = new BanleShopEntities();
         }
 
-        public IEnumerable<Product> List
+        public IEnumerable<Order> List
         {
             get
             {
-                return _productContext.Products;
+                return _orderContext.Orders;
             }
         }
 
-        public void Add(Product entity)
+        public void Add(Order entity)
         {
-            _productContext.Products.Add(entity);
+            _orderContext.Orders.Add(entity);
             try
             {
-                _productContext.SaveChanges();
+                _orderContext.SaveChanges();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
@@ -48,32 +48,22 @@ namespace BanleWebsite.Repository
             }
         }
 
-        public void Delete(Product entity)
+        public void Delete(Order entity)
         {
-            _productContext.Products.Remove(entity);
-            _productContext.SaveChanges();
+            _orderContext.Orders.Remove(entity);
+            _orderContext.SaveChanges();
         }
 
-        public Product FindById(int Id)
+        public Order FindById(int Id)
         {
-            var result = (from r in _productContext.Products where r.ID == Id select r).FirstOrDefault();
+            var result = (from r in _orderContext.Orders where r.ID == Id select r).FirstOrDefault();
             return result;
         }
 
-        public void Update(Product entity)
+        public void Update(Order entity)
         {
-            _productContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            _productContext.SaveChanges();
-        }
-
-        public List<Product> getByCategoryId(int cateId)
-        {
-            var result = (from r in _productContext.Products where r.CateID == cateId select r).ToList();
-            if (result == null)
-            {
-                result = new List<Product>();
-            }
-            return result;
+            _orderContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            _orderContext.SaveChanges();
         }
     }
 }
