@@ -1,4 +1,29 @@
-﻿
+﻿@using BanleWebsite.Services;
+@{
+    CategoryServices _categoryServices = new CategoryServices();
+
+    List<Category> categoryList = _categoryServices.getAll();
+    List<Category> categoryListNoPre = new List<Category>();
+    foreach (var item in categoryList)
+    {
+        if (item.PreCateID == SLIMCONFIG.NONE_PRE_CATEGORY)
+        {
+            categoryListNoPre.Add(item);
+        }
+    }
+
+    //List<Category> categoryListFirstLevel = new List<Category>();
+    //foreach (var item in categoryList)
+    //{
+    //    foreach (var item2 in categoryListNoPre)
+    //    {
+    //        if (item.PreCateID == item2.ID)
+    //        {
+    //            categoryListFirstLevel.Add(item);
+    //        }
+    //    }
+    //}
+}
 
 <!DOCTYPE html>
 
@@ -703,7 +728,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                         <nav id="megamenu" class="menu-main-menu-container">
                             <ul id="nav" class="for_spy">
                                 <li id="menu-item-1032" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-24 current_page_item menu-item-1032 dropdown"><a title="home" href="/"><i class="icon-home"></i></a></a></li>
-                                <li id="menu-item-898" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat current-menu-ancestor current-menu-parent menu-item-has-children menu-parent-item menu-item-898">
+                                @*<li id="menu-item-898" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat current-menu-ancestor current-menu-parent menu-item-has-children menu-parent-item menu-item-898">
                                     <a href="index90fa.html?product_cat=women"><span>Women</span></a>
                                     <ul class="level0">
                                         <ul class="shadow">
@@ -743,8 +768,46 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                             </li>
                                         </ul>
                                     </ul>
-                                </li>
-                                <li id="menu-item-928" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-928">
+                                </li>*@
+                                @{
+                                    foreach (var item in categoryListNoPre)
+                                    {
+                                        <li id="menu-item-928" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-928">
+                                            <a href="/danhmuc/@item.ID"><span>@item.Name</span></a>
+                                            <ul class="level0">
+                                                <ul class="shadow">
+                                                    <li class="row_middle">
+                                                        <ul class="rows_outer">
+                                                            <li>
+                                                                <ul class="menu_row">
+                                                                    <li id="menu-item-951" class="col menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-parent-item menu-item-951">
+                                                                        <a href="#" class="title">	<span></span>	</a>
+                                                                        <ul class="level1">
+                                                                            @{
+                                                                                foreach (var item2 in categoryList)
+                                                                                {
+                                                                                    if (item2.PreCateID == item.ID)
+                                                                                    {
+                                                                                        <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		<a href="/danhmuc/@item2.ID">		<span>@item2.Name</span>		</a>		</li>
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            
+                                                                              </ul>
+                                                                    </li>
+                                                                    <li id="menu-item-952" class="image-item menu-item menu-item-type-custom menu-item-object-custom menu-item-952">	<a href="#">	<img src="~/Content/Buyshop/wp-content/uploads/2014/07/bigstock-Elegant-man-in-suit-44860783.jpg" alt=" " />	</a>	</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </ul>
+                                        </li>
+
+                                    }
+                                }
+
+                                @*<li id="menu-item-928" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-928">
                                     <a href="indexefad.html?product_cat=man"><span>Man</span></a>
                                     <ul class="level0">
                                         <ul class="shadow">
@@ -823,7 +886,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                         </ul>
                                     </ul>
                                 </li>
-                                <li id="menu-item-1086" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1086 dropdown"><a href="index3473.html?page_id=986"><span>Contact Us</span></a></li>
+                                <li id="menu-item-1086" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1086 dropdown"><a href="index3473.html?page_id=986"><span>Contact Us</span></a></li>*@
                             </ul>
                         </nav>
 

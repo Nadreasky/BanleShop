@@ -64,6 +64,41 @@ namespace BanleWebsite.Services
             }
         }
 
+        /// <summary>
+        /// treasuryonly
+        /// lay ra cai duong dan may cai Category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>categoryTree</returns>
+        public List<Category> getCategoryTree(int id)
+        {
+            List<Category> categoryTree = new List<Category>();
+            Category currentCategory = findByid(id);
+            Category previousCategory = new Category();
+            categoryTree.Add(currentCategory);
+            while (currentCategory.PreCateID != SLIMCONFIG.NONE_PRE_CATEGORY)
+            {
+                previousCategory = findByid(currentCategory.PreCateID.Value);
+                categoryTree.Add(previousCategory);
+                currentCategory = previousCategory;
+            }
+
+            return categoryTree;
+        }
+
+        /// <summary>
+        /// treasuryonly
+        /// lay ra cai duong dan may cai Category (ma theo kieu de qui)
+        /// </summary>
+        List<Category> categoryTreeRecursion = new List<Category>();
+        public List<Category> getCategoryTreeRecursion(int id)
+        {
+            categoryTreeRecursion.Add(findByid(id));
+            if (findByid(id).PreCateID.Value == SLIMCONFIG.NONE_PRE_CATEGORY)
+                return categoryTreeRecursion;
+
+            return getCategoryTreeRecursion(findByid(id).PreCateID.Value);
+        }
         public void delete(Category c)
         {
             _categoryRepository.Delete(c);
