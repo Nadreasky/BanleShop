@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Your Fashion";
+    List<Product> allProduct = ViewBag.allProduct;
 }
 
 <section class="slider">
@@ -65,737 +66,118 @@
 
 
                 <div class="row">
-                    <div class=" span12">
+                    <div class="span12">
 
                         <div class="">
                             <div class="woocommerce">
-                                <section class="filters-by-category clearfix">
+                                @*<section class="filters-by-category clearfix">
                                     <ul class="option-set" data-option-key="filter">
                                         <li><a href="#filter" data-option-value="*" class="selected" data-per-page="8">all</a></li>
                                         <li><a href="#filter" data-option-value=".featured" data-per-page="8">FEATURED</a></li>
                                         <li><a href="#filter" data-option-value=".new_product" data-per-page="8">NEW PRODUCTS</a></li>
                                         <li><a href="#filter" data-option-value=".sale" data-per-page="8">ON SALE</a></li>
                                     </ul>
-                                </section>
+                                </section>*@
                                 <div class="row isotope-outer big_with_description">
-                                    <div class="span3 product carousel_item new_product post-1025 type-product status-publish has-post-thumbnail product_cat-lingerie product_cat-shorts product_cat-skirts product_cat-women product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-shirts product_tag-shorts product_tag-skirts featured shipping-taxable purchasable product-type-simple product-cat-lingerie product-cat-shorts product-cat-skirts product-cat-women product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-shirts product-tag-shorts product-tag-skirts instock">
+                                    @{
+                                        foreach (Product items in allProduct)
+                                        {
+                                            int Count = 0;
+                                            if (Count < 8)
+                                            {
+                                                <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
 
 
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_new_top_left">New!</div>		<a href="index8144.html?product=marguerite-riding-printed-stretch-tulle-thong-3"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-67-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (67)" /></a>
-                                        </div>
+                                                    <div class="product-image-wrapper onhover animate scale">
+                                                        <div class="label_new_top_left">New!</div>		
+                                                        <a href="/sanpham/@items.ID">
+                                                        <img width="300" height="300" src="@items.Img1" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (85)" /></a>
+                           </div>
+                           <div class="wrapper-hover">
+
+                                                        <div class="product-name">
+                                                            <a href="/sanpham/@items.ID">
+                                                                @items.Name
+                                                            </a>
+                                                        </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1018">Quick View</a>
+                                                        <div class="wrapper">
 
 
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index8144.html?product=marguerite-riding-printed-stretch-tulle-thong-3">
-                                                    Marguerite stretch-tulle thong
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1025">Quick View</a>
-                                            <div class="wrapper">
+                                                            <div class="product-price"><span class="amount">@items.Price VND</span></div>
 
 
-                                                <div class="product-price"><span class="amount">&pound;750.00</span></div>
+                                                            <div class="product-tocart"><a href="index1a5c.html?add-to-cart=1018" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                    </div>
 
 
-                                                <div class="product-tocart"><a href="index6365.html?add-to-cart=1025" rel="nofollow" data-product_id="1025" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
+                                                    <span class="sort-date hidden">1396632733</span>
+                                                    <span class="sort-price hidden">@items.Price</span>
+                                                    <span class="sort-product_name hidden">@items.Name</span>
+                                                    <span class="sort-rating hidden">0</span>
 
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396634007</span>
-                                        <span class="sort-price hidden">750</span>
-                                        <span class="sort-product_name hidden">Marguerite stretch-tulle thong</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-68.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-68-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-67.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-67-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-66.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-66-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_new_top_left">New!</div>				<a href="index8144.html?product=marguerite-riding-printed-stretch-tulle-thong-3">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-67-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (67)" />
-                                                    </a>
                                                 </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index8144.html?product=marguerite-riding-printed-stretch-tulle-thong-3">
-                                                            Marguerite stretch-tulle thong
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1025">Quick View</a>
+                                                <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                     <div class="wrapper">
 
-
-                                                        <div class="product-price"><span class="amount">&pound;750.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index6365.html?add-to-cart=1025" rel="nofollow" data-product_id="1025" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexce78.html?add_to_wishlist=1025" data-product-id="1025" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1024 type-product status-publish has-post-thumbnail product_cat-jeans product_cat-shirts product_cat-women product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-shirts product_tag-shorts product_tag-skirts shipping-taxable purchasable product-type-simple product-cat-jeans product-cat-shirts product-cat-women product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-shirts product-tag-shorts product-tag-skirts instock">
+                                                        <div class="col-1">
 
 
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_new_top_left">New!</div>		<a href="index6a5d.html?product=paisley-print-stretch-silk-camisole-3"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-81-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (81)" /></a>
-                                        </div>
+                                                            <a class="image" data-rel="@items.Img1" href="#">
+                                                                <img class="thumb" alt="" src="@items.Img1" />
+                                                            </a>
 
 
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index6a5d.html?product=paisley-print-stretch-silk-camisole-3">
-                                                    Paisley-print stretch-silk camisole
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1024">Quick View</a>
-                                            <div class="wrapper">
-
-                                                <div class="star-rating" title="Rated 5.00 out of 5"><span style="width:100%"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                <div class="product-price"><span class="amount">&pound;140.00</span></div>
+                                                            <a class="image" data-rel="@items.Img2" href="#">
+                                                                <img class="thumb" alt="" src="@items.Img2" />
+                                                            </a>
 
 
-                                                <div class="product-tocart"><a href="index58aa.html?add-to-cart=1024" rel="nofollow" data-product_id="1024" data-product_sku="20" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
+                                                            <a class="image" data-rel="@items.Img3" href="#">
+                                                                <img class="thumb" alt="" src="@items.Img3" />
+                                                            </a>
 
 
-                                        <span class="sort-date hidden">1396633976</span>
-                                        <span class="sort-price hidden">140</span>
-                                        <span class="sort-product_name hidden">Paisley-print stretch-silk camisole</span>
-                                        <span class="sort-rating hidden">5</span>
+                                                        </div>
+                                                        <div class="col-2 with_media">
+                                                            <div class="big_image">
+                                                                <div class="label_new_top_left">New!</div>				<a href="/sanpham/@items.ID">
 
-                                    </div>
+                                                                    <img width="300" height="300" src="@items.Img1" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (85)" />
+                                                                </a>
+                                                            </div>
 
+                                                            <div class="wrapper-hover">
 
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-82.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-82-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-81.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-81-63x63.jpg" />
-                                                </a>
+                                                                <div class="product-name">
+                                                                    <a href="/sanpham/@items.ID">
+                                                                        @items.Name
+                                                                    </a>
+                                                                </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1018">Quick View</a>
+                                                                <div class="wrapper">
 
 
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-80.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-80-63x63.jpg" />
-                                                </a>
+                                                                    <div class="product-price"><span class="amount">@items.Price VND</span></div>
 
 
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_new_top_left">New!</div>				<a href="index6a5d.html?product=paisley-print-stretch-silk-camisole-3">
+                                                                    <div class="product-tocart"><a href="index1a5c.html?add-to-cart=1018" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
 
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-81-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (81)" />
-                                                    </a>
-                                                </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
 
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index6a5d.html?product=paisley-print-stretch-silk-camisole-3">
-                                                            Paisley-print stretch-silk camisole
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1024">Quick View</a>
-                                                    <div class="wrapper">
-
-                                                        <div class="star-rating" title="Rated 5.00 out of 5"><span style="width:100%"><strong class="rating">5.00</strong> out of 5</span></div>
-                                                        <div class="product-price"><span class="amount">&pound;140.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index58aa.html?add-to-cart=1024" rel="nofollow" data-product_id="1024" data-product_sku="20" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index8782.html?add_to_wishlist=1024" data-product-id="1024" data-product-type="simple">Add to Wishlist</a>
+                                                                <div class="product-link">
+                                                                    <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1023 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-shirts product_tag-shorts product_tag-skirts sale featured shipping-taxable purchasable product-type-variable product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-shirts product-tag-shorts product-tag-skirts instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_sale_top_right">Sale!</div><div class="label_new_top_left">New!</div>		<a href="indexffd7.html?product=dugan-georgette-top-3"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-26-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (26)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexffd7.html?product=dugan-georgette-top-3">
-                                                    Dugan georgette top
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1023">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><del><span class="amount">&pound;180.00</span>&ndash;<span class="amount">&pound;182.00</span></del> <ins><span class="amount">&pound;150.00</span>&ndash;<span class="amount">&pound;152.00</span></ins></div>
-
-
-                                                <div class="product-tocart"><a href="indexffd7.html?product=dugan-georgette-top-3" rel="nofollow" data-product_id="1023" data-product_sku="13" data-wooclass=" button product_type_variable" class="wft_add_to_cart_button product_type_variable"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396633884</span>
-                                        <span class="sort-price hidden">150</span>
-                                        <span class="sort-product_name hidden">Dugan georgette top</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-27.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-27-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-26.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-26-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_sale_top_right">Sale!</div><div class="label_new_top_left">New!</div>				<a href="indexffd7.html?product=dugan-georgette-top-3">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-26-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (26)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexffd7.html?product=dugan-georgette-top-3">
-                                                            Dugan georgette top
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1023">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><del><span class="amount">&pound;180.00</span>&ndash;<span class="amount">&pound;182.00</span></del> <ins><span class="amount">&pound;150.00</span>&ndash;<span class="amount">&pound;152.00</span></ins></div>
-
-
-                                                        <div class="product-tocart"><a href="indexffd7.html?product=dugan-georgette-top-3" rel="nofollow" data-product_id="1023" data-product_sku="13" data-wooclass=" button product_type_variable" class="wft_add_to_cart_button product_type_variable"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index557f.html?add_to_wishlist=1023" data-product-id="1023" data-product-type="variable">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1022 type-product status-publish has-post-thumbnail product_cat-coats product_cat-dresses product_cat-evening-dresses product_cat-women product_tag-coats product_tag-dress product_tag-dresses product_tag-evening-dresses product_tag-jackets product_tag-jeans product_tag-lingerie product_tag-prom-dresses product_tag-sexy product_tag-shirts product_tag-shorts product_tag-skirts product_tag-style shipping-taxable purchasable product-type-simple product-cat-coats product-cat-dresses product-cat-evening-dresses product-cat-women product-tag-coats product-tag-dress product-tag-dresses product-tag-evening-dresses product-tag-jackets product-tag-jeans product-tag-lingerie product-tag-prom-dresses product-tag-sexy product-tag-shirts product-tag-shorts product-tag-skirts product-tag-style instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_video_bot_right">Video</div><div class="label_new_top_left">New!</div>		<a href="indexd351.html?product=angela-dress-3"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-32-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (32)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexd351.html?product=angela-dress-3">
-                                                    Angela Dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1022">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;190.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="indexcf6e.html?add-to-cart=1022" rel="nofollow" data-product_id="1022" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396633859</span>
-                                        <span class="sort-price hidden">190</span>
-                                        <span class="sort-product_name hidden">Angela Dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-33.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-33-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-32.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-32-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_video_bot_right">Video</div><div class="label_new_top_left">New!</div>				<a href="indexd351.html?product=angela-dress-3">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-32-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (32)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexd351.html?product=angela-dress-3">
-                                                            Angela Dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1022">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;190.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="indexcf6e.html?add-to-cart=1022" rel="nofollow" data-product_id="1022" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index00f9.html?add_to_wishlist=1022" data-product-id="1022" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1021 type-product status-publish has-post-thumbnail product_cat-jeans product_cat-shirts product_cat-women product_tag-coats product_tag-dresses product_tag-evening-dresses product_tag-jackets product_tag-lingerie product_tag-shirts product_tag-shorts product_tag-skirts featured shipping-taxable purchasable product-type-simple product-cat-jeans product-cat-shirts product-cat-women product-tag-coats product-tag-dresses product-tag-evening-dresses product-tag-jackets product-tag-lingerie product-tag-shirts product-tag-shorts product-tag-skirts instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_new_top_left">New!</div>		<a href="indexef57.html?product=swarovski-crystal-embellished-jersey-dress-2"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-77-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (77)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexef57.html?product=swarovski-crystal-embellished-jersey-dress-2">
-                                                    Swarovski jersey dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1021">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;160.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index142d.html?add-to-cart=1021" rel="nofollow" data-product_id="1021" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396632997</span>
-                                        <span class="sort-price hidden">160</span>
-                                        <span class="sort-product_name hidden">Swarovski jersey dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-79.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-79-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-78.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-78-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-77.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-77-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_new_top_left">New!</div>				<a href="indexef57.html?product=swarovski-crystal-embellished-jersey-dress-2">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-77-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (77)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexef57.html?product=swarovski-crystal-embellished-jersey-dress-2">
-                                                            Swarovski jersey dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1021">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;160.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index142d.html?add-to-cart=1021" rel="nofollow" data-product_id="1021" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexb43e.html?add_to_wishlist=1021" data-product-id="1021" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1020 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women product_tag-club-dresses product_tag-coats product_tag-dresses product_tag-evening-dresses product_tag-jackets product_tag-lingerie product_tag-shirts product_tag-shorts product_tag-skirts featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women product-tag-club-dresses product-tag-coats product-tag-dresses product-tag-evening-dresses product-tag-jackets product-tag-lingerie product-tag-shirts product-tag-shorts product-tag-skirts instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_new_top_left">New!</div>		<a href="index5144.html?product=bandage-dress-2"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-52-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (52)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index5144.html?product=bandage-dress-2">
-                                                    Bandage dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1020">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;870.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="indexd518.html?add-to-cart=1020" rel="nofollow" data-product_id="1020" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396632971</span>
-                                        <span class="sort-price hidden">870</span>
-                                        <span class="sort-product_name hidden">Bandage dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-53.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-53-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-52.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-52-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-51.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-51-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_new_top_left">New!</div>				<a href="index5144.html?product=bandage-dress-2">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-52-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (52)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index5144.html?product=bandage-dress-2">
-                                                            Bandage dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1020">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;870.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="indexd518.html?add-to-cart=1020" rel="nofollow" data-product_id="1020" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="indexa29b.html?add_to_wishlist=1020" data-product-id="1020" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="label_new_top_left">New!</div>		<a href="indexc8e0.html?product=strapless-ruffled-cocktail-dress-copy-2"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-85-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (85)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="indexc8e0.html?product=strapless-ruffled-cocktail-dress-copy-2">
-                                                    Strapless Ruffled Cocktail Dress
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1018">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><span class="amount">&pound;520.00</span></div>
-
-
-                                                <div class="product-tocart"><a href="index1a5c.html?add-to-cart=1018" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396632733</span>
-                                        <span class="sort-price hidden">520</span>
-                                        <span class="sort-product_name hidden">Strapless Ruffled Cocktail Dress</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-86.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-86-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-85.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-85-63x63.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/woclo_01_1-84.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-84-63x63.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="label_new_top_left">New!</div>				<a href="indexc8e0.html?product=strapless-ruffled-cocktail-dress-copy-2">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-85-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (85)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="indexc8e0.html?product=strapless-ruffled-cocktail-dress-copy-2">
-                                                            Strapless Ruffled Cocktail Dress
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1018">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><span class="amount">&pound;520.00</span></div>
-
-
-                                                        <div class="product-tocart"><a href="index1a5c.html?add-to-cart=1018" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span3 product carousel_item new_product post-1017 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-lingerie product_cat-shorts product_cat-skirts product_cat-women product_tag-club-dresses product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-shirts product_tag-shorts product_tag-skirts sale shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-lingerie product-cat-shorts product-cat-skirts product-cat-women product-tag-club-dresses product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-shirts product-tag-shorts product-tag-skirts instock">
-
-
-                                        <div class="product-image-wrapper onhover animate scale">
-                                            <div class="sale_discount img-rounded">-23%</div><div class="label_sale_top_right">Sale!</div><div class="label_new_top_left">New!</div>		<a href="index1edc.html?product=aero-draped-front-wool-cardigan-2"><img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-83-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (83)" /></a>
-                                        </div>
-
-
-                                        <div class="wrapper-hover">
-
-                                            <div class="product-name">
-                                                <a href="index1edc.html?product=aero-draped-front-wool-cardigan-2">
-                                                    Aero Draped-front wool cardigan
-                                                </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1017">Quick View</a>
-                                            <div class="wrapper">
-
-
-                                                <div class="product-price"><del><span class="amount">&pound;174.20</span></del> <ins><span class="amount">&pound;134.00</span></ins></div>
-
-
-                                                <div class="product-tocart"><a href="indexd9df.html?add-to-cart=1017" rel="nofollow" data-product_id="1017" data-product_sku="25" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                                <div class="clearfix"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <span class="sort-date hidden">1396632712</span>
-                                        <span class="sort-price hidden">134.00</span>
-                                        <span class="sort-product_name hidden">Aero Draped-front wool cardigan</span>
-                                        <span class="sort-rating hidden">0</span>
-
-                                    </div>
-
-
-                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                        <div class="wrapper">
-
-                                            <div class="col-1">
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/wocload_01_1_39_.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/wocload_01_1_39_-63x84.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/wocload_01_1_40_.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/wocload_01_1_40_-63x84.jpg" />
-                                                </a>
-
-
-                                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2013/12/wocload_01_1_41_.jpg" href="#">
-                                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2013/12/wocload_01_1_41_-63x84.jpg" />
-                                                </a>
-
-
-                                            </div>
-                                            <div class="col-2 with_media">
-                                                <div class="big_image">
-                                                    <div class="sale_discount img-rounded">-23%</div><div class="label_sale_top_right">Sale!</div><div class="label_new_top_left">New!</div>				<a href="index1edc.html?product=aero-draped-front-wool-cardigan-2">
-
-                                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2013/12/woclo_01_1-83-300x300.jpg" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (83)" />
-                                                    </a>
-                                                </div>
-
-                                                <div class="wrapper-hover">
-
-                                                    <div class="product-name">
-                                                        <a href="index1edc.html?product=aero-draped-front-wool-cardigan-2">
-                                                            Aero Draped-front wool cardigan
-                                                        </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="1017">Quick View</a>
-                                                    <div class="wrapper">
-
-
-                                                        <div class="product-price"><del><span class="amount">&pound;174.20</span></del> <ins><span class="amount">&pound;134.00</span></ins></div>
-
-
-                                                        <div class="product-tocart"><a href="indexd9df.html?add-to-cart=1017" rel="nofollow" data-product_id="1017" data-product_sku="25" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                                    </div>
-                                                    <div class="clearfix"></div>
-
-                                                    <div class="product-link">
-                                                        <a class="wft_add_to_wishlist" href="index5682.html?add_to_wishlist=1017" data-product-id="1017" data-product-type="simple">Add to Wishlist</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            }
+                                        }
+                                    }
+                                    
                                 </div>
                             </div>
 
