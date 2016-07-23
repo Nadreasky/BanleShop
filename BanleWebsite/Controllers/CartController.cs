@@ -17,15 +17,15 @@ namespace BanleWebsite.Controllers
             {
                 int id = Int32.Parse(Request["id"]);
                 _orderServices.AddToCart(id);
-                ViewBag.cart = _orderServices.getCart();
-                return View();
             }
-            else
-            {
-                return RedirectToAction("Index","Home");
-            }
-     
-            
+
+            //else
+            //{
+            //    return RedirectToAction("Index","Home");
+            //}
+            ViewBag.cart = _orderServices.getCart();
+            return View();
+
         }
 
         [HttpPost]
@@ -34,6 +34,22 @@ namespace BanleWebsite.Controllers
         {
             _orderServices.SubmitOrder(name, phoneNo);
             return RedirectToAction("index", "home");
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateQuantity(int productId, int quantity)
+        {
+            _orderServices.UpdateQuantity(productId, quantity);
+            return RedirectToAction("index", "cart");
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult DeleteCartItem(int productId)
+        {
+            _orderServices.DeleteCartItem(productId);
+            return RedirectToAction("index", "cart");
         }
     }
 }

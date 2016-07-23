@@ -54,6 +54,43 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
+        public void UpdateQuantity(int productId, int quantity)
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Current.Session["CartSession"] != null)
+            {
+                cart = (List<CartItem>)HttpContext.Current.Session["CartSession"];
+                foreach (var item in cart)
+                {
+                    if (item.productId==productId)
+                    {
+                        item.quantity = quantity;
+                    }
+                }
+            }
+
+            HttpContext.Current.Session.Add("CartSession", cart);
+        }
+
+        public void DeleteCartItem(int productId)
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Current.Session["CartSession"] != null)
+            {
+                cart = (List<CartItem>)HttpContext.Current.Session["CartSession"];
+                foreach (var item in cart)
+                {
+                    if (item.productId == productId)
+                    {
+                        cart.Remove(item);
+                        break;
+                    }
+                }
+            }
+
+            HttpContext.Current.Session.Add("CartSession", cart);
+        }
+
         public void SubmitOrder(string name, string phoneNo)
         {
             List<CartItem> cart = new List<CartItem>();
