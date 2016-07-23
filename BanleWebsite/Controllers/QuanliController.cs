@@ -15,6 +15,7 @@ namespace BanleWebsite.Controllers
         CategoryServices _categoryServices = new CategoryServices();
         ProductServices _productServices = new ProductServices();
         ImageServices _imageServices = new ImageServices();
+        OrderServices _orderServices = new OrderServices();
 
         // GET: Quanli
         public ActionResult Index()
@@ -35,6 +36,20 @@ namespace BanleWebsite.Controllers
             ViewBag.categories = categories;
             List<Product> products = _productServices.getAll();
             ViewBag.products = products;
+            return View();
+        }
+
+        public ActionResult Order()
+        {
+            List<Order> orders = _orderServices.getAllOrder();
+            ViewBag.orders = orders;
+            return View(); // chua co
+        }
+
+        public ActionResult OrderClone()
+        {
+            List<Order> orders = _orderServices.getAllOrder();
+            ViewBag.orders = orders;
             return View();
         }
 
@@ -339,6 +354,11 @@ namespace BanleWebsite.Controllers
             //Product p = null;
             //ViewBag.pro1 = p;
             return View();
+        }
+
+        public Object getOrderDetail(int id)
+        {
+            return JsonConvert.SerializeObject(_orderServices.getOrderDetail(id));
         }
     }
 }

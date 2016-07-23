@@ -135,6 +135,27 @@ namespace BanleWebsite.Services
             return cart;
         }
 
+        // may ham ben quan li Order
+        ////////////////////////////////////////////////////////
+
+        public List<Order> getAllOrder()
+        {
+            return _orderRepository.List.ToList(); 
+        }
+
+        public List<OrderDetail> getOrderDetail(int Id)
+        {
+            List<OrderDetail> orderDetailListOfAnOrder = new List<OrderDetail>();
+            foreach (var item in _productOrderRepository.List.ToList())
+            {
+                if (item.OrderID==Id)
+                {
+                    orderDetailListOfAnOrder.Add(item);
+                }
+            }
+
+            return orderDetailListOfAnOrder;
+        }
         
     }
 }

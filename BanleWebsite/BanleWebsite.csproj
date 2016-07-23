@@ -328,6 +328,8 @@
     <Content Include="Views\Quanli\Product.cshtml" />
     <Content Include="Views\Quanli\UpdateCategory.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Quanli\Order.cshtml" />
+    <Content Include="Views\Quanli\OrderClone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
