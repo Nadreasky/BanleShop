@@ -12,7 +12,7 @@ namespace BanleWebsite
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductOrder
+    public partial class OrderDetail
     {
         public int ID { get; set; }
         public int OrderID { get; set; }

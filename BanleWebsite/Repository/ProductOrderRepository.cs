@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BanleWebsite.Repository
 {
-    public class ProductOrderRepository : IRepository<ProductOrder>
+    public class ProductOrderRepository : IRepository<OrderDetail>
     {
         BanleShopEntities _productOrderContext;
         
@@ -14,17 +14,17 @@ namespace BanleWebsite.Repository
             _productOrderContext = new BanleShopEntities();
         }
 
-        public IEnumerable<ProductOrder> List
+        public IEnumerable<OrderDetail> List
         {
             get
             {
-                return _productOrderContext.ProductOrders;
+                return _productOrderContext.OrderDetails;
             }
         }
 
-        public void Add(ProductOrder entity)
+        public void Add(OrderDetail entity)
         {
-            _productOrderContext.ProductOrders.Add(entity);
+            _productOrderContext.OrderDetails.Add(entity);
             try
             {
                 _productOrderContext.SaveChanges();
@@ -48,19 +48,19 @@ namespace BanleWebsite.Repository
             }
         }
 
-        public void Delete(ProductOrder entity)
+        public void Delete(OrderDetail entity)
         {
-            _productOrderContext.ProductOrders.Remove(entity);
+            _productOrderContext.OrderDetails.Remove(entity);
             _productOrderContext.SaveChanges();
         }
 
-        public ProductOrder FindById(int Id)
+        public OrderDetail FindById(int Id)
         {
-            var result = (from r in _productOrderContext.ProductOrders where r.ID == Id select r).FirstOrDefault();
+            var result = (from r in _productOrderContext.OrderDetails where r.ID == Id select r).FirstOrDefault();
             return result;
         }
 
-        public void Update(ProductOrder entity)
+        public void Update(OrderDetail entity)
         {
             throw new NotImplementedException();
         }
@@ -70,6 +70,5 @@ namespace BanleWebsite.Repository
             _productOrderContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             _productOrderContext.SaveChanges();
         }
-
     }
 }

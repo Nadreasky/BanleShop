@@ -106,7 +106,18 @@
                                                             <div class="product-price"><span class="amount">@items.Price VND</span></div>
 
 
-                                                            <div class="product-tocart"><a href="index1a5c.html?add-to-cart=1018" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                                            <div class="product-tocart">
+                                                                @*@Html.TextBox("id");*@
+                                                                @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                {
+                                                                    <input type="hidden" name="id" value="@items.ID" />
+                                                                    <input type="submit" value="Submit" />
+                                                                }
+                                                                
+                                                                <a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                                    <i class="icon-basket"></i>
+                                                                </a>
+                                                            </div>
                                                             <div class="clearfix"></div>
                                                         </div>
 

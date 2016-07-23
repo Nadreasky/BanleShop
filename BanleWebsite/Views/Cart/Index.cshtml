@@ -1,0 +1,49 @@
+﻿@using BanleWebsite.Services;
+@using BanleWebsite.Models;
+@using BanleWebsite.Repository;
+@{
+
+    ViewBag.Title = "Giỏ hàng";
+    List<CartItem> cart = ViewBag.cart;
+    ProductRepository _productRepository = new ProductRepository();
+    <table border="1">
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Tên sản phẩm</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+
+        </tr>
+        @{int soThuTu = 0;
+            double totalMoney = 0;
+        }
+        @foreach (var item in cart)
+        {
+            <tr>
+                @{ ++soThuTu;}
+                <td>@soThuTu</td>
+                <td>@_productRepository.FindById(item.productId).Name</td>
+                <td>@_productRepository.FindById(item.productId).Price</td>
+                <td>@item.quantity</td>
+                @{ double thanhTien = item.quantity * _productRepository.FindById(item.productId).Price.Value;
+                    totalMoney += thanhTien;}
+                <td>@thanhTien</td>
+
+            </tr>
+                    }
+        <tr>
+            <td colspan="4">Tổng</td>
+            <td>@totalMoney</td>
+        </tr>
+    </table>
+                    using (Html.BeginForm("SubmitOrder", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="text" class="form-control" name="name" />
+                        <input type="text" class="form-control" name="phoneNo" />
+                        <input type="submit" value="Submit" />
+                    }
+}
+
+<h2>Index</h2>
+

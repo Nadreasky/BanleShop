@@ -25,6 +25,8 @@ namespace BanleWebsite.Repository
         public void Add(Order entity)
         {
             _orderContext.Orders.Add(entity);
+            //newOrderId =_orderContext.Orders.Add(entity).ID;    // lay Id cua cai Order moi tao
+
             try
             {
                 _orderContext.SaveChanges();
