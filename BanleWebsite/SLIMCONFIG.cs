@@ -15,5 +15,6 @@ namespace BanleWebsite
         public static int PRODUCT_IMG_HEIGHT = 100000;
         public static int BIG_PRODUCT_IMG_WIDTH = 900;
         public static int BIG_PRODUCT_IMG_HEIGHT = 100000;
+        public static int ORDER_STATUS_UNCHECK = -1;
     }
 }

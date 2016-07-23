@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Quản lí đơn hàng";
+}
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+<!--Datatables-->
+
+<div class="container">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <script>
+        var jq = jQuery.noConflict();
+        jq(document).ready(function () {
+            jq('#orderTable').DataTable();
+        });
+    </script>
+    <section>
+        <h2>Danh sách các đơn hàng</h2>
+        <table class="table" id="orderTable">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày tạo</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày chỉnh sửa</th>
+                    <th>Nhân viên chỉnh sửa</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </section>
+</div>
+
+
+

@@ -684,34 +684,34 @@ jQuery(document).ready(function() {
 			return false;
 		});
 
-		jQuery(document).on('click', 'a.quickview', function() {
+		//jQuery(document).on('click', 'a.quickview', function() {
 
-			var prod_id = jQuery(this).data('product-id');
+		//	var prod_id = jQuery(this).data('product-id');
 
-			jQuery.fancybox({
-				'href' : woocommerce_params.ajax_url + '?action=et_product_quick_view&context=frontend&prodid=' + prod_id,
-				'type' : 'ajax',
-				helpers : {
-					overlay: {
-						locked: true
-					}
+		//	jQuery.fancybox({
+		//		'href' : woocommerce_params.ajax_url + '?action=et_product_quick_view&context=frontend&prodid=' + prod_id,
+		//		'type' : 'ajax',
+		//		helpers : {
+		//			overlay: {
+		//				locked: true
+		//			}
 
-				},
-				afterShow : function() {
+		//		},
+		//		afterShow : function() {
 
-					jQuery(function() {
-						jQuery('.variations_form').wc_variation_form();
-						jQuery('.variations_form .variations select').change();
-					});
+		//			jQuery(function() {
+		//				jQuery('.variations_form').wc_variation_form();
+		//				jQuery('.variations_form .variations select').change();
+		//			});
 
-				}
-				//'scrolling' : 'yes'
-			});
+		//		}
+		//		//'scrolling' : 'yes'
+		//	});
 
 
 
-			return false;
-		});
+		//	return false;
+		//});
 
 		// Search autocomplete (jquery.autocomplete.js)
 		if ( search_autocomplete_enabled > 0 ) {

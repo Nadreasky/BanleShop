@@ -67,6 +67,7 @@ namespace BanleWebsite.Services
             WebImage img = new WebImage(file.InputStream);
 
             img.Resize(SLIMCONFIG.PRODUCT_IMG_WIDTH, SLIMCONFIG.PRODUCT_IMG_HEIGHT, true, true);
+            img.Crop(1, 1, 0, 0);
 
             return img;
         }
@@ -75,6 +76,7 @@ namespace BanleWebsite.Services
         {
             WebImage img = file;
             img.Resize(SLIMCONFIG.PRODUCT_IMG_WIDTH, SLIMCONFIG.PRODUCT_IMG_HEIGHT, true, true);
+            img.Crop(1, 1, 0, 0);
             return img;
         }
 
@@ -83,6 +85,7 @@ namespace BanleWebsite.Services
             WebImage img = new WebImage(file.InputStream);
 
             img.Resize(SLIMCONFIG.BIG_PRODUCT_IMG_WIDTH, SLIMCONFIG.BIG_PRODUCT_IMG_HEIGHT, true, true);
+            img.Crop(1, 1, 0, 0);
 
             return img;
         }

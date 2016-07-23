@@ -9,6 +9,7 @@ namespace BanleWebsite.Services
     public class CategoryServices
     {
         CategoryRepository _categoryRepository;
+        ProductServices _productServices;
 
         public CategoryServices()
         {
@@ -62,6 +63,42 @@ namespace BanleWebsite.Services
                 }
                 _categoryRepository.Update(c);
             }
+        }
+
+        public List<Product> getProductByCate(int id)
+        {
+            _productServices = new ProductServices();
+            Category mainCate = findByid(id);
+            List<Product> allProduct = _productServices.getAll();
+            List<Product> productListByCate = new List<Product>();
+            if (mainCate.PreCateID == SLIMCONFIG.NONE_PRE_CATEGORY)
+            {
+                List<Category> allCate = getAll();
+                for (int i = 0; i < allCate.Count; i++)
+                {
+                    Category c = allCate.ElementAt(i);
+                    if (c.PreCateID == mainCate.ID)
+                    {
+                        for (int j = 0; j < allProduct.Count; j++)
+                        {
+                            Product p = allProduct.ElementAt(j);
+                            if (p.CateID == c.ID)
+                            {
+                                productListByCate.Add(p);
+                            }
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < allProduct.Count; i++)
+            {
+                Product p = allProduct.ElementAt(i);
+                if (p.CateID == id)
+                {
+                    productListByCate.Add(p);
+                }
+            }
+            return productListByCate;
         }
 
         /// <summary>

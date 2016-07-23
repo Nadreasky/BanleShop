@@ -18,5 +18,8 @@ namespace BanleWebsite
         public string Name { get; set; }
         public string PhoneNo { get; set; }
         public Nullable<int> Status { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> DateModified { get; set; }
+        public string Staff { get; set; }
     }
 }

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\DanhmucController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\QuanliController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,6 +203,12 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -209,9 +216,13 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\OrderDetailRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Services\CategoryServices.cs" />
     <Compile Include="Services\ImageServices.cs" />
+    <Compile Include="Services\OrderDetailServices.cs" />
+    <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="SLIMCONFIG.cs" />
     <Compile Include="Startup.cs" />
@@ -231,6 +242,14 @@
     <Content Include="Content\SiteImages\logo.png" />
     <Content Include="Content\SiteImages\logo_rightbar.png" />
     <Content Include="Content\SiteImages\tphcm.jpg" />
+    <Content Include="Content\Slider\8I51IPD.jpg" />
+    <Content Include="Content\Slider\Fashion Show Banners-45.jpg" />
+    <Content Include="Content\Slider\IMG_2283.jpg" />
+    <Content Include="Content\Slider\WEB_Banner_FashionPlea.jpg" />
+    <Content Include="Content\Vertic_Banner\Banner1D.jpg" />
+    <Content Include="Content\Vertic_Banner\Banner2D.jpg" />
+    <Content Include="Content\Vertic_Banner\Banner3D.jpg" />
+    <Content Include="Content\Vertic_Banner\Iam-Banner-Vertical.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -247,13 +266,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-3.3.6-dist\css\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-3.3.6-dist\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-3.3.6-dist\css\bootstrap.css.map" />
@@ -263,6 +275,13 @@
     <Content Include="Content\bootstrap-3.3.6-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap-3.3.6-dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\font\VNF-Oswald Regular.ttf" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -316,11 +335,14 @@
     <Content Include="Views\Quanli\Category.cshtml" />
     <Content Include="Views\Quanli\Product.cshtml" />
     <Content Include="Views\Quanli\UpdateCategory.cshtml" />
+    <Content Include="Views\Quanli\Index.cshtml" />
+    <Content Include="Views\Quanli\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

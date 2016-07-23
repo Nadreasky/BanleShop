@@ -38,6 +38,11 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public ActionResult Order()
+        {
+            return View();
+        }
+
         //============START FUNCTION OF PRODUCT=============
 
         [HttpPost]
@@ -309,6 +314,23 @@ namespace BanleWebsite.Controllers
         }
 
         //=======================END FUNCTION OF CATEGORY=============
+
+        //=======================START FUNCTION OF ORDER==============
+
+        public void addOrder()
+        {
+
+        }
+
+        public void changeStateOrder()
+        {
+
+        }
+
+
+
+
+        //=======================END FUNCTION OF ORDER================
 
         public ActionResult UpdateCategory()
         {
