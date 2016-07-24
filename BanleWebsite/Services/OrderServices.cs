@@ -137,6 +137,10 @@ namespace BanleWebsite.Services
 
         // may ham ben quan li Order
         ////////////////////////////////////////////////////////
+        public Order findOrderByID(int id)
+        {
+            return _orderRepository.FindById(id);
+        }
 
         public List<Order> getAllOrder()
         {

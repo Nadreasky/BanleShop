@@ -1,11 +1,218 @@
 ﻿@using BanleWebsite.Repository;
+@using BanleWebsite.Services;
 @{
-    ViewBag.Title = "Order";
+    ViewBag.Title = "Quản lí đơn hàng";
     List<Order> orders = ViewBag.orders;
     int soThuTu = 0;
 }
 
-<iframe scrolling="no" src="/Quanli/OrderClone" width="100%" height="100%"></iframe>
 
+
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Tên khách hàng</th>
+            <th>Số điện thoại</th>
+            <th>Ngày tạo</th>
+            <th>Trạng thái</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @{
+            foreach (var item in orders)
+            {
+
+                <tr>
+                    @{++soThuTu;}
+                    <td>@soThuTu</td>
+                    <td>@item.Name</td>
+                    <td>@item.PhoneNo</td>
+                    <td>@item.CreateDate</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Detail</button>
+                    </td>
+
+                </tr>
+                        }
+        }
+    </table>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="font-family:VNOswald;" id="orderTitle"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="float:left; display:block;">
+                    <label>Họ tên khách hàng</label>
+                    <h4 id="cusName"></h4>
+                </div>
+                <div class="form-group" style="float:left; margin-left:30px; display:block;">
+                    <label>Số điện thoại</label>
+                    <h4 id="cusPhoneNo"></h4>
+                </div>
+                <div class="form-group" style="float:right; margin-left:30px; display:block;">
+                    <label>Ngày tạo</label>
+                    <h4 id="createDate"></h4>
+                </div>
+                <div class="clearfix"></div>
+                <h3 style="text-align:center;font-family:VNOswald;">Sản phẩm đã đặt</h3>
+                <table class="table" id="modalTable">
+                    <col width="280" />
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalBoby">
+                        @*<tr>
+                            <td>Chuột không dây dùng pin sạc AZZOR (Đen)</td>
+                            <td>100 000</td>
+                            <td>10</td>
+                            <td>1 000 000</td>
+                        </tr>
+                        <tr>
+                            <td>Chuột không dây dùng pin sạc AZZOR (Đen)</td>
+                            <td>100 000</td>
+                            <td>10</td>
+                            <td>1 000 000</td>
+                        </tr>*@
+                        <tr>
+                            <td colspan="3"><strong>Tổng cộng</strong></td>
+                            <td><strong id="total_cell">20 000 000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    function getOrder(id) {
+        var order = "";
+        jQuery.ajax({
+            url: "/Quanli/getOrderInfo",
+            async: false,
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function() {
+                alert("Get order info fail!")
+            },
+            success: function(data) {
+                order += data
+            }
+        })
+        console.log(order);
+        return order;
+    }
+    function getproductItem(id) {
+        var item = "";
+        jQuery.ajax({
+            url: "/Quanli/getProductInfo",
+            async: false,
+            data: {
+                format: 'json',
+                proId: id
+            },
+            error: function() {
+                alert("Get product item fail!")
+            },
+            success: function (data) {
+                
+                item += data;
+                //console.log(item + "111111111111111111111");
+            }
+        })
+        //console.log(item + "222222222222222222222222");
+        return item;
+    }
+
+    function getOrderDetail(id) {
+        jQuery.ajax({
+            url: "/Quanli/getOrderDetail",
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function() {
+                alert("Get order detail fail!")
+            },
+            success: function (data) {
+                var orderDetailList = JSON.parse(data);
+                var total = 0;
+                for (var i = orderDetailList.length - 1; i >= 0; i--) {
+                    
+                    //alert(orderDetailList[i].ID);
+                    //find peoduct item in order list
+                    var item = getproductItem(orderDetailList[i].ProductID);
+                    var product = JSON.parse(item);
+                    //alert(item);
+                    
+                    var table = document.getElementById("modalTable");
+                    var row = table.insertRow(1);
+                    var proName_Cell = row.insertCell(0);
+                    var price_Cell = row.insertCell(1);
+                    var quantity_Cell = row.insertCell(2);
+                    var thanhtien_Cell = row.insertCell(3)
+
+                    proName_Cell.innerHTML = product.Name;
+                    price_Cell.innerHTML = product.Price;
+                    quantity_Cell.innerHTML = orderDetailList[i].Quantity;
+                    thanhtien_Cell.innerHTML = product.Price * orderDetailList[i].Quantity;
+                    total += product.Price * orderDetailList[i].Quantity;
+                }
+                var toto_cell = document.getElementById("total_cell");
+                total_cell.innerHTML = total;
+
+                //Cus info
+                var order = JSON.parse(getOrder(id));
+                //console.log(order.Name + "fffffffffffffffffffffff");
+                document.getElementById("orderTitle").innerText = "Thông tin về đơn hàng #" + order.ID;
+                document.getElementById("cusName").innerText = order.Name;
+                document.getElementById("cusPhoneNo").innerText = order.PhoneNo;
+                document.getElementById("createDate").innerText = order.CreateDate;
+            },
+            type: 'GET'
+        })
+    }
+
+    jQuery('#myModal').on('hidden.bs.modal', function () {
+        var x = document.getElementById("modalTable").rows.length;
+        for (var i = x; i > 2; i--) {
+            document.getElementById("modalTable").deleteRow(1);
+        }
+        //document.getElementById("total_cell").innerHTML = "";
+        //document.getElementById("cusName").innerHTML = "";
+        //document.getElementById("cusPhoneNo").innerHTML = "";
+        //document.getElementById("createDate").innerHTML = "";
+
+        //document.getElementById("cusName").innerText = "";
+        //document.getElementById("cusPhoneNo").innerText = "";
+        //document.getElementById("createDate").innerText = "";
+    });
+</script>
 
 

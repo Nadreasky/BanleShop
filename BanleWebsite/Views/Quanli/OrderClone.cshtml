@@ -13,30 +13,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>OrderClone</title>
 
-    <script>
-    function getOrderDetail(id)
-    {
-            jQuery.ajax({
-                url: "/Quanli/getOrderDetail",
-                data: {
-                    format: 'json',
-                    iD: id,
-                },
-                error: function () {
-                    alert("Problem!")
-                },
-                success: function (data) {
-                    var jq = jQuery.noConflict();
-                    var cateObj = JSON.parse(data);
-                    jq("#id").val(cateObj.ID);
-                    jq("#categoryName").val(cateObj.Name);
-
-                    jq("#btnAddCategory").val("Update");
-                },
-                type: 'GET'
-            })
-    }
-    </script>
+    
 
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 
@@ -78,9 +55,7 @@
                         <td>@item.Status</td>
                         <td>
                             <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="getIDtoModal(@item.ID)">Open Modal</button>
-                            
-                            <button onclick="getIDtoModal(@item.ID)">Test</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Detail</button>
                         </td>
 
                     </tr>
@@ -88,39 +63,83 @@
             }
         </table>
 
- 
 
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                    <input type="text" value="" id="fuk" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        function getOrderDetail(id) {
+            $.ajax({
+                url: "/Quanli/getOrderDetail",
+                data: {
+                    format: 'json',
+                    id: id
+                },
+                error: function() {
+                    alert("Problem!")
+                },
+                success: function (data) {
+                    var orderDetailList = JSON.parse(data);
+                    for (var i = 0; i < orderDetailList.length; i++) {
+                        alert(orderDetailList[i].ID);
+                    }
+                },
+                type: 'GET'
+            })
+        }
+
+        //function getOrderDetail(id)
+        //{
+        //        jQuery.ajax({
+        //            url: "/Quanli/getOrderDetail",
+        //            data: {
+        //                format: 'json',
+        //                iD: id,
+        //            },
+        //            error: function () {
+        //                alert("Problem!")
+        //            },
+        //            success: function (data) {
+        //                var jq = jQuery.noConflict();
+
+        //                JSONArray orderDetailArr = new JSONArray(data);
+
+        //                var cateObj = JSON.parse(data);
+        //                jq("#id").val(cateObj.ID);
+        //                jq("#categoryName").val(cateObj.Name);
+
+        //                jq("#btnAddCategory").val("Update");
+        //            },
+        //            type: 'GET'
+        //        })
+        //}
+    </script>
 
     
 </body>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-                <p id="idnek"></p>
-                <input type="text" value="" id="fuk" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
 </html>
 
 

@@ -356,9 +356,21 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        //=========================START FUNCTION OF ORDER============================
+
+        //Tìm detail cua order theo OrderID
         public Object getOrderDetail(int id)
         {
             return JsonConvert.SerializeObject(_orderServices.getOrderDetail(id));
         }
+
+        //Tim order theo orderID
+        public Object getOrderInfo(int id)
+        {
+            return JsonConvert.SerializeObject(_orderServices.findOrderByID(id));
+        }
+
+
+        //==========================END FUNCTION OF ORDER
     }
 }

@@ -92,8 +92,8 @@
                                                         <div class="label_new_top_left">New!</div>		
                                                         <a href="/sanpham/@items.ID">
                                                         <img width="300" height="300" src="@items.Img1" class="attachment-shop_single wp-post-image" alt="woclo_01_1 (85)" /></a>
-                           </div>
-                           <div class="wrapper-hover">
+                                                    </div>
+                                                   <div class="wrapper-hover">
 
                                                         <div class="product-name">
                                                             <a href="/sanpham/@items.ID">
@@ -111,12 +111,15 @@
                                                                 @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                 {
                                                                     <input type="hidden" name="id" value="@items.ID" />
-                                                                    <input type="submit" value="Submit" />
+                                                                    @*<input type="submit" value="Submit" />*@
+                                                                    <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                    </button>
                                                                 }
                                                                 
-                                                                <a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                                @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
                                                                     <i class="icon-basket"></i>
-                                                                </a>
+                                                                </a>*@
                                                             </div>
                                                             <div class="clearfix"></div>
                                                         </div>
@@ -173,7 +176,16 @@
                                                                     <div class="product-price"><span class="amount">@items.Price VND</span></div>
 
 
-                                                                    <div class="product-tocart"><a href="index1a5c.html?add-to-cart=1018" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                                                    <div class="product-tocart">
+                                                                        @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                        {
+                                                                            <input type="hidden" name="id" value="@items.ID" />
+                                                                            @*<input type="submit" value="Submit" />*@
+                                                                            <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                            </button>
+                                                                        }
+                                                                    </div>
 
                                                                 </div>
                                                                 <div class="clearfix"></div>
