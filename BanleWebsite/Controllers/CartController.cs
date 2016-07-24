@@ -28,12 +28,17 @@ namespace BanleWebsite.Controllers
 
         }
 
+        public ActionResult SubmitOrderCompleted()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult SubmitOrder(string name, string phoneNo)
         {
             _orderServices.SubmitOrder(name, phoneNo);
-            return RedirectToAction("index", "home");
+            return RedirectToAction("SubmitOrderCompleted", "Cart");
         }
 
         [HttpPost]

@@ -330,6 +330,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Quanli\Order.cshtml" />
     <Content Include="Views\Quanli\OrderClone.cshtml" />
+    <Content Include="Views\Cart\SubmitOrderCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
