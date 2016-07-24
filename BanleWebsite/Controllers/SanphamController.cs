@@ -20,7 +20,7 @@ namespace BanleWebsite.Controllers
             }
             if (mainProduct == null)
             {
-                return RedirectToAction("Home/Index");
+                return RedirectToAction("index", "Home");
             }
             ViewBag.mainProduct = mainProduct;
             List<Product> relativeProducts = _productService.getRelativeProducts(id.Value);

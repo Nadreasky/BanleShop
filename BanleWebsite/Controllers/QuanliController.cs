@@ -50,6 +50,7 @@ namespace BanleWebsite.Controllers
         {
             List<Order> orders = _orderServices.getAllOrder();
             ViewBag.orders = orders;
+
             return View();
         }
 
@@ -324,6 +325,23 @@ namespace BanleWebsite.Controllers
         }
 
         //=======================END FUNCTION OF CATEGORY=============
+
+        //=======================START FUNCTION OF ORDER==============
+
+        public void addOrder()
+        {
+
+        }
+
+        public void changeStateOrder()
+        {
+
+        }
+
+
+
+
+        //=======================END FUNCTION OF ORDER================
 
         public ActionResult UpdateCategory()
         {

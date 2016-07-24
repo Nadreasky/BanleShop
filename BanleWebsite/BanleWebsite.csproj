@@ -177,6 +177,7 @@
     <Compile Include="Controllers\DanhmucController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\QuanliController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,11 +218,17 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductOrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Services\CategoryServices.cs" />
     <Compile Include="Services\ImageServices.cs" />
+    <Compile Include="Repository\OrderDetailRepository.cs" />
+    <Compile Include="Services\CategoryServices.cs" />
+    <Compile Include="Services\ImageServices.cs" />
+    <Compile Include="Services\OrderDetailServices.cs" />
+
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="SLIMCONFIG.cs" />
@@ -242,6 +249,14 @@
     <Content Include="Content\SiteImages\logo.png" />
     <Content Include="Content\SiteImages\logo_rightbar.png" />
     <Content Include="Content\SiteImages\tphcm.jpg" />
+    <Content Include="Content\Slider\8I51IPD.jpg" />
+    <Content Include="Content\Slider\Fashion Show Banners-45.jpg" />
+    <Content Include="Content\Slider\IMG_2283.jpg" />
+    <Content Include="Content\Slider\WEB_Banner_FashionPlea.jpg" />
+    <Content Include="Content\Vertic_Banner\Banner1D.jpg" />
+    <Content Include="Content\Vertic_Banner\Banner2D.jpg" />
+    <Content Include="Content\Vertic_Banner\Banner3D.jpg" />
+    <Content Include="Content\Vertic_Banner\Iam-Banner-Vertical.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -331,11 +346,13 @@
     <Content Include="Views\Quanli\Order.cshtml" />
     <Content Include="Views\Quanli\OrderClone.cshtml" />
     <Content Include="Views\Cart\SubmitOrderCompleted.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -34,7 +34,7 @@
             <div id="column_right" class="span9">
 
 
-                <div class="listing_header_row1">
+                @*<div class="listing_header_row1">
                     <div class="pull-left">
                         <form class="woocommerce-ordering" method="get">
                             <label>Sort by:</label>
@@ -53,7 +53,7 @@
                     </div>
 
                 </div>
-                <div class="line1"></div>
+                <div class="line1"></div>*@
                 @*<div class="listing_header_row2">
                     <div class="pull-left">
                         <p class="woocommerce-result-count">
@@ -79,9 +79,9 @@
                             <div class="span3 product carousel_item post-78 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
 
 
-                                <div class="product-image-wrapper onhover animate scale">
+                                <div class="product-image-wrapper onhover animate scale" style="height:300px;">
                                     <a href="/sanpham/@item.ID">
-                                        <img width="300" height="300" src="@item.Img1" class="attachment-shop_single wp-post-image" alt="@item.Name" />
+                                        <img style="max-height:300px;" width="300" height="300" src="@item.Img1" class="attachment-shop_single wp-post-image" alt="@item.Name" />
                                     </a>
                                 </div>
 
@@ -92,7 +92,7 @@
                                         <a href="/sanpham/@item.ID">
                                             @item.Name
                                         </a>
-                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78">Quick View</a>
+                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@item.ID" data-product-id="78">Chi tiết</a>
                                     <div class="wrapper">
 
 
@@ -149,8 +149,9 @@
                                     <div class="col-2 with_media">
                                         <div class="big_image">
                                             <a href="/sanpham/@item.ID">
-
-                                                <img width="300" height="300" src="@item.Img1" class="attachment-shop_single wp-post-image" alt="@item.Name" />
+                                                <div style="height:300px;">
+                                                    <img style="max-height:300px;" width="300" height="300" src="@item.Img1" class="attachment-shop_single wp-post-image" alt="@item.Name" />
+                                                </div>
                                             </a>
                                         </div>
 
@@ -160,7 +161,7 @@
                                                 <a href="/sanpham/@item.ID">
                                                     @item.Name
                                                 </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78">Quick View</a>
+                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78" href="/sanpham/@item.ID">Chi tiết</a>
                                             <div class="wrapper">
 
 
@@ -184,9 +185,9 @@
                                             </div>
                                             <div class="clearfix"></div>
 
-                                            <div class="product-link">
+                                            @*<div class="product-link">
                                                 <a class="wft_add_to_wishlist" href="index324a.html?product_cat=dresses&amp;add_to_wishlist=78" data-product-id="78" data-product-type="simple">Add to Wishlist</a>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -289,7 +290,7 @@
 
                 </div>
 
-                <div class="listing_header_row1">
+                @*<div class="listing_header_row1">
                     <div class="pull-left">
                         <form class="woocommerce-ordering" method="get">
                             <label>Sort by:</label>
@@ -307,8 +308,9 @@
                         </form>
                     </div>
 
-                </div>
-                <div class="line1"></div>			<div class="listing_header_row2">
+                </div>*@
+                <div class="line1"></div>			
+                @*<div class="listing_header_row2">
                     <div class="pull-left">
                         <p class="woocommerce-result-count">
                             Showing 1–9 of 18 results
@@ -321,7 +323,7 @@
                             <a class="next page-numbers" href="index55d1.html?product_cat=dresses&amp;paged=2">&rarr;</a>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="clearfix"></div>
 
             </div>
@@ -378,7 +380,7 @@
                                 </div>
                             </form><div class="clearfix"></div>
                         </div>*@<!-- //sidebar-widget -->
-                        <div id="tag_cloud-2" class="block widget_tag_cloud">
+                        @*<div id="tag_cloud-2" class="block widget_tag_cloud">
                             <div class="block-title"><strong><span>Popular Tags</span></strong></div><div class="tagcloud">
                                 <a href='index85f0.html?product_tag=club-dresses' class='tag-link-28' title='24 topics' style='font-size: 20.504854368932pt;'>Club Dresses</a>
                                 <a href='index58b0.html?product_tag=coats' class='tag-link-32' title='7 topics' style='font-size: 13.708737864078pt;'>Coats</a>
@@ -398,17 +400,19 @@
                                 <a href='indexcffa.html?product_tag=style' class='tag-link-25' title='4 topics' style='font-size: 10.990291262136pt;'>style</a>
                             </div>
                             <div class="clearfix"></div>
-                        </div><!-- //sidebar-widget --><div id="wft-static-block-2" class="block wft_widget_satic_block">
+                        </div>*@
+                        <!-- //sidebar-widget -->
+                        <div id="wft-static-block-2" class="block wft_widget_satic_block">
                             <div class="banners_outer">
                                 <div class="flexslider banners">
 
                                     <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                         <ul class="slides" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-768px, 0px, 0px);">
-                                            <li class="clone" style="width: 256px; float: left; display: block;"> <a href="#"><img alt="" src="~/Content/Buyshop/wp-content/uploads/2014/01/banner3.jpg"></a> </li>
-                                            <li style="width: 256px; float: left; display: block;" class=""> <a href="#"><img alt="" src="~/Content/Buyshop/wp-content/uploads/2014/01/banner1.jpg"></a> </li>
-                                            <li style="width: 256px; float: left; display: block;" class=""> <a href="#"><img alt="" src="~/Content/Buyshop/wp-content/uploads/2014/01/banner2.jpg"></a> </li>
-                                            <li style="width: 256px; float: left; display: block;" class="flex-active-slide"> <a href="#"><img alt="" src="~/Content/Buyshop/wp-content/uploads/2014/01/banner3.jpg"></a> </li>
-                                            <li style="width: 256px; float: left; display: block;" class="clone"> <a href="#"><img alt="" src="~/Content/Buyshop/wp-content/uploads/2014/01/banner1.jpg"></a> </li>
+                                            <li class="clone" style="width: 256px; float: left; display: block;"> <a href="#"><img alt="" src="~/Content/Vertic_Banner/Banner3D.jpg"></a> </li>
+                                            <li style="width: 256px; float: left; display: block;" class=""> <a href="#"><img alt="" src="~/Content/Vertic_Banner/Banner1D.jpg"></a> </li>
+                                            <li style="width: 256px; float: left; display: block;" class=""> <a href="#"><img alt="" src="~/Content/Vertic_Banner/Banner2D.jpg"></a> </li>
+                                            <li style="width: 256px; float: left; display: block;" class="flex-active-slide"> <a href="#"><img alt="" src="~/Content/Vertic_Banner/Banner3D.jpg"></a> </li>
+                                            <li style="width: 256px; float: left; display: block;" class="clone"> <a href="#"><img alt="" src="~/Content/Vertic_Banner/Iam-Banner-Vertical.jpg"></a> </li>
                                         </ul>
                                     </div><ul class="flex-direction-nav"><li><a href="#" class="flex-prev"><i class="icon-left-thin"></i></a></li><li><a href="#" class="flex-next"><i class="icon-right-thin"></i></a></li></ul>
                                 </div>

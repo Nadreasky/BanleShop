@@ -5,34 +5,28 @@ using System.Web;
 
 namespace BanleWebsite.Repository
 {
-    public class OrderRepository : IRepository<Order>
+    public class OrderDetailRepository : IRepository<OrderDetail>
     {
-        BanleShopEntities _orderContext;
+        BanleShopEntities _orderDetailContext;
 
-        public OrderRepository()
+        public OrderDetailRepository()
         {
-            _orderContext = new BanleShopEntities();
-
+            _orderDetailContext = new BanleShopEntities();
         }
-
-        public IEnumerable<Order> List
+        public IEnumerable<OrderDetail> List
         {
             get
             {
-                return _orderContext.Orders;
-
+                return _orderDetailContext.OrderDetails;
             }
         }
 
-        public void Add(Order entity)
+        public void Add(OrderDetail entity)
         {
-            _orderContext.Orders.Add(entity);
-            //newOrderId =_orderContext.Orders.Add(entity).ID;    // lay Id cua cai Order moi tao
-
+            _orderDetailContext.OrderDetails.Add(entity);
             try
             {
-                _orderContext.SaveChanges();
-
+                _orderDetailContext.SaveChanges();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
@@ -53,23 +47,22 @@ namespace BanleWebsite.Repository
             }
         }
 
-        public void Delete(Order entity)
+        public void Delete(OrderDetail entity)
         {
-            _orderContext.Orders.Remove(entity);
-            _orderContext.SaveChanges();
-
+            _orderDetailContext.OrderDetails.Remove(entity);
+            _orderDetailContext.SaveChanges();
         }
 
-        public Order FindById(int Id)
+        public OrderDetail FindById(int Id)
         {
-            var result = (from r in _orderContext.Orders where r.ID == Id select r).FirstOrDefault();
+            var result = (from r in _orderDetailContext.OrderDetails where r.ID == Id select r).FirstOrDefault();
             return result;
         }
 
-        public void Update(Order entity)
+        public void Update(OrderDetail entity)
         {
-            _orderContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            _orderContext.SaveChanges();
+            _orderDetailContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            _orderDetailContext.SaveChanges();
         }
     }
 }
