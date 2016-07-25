@@ -7,6 +7,7 @@ using BanleWebsite.Services;
 using Newtonsoft.Json;
 using System.IO;
 using System.Web.Helpers;
+using System.Text;
 
 namespace BanleWebsite.Controllers
 {
@@ -371,9 +372,45 @@ namespace BanleWebsite.Controllers
             }
             o.Status = _status;
             _orderServices.updateOrder(o);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Action: UpdateOrderStatus");
+            sb.Append(Environment.NewLine);
+            sb.Append("Id: ");
+            sb.Append(id);
+            sb.Append(Environment.NewLine);
+            sb.Append("Status: ");
+            sb.Append(status);
+
+            WriteLog(sb.ToString());
+
             return "Success";
         }
 
         //==========================END FUNCTION OF ORDER
+
+        public void WriteLog(string text)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(DateTime.Now.ToLongDateString());
+            sb.Append(" - ");
+            sb.Append(DateTime.Now.ToLongTimeString());
+            sb.Append(Environment.NewLine);
+
+            sb.Append(text);
+            sb.Append(Environment.NewLine);
+            sb.Append(Environment.NewLine);
+
+            string path = Server.MapPath(Url.Content("~/"));
+            //string fileName = Server.MapPath("logYourFashion.txt");
+            if (!System.IO.File.Exists(path + "/logYourFashion.txt"))
+            {
+                System.IO.File.Create(path + "/logYourFashion.txt").Close();
+            }
+            System.IO.File.AppendAllText(path + "/logYourFashion.txt", sb.ToString());
+
+            sb.Clear();
+        }
     }
 }

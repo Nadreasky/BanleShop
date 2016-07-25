@@ -43,9 +43,7 @@ namespace BanleWebsite.Controllers
 
             StringBuilder sb = new StringBuilder();
 
-            string action = "SubmitOrder";
-            sb.Append("Action: ");
-            sb.Append(action);
+            sb.Append("Action: SubmitOrder");
             sb.Append(Environment.NewLine);
             sb.Append("Username: ");
             sb.Append(name);
