@@ -10,7 +10,7 @@
 
 
 <div class="container">
-    <table class="table">
+    <table class="table" id="orderTable">
         <tr>
             <th>Số thứ tự</th>
             <th>Tên khách hàng</th>
@@ -30,7 +30,62 @@
                     <td>@item.Name</td>
                     <td>@item.PhoneNo</td>
                     <td>@item.CreateDate</td>
-                    <td>@item.Status</td>
+                    <td>
+                        @{ 
+                            if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                            {
+                                <p>Mới tạo</p>
+                            }
+                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                            {
+                                <p>Đã xác nhận</p>
+                            }
+                            if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                            {
+                                <p>Đã thanh toán</p>
+                            }
+                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                            {
+                                <p>Đã hủy đơn hàng</p>
+                            }
+                        }
+                        @*<select style="width:150px;">
+                            @{
+                                if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                {
+                                    <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                }
+                                else
+                                {
+                                    <option disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                }
+                                if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                {
+                                    <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                }
+                                else
+                                {
+                                    <option disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                }
+                                if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                {
+                                    <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                }
+                                else
+                                {
+                                    <option disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                }
+                                if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                                {
+                                    <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy đơn hàng</option>
+                                }
+                                else
+                                {
+                                    <option disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Mới tạo</option>
+                                }
+                            }
+                        </select>*@
+                    </td>
                     <td>
                         <!-- Trigger the modal with a button -->
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Detail</button>
@@ -63,7 +118,16 @@
                     <label>Số điện thoại</label>
                     <h4 id="cusPhoneNo"></h4>
                 </div>
-                <div class="form-group" style="float:right; margin-left:30px; display:block;">
+                <div class="form-group" style="float:left; display:block; margin-left:25px;">
+                    <label>Tình trạng</label>
+                    <select id="orderStatus" style="width:150px;">
+                        <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="form-group" style="float:right; display:block;">
                     <label>Ngày tạo</label>
                     <h4 id="createDate"></h4>
                 </div>
@@ -80,18 +144,6 @@
                         </tr>
                     </thead>
                     <tbody id="modalBoby">
-                        @*<tr>
-                            <td>Chuột không dây dùng pin sạc AZZOR (Đen)</td>
-                            <td>100 000</td>
-                            <td>10</td>
-                            <td>1 000 000</td>
-                        </tr>
-                        <tr>
-                            <td>Chuột không dây dùng pin sạc AZZOR (Đen)</td>
-                            <td>100 000</td>
-                            <td>10</td>
-                            <td>1 000 000</td>
-                        </tr>*@
                         <tr>
                             <td colspan="3"><strong>Tổng cộng</strong></td>
                             <td><strong id="total_cell">20 000 000</strong></td>
@@ -99,8 +151,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-footer" id="modalFooter">
+                <button id="btnModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
 
@@ -109,6 +161,32 @@
 
 
 <script>
+    function updateOrderStatus(id) {
+        var status = jQuery("#orderStatus").val();
+        console.log(status);
+        jQuery.ajax({
+            url: "/Quanli/UpdateOrderStatus",
+            data: {
+                format: 'json',
+                id: id,
+                status: status
+            },
+            error: function () {
+                alert("Change status order fail!")
+            },
+            success: function (data) {
+                if (data === "Success")
+                {
+                    alert("Cập nhật thành công!");
+                    jQuery("#orderTable").load("/Quanli/Order #orderTable");
+                    jQuery("#myModal").modal("toggle");
+                }
+                
+            },
+            type: 'POST'
+        })
+    }
+
     function getOrder(id) {
         var order = "";
         jQuery.ajax({
@@ -194,6 +272,9 @@
                 document.getElementById("cusName").innerText = order.Name;
                 document.getElementById("cusPhoneNo").innerText = order.PhoneNo;
                 document.getElementById("createDate").innerText = order.CreateDate;
+                jQuery("#orderStatus").val(order.Status);
+                //button update
+                jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
             },
             type: 'GET'
         })
@@ -203,7 +284,9 @@
         var x = document.getElementById("modalTable").rows.length;
         for (var i = x; i > 2; i--) {
             document.getElementById("modalTable").deleteRow(1);
+            var btnUpdateStt = document.getElementById("btnUpdateStt");
         }
+
         //document.getElementById("total_cell").innerHTML = "";
         //document.getElementById("cusName").innerHTML = "";
         //document.getElementById("cusPhoneNo").innerHTML = "";
@@ -213,6 +296,11 @@
         //document.getElementById("cusPhoneNo").innerText = "";
         //document.getElementById("createDate").innerText = "";
     });
+
+    jQuery('#myModal').on('hide.bs.modal', function () {
+        btnUpdateStt.parentNode.removeChild(btnUpdateStt);
+    });
+
 </script>
 
 
