@@ -326,53 +326,6 @@ namespace BanleWebsite.Controllers
 
         //=======================END FUNCTION OF CATEGORY=============
 
-        //=======================START FUNCTION OF ORDER==============
-
-        public void addOrder()
-        {
-
-        }
-
-        public void changeStateOrder()
-        {
-
-        }
-
-
-
-
-        //=======================END FUNCTION OF ORDER================
-
-        public ActionResult UpdateCategory()
-        {
-            List<Category> categoryList =_categoryServices.getAll();
-            ViewBag.categoryList = categoryList;
-
-            List<Category> categoryNoPreList = new List<Category>();
-            ViewBag.categoryNoPreList = categoryNoPreList;
-            foreach (var itemCategory in categoryList)
-            {
-                if (itemCategory.PreCateID == null)
-                {
-                    categoryNoPreList.Add(itemCategory);
-                }
-            }
-
-
-
-            //foreach (var itemCategoryNoPre in categoryNoPreList)
-            //{
-            //    foreach (var itemCategory in categoryList)
-            //    {
-            //        if (itemCategory.PreCateID == itemCategoryNoPre.ID) { }
-
-            //    }
-            //}
-
-            //Product p = null;
-            //ViewBag.pro1 = p;
-            return View();
-        }
 
         //=========================START FUNCTION OF ORDER============================
 
@@ -388,6 +341,38 @@ namespace BanleWebsite.Controllers
             return JsonConvert.SerializeObject(_orderServices.findOrderByID(id));
         }
 
+        [HttpPost]
+        public string UpdateOrderStatus(string id, string status)
+        {
+            int _id = -1;
+            int _status = -1;
+            if (id == null || id.Equals(""))
+            {
+                return "Error: ID không hợp lệ!";
+            }
+            else if (int.TryParse(id, out _id) == false)
+            {
+                return "Error: Lỗi khi parse ID";
+            }
+
+            if (status == null || status.Equals(""))
+            {
+                return "Error: status không hợp lệ!";
+            }
+            else if (int.TryParse(status, out _status) == false)
+            {
+                return "Error: Lỗi khi parse status";
+            }
+
+            Order o = _orderServices.findOrderByID(_id);
+            if ( o == null)
+            {
+                return "Không tìm thấy order yêu cầu";
+            }
+            o.Status = _status;
+            _orderServices.updateOrder(o);
+            return "Success";
+        }
 
         //==========================END FUNCTION OF ORDER
     }

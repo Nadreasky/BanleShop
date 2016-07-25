@@ -5,7 +5,7 @@
 
     ViewBag.Title = "Giỏ hàng";
     List<CartItem> cart = ViewBag.cart;
-    ProductRepository _productRepository = new ProductRepository();
+    ProductServices _productServices = new ProductServices();
 
 }
 
@@ -31,8 +31,8 @@
                 {
                     <tr>
                         <td>@{++stt;}@stt</td>
-                        <td>@_productRepository.FindById(item.productId).Name</td>
-                        <td>@_productRepository.FindById(item.productId).Price</td>
+                        <td>@_productServices.findByID(item.productId).Name</td>
+                        <td>@_productServices.findByID(item.productId).Price</td>
                         <td>
                             @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             @{
-                                double thanhtien = item.quantity * _productRepository.FindById(item.productId).Price.Value;
+                                double thanhtien = item.quantity * _productServices.findByID(item.productId).Price.Value;
                                 total += thanhtien;
                             }
                             @thanhtien
@@ -74,88 +74,6 @@
             <input type="text" placeholder="Số điện thoại" name="phoneNo" />
         </div>
             <input type="submit" value="Mua ngay" />
-            @*<table class="table">
-                    <tr>
-                        <th>Tên</th>
-                        <th>Số điện thoại</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="form-control" name="name" /></td>
-                        <td><input type="text" class="form-control" name="phoneNo" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><input type="submit" value="Submit" /></td>
-                    </tr>
-                </table>*@
     }
 
 </div>
-
-
-@*<table border="1">
-    <tr>
-        <th>Số thứ tự</th>
-        <th>Tên sản phẩm</th>
-        <th>Đơn giá</th>
-        <th>Số lượng</th>
-        <th>Thành tiền</th>
-        <th></th>
-        <th></th>
-
-    </tr>
-    @{int soThuTu = 0;
-            double totalMoney = 0;
-    }
-    @foreach (var item in cart)
-    {
-        <tr>
-            @{ ++soThuTu;}
-            <td>@soThuTu</td>
-            <td>@_productRepository.FindById(item.productId).Name</td>
-            <td>@_productRepository.FindById(item.productId).Price</td>
-
-            <td>
-                @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <input type="hidden" class="form-control" value="@item.productId" name="productId" />
-                    <input type="text" class="form-control" value="@item.quantity" name="quantity" />
-                    <input type="submit" value="Cập nhật" />
-                }
-            </td>
-            @{ double thanhTien = item.quantity * _productRepository.FindById(item.productId).Price.Value;
-                totalMoney += thanhTien;}
-            <td>@thanhTien</td>
-
-            <td>
-                @using (Html.BeginForm("DeleteCartItem", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <input type="hidden" class="form-control" value="@item.productId" name="productId" />
-                    <input type="submit" value="Xóa" />
-                }
-            </td>
-        </tr>
-                }
-    <tr>
-        <td colspan="4">Tổng</td>
-        <td>@totalMoney</td>
-    </tr>
-</table>
-                    @using (Html.BeginForm("SubmitOrder", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-<table border="1">
-    <tr>
-        <th>Tên</th>
-        <th>Số điện thoại</th>
-    </tr>
-    <tr>
-        <td><input type="text" class="form-control" name="name" /></td>
-        <td><input type="text" class="form-control" name="phoneNo" /></td>
-    </tr>
-    <tr>
-        <td colspan="2"><input type="submit" value="Submit" /></td>
-    </tr>
-</table>
-
-
-
-                    }*@
