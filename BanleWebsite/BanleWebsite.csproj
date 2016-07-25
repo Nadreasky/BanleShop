@@ -218,17 +218,13 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
-
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductOrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
-    <Compile Include="Services\CategoryServices.cs" />
-    <Compile Include="Services\ImageServices.cs" />
     <Compile Include="Repository\OrderDetailRepository.cs" />
     <Compile Include="Services\CategoryServices.cs" />
     <Compile Include="Services\ImageServices.cs" />
     <Compile Include="Services\OrderDetailServices.cs" />
-
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="SLIMCONFIG.cs" />
@@ -346,7 +342,7 @@
     <Content Include="Views\Quanli\Order.cshtml" />
     <Content Include="Views\Quanli\OrderClone.cshtml" />
     <Content Include="Views\Cart\SubmitOrderCompleted.cshtml" />
-
+    <Content Include="Views\Quanli\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -379,7 +375,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51657</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

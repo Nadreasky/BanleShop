@@ -161,5 +161,9 @@ namespace BanleWebsite.Services
             return orderDetailListOfAnOrder;
         }
         
+        public void updateOrder(Order order)
+        {
+            _orderRepository.Update(order);
+        }
     }
 }
