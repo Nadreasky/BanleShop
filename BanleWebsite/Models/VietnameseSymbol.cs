@@ -23,12 +23,12 @@ namespace BanleWebsite.Models
                     case 'ú': case 'ù': case 'ủ': case 'ũ': case 'ụ': sb.Append('u'); break;
                     case 'é': case 'è': case 'ẻ': case 'ẽ': case 'ẹ': sb.Append('e'); break;
                     case 'ó': case 'ò': case 'ỏ': case 'õ': case 'ọ': sb.Append('o'); break;
-                    case 'ấ': case 'ầ': case 'ẩ': case 'ẫ': case 'ậ': sb.Append('a'); break;
-                    case 'ắ': case 'ằ': case 'ẳ': case 'ẵ': case 'ặ': sb.Append('a'); break;
-                    case 'ứ': case 'ừ': case 'ử': case 'ữ': case 'ự': sb.Append('u'); break;
-                    case 'ế': case 'ề': case 'ể': case 'ễ': case 'ệ': sb.Append('e'); break;
-                    case 'ố': case 'ồ': case 'ổ': case 'ỗ': case 'ộ': sb.Append('o'); break;
-                    case 'ớ': case 'ờ': case 'ở': case 'ỡ': case 'ợ': sb.Append('o'); break;
+                    case 'ấ': case 'ầ': case 'ẩ': case 'ẫ': case 'ậ': case 'â':  sb.Append('a'); break;
+                    case 'ắ': case 'ằ': case 'ẳ': case 'ẵ': case 'ặ': case 'ă': sb.Append('a'); break;
+                    case 'ứ': case 'ừ': case 'ử': case 'ữ': case 'ự': case 'ư': sb.Append('u'); break;
+                    case 'ế': case 'ề': case 'ể': case 'ễ': case 'ệ': case 'ê': sb.Append('e'); break;
+                    case 'ố': case 'ồ': case 'ổ': case 'ỗ': case 'ộ': case 'ô': sb.Append('o'); break;
+                    case 'ớ': case 'ờ': case 'ở': case 'ỡ': case 'ợ': case 'ơ': sb.Append('o'); break;
                     case 'ý': case 'ỳ': case 'ỷ': case 'ỹ': case 'ỵ': sb.Append('y'); break;
                     case 'đ': sb.Append('d'); break;
                     default: sb.Append(item); break;
