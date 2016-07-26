@@ -106,7 +106,7 @@ namespace BanleWebsite.Services
             Order order = new Order();
             order.Name = name;
             order.PhoneNo = phoneNo;
-            order.Status = 0;
+            order.Status = SLIMCONFIG.ORDER_STATUS_UNCHECK;
             order.CreateDate = DateTime.Today;
             
             _orderRepository.Add(order);
