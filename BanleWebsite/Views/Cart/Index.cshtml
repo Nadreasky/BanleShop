@@ -6,7 +6,8 @@
     ViewBag.Title = "Giỏ hàng";
     List<CartItem> cart = ViewBag.cart;
     ProductServices _productServices = new ProductServices();
-
+    OrderServices _orderServices = new OrderServices();
+    int itemInCart = _orderServices.getNumberOfItemInCart();
     double total = 0;
 
 }
@@ -22,57 +23,69 @@
 </style>
 
 <div class="container">
-    <h2 style="font-family:VNOswald; text-align:center; margin:10px;">Giỏ hàng của bạn</h2>
-    <section>
-        <div id="cart" style="width:700px; border: 1px solid #9D3BC6; border-radius:4px; margin:auto;">
-            @{
-                foreach (var item in cart)
-                {
-                    Product p = _productServices.findByID(item.productId);
-                    double thanhtien = p.Price.Value * item.quantity;
-                    total += thanhtien;
-                    <div id="item" style="width:680px; margin:auto; padding:10px; border-bottom:1px solid #9D3BC6; padding-bottom:40px;">
-                        <a href="" style="text-decoration:none; cursor:pointer;">
-                            <img height="80" width="80" src="@p.Img1" style="float:right;" />
-                        </a>
-                        <h3 style="text-align:left;">@p.Name</h3>
-                        <h3 style="text-align:left; color:red; font-size:20px; font-family:VNOswald;">@p.Price VND</h3>
-                        <div class="clearfix"></div>
-                        <div class="action" style="display:block; margin-top:10px;">
-                            <p style="display:block; float:left; font-family:VNOswald; font-size:20px; margin:5px 10px 0 0;">Số lượng: </p>
-                            @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0; margin-left:10px;" }))
-                            {
-                                <input type="hidden" class="form-control" value="@item.productId" name="productId" />
-                                <input type="text" class="form-control" value="@item.quantity" name="quantity" style="width:50px; margin: 0 0 0 0; display:block; float:left;" />
-                                <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 0; display:block; float:left;" />
-                            }
-                            
-                            @using (Html.BeginForm("DeleteCartItem", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0px; margin-right:10px;" }))
-                            {
-                                <input type="hidden" class="form-control" value="@item.productId" name="productId" />
-                                <input type="submit" value="Xóa" style="margin: 0 0 0 0; display:block;float:right;" />
-                            }
-                        </div>
+    @{ 
+        if (itemInCart == 0)
+        {
+            <section style="text-align:center;">
+                <img src="~/Content/SiteImages/empty_bin.png" />
+            </section>
+        }
+        else
+        {
+            <h2 style="font-family:VNOswald; text-align:center; margin:10px;">Giỏ hàng của bạn</h2>
+            <section>
+                <div id="cart" style="width:700px; border: 1px solid #9D3BC6; border-radius:4px; margin:auto;">
+                    @{
+                        foreach (var item in cart)
+                        {
+                            Product p = _productServices.findByID(item.productId);
+                            double thanhtien = p.Price.Value * item.quantity;
+                            total += thanhtien;
+                            <div id="item" style="width:680px; margin:auto; padding:10px; border-bottom:1px solid #9D3BC6; padding-bottom:40px;">
+                                <a href="" style="text-decoration:none; cursor:pointer;">
+                                    <img height="80" width="80" src="@p.Img1" style="float:right;" />
+                                </a>
+                                <h3 style="text-align:left;">@p.Name</h3>
+                                <h3 style="text-align:left; color:red; font-size:20px; font-family:VNOswald;">@p.Price VND</h3>
+                                <div class="clearfix"></div>
+                                <div class="action" style="display:block; margin-top:10px;">
+                                    <p style="display:block; float:left; font-family:VNOswald; font-size:20px; margin:5px 10px 0 0;">Số lượng: </p>
+                                    @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0; margin-left:10px;" }))
+                                    {
+                                        <input type="hidden" class="form-control" value="@item.productId" name="productId" />
+                                        <input type="text" class="form-control" value="@item.quantity" name="quantity" style="width:50px; margin: 0 0 0 0; display:block; float:left;" />
+                                        <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 0; display:block; float:left;" />
+                                    }
+
+                                    @using (Html.BeginForm("DeleteCartItem", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0px; margin-right:10px;" }))
+                                    {
+                                        <input type="hidden" class="form-control" value="@item.productId" name="productId" />
+                                        <input type="submit" value="Xóa" style="margin: 0 0 0 0; display:block;float:right;" />
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div id="total" style="width:680px; border-bottom:1px solid #9D3BC6; padding:10px;">
+                        <b style="font-size:18px; font-family:VNOswald;">Tổng tiền</b><br /><br />
+                        <strong style="color:red; font-family:VNOswald; font-size:18px;">@total VND</strong>
                     </div>
-                }
-            }
-            
-            <div id="total" style="width:680px; border-bottom:1px solid #9D3BC6; padding:10px;">
-                <b style="font-size:18px; font-family:VNOswald;">Tổng tiền</b><br /><br />
-                <strong style="color:red; font-family:VNOswald; font-size:18px;">@total VND</strong>
-            </div>
-            <div id="cusInfo" style="width:700px; margin:auto; text-align:center;">
-                @using (Html.BeginForm("SubmitOrder", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    <div id="cusInfo" style="width:700px; margin:auto; text-align:center;">
+                        @using (Html.BeginForm("SubmitOrder", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <div class="form-inline">
-                        <input type="text" placeholder="Họ và tên" name="name" style="margin:10px; height:30px; width:220px;" />
-                        <input type="text" placeholder="Số điện thoại" name="phoneNo" style="margin:10px; height:30px; width:220px;" />
+                            <div class="form-inline">
+                                <input type="text" placeholder="Họ và tên" name="name" style="margin:10px; height:30px; width:220px;" />
+                                <input type="text" placeholder="Số điện thoại" name="phoneNo" style="margin:10px; height:30px; width:220px;" />
+                            </div>
+                            <input type="submit" style="font-size:25px; padding:20px 55px 50px 55px; margin-top:10px;" value="Mua ngay" />
+                        }
                     </div>
-                    <input type="submit" style="font-size:25px; padding:20px 55px 50px 55px; margin-top:10px;" value="Mua ngay" />
-                }
-            </div>
-        </div>
-    </section>
+                </div>
+            </section>
+                        }
+    }
+    
 </div>
 
 

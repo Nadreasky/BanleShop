@@ -241,6 +241,7 @@
     <Content Include="Content\bootstrap-3.3.6-dist\js\npm.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\SiteImages\empty_bin.png" />
     <Content Include="Content\SiteImages\favi.png" />
     <Content Include="Content\SiteImages\logo.png" />
     <Content Include="Content\SiteImages\logo_rightbar.png" />
