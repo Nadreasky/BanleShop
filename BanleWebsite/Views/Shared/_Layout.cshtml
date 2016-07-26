@@ -703,19 +703,19 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                     </a>
 
                                     <ul id="level0" class="collapse in">
-                                        <li id="menu-item-1150" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-24 current_page_item menu-item-1150 dropdown"><a href="/"><span style="font-family:VNOswald;">Trang chủ</span></a></li>
+                                        <li id="home" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-24 current_page_item menu-item-1150 dropdown"><a href="/"><span style="font-family:VNOswald;">Trang chủ</span></a></li>
                                         @{
                                             foreach (var item in categoryListNoPre)
                                             {
-                                                <li id="menu-item-1165" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-1165 dropdown">
-                                                    <a href="/Danhmuc/@item.ID"><span style="font-family:VNOswald;">@item.Name</span></a><a class="icon-collapse collapsed" href="#collapsed_item_1165" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
-                                                    <ul class="collapse in level0" id="collapsed_item_1165">
+                                                <li id="menu-item-@item.ID" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-@item.ID dropdown">
+                                                    <a href="/Danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a><a class="icon-collapse collapsed" href="#collapsed_item_@item.ID" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
+                                                    <ul class="collapse in level0" id="collapsed_item_@item.ID">
                                                         @{
                                                             foreach (var item2 in categoryList)
                                                             {
                                                                 if (item2.PreCateID == item.ID)
                                                                 {
-                                                                    <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href="/Danhmuc/@item2.ID">	<span style="font-family:VNOswald;">@item2.Name</span>	</a>	</li>
+                                                                    <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href="/Danhmuc/@item2.GenerateSlug()">	<span style="font-family:VNOswald;">@item2.Name</span>	</a>	</li>
                                                                 }
                                                             }
                                                         }

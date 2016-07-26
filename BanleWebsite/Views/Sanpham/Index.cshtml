@@ -20,7 +20,7 @@
             <div class="wrapper_w">
                 <div class="pull-left">
                     <div class="breadcrumbs">
-                        <a class="home" href="/">Home</a><span>›</span>
+                        <a class="home" href="/">Trang chủ</a><span>›</span>
                         @{ 
                             for (int i = proTree.Count - 1; i >= 0; i--)
                             {
@@ -181,14 +181,14 @@
                                     @*<button type="submit" class="button btn-cart"><i class="icon-basket"></i>Add to cart</button>*@
                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @class = "cart" }))
                                     {
-                                        <div class="qty">
+                                        @*<div class="qty">
                                             <label for="qty">Qty:</label>
                                             <input type="number" name="quantity" maxlength="12" value="1" class="input-text qty" id="qty" min="1" max="999967" name="quantity" value="1" title="Qty">
-                                        </div>
+                                        </div>*@
 
                                         <input type="hidden" name="id" value="@mainProduct.ID" />
                                         @*<input type="submit" value="Submit" />*@
-                                        <button type="submit" class="button btn-cart"><i class="icon-basket"></i>Add to cart</button>
+                                        <button type="submit" class="button btn-cart"><i class="icon-basket"></i>Mua ngay</button>
                                     }
 
 
@@ -343,7 +343,7 @@
 
                 <div class="related products span12">
 
-                    <h2>Related Products</h2>
+                    <h2>Các sản phẩm liên quan</h2>
 
                     <div class="carousel es-carousel-wrapper style0">
                         <div class="es-carousel">
