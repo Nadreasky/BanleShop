@@ -780,7 +780,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                     foreach (var item in categoryListNoPre)
                                     {
                                         <li id="menu-item-928" class="dropdown menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-1062 dropdown">
-                                            <a href="/danhmuc/@item.ID"><span style="font-family:VNOswald;">@item.Name</span></a>
+                                            <a href="/danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a>
                                             <ul class="level0">
                                                 <ul class="shadow">
                                                     <li class="row_middle">
@@ -796,7 +796,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                                                     if (item2.PreCateID == item.ID)
                                                                                     {
                                                                                         <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		
-                                                                                            <a href="/danhmuc/@item2.ID">		
+                                                                                            <a href="/danhmuc/@item2.GenerateSlug()">		
                                                                                                 <span>@item2.Name</span>		
                                                                                             </a>		
                                                                                         </li>

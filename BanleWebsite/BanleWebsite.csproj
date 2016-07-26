@@ -205,6 +205,7 @@
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\VietnameseSymbol.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -343,7 +344,10 @@
     <Content Include="Views\Quanli\Order.cshtml" />
     <Content Include="Views\Quanli\OrderClone.cshtml" />
     <Content Include="Views\Cart\SubmitOrderCompleted.cshtml" />
+
+
     <Content Include="Views\Quanli\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

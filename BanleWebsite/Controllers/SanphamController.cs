@@ -31,6 +31,6 @@ namespace BanleWebsite.Controllers
 
             return View();
         }
-
+        
     }
 }
