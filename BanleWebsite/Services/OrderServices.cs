@@ -135,6 +135,17 @@ namespace BanleWebsite.Services
             return cart;
         }
 
+        public int getNumberOfItemInCart()
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Current.Session["CartSession"] != null)
+            {
+                cart = (List<CartItem>)HttpContext.Current.Session["CartSession"];
+            }
+
+            return cart.Count;
+        }
+
         // may ham ben quan li Order
         ////////////////////////////////////////////////////////
         public Order findOrderByID(int id)

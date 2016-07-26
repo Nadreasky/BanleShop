@@ -10,6 +10,7 @@ namespace BanleWebsite.Controllers
     public class HomeController : Controller
     {
         ProductServices _productServices;
+
         public ActionResult Index()
         {
             _productServices = new ProductServices();
@@ -20,6 +21,7 @@ namespace BanleWebsite.Controllers
 
         public ActionResult About()
         {
+
             ViewBag.Message = "Your application description page.";
 
             return View();

@@ -28,6 +28,7 @@ namespace BanleWebsite.Controllers
 
             List<Category> proTree = _productService.getProductTree(id.Value);
             ViewBag.proTree = proTree;
+
             return View();
         }
 
