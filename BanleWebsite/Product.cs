@@ -9,9 +9,11 @@
 
 namespace BanleWebsite
 {
+    using Models;
     using System;
     using System.Collections.Generic;
-    
+    using System.Text.RegularExpressions;
+
     public partial class Product
     {
         public int ID { get; set; }
@@ -23,5 +25,24 @@ namespace BanleWebsite
         public string Img1 { get; set; }
         public string Img2 { get; set; }
         public string Img3 { get; set; }
+
+        public string GenerateSlug()
+        {
+            VietnameseSymbol vs = new VietnameseSymbol();
+            string phrase = string.Format("{0}-{1}", vs.ClearSymbol(Name), ID);
+
+            string str = RemoveAccent(phrase).ToLower();       
+            str = Regex.Replace(str, @"[^a-z0-9\s-]", "");  
+            str = Regex.Replace(str, @"\s+", " ").Trim();
+            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+            str = Regex.Replace(str, @"\s", "-");
+            return str;
+        }
+
+        private string RemoveAccent(string text)
+        {
+            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
+            return System.Text.Encoding.ASCII.GetString(bytes);
+        }
     }
 }

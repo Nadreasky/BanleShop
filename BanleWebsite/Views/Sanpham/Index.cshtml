@@ -37,7 +37,7 @@
                             if (prevProduct != null)
                             {
                                 <span class="prev">
-                                    <a href="/sanpham/@prevProduct.ID" rel="prev">
+                                    <a href="/sanpham/@prevProduct.GenerateSlug()" rel="prev">
                                         <i class="icon-left-thin"></i>
                                     </a>
                                     <div class="small_preview prev hidden-phone hidden-tablet" style="display: none;">
@@ -49,7 +49,7 @@
                             if (nextProduct != null)
                             {
                                 <span class="next">
-                                    <a href="/sanpham/@nextProduct.ID" rel="next">
+                                    <a href="/sanpham/@nextProduct.GenerateSlug()" rel="next">
                                         <i class="icon-right-thin"></i>
                                     </a>
                                     <div class="small_preview next hidden-phone hidden-tablet" style="display: none;">
