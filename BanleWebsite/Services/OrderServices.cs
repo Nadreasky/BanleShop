@@ -91,7 +91,7 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public void SubmitOrder(string name, string phoneNo)
+        public List<CartItem> SubmitOrder(string name, string phoneNo)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -100,7 +100,7 @@ namespace BanleWebsite.Services
             }
             else
             {
-                return;
+                return cart;
             }
 
             Order order = new Order();
@@ -122,6 +122,10 @@ namespace BanleWebsite.Services
             }
 
             HttpContext.Current.Session.Clear();
+
+            return cart;
+            //LogFile logfile = new LogFile();
+            //logfile.WriteLog(name + " - " + phoneNo);
         }
 
         public List<CartItem> getCart()
@@ -133,6 +137,17 @@ namespace BanleWebsite.Services
             }
 
             return cart;
+        }
+
+        public int getNumberOfItemInCart()
+        {
+            List<CartItem> cart = new List<CartItem>();
+            if (HttpContext.Current.Session["CartSession"] != null)
+            {
+                cart = (List<CartItem>)HttpContext.Current.Session["CartSession"];
+            }
+
+            return cart.Count;
         }
 
         // may ham ben quan li Order
@@ -161,5 +176,9 @@ namespace BanleWebsite.Services
             return orderDetailListOfAnOrder;
         }
         
+        public void updateOrder(Order order)
+        {
+            _orderRepository.Update(order);
+        }
     }
 }

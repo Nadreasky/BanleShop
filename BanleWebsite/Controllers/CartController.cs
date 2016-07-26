@@ -1,7 +1,9 @@
 ﻿using BanleWebsite.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,7 +39,31 @@ namespace BanleWebsite.Controllers
         [ValidateInput(false)]
         public ActionResult SubmitOrder(string name, string phoneNo)
         {
-            _orderServices.SubmitOrder(name, phoneNo);
+            var cart = _orderServices.SubmitOrder(name, phoneNo);
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("Action: SubmitOrder");
+            sb.Append(Environment.NewLine);
+            sb.Append("Username: ");
+            sb.Append(name);
+            sb.Append(Environment.NewLine);
+            sb.Append("PhoneNumber: ");
+            sb.Append(phoneNo);
+
+            foreach (var item in cart)
+            {
+                sb.Append(Environment.NewLine);
+                sb.Append("ProductId: ");
+                sb.Append(item.productId);
+                sb.Append(" - ");
+                sb.Append("Quantity: ");
+                sb.Append(item.quantity);
+            }
+            WriteLog(sb.ToString());
+
+            sb.Clear();
+
             return RedirectToAction("SubmitOrderCompleted", "Cart");
         }
 
@@ -55,6 +81,30 @@ namespace BanleWebsite.Controllers
         {
             _orderServices.DeleteCartItem(productId);
             return RedirectToAction("index", "cart");
+        }
+
+        public void WriteLog(string text)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(DateTime.Now.ToLongDateString());
+            sb.Append(" - ");
+            sb.Append(DateTime.Now.ToLongTimeString());
+            sb.Append(Environment.NewLine);
+
+            sb.Append(text);
+            sb.Append(Environment.NewLine);
+            sb.Append(Environment.NewLine);
+
+            string path = Server.MapPath(Url.Content("~/"));
+            //string fileName = Server.MapPath("logYourFashion.txt");
+            if (!System.IO.File.Exists(path + "/logYourFashion.txt"))
+            {
+                System.IO.File.Create(path + "/logYourFashion.txt").Close();   
+            }
+            System.IO.File.AppendAllText(path + "/logYourFashion.txt", sb.ToString());
+
+            sb.Clear();
         }
     }
 }
