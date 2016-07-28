@@ -6,16 +6,44 @@
     int soThuTu = 0;
 }
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
+<script>
+  jQuery( function() {
+    jQuery( "#fromDate" ).datepicker();
+  } );
+</script>
 
+<script>
+  jQuery( function() {
+    jQuery( "#toDate" ).datepicker();
+  } );
+</script>
 
 <div class="container">
+    
+    <div style="display:inline-block; float:left;">
+        <label>Lọc đơn hàng theo <strong>Trạng thái</strong></label>
+        <select>
+            <option>Mới tạo</option>
+            <option>Đã xác nhận</option>
+            <option>Đã thanh toán</option>
+            <option>Đã hủy</option>
+        </select>
+    </div>
+    <div style="display:inline-block; float:right;">
+        <label>Lọc đơn hàng theo <strong>Ngày</strong></label>
+        <p>Từ ngày: <input type="text" id="fromDate" /> Đến ngày: <input type="text" id="toDate" /></p>
+    </div>
+
     <table class="table" id="orderTable">
         <tr>
             <th>Số thứ tự</th>
+            <th>Ngày tạo</th>
             <th>Tên khách hàng</th>
             <th>Số điện thoại</th>
-            <th>Ngày tạo</th>
             <th>Trạng thái</th>
             <th></th>
             <th></th>
@@ -27,9 +55,9 @@
                 <tr>
                     @{++soThuTu;}
                     <td>@soThuTu</td>
+                    <td>@item.CreateDate</td>
                     <td>@item.Name</td>
                     <td>@item.PhoneNo</td>
-                    <td>@item.CreateDate</td>
                     <td>
                         @{ 
                             if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
@@ -88,7 +116,7 @@
                     </td>
                     <td>
                         <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Detail</button>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)" style="font-family:VNOswald;">Chi tiết</button>
                     </td>
 
                 </tr>
@@ -287,7 +315,7 @@
 
                 //Cus info
                 var order = JSON.parse(getOrder(id));
-                //console.log(order.Name + "fffffffffffffffffffffff");
+                //console.log(order + "fffffffffffffffffffffff");
                 document.getElementById("orderTitle").innerText = "Thông tin về đơn hàng #" + order.ID;
                 document.getElementById("cusName").innerText = order.Name;
                 document.getElementById("cusPhoneNo").innerText = order.PhoneNo;
@@ -304,7 +332,7 @@
         var x = document.getElementById("modalTable").rows.length;
         for (var i = x; i > 2; i--) {
             document.getElementById("modalTable").deleteRow(1);
-            var btnUpdateStt = document.getElementById("btnUpdateStt");
+            
         }
 
         //document.getElementById("total_cell").innerHTML = "";
@@ -318,6 +346,7 @@
     });
 
     jQuery('#myModal').on('hide.bs.modal', function () {
+        var btnUpdateStt = document.getElementById("btnUpdateStt");
         btnUpdateStt.parentNode.removeChild(btnUpdateStt);
     });
 
