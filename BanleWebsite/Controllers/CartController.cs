@@ -1,4 +1,5 @@
-﻿using BanleWebsite.Services;
+﻿using BanleWebsite.Models;
+using BanleWebsite.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,10 @@ namespace BanleWebsite.Controllers
             //    return RedirectToAction("Index","Home");
             //}
             ViewBag.cart = _orderServices.getCart();
+
+            AddressBar ab = new AddressBar();
+            ViewBag.link = ab.GetLinkBackToShopping();
+
             return View();
 
         }

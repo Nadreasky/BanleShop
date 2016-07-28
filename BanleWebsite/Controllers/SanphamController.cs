@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BanleWebsite.Services;
+using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
@@ -28,6 +29,10 @@ namespace BanleWebsite.Controllers
 
             List<Category> proTree = _productService.getProductTree(id.Value);
             ViewBag.proTree = proTree;
+
+            // cap nhat link cho "Quay lai mua sam"
+            AddressBar ab = new AddressBar();
+            ab.UpdateLinkBackToShopping();
 
             return View();
         }
