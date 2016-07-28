@@ -17,9 +17,12 @@ namespace BanleWebsite.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        ApplicationDbContext context;
+
 
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -139,7 +142,11 @@ namespace BanleWebsite.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            var roles = context.Roles.ToList();
+            foreach (var r in roles)
+            { model.RoleList.Add(new SelectListItem() { Text = r.Name, Value = r.Name }); }
+            return View(model);
         }
 
         //
@@ -155,6 +162,9 @@ namespace BanleWebsite.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Assign Role to user Here 
+                    await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                    //Ends Here
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
