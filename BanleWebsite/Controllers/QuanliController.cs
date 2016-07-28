@@ -8,9 +8,12 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Web.Helpers;
 using System.Text;
+using System.Web.Security;
+
 
 namespace BanleWebsite.Controllers
 {
+    [AuthLog(Roles = "Admin")]
     public class QuanliController : Controller
     {
         CategoryServices _categoryServices = new CategoryServices();
