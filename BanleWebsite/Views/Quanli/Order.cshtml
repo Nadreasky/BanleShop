@@ -159,6 +159,26 @@
     </div>
 </div>
 
+<div id="successModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            @*<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-family:VNOswald;">Lỗi</h4>
+            </div>*@
+            <div class="modal-body" style="text-align:center; background-color:#dff0d8;">
+                <p style="color:#468847; font-size:20px;"><strong>Cập nhật thành công</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 <script>
     function updateOrderStatus(id) {
@@ -177,7 +197,7 @@
             success: function (data) {
                 if (data === "Success")
                 {
-                    alert("Cập nhật thành công!");
+                    jQuery("#successModal").modal("toggle");
                     jQuery("#orderTable").load("/Quanli/Order #orderTable");
                     jQuery("#myModal").modal("toggle");
                 }

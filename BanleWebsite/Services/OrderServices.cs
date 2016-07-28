@@ -18,7 +18,7 @@ namespace BanleWebsite.Services
             _productOrderRepository = new ProductOrderRepository();
         }
 
-        public void AddToCart(int productId)
+        public void AddToCart(int productId, string color, string size)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -27,7 +27,9 @@ namespace BanleWebsite.Services
                 bool isInCart = false;
                 foreach (var item in cart)
                 {
-                    if (item.productId == productId)
+                    if (item.productId == productId
+                        && item.color ==color
+                        && item.size == size)
                     {
                         item.quantity++;
                         isInCart = true;
@@ -39,6 +41,8 @@ namespace BanleWebsite.Services
                     CartItem cartItem = new CartItem();
                     cartItem.productId = productId;
                     cartItem.quantity = 1;
+                    cartItem.color = color;
+                    cartItem.size = size;
                     cart.Add(cartItem);
                 }
             }
@@ -48,13 +52,15 @@ namespace BanleWebsite.Services
                 CartItem cartItem = new CartItem();
                 cartItem.productId = productId;
                 cartItem.quantity = 1;
+                cartItem.color = color;
+                cartItem.size = size;
                 cart.Add(cartItem);
             }
 
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public void UpdateQuantity(int productId, int quantity)
+        public void UpdateQuantity(int productId, int quantity, string color, string size)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -62,7 +68,9 @@ namespace BanleWebsite.Services
                 cart = (List<CartItem>)HttpContext.Current.Session["CartSession"];
                 foreach (var item in cart)
                 {
-                    if (item.productId==productId)
+                    if (item.productId==productId
+                        && item.color == color
+                        && item.size == size)
                     {
                         item.quantity = quantity;
                     }
@@ -72,7 +80,7 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public void DeleteCartItem(int productId)
+        public void DeleteCartItem(int productId, string color, string size)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -80,7 +88,9 @@ namespace BanleWebsite.Services
                 cart = (List<CartItem>)HttpContext.Current.Session["CartSession"];
                 foreach (var item in cart)
                 {
-                    if (item.productId == productId)
+                    if (item.productId == productId
+                        && item.color==color
+                        && item.size == size)
                     {
                         cart.Remove(item);
                         break;
@@ -91,7 +101,7 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public List<CartItem> SubmitOrder(string name, string phoneNo)
+        public List<CartItem> SubmitOrder(string name, string phoneNo, string address)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -106,8 +116,9 @@ namespace BanleWebsite.Services
             Order order = new Order();
             order.Name = name;
             order.PhoneNo = phoneNo;
-            order.Status = 0;
-            order.CreateDate = DateTime.Today;
+            order.Status = SLIMCONFIG.ORDER_STATUS_UNCHECK;
+            order.CreateDate = DateTime.Now;
+            order.Address = address;
             
             _orderRepository.Add(order);
 
@@ -117,6 +128,8 @@ namespace BanleWebsite.Services
                 productOrder.OrderID = order.ID;
                 productOrder.ProductID = item.productId;
                 productOrder.Quantity = item.quantity;
+                productOrder.Color = item.color;
+                productOrder.Size = item.size;
 
                 _productOrderRepository.Add(productOrder);
             }
@@ -179,6 +192,18 @@ namespace BanleWebsite.Services
         public void updateOrder(Order order)
         {
             _orderRepository.Update(order);
+        }
+
+        public List<Order> getOrderFilter(string keyword, int? status, DateTime? fromDate, DateTime? toDate)
+        {
+            var getAny = string.IsNullOrWhiteSpace(keyword);
+
+            var orderListFull = _orderRepository.List;
+
+            return orderListFull.Where(o => (getAny || (o.Name+o.PhoneNo.ToString()).Contains(keyword))
+                && (!status.HasValue || o.Status.Value == status.Value)
+                && (!fromDate.HasValue || o.CreateDate >= fromDate.Value)
+                && (!toDate.HasValue || o.CreateDate <= toDate.Value)).ToList();
         }
     }
 }

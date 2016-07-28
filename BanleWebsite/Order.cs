@@ -21,5 +21,6 @@ namespace BanleWebsite
         public System.DateTime CreateDate { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
         public Nullable<int> Staff { get; set; }
+        public string Address { get; set; }
     }
 }
