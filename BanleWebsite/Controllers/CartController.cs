@@ -15,11 +15,17 @@ namespace BanleWebsite.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            if (Request["id"]!=null)
+            if (Request["id"]!=null
+                && Request["color"]!=null
+                && Request["size"]!=null)
             {
                 int id = Int32.Parse(Request["id"]);
-                _orderServices.AddToCart(id);
+                string color = Request["color"].ToString();
+                string size = Request["size"].ToString();
+                _orderServices.AddToCart(id, color, size);
             }
+
+            //_orderServices.AddToCart(13, "white", "XL");
 
             //else
             //{
@@ -37,9 +43,9 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult SubmitOrder(string name, string phoneNo)
+        public ActionResult SubmitOrder(string name, string phoneNo, string address)
         {
-            var cart = _orderServices.SubmitOrder(name, phoneNo);
+            var cart = _orderServices.SubmitOrder(name, phoneNo, address);
 
             StringBuilder sb = new StringBuilder();
 
@@ -50,6 +56,9 @@ namespace BanleWebsite.Controllers
             sb.Append(Environment.NewLine);
             sb.Append("PhoneNumber: ");
             sb.Append(phoneNo);
+            sb.Append(Environment.NewLine);
+            sb.Append("Address: ");
+            sb.Append(address);
 
             foreach (var item in cart)
             {
@@ -59,6 +68,12 @@ namespace BanleWebsite.Controllers
                 sb.Append(" - ");
                 sb.Append("Quantity: ");
                 sb.Append(item.quantity);
+                sb.Append(" - ");
+                sb.Append("Color: ");
+                sb.Append(item.color);
+                sb.Append(" - ");
+                sb.Append("Size: ");
+                sb.Append(item.size);
             }
             WriteLog(sb.ToString());
 
@@ -69,17 +84,17 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult UpdateQuantity(int productId, int quantity)
+        public ActionResult UpdateQuantity(int productId, int quantity, string color, string size)
         {
-            _orderServices.UpdateQuantity(productId, quantity);
+            _orderServices.UpdateQuantity(productId, quantity, color, size);
             return RedirectToAction("index", "cart");
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult DeleteCartItem(int productId)
+        public ActionResult DeleteCartItem(int productId, string color, string size)
         {
-            _orderServices.DeleteCartItem(productId);
+            _orderServices.DeleteCartItem(productId, color, size);
             return RedirectToAction("index", "cart");
         }
 

@@ -9,5 +9,7 @@ namespace BanleWebsite.Models
     {
         public int productId { get; set; }
         public int quantity { get; set; }
+        public string color { get; set; }
+        public string size { get; set; }
     }
 }
