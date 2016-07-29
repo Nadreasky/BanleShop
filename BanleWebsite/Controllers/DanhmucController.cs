@@ -1,4 +1,5 @@
-﻿using BanleWebsite.Services;
+﻿using BanleWebsite.Models;
+using BanleWebsite.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace BanleWebsite.Controllers
 
             Category mainCate = _categoryServices.findByid(id.Value);
             ViewBag.mainCate = mainCate;
+
+            // cap nhat link cho "Quay lai mua sam"
+            AddressBar ab = new AddressBar();
+            ab.UpdateLinkBackToShopping();
 
             return View();
         }

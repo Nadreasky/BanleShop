@@ -101,7 +101,7 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public List<CartItem> SubmitOrder(string name, string phoneNo, string address)
+        public List<CartItem> SubmitOrder(string name, string phoneNo, string address, string email)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -119,6 +119,7 @@ namespace BanleWebsite.Services
             order.Status = SLIMCONFIG.ORDER_STATUS_UNCHECK;
             order.CreateDate = DateTime.Now;
             order.Address = address;
+            order.Email = email;
             
             _orderRepository.Add(order);
 
@@ -134,7 +135,9 @@ namespace BanleWebsite.Services
                 _productOrderRepository.Add(productOrder);
             }
 
-            HttpContext.Current.Session.Clear();
+            //HttpContext.Current.Session.Clear();
+
+            HttpContext.Current.Session.Add("OrderId", order.ID);
 
             return cart;
             //LogFile logfile = new LogFile();

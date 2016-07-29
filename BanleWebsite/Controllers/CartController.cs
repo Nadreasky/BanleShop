@@ -1,4 +1,5 @@
-﻿using BanleWebsite.Services;
+﻿using BanleWebsite.Models;
+using BanleWebsite.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,8 @@ namespace BanleWebsite.Controllers
         // GET: Cart
         public ActionResult Index()
         {
+            string xcolor = Request["color"];
+            string xsize = Request["size"];
             if (Request["id"]!=null
                 && Request["color"]!=null
                 && Request["size"]!=null)
@@ -32,20 +35,28 @@ namespace BanleWebsite.Controllers
             //    return RedirectToAction("Index","Home");
             //}
             ViewBag.cart = _orderServices.getCart();
+
+            AddressBar ab = new AddressBar();
+            ViewBag.link = ab.GetLinkBackToShopping();
+
             return View();
 
         }
 
         public ActionResult SubmitOrderCompleted()
         {
+            Invoice invoice = new Invoice();
+
+            ViewBag.invoice = invoice;
+
             return View();
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult SubmitOrder(string name, string phoneNo, string address)
+        public ActionResult SubmitOrder(string name, string phoneNo, string address, string email)
         {
-            var cart = _orderServices.SubmitOrder(name, phoneNo, address);
+            var cart = _orderServices.SubmitOrder(name, phoneNo, address, email);
 
             StringBuilder sb = new StringBuilder();
 
@@ -59,6 +70,9 @@ namespace BanleWebsite.Controllers
             sb.Append(Environment.NewLine);
             sb.Append("Address: ");
             sb.Append(address);
+            sb.Append(Environment.NewLine);
+            sb.Append("Email: ");
+            sb.Append(email);
 
             foreach (var item in cart)
             {

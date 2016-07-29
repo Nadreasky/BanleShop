@@ -1,6 +1,8 @@
-﻿
+﻿@using BanleWebsite.Models
+
 @{
     ViewBag.Title = "Đặt hàng thành công";
+    Invoice invoice = ViewBag.invoice;
 }
 
 
@@ -11,3 +13,85 @@
         <h2 style="font-family:VNOswald;">Cám ơn quý khách đã mua hàng tại Your Fashion!</h2>
     </div>
 </div>
+
+Tên khách hàng: @invoice.name
+<table border="1">
+    <tr>
+        <td>Tên khách hàng:</td>
+        <td>@invoice.name</td>
+        <td>Inv No:</td>
+        <td>@invoice.orderId</td>
+    </tr>
+    <tr>
+        <td>Địa chỉ giao hàng:</td>
+        <td>@invoice.address</td>
+        <td>Date:</td>
+        <td>@invoice.createDate</td>
+    </tr>
+    <tr>
+        <td>Số điện thoại:</td>
+        <td>@invoice.phoneNo</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>@invoice.email</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Sản phẩm</th>
+        <th>Màu</th>
+        <th>Kích cỡ</th>
+        <th>Đơn giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+    </tr>
+    @{
+        int soThuTu = 0;
+        double thanhTien = 0;
+        double subTotal = 0;
+        double maGiamGia = 0.1;
+        double total = 0;
+        double subTotalGiamGia = 0;
+        foreach (var item in invoice.listOrderDetail)
+        {
+            soThuTu++;
+            <tr>
+                <td>@soThuTu</td>
+                <td>@item.productName</td>
+                <td>@item.color</td>
+                <td>@item.size</td>
+                <td>@item.price</td>
+                <td>@item.quantity</td>
+                @{ thanhTien = item.price * item.quantity;
+                    subTotal += thanhTien;
+                }
+                <td>@thanhTien</td>
+            </tr>
+        }
+
+    }
+    <tr>
+        <td colspan="5"></td>
+        <td>Subtotal:</td>
+        <td>@subTotal</td>
+    </tr>
+    <tr>
+        <td colspan="5">Thank you!</td>
+        <td>Mã giảm giá:</td>
+        @{ subTotalGiamGia = subTotal * maGiamGia;}
+        <td>-@subTotalGiamGia</td>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+        <td>Tổng cộng:</td>
+        @{ total = subTotal - subTotalGiamGia;}
+        <td>@total</td>
+    </tr>
+</table>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BanleWebsite.Services;
+using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
@@ -16,6 +17,11 @@ namespace BanleWebsite.Controllers
             _productServices = new ProductServices();
             List<Product> allProduct = _productServices.getAll();
             ViewBag.allProduct = allProduct;
+
+            // cap nhat link cho "Quay lai mua sam"
+            AddressBar ab = new AddressBar();
+            ab.UpdateLinkBackToShopping();
+
             return View();
         }
 

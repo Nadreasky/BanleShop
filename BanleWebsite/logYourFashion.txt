@@ -1,0 +1,67 @@
+Tuesday, July 26, 2016 - 14:32:15
+Action: SubmitOrder
+Username: loi te le huhu
+PhoneNumber: 95847347433
+ProductId: 21 - Quantity: 1
+
+Tuesday, July 26, 2016 - 14:35:21
+Action: UpdateOrderStatus
+Id: 6
+Status: 1
+
+Tuesday, July 26, 2016 - 14:35:31
+Action: UpdateOrderStatus
+Id: 7
+Status: 1
+
+Tuesday, July 26, 2016 - 14:38:09
+Action: SubmitOrder
+Username: yuyuyu
+PhoneNumber: 6532555
+ProductId: 1037 - Quantity: 1
+
+Tuesday, July 26, 2016 - 16:37:41
+Action: SubmitOrder
+Username: 
+PhoneNumber: 
+ProductId: 1040 - Quantity: 1
+
+Tuesday, July 26, 2016 - 16:47:56
+Action: SubmitOrder
+Username: 
+PhoneNumber: 
+ProductId: 14 - Quantity: 1
+
+Tuesday, July 26, 2016 - 20:17:22
+Action: SubmitOrder
+Username: 
+PhoneNumber: 
+ProductId: 1041 - Quantity: 1
+
+Tuesday, July 26, 2016 - 20:18:57
+Action: SubmitOrder
+Username: 
+PhoneNumber: 
+ProductId: 14 - Quantity: 1
+
+Tuesday, July 26, 2016 - 20:21:54
+Action: SubmitOrder
+Username: 
+PhoneNumber: 
+ProductId: 1042 - Quantity: 1
+
+Tuesday, July 26, 2016 - 20:43:19
+Action: UpdateOrderStatus
+Id: 11
+Status: 4
+
+Tuesday, July 26, 2016 - 20:45:08
+Action: UpdateOrderStatus
+Id: 12
+Status: 4
+
+Thursday, July 28, 2016 - 14:44:48
+Action: UpdateOrderStatus
+Id: 6
+Status: 3
+

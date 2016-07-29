@@ -1,4 +1,5 @@
 ﻿@using BanleWebsite.Services;
+@RenderSection("scripts", required: false)
 @{
     CategoryServices _categoryServices = new CategoryServices();
     OrderServices _orderServices = new OrderServices();
@@ -606,8 +607,9 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                             <a href="#">Account</a>
                             <div class="ul_wrapper">
                                 <ul id="menu-account-menu" class="menu">
-                                    <li id="menu-item-1122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1122 dropdown"><a href="index3f35.html?page_id=8"><span>My Account</span></a></li>
+                                    <li id="menu-item-1122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1122 dropdown"><a href="~/Account/Login"><span>Login</span></a></li>
                                     <li id="menu-item-1123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1123 dropdown"><a href="index5534.html?page_id=6"><span>Cart</span></a></li>
+                                    <li id="menu-item-1123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1123 dropdown">@Html.ActionLink("Role", "Index", "Role")</li>
                                 </ul>
                             </div>
                         </div>

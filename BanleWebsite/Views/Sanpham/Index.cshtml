@@ -187,6 +187,8 @@
                                         </div>*@
 
                                         <input type="hidden" name="id" value="@mainProduct.ID" />
+                                        <input type="hidden" id="color" name="color" value="white" />
+                                        <input type="hidden" id="size" name="size" value="XL" />
                                         @*<input type="submit" value="Submit" />*@
                                         <button type="submit" class="button btn-cart"><i class="icon-basket"></i>Mua ngay</button>
                                     }
@@ -488,6 +490,15 @@
 
     </div>
 </section>
+
+<script>
+    jQuery(document).ready(function () {
+        var color = jQuery("#color").val();
+        var size = jQuery("#size").val();
+        console.log(color);
+        console.log(size);
+    });
+</script>
 
 <link rel='stylesheet' id='cloud-zoom-css' href='~/Content/Buyshop/wp-content/themes/buyshop/css/cloud-zoom7350.css?ver=4.2.9' type='text/css' media='all' />
 <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/cloud-zoom.1.0.27350.js?ver=4.2.9'></script>

@@ -185,7 +185,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\QuanliController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
+    <Compile Include="CustomFilters\AuthLogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,8 +210,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddressBar.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\VietnameseSymbol.cs" />
     <Compile Include="Order.cs">
@@ -360,6 +365,9 @@
     <Content Include="Views\Quanli\OrderClone.cshtml" />
     <Content Include="Views\Cart\SubmitOrderCompleted.cshtml" />
     <Content Include="Views\Quanli\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
