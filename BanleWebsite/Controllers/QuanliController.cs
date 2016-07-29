@@ -13,7 +13,7 @@ using System.Web.Security;
 
 namespace BanleWebsite.Controllers
 {
-    [AuthLog(Roles = "Admin")]
+    //[AuthLog(Roles = "Admin")]
     public class QuanliController : Controller
     {
         CategoryServices _categoryServices = new CategoryServices();
@@ -45,8 +45,8 @@ namespace BanleWebsite.Controllers
 
         public ActionResult Order()
         {
-            //List<Order> orders = _orderServices.getAllOrder();
-            var orders = _orderServices.getOrderFilter("Q",2,null,null);
+            List<Order> orders = _orderServices.getAllOrder();
+            //var orders = _orderServices.getOrderFilter("Q",2,null,null);
 
             ViewBag.orders = orders;
             return View(); // chua co

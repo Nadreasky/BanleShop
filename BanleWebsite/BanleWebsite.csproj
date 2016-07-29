@@ -172,6 +172,12 @@
     <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Color.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ColorProductDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DanhmucController.cs" />
@@ -207,6 +213,8 @@
     <Compile Include="Models\AddressBar.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\VietnameseSymbol.cs" />
     <Compile Include="Order.cs">
@@ -234,6 +242,12 @@
     <Compile Include="Services\OrderDetailServices.cs" />
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
+    <Compile Include="Size.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SizeProductDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="SLIMCONFIG.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

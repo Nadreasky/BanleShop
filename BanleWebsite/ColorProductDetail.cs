@@ -12,16 +12,10 @@ namespace BanleWebsite
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class ColorProductDetail
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string PhoneNo { get; set; }
-        public Nullable<int> Status { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public Nullable<System.DateTime> DateModified { get; set; }
-        public Nullable<int> Staff { get; set; }
-        public string Address { get; set; }
-        public string Email { get; set; }
+        public Nullable<int> ProID { get; set; }
+        public Nullable<int> ColorID { get; set; }
     }
 }

@@ -15,7 +15,8 @@ namespace BanleWebsite
     public partial class Image
     {
         public int ID { get; set; }
-        public Nullable<int> NameCode { get; set; }
+        public Nullable<int> IDColor { get; set; }
         public string Path { get; set; }
+        public Nullable<int> IDProduct { get; set; }
     }
 }
