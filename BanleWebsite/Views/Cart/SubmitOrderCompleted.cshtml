@@ -5,16 +5,117 @@
     Invoice invoice = ViewBag.invoice;
 }
 
+<style>
+    body {
+            background-image: url('../../Content/SiteImages/BGR1.jpg');
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    tr {
+        border-top: 1px solid #dbd7d7;
+    }
+
+    th {
+        border-top: 3px solid #8200d0;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .stt {
+        max-width: 20px;
+    }
+
+    td {
+        padding: 10px !important;
+        min-width: 80px;
+        vertical-align: middle;
+    }
+
+    #orderReview {
+            border: 3px solid #8200d0;
+        }
+
+    h2, h3, h4, h5, p {
+        font-family: Tahoma;
+    }
+</style>
+
+
 
 <div class="container">
-    <div style="text-align:center; margin-top:50px;">
-        <h2 style="font-family:VNOswald;">Đơn hàng của quý khách đã được ghi nhận.</h2>
-        <h2 style="font-family:VNOswald;">Chúng tôi sẽ gọi tới quý khách để xác nhận đơn hàng một cách sớm nhất.</h2>
-        <h2 style="font-family:VNOswald;">Cám ơn quý khách đã mua hàng tại Your Fashion!</h2>
+    <div style="background-color:#fff; margin:auto; width:85%; padding-bottom:20px;">
+
+        <div id="orderReview" style="display:block; margin:auto; font-family:Tahoma; max-width:75%; overflow-x:auto;">
+            <div id="cusName" style="display:block; width:80%; padding: 10px">
+                <h2><b>@invoice.name</b></h2>
+            </div>
+            <div id="cusInfo" style="display:block; float:left; text-align:left; width:55%; padding: 10px">
+
+                <p>Địa chỉ giao hàng: @invoice.address</p>
+                <p>Điện thoại: @invoice.phoneNo</p>
+                <p>Email: @invoice.email</p>
+            </div>
+            <div id="invInfo" style="display:block; float:right; text-align:left; width:30%; padding: 10px">
+                <h5><b>Đơn hàng số: @invoice.orderId</b></h5>
+                <p>Ngày tạo: @invoice.createDate</p>
+                <p>Phương thức thanh toán: Khi nhận hàng</p>
+            </div>
+            <table id="table01" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th class="stt">STT</th>
+                        <th>SẢN PHẨM</th>
+                        <th>CHI TIẾT</th>
+                        <th>ĐƠN GIÁ</th>
+                        <th>SỐ LƯỢNG</th>
+                        <th>THÀNH TIỀN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int soThuTu = 0;
+                        double thanhTien = 0;
+                        double subTotal = 0;
+                        double maGiamGia = 0;
+                        double total = 0;
+                        double subTotalGiamGia = 0;
+                        foreach (var item in invoice.listOrderDetail)
+                        {
+                            soThuTu++;
+                            <tr>
+                                <td>@soThuTu</td>
+                                <td>@item.productName</td>
+                                <td>@item.color - @item.size</td>
+                                <td>@item.price</td>
+                                <td>@item.quantity</td>
+                                @{ thanhTien = item.price * item.quantity;
+                                    subTotal += thanhTien;
+                                }
+                                <td>@thanhTien</td>
+                            </tr>
+                        }
+                        subTotalGiamGia = subTotal * maGiamGia;
+                        total = subTotal - subTotalGiamGia;
+                        <tr style="border-bottom: 3px solid #8200d0">
+                        <td colspan="4"></td>
+                        <td>Tổng cộng</td>
+                        <td>@total</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                <p style="text-align:center; line-height: 1.5; color:#6e0ea8; font-size:16px; padding: 18px;">
+                    Đơn hàng của quý khách đã được ghi nhận! <br />
+                    Chúng tôi sẽ gọi đến quý khách để xác nhận đơn hàng một cách sớm nhất. <br />
+                    CẢM ƠN QUÝ KHÁCH ĐÃ MUA HÀNG TẠI YOUR FASHION! <br />
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
-Tên khách hàng: @invoice.name
+@*Tên khách hàng: @invoice.name
 <table border="1">
     <tr>
         <td>Tên khách hàng:</td>
@@ -94,4 +195,4 @@ Tên khách hàng: @invoice.name
         @{ total = subTotal - subTotalGiamGia;}
         <td>@total</td>
     </tr>
-</table>
+</table>*@

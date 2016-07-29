@@ -25,7 +25,7 @@
                             for (int i = proTree.Count - 1; i >= 0; i--)
                             {
                                 Category c = proTree.ElementAt(i);
-                                <a href="/danhmuc/@c.ID">@c.Name</a><span>></span>
+                                <a href="/danhmuc/@c.GenerateSlug()">@c.Name</a><span>></span>
                             }
                         }
                         <a href="#">@mainProduct.Name</a>
@@ -157,6 +157,19 @@
                             <div class="short-description">
                                 <p style="font:VNOswald;">@Html.Raw(mainProduct.Descriptions)</p>
                             </div>
+                            <div id="sz" style="margin-top:10px; max-width:100px;">
+                                <label><strong>Size</strong></label>
+                                <ul>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                    <li>XL</li>
+                                </ul>
+                            </div>
                             <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
                                 <span class="amount">@mainProduct.Price VND</span>
@@ -252,7 +265,7 @@
                         <div id="tabreviews" class="tab-pane ">
                             <div id="reviews">
 
-                                <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@mainProduct.ID" data-width="1130" data-numposts="5"></div>
+                                <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@mainProduct.GenerateSlug()" data-width="1130" data-numposts="5"></div>
 
                                 @*<div id="comments"><h2>Reviews</h2><p class="noreviews">There are no reviews yet, would you like to <a href="#review_form" class="inline show_review_form">submit yours</a>?</p></div>
                                 <div id="review_form_wrapper">
