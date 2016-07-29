@@ -21,31 +21,31 @@ namespace BanleWebsite.Services
             return _imageRepository.List.ToList();
         }
 
-        public List<Image> getImagesByNameCode(int nameCode)
-        {
-            return _imageRepository.getImagesByNameCode(nameCode);
-        }
+        //public List<Image> getImagesByNameCode(int nameCode)
+        //{
+        //    return _imageRepository.getImagesByNameCode(nameCode);
+        //}
         
-        public void addImage(int id, int nameCode, string path)
-        {
-            Image i = findByID(id);
-            if (i == null)
-            {
-                i = new Image();
-                i.NameCode = nameCode;
-                i.Path = path;
-                _imageRepository.Add(i);
-            }
-            else
-            {
-                i.NameCode = nameCode;
-                if (path != null && !path.Equals(""))
-                {
-                    i.Path = path;
-                }
-                _imageRepository.Update(i);
-            }
-        }
+        //public void addImage(int id, int nameCode, string path)
+        //{
+        //    Image i = findByID(id);
+        //    if (i == null)
+        //    {
+        //        i = new Image();
+        //        i.NameCode = nameCode;
+        //        i.Path = path;
+        //        _imageRepository.Add(i);
+        //    }
+        //    else
+        //    {
+        //        i.NameCode = nameCode;
+        //        if (path != null && !path.Equals(""))
+        //        {
+        //            i.Path = path;
+        //        }
+        //        _imageRepository.Update(i);
+        //    }
+        //}
 
         public void delete(Image p)
         {

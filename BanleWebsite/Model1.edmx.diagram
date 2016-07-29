@@ -10,7 +10,11 @@
         <EntityTypeShape EntityType="BanleShopModel.Order" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="BanleShopModel.OrderDetail" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="BanleShopModel.Product" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BanleShopModel.ProductDetail" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BanleShopModel.ProductDetail" Width="1.5" PointX="4.75" PointY="3.875" />
+        <EntityTypeShape EntityType="BanleShopModel.Color" Width="1.5" PointX="9.25" PointY="0.75" />
+        <EntityTypeShape EntityType="BanleShopModel.ColorProductDetail" Width="2" PointX="9.25" PointY="2.875" />
+        <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="6.75" PointY="0.625" />
+        <EntityTypeShape EntityType="BanleShopModel.SizeProductDetail" Width="1.75" PointX="6.75" PointY="2.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

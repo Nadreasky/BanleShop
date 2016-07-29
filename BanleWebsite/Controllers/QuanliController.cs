@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Web.Helpers;
 using System.Text;
+using System.Globalization;
 
 namespace BanleWebsite.Controllers
 {
@@ -42,10 +43,43 @@ namespace BanleWebsite.Controllers
 
         public ActionResult Order()
         {
-            //List<Order> orders = _orderServices.getAllOrder();
-            var orders = _orderServices.getOrderFilter("Q",2,null,null);
-
-            ViewBag.orders = orders;
+            
+            //var orders = _orderServices.getOrderFilter("Q",2,null,null);
+            if(string.IsNullOrWhiteSpace(Request.Form["status"]) == false ||
+                string.IsNullOrWhiteSpace(Request.Form["fromDate"]) == false || string.IsNullOrWhiteSpace(Request.Form["toDate"]) == false)
+            {
+                int? status = Int32.Parse(Request.Form["status"]);
+                if (status == -1)
+                {
+                    status = null;
+                }
+                DateTime? fromDate = null;
+                DateTime? toDate = null;
+                List<Order> filteredOrders;
+            
+                if (string.IsNullOrWhiteSpace(Request.Form["fromDate"]) == false)
+                {
+                    fromDate = DateTime.ParseExact(Request.Form["fromDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                }
+                if (string.IsNullOrWhiteSpace(Request.Form["toDate"]) == false)
+                {
+                    toDate = DateTime.ParseExact(Request.Form["toDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                }
+                    
+                   
+                filteredOrders = _orderServices.getOrderFilter("", status, fromDate, toDate);
+                ViewBag.status = status;
+                ViewBag.orders = filteredOrders;
+                return View();
+               
+            }
+            else
+            {
+                List<Order> orders = _orderServices.getAllOrder();
+                ViewBag.orders = orders;
+            }
+            
+                        
             return View(); // chua co
         }
 
@@ -387,6 +421,24 @@ namespace BanleWebsite.Controllers
             WriteLog(sb.ToString());
 
             return "Success";
+        }
+
+        [HttpPost]
+        public ActionResult filterOrder(string status, string fromDate, string toDate)
+        {
+            int _status = -1;
+            DateTime _fromDate;
+            DateTime _toDate;
+
+            int.TryParse(status, out _status);
+            _fromDate = DateTime.ParseExact(fromDate, "MM-dd-yyyy", CultureInfo.InvariantCulture);
+            _toDate = DateTime.ParseExact(toDate, "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
+            List<Order> orders = _orderServices.getOrderFilter("", _status, _fromDate, _toDate);
+            ViewBag.orders = orders;
+
+            return RedirectToAction("Order");
+            
         }
 
         //==========================END FUNCTION OF ORDER

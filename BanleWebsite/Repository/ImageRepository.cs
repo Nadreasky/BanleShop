@@ -66,14 +66,5 @@ namespace BanleWebsite.Repository
             _imageContext.SaveChanges();
         }
 
-        public List<Image> getImagesByNameCode(int nameCode)
-        {
-            var result = (from i in _imageContext.Images where i.NameCode == nameCode select i).ToList();
-            if (result == null)
-            {
-                result = new List<Image>();
-            }
-            return result;
-        }
     }
 }

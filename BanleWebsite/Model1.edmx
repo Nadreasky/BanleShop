@@ -13,13 +13,30 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PreCateID" Type="int" />
         </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ColorCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ColorProductDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProID" Type="int" />
+          <Property Name="ColorID" Type="int" />
+        </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NameCode" Type="int" />
+          <Property Name="IDColor" Type="int" />
           <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="IDProduct" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -33,6 +50,7 @@
           <Property Name="DateModified" Type="datetime" />
           <Property Name="Staff" Type="int" />
           <Property Name="Address" Type="text" />
+          <Property Name="Email" Type="text" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -69,13 +87,32 @@
           <Property Name="SalePercent" Type="float" Nullable="false" />
           <Property Name="Promotion" Type="text" Nullable="false" />
         </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SizeProductDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProID" Type="int" />
+          <Property Name="SizeID" Type="int" />
+        </EntityType>
         <EntityContainer Name="BanleShopModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColorProductDetail" EntityType="Self.ColorProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SizeProductDetail" EntityType="Self.SizeProductDetail" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -88,6 +125,10 @@
           <EntitySet Name="OrderDetails" EntityType="BanleShopModel.OrderDetail" />
           <EntitySet Name="Products" EntityType="BanleShopModel.Product" />
           <EntitySet Name="ProductDetails" EntityType="BanleShopModel.ProductDetail" />
+          <EntitySet Name="Colors" EntityType="BanleShopModel.Color" />
+          <EntitySet Name="ColorProductDetails" EntityType="BanleShopModel.ColorProductDetail" />
+          <EntitySet Name="Sizes" EntityType="BanleShopModel.Size" />
+          <EntitySet Name="SizeProductDetails" EntityType="BanleShopModel.SizeProductDetail" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -102,8 +143,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameCode" Type="Int32" />
           <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDColor" Type="Int32" />
+          <Property Name="IDProduct" Type="Int32" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -117,6 +159,7 @@
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="Staff" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -153,6 +196,37 @@
           <Property Name="SalePercent" Type="Double" Nullable="false" />
           <Property Name="Promotion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ColorProductDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="Int32" />
+          <Property Name="ColorID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SizeProductDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="Int32" />
+          <Property Name="SizeID" Type="Int32" />
+        </EntityType>
         </Schema>
 
     </edmx:ConceptualModels>
@@ -172,8 +246,9 @@
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="BanleShopModel.Image">
               <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -181,6 +256,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="BanleShopModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Staff" ColumnName="Staff" />
                 <ScalarProperty Name="DateModified" ColumnName="DateModified" />
@@ -226,6 +302,41 @@
                 <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
                 <ScalarProperty Name="Featured" ColumnName="Featured" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="BanleShopModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorProductDetails">
+            <EntityTypeMapping TypeName="BanleShopModel.ColorProductDetail">
+              <MappingFragment StoreEntitySet="ColorProductDetail">
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="BanleShopModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SizeProductDetails">
+            <EntityTypeMapping TypeName="BanleShopModel.SizeProductDetail">
+              <MappingFragment StoreEntitySet="SizeProductDetail">
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

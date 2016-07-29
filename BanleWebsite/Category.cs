@@ -24,7 +24,6 @@ namespace BanleWebsite
         {
             VietnameseSymbol vs = new VietnameseSymbol();
             string phrase = string.Format("{0}-{1}", vs.ClearSymbol(Name), ID);
-
             string str = RemoveAccent(phrase).ToLower();
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             str = Regex.Replace(str, @"\s+", " ").Trim();
@@ -32,7 +31,6 @@ namespace BanleWebsite
             str = Regex.Replace(str, @"\s", "-");
             return str;
         }
-
         private string RemoveAccent(string text)
         {
             byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);

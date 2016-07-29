@@ -12,11 +12,10 @@ namespace BanleWebsite
     using System;
     using System.Collections.Generic;
     
-    public partial class Image
+    public partial class Color
     {
         public int ID { get; set; }
-        public string Path { get; set; }
-        public Nullable<int> IDColor { get; set; }
-        public Nullable<int> IDProduct { get; set; }
+        public string Name { get; set; }
+        public string ColorCode { get; set; }
     }
 }

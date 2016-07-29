@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Quản lí đơn hàng";
     List<Order> orders = ViewBag.orders;
+    int? status = ViewBag.status;
+
     int soThuTu = 0;
 }
 
@@ -14,29 +16,45 @@
   jQuery( function() {
     jQuery( "#fromDate" ).datepicker();
   } );
+
+  jQuery( function() {
+      jQuery( "#toDate" ).datepicker();
+  });
+
+  $(document).ready(function () {
+      var status = jQuery("#st").val()
+      if (status != null && status != "") {
+          jQuery("#sttSelect").val(status);
+      }
+      
+      
+  });
+
 </script>
 
-<script>
-  jQuery( function() {
-    jQuery( "#toDate" ).datepicker();
-  } );
-</script>
 
 <div class="container">
+    @using (Html.BeginForm("Order", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div style="display:inline-block; float:left;">
+            <label><strong>Trạng thái</strong></label>
+            <input type="hidden" id="st" value="@status"/>
+            <select id="sttSelect" name="status">
+                <option value="-1">All</option>
+                <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                <option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>
+            </select>
+        </div>
+        <div style="display:inline-block; float:left; margin-left:20px;">
+            <label><strong>Ngày</strong></label>
+            <p>Từ ngày: <input type="text" id="fromDate" name="fromDate" onchange="get()" /> Đến ngày: <input type="text" id="toDate" name="toDate" /></p>
+        </div>
+        <label></label>
+        <input type="submit" class="btn-success" value="Chọn" style="display:inline-block;float:left;font-family:VNOswald; margin:25px 0 0 5px;"/>
+    }
     
-    <div style="display:inline-block; float:left;">
-        <label>Lọc đơn hàng theo <strong>Trạng thái</strong></label>
-        <select>
-            <option>Mới tạo</option>
-            <option>Đã xác nhận</option>
-            <option>Đã thanh toán</option>
-            <option>Đã hủy</option>
-        </select>
-    </div>
-    <div style="display:inline-block; float:right;">
-        <label>Lọc đơn hàng theo <strong>Ngày</strong></label>
-        <p>Từ ngày: <input type="text" id="fromDate" /> Đến ngày: <input type="text" id="toDate" /></p>
-    </div>
 
     <table class="table" id="orderTable">
         <tr>
@@ -120,7 +138,7 @@
                     </td>
 
                 </tr>
-                        }
+                                }
         }
     </table>
 
@@ -349,6 +367,14 @@
         var btnUpdateStt = document.getElementById("btnUpdateStt");
         btnUpdateStt.parentNode.removeChild(btnUpdateStt);
     });
+
+    function getOrderByStt()
+    {
+        var stt = document.getElementById("sttSelect").value;
+        jQuery.ajax({
+            
+        })
+    }
 
 </script>
 
