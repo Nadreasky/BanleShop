@@ -101,7 +101,8 @@
                     CKEDITOR.replace('description')
                 </script>
                 <div class="clearfix"></div>
-                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Update" />
+                <input type="submit" class="btn btn-primary" id="btnAddProduct" style="font-family:VNOswald;" value="Cập nhật" />
+                <button class="btn btn-warning" onclick="deleteProduct(@mainProduct.ID)" style="float:right;">Xóa sản phẩm</button>
 
             }
         </div>
@@ -146,7 +147,7 @@
                 </select>
                 <input class="form-control" type="file" id="colorImg" name="imgColor" />
                 <input type="hidden" id="mainPID" value="@mainProduct.ID" name="productID"/>
-                <input type="submit" value="Submit" />
+                <input type="submit" style="font-family:VNOswald;" value="Lưu" />
             }
 
             <table id="tblColorImg" class="table">
@@ -191,7 +192,23 @@
 </div>
 
 <script>
-
+    function deleteProduct(id) {
+        jQuery.ajax({
+            url: "/Quanli/deleteProduct",
+            data: {
+                format: 'json',
+                proId: id
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (data) {
+                if (data === "Success") {
+                }
+            },
+            type: 'POST'
+        })
+    }
     jQuery("#size-XS").change(function () {
         var jq = jQuery.noConflict();
         var proID = jQuery("#mainPID").val();
