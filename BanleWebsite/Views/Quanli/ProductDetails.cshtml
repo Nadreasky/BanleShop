@@ -1,4 +1,5 @@
 ﻿@using BanleWebsite.Services;
+@using BanleWebsite;
 @{
     ViewBag.Title = "ProductDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -149,7 +150,7 @@
                 <input type="hidden" id="mainPID" value="@mainProduct.ID" name="productID"/>
                 <input type="submit" style="font-family:VNOswald;" value="Lưu" />
             }
-
+            <img src="" id="imgReview" width="200" height="200" />
             <table id="tblColorImg" class="table">
                 <thead>
                     <tr>
@@ -171,7 +172,7 @@
                                         <div class="splColor" id="color-@item.ID" style="background-color:@colorCode;width:50px; height:50px;"></div>
                                     </td>
                                     <td>
-                                        <img src="@item.Path" height="80" width="80" />
+                                         <img src="@item.Path" height="80" width="80" />
                                     </td>
                                 </tr>
                                 stt++;
@@ -489,4 +490,48 @@
             })
         }
     });
+
+    jQuery("#colorImg").change(function () {
+        var data = new FormData();
+        console.log("dien gi cung duoc xD");
+        data.append("dir", "@BanleWebsite.SLIMCONFIG.BIG_PRODUCT_IMG_PATH");
+
+        var files = jQuery("#colorImg").get(0).files;
+        if (files.length > 0) {
+            data.append("image", files[0]);
+            data.append("thumbWidth", 480);
+            data.append("thumbHeight", 480);
+
+            data.append("width", 1200);
+            data.append("height", 627);
+        }
+
+        // progessBar(true);
+        jQuery.ajax({
+            url: "/quanli/UploadPostImage",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+
+            success: function (successData) {
+                console.log(successData);
+                var thumbnailData = successData.Data.thumbnailUrl;
+                var imageData = successData.Data.imageUrl;
+                
+                //addImageToPreviewList(thumbnailData, listUploadImage.length);
+                //listUploadImage[listUploadImage.length] = imageData;
+                //listUploadThumnailImage[listUploadThumnailImage.length] = thumbnailData;
+                jQuery("#imgReview").setAttribute("src", imageData);
+                // progessBar(false);
+
+            },
+            error: function (er) {
+                alert(er);
+                //progessBar(false);
+            }
+
+        });
+    });
+
 </script>
