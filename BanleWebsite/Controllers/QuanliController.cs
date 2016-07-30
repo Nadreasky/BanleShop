@@ -551,11 +551,11 @@ namespace BanleWebsite.Controllers
             return "Success";
         }
 
-        //==========================END FUNCTION OF ORDER
+        //======================END FUNCTION OF ORDER=====================
 
 
         [HttpPost]
-        [Route("BigImages/Images/ProductImages")]
+        //[Route("BigImages/Images/ProductImages")]
         public ActionResult UploadPostImage()
         {
             ResultViewModels result = new ResultViewModels();
@@ -589,8 +589,8 @@ namespace BanleWebsite.Controllers
 
                     object obj = new
                     {
-                        imageUrl = newPath + "\\" + pic.FileName,
-                        thumbnailUrl = newPath + "\\" + pic.FileName,
+                        imageUrl = "/Images/ProductImages/" + pic.FileName,
+                        thumbnailUrl = "/Images/ProductImages/" + pic.FileName,
                     };
                     result.data = obj;
                 }

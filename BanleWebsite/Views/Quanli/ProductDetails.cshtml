@@ -95,15 +95,15 @@
                 <div id="pimg">
                     <div id="pimg1" style="display:block; float:left; margin-right:15px;">
                         <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
-                        <img src="@mainProduct.Img1" width="100" height="100"/>
+                        <img src="@mainProduct.Img1" width="100" height="100" style="margin-top:10px;"/>
                     </div>
                     <div id="pimg2" style="display:block; float:left; margin-right:15px;">
                         <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
-                        <img src="@mainProduct.Img2" width="100" height="100"/>
+                        <img src="@mainProduct.Img2" width="100" height="100" style="margin-top:10px;"/>
                     </div>
                     <div id="pimg3" style="display:block; float:left; margin-right:15px;">
                         <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
-                        <img src="@mainProduct.Img3" width="100" height="100"/>
+                        <img src="@mainProduct.Img3" width="100" height="100" style="margin-top:10px;"/>
                     </div>
                 </div>
                 <br />
@@ -529,13 +529,13 @@
 
             success: function (successData) {
                 console.log(successData);
-                var thumbnailData = successData.Data.thumbnailUrl;
-                var imageData = successData.Data.imageUrl;
+                var thumbnailData = successData.data.thumbnailUrl;
+                var imageData = successData.data.imageUrl;
                 
                 //addImageToPreviewList(thumbnailData, listUploadImage.length);
                 //listUploadImage[listUploadImage.length] = imageData;
                 //listUploadThumnailImage[listUploadThumnailImage.length] = thumbnailData;
-                jQuery("#imgReview").setAttribute("src", imageData);
+                jQuery("#imgReview").attr("src", imageData);
                 // progessBar(false);
 
             },
