@@ -44,5 +44,10 @@ namespace BanleWebsite.Services
         {
             _sizeProductDetailRepository.Delete(spd);
         }
+
+        public List<SizeProductDetail> getByProductId(int productId)
+        {
+            return getAll().Where(spd => spd.ProID == productId).ToList();
+        }
     }
 }
