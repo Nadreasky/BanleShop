@@ -31,39 +31,7 @@
 
     }
     <div class="row">
-        <div class="col-md-4">
-            <h2>Thêm sản phẩm mới</h2>
-            @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <input class="form-control" id="id" name="id" type="hidden" />
-                <label>Tên sản phẩm</label>
-                <input class="form-control" id="productName" name="productName" />
-                <label>Giá sản phẩm</label>
-                <input class="form-control" id="productPrice" name="productPrice" />
-                <label>Category</label>
-                <select class="form-control" name="productCateID" id="productCateID">
-                    @{
-                        for (int i = 0; i < categories.Count; i++)
-                        {
-                            Category c = categories.ElementAt(i);
-                            <option value="@c.ID">@c.Name</option>
-                        }
-                    }
-                </select>
-                <label>Số lượng</label>
-                <input class="form-control" id="quantity" name="quantity" />
-                <label>Hình ảnh sản phẩm</label><br />
-                <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
-                <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
-                <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
-                <label>Description</label>
-                <textarea name="description" id="description" class="form-control" rows="10"></textarea>
-
-                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Add" />
-
-             }
-        </div>
-        <div class="col-md-8">
+        <div>
             <table class="table" id="productTable">
                 <thead>
                     <tr>
@@ -106,50 +74,3 @@
     CKEDITOR.replace('description')
 </script>
 
-<script>
-    function editProduct(id)
-    {
-       jQuery.ajax({
-            url: "/Quanli/getProductInfo",
-            data: {
-                format: 'json',
-                proId:id
-            },
-            error: function() {
-                alert("Problem");
-            },
-            success: function (data) {
-                var proObj = JSON.parse(data);
-                var jq = jQuery.noConflict();
-
-                jq("#id").val(proObj.ID);
-                jq("#productName").val(proObj.Name);
-                jq("#productPrice").val(proObj.Price);
-                jq("#productCateID").val(proObj.CateID);
-                jq("#quantity").val(proObj.Quantity);
-                jq("#trend").val(proObj.Trend);
-                CKEDITOR.instances['description'].setData(proObj.Descriptions);
-                jq("#btnAddProduct").val("Update");
-            }
-        })
-    }
-
-    function deleteProduct(id) {
-        jQuery.ajax({
-            url: "/Quanli/deleteProduct",
-            data: {
-                format: 'json',
-                proId: id
-            },
-            error: function () {
-                alert("Problem!")
-            },
-            success: function (data) {
-                if (data === "Success") {
-                    location.href = location.href;
-                }
-            },
-            type: 'POST'
-        })
-    }
-</script>

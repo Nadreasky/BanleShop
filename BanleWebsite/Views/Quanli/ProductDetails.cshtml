@@ -1,9 +1,9 @@
 ﻿@using BanleWebsite.Services;
 @{
-    ViewBag.Title = "ProductDetails";
+    Product mainProduct = ViewBag.mainProduct;
+    ViewBag.Title = "Cập nhật " + mainProduct.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<Category> categories = ViewBag.categories;
-    Product mainProduct = ViewBag.mainProduct;
     List<Color> allColor = ViewBag.allColor;
     List<Size> allSize = ViewBag.allSize;
     var colorMainProduct = ViewBag.colorMainProduct;
@@ -91,10 +91,22 @@
                 </div>
                 <div class="clearfix"></div>
                 <label>Hình ảnh sản phẩm</label><br />
-                <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
-                <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
-                <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
+                <div id="pimg">
+                    <div id="pimg1" style="display:block; float:left; margin-right:15px;">
+                        <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
+                        <img src="@mainProduct.Img1" width="100" height="100"/>
+                    </div>
+                    <div id="pimg2" style="display:block; float:left; margin-right:15px;">
+                        <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
+                        <img src="@mainProduct.Img2" width="100" height="100"/>
+                    </div>
+                    <div id="pimg3" style="display:block; float:left; margin-right:15px;">
+                        <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
+                        <img src="@mainProduct.Img3" width="100" height="100"/>
+                    </div>
+                </div>
                 <br />
+                <div class="clearfix"></div>
                 <label><strong>Mô tả sản phẩm</strong></label>
                 <textarea name="description" id="description" class="form-control" rows="5">@mainProduct.Descriptions</textarea>
                 <script>
@@ -204,6 +216,7 @@
             },
             success: function (data) {
                 if (data === "Success") {
+                    location.href = "/Quanli/Product";
                 }
             },
             type: 'POST'
