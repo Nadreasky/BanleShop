@@ -10,7 +10,7 @@ using System.Web.Helpers;
 using System.Text;
 using System.Globalization;
 using System.Web.Security;
-
+using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
@@ -51,6 +51,7 @@ namespace BanleWebsite.Controllers
 
         public ActionResult ProductDetails(int? id)
         {
+
             Product mainProduct = _productServices.findByID(id.Value);
             ViewBag.mainProduct = mainProduct;
             List<Color> allColor = _colorServices.getAll();
@@ -551,6 +552,62 @@ namespace BanleWebsite.Controllers
         }
 
         //==========================END FUNCTION OF ORDER
+
+
+        [HttpPost]
+        [Route("BigImages/Images/ProductImages")]
+        public ActionResult UploadPostImage()
+        {
+            ResultViewModels result = new ResultViewModels();
+            string fileName = "";
+            string thumbFileName = "";
+
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                var pic = System.Web.HttpContext.Current.Request.Files["image"];
+                int width = Int32.Parse(Request.Form["width"]);
+                int height = Int32.Parse(Request.Form["height"]);
+
+                int thumbWidth = Int32.Parse(Request.Form["thumbWidth"]);
+                int thumbHeight = Int32.Parse(Request.Form["thumbHeight"]);
+
+                if (pic != null)
+                {
+                    string newPath = Server.MapPath(SLIMCONFIG.PRODUCT_IMG_PATH + "ProductImages");
+                    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+                    if (!Directory.Exists(newPath))
+                    {
+                        System.IO.Directory.CreateDirectory(newPath);
+                    }
+                    //WebImage imgBig = _imageServices.reSizeImgBig(productImg1);
+                    //imgBig.FileName = productImg1.FileName;
+                    //imgBig.Save(newPathBig + "/" + imgBig.FileName);
+
+
+                    //WebImage img = _imageServices.reSizeImg();
+                    pic.SaveAs(newPath + "\\" + pic.FileName);
+
+                    object obj = new
+                    {
+                        imageUrl = newPath + "\\" + pic.FileName,
+                        thumbnailUrl = newPath + "\\" + pic.FileName,
+                    };
+                    result.data = obj;
+                }
+                else
+                {
+
+                    result.message = "Tải lên tập tin thất bại";
+                }
+            }
+            else
+            {
+                //response.StatusCode = -1;
+                result.message = "Tải lên tập tin thất bại";
+            }
+
+            return Json(result);
+        }
 
         public void WriteLog(string text)
         {
