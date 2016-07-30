@@ -71,8 +71,7 @@
                         <th>Tên sản phẩm</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,8 +84,7 @@
                                 <td>@p.Name</td>
                                 <td>@p.Price</td>
                                 <td>@p.Quantity</td>
-                                <td rowspan="2"><button style="margin-top:50px;" class="btn btn-warning" onclick="editProduct(@p.ID)">Edit</button></td>
-                                <td rowspan="2"><button style="margin-top:50px;" class="btn btn-danger" onclick="deleteProduct(@p.ID)">Delete</button></td>
+                                <td rowspan="2"><a href="/Quanli/ProductDetails/@p.ID" style="margin-top:50px; font-family:VNOswald;" class="btn btn-warning">Chi tiết</a></td>
                             </tr>
                             <tr>
                                 <td colspan="3">

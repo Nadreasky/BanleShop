@@ -8,7 +8,7 @@
     List<Size> allSize = ViewBag.allSize;
     var colorMainProduct = ViewBag.colorMainProduct;
     List<Image> imgMainProduct = ViewBag.imgMainProduct;
-    var sizeMainProduct = ViewBag.sizeMainProduct;
+    List<SizeProductDetail> sizeMainProduct = ViewBag.sizeMainProduct;
 
     ColorServices _colorServices = new ColorServices();
 }
@@ -24,6 +24,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
 
 
 
@@ -100,7 +101,7 @@
                     CKEDITOR.replace('description')
                 </script>
                 <div class="clearfix"></div>
-                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Thêm" />
+                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Update" />
 
             }
         </div>
@@ -109,11 +110,22 @@
         <div id="sizeInfo">
             <ul id="psz">
                 @{
+                    
                     foreach (var item in allSize)
                     {
+                        foreach (var item2 in sizeMainProduct)
+                        {
+                            if (item.ID == item2.SizeID)
+                            {
+                                <li>
+                                    <input type="checkbox" id="size-@item.Name" value="@item.ID" checked />@item.Name
+                                </li>
+                            }
+                        }
                         <li>
-                            <input type="checkbox" name="" value="@item.ID" />@item.Name
+                            <input type="checkbox" id="size-@item.Name" value="@item.ID" />@item.Name
                         </li>
+
                     }
                 }
             </ul>
@@ -133,7 +145,7 @@
                     
                 </select>
                 <input class="form-control" type="file" id="colorImg" name="imgColor" />
-                <input type="hidden" value="@mainProduct.ID" name="productID"/>
+                <input type="hidden" id="mainPID" value="@mainProduct.ID" name="productID"/>
                 <input type="submit" value="Submit" />
             }
 
@@ -177,3 +189,287 @@
         </div>
     </section>
 </div>
+
+<script>
+
+    jQuery("#size-XS").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XS").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XS").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-S").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-S").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-S").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-M").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-M").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-M").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-L").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-L").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-L").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-XL").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-2XL").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-2XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-2XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-3XL").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-3XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-3XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+</script>
