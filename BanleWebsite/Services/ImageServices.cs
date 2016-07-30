@@ -89,5 +89,16 @@ namespace BanleWebsite.Services
 
             return img;
         }
+
+        // Kun 30.7.16
+        public void add(int idColor, string path, int idProduct)
+        {
+            Image img = new Image();
+            img.IDColor = idColor;
+            img.Path = path;
+            img.IDProduct = idProduct;
+
+            _imageRepository.Add(img);
+        }
     }
 }
