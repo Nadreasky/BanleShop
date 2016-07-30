@@ -3,6 +3,7 @@
     ViewBag.Title = "ProductDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<Category> categories = ViewBag.categories;
+    Product mainProduct = ViewBag.mainProduct;
 }
 
 <head>
@@ -46,13 +47,13 @@
             @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
-                    <input class="form-control" id="id" name="id" type="hidden" />
+                    <input class="form-control" id="id" name="id" type="hidden" value="@mainProduct.ID"/>
                     <label>Tên sản phẩm</label>
-                    <input class="form-control" id="productName" name="productName" />
+                    <input class="form-control" id="productName" name="productName" value="@mainProduct.Name"/>
                 </div>
                 <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
                     <label>Giá sản phẩm</label>
-                    <input class="form-control" id="productPrice" name="productPrice" />
+                    <input class="form-control" id="productPrice" name="productPrice" value="@mainProduct.Price"/>
                 </div>
                 <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
                     <label>Category</label>
@@ -61,7 +62,15 @@
                             for (int i = 0; i < categories.Count; i++)
                             {
                                 Category c = categories.ElementAt(i);
-                                <option value="@c.ID">@c.Name</option>
+                                if (c.ID == mainProduct.CateID)
+                                {
+                                    <option selected value="@c.ID">@c.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@c.ID">@c.Name</option>
+                                }
+
                             }
                         }
                     </select>
@@ -75,13 +84,14 @@
                 <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
                 <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
                 <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
-                <label>Description</label>
+                <br />
+                <label><strong>Mô tả sản phẩm</strong></label>
                 <textarea name="description" id="description" class="form-control" rows="5"></textarea>
                 <script>
                     CKEDITOR.replace('description')
                 </script>
                 <div class="clearfix"></div>
-                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Add" />
+                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Thêm" />
 
             }
         </div>

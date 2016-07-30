@@ -21,6 +21,7 @@ namespace BanleWebsite.Controllers
         ProductServices _productServices = new ProductServices();
         ImageServices _imageServices = new ImageServices();
         OrderServices _orderServices = new OrderServices();
+        ColorServices _colorServices = new ColorServices();
 
         // GET: Quanli
         public ActionResult Index()
@@ -44,8 +45,12 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
-        public ActionResult ProductDetails()
+        public ActionResult ProductDetails(int? id)
         {
+            Product mainProduct = _productServices.findByID(id.Value);
+            ViewBag.mainProduct = mainProduct;
+            List<Color> allColor = _colorServices.getAll();
+
             List<Category> categories = _categoryServices.getAll();
             ViewBag.categories = categories;
             return View();
