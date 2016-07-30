@@ -26,6 +26,7 @@ namespace BanleWebsite.Controllers
         ColorProductDetailServices _colorProductDetailsServices = new ColorProductDetailServices();
         SizeProductDetailServices _sizeProductDetailsServices = new SizeProductDetailServices();
 
+
         // GET: Quanli
         public ActionResult Index()
         {
@@ -484,6 +485,72 @@ namespace BanleWebsite.Controllers
         }
         //========================END FUNCTION OF IMAGE SSERVICES=================
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public string saveSize(string sizeId, string productId)
+        {
+            int _sizeID = -1;
+            int _proID = -1;
+            if (sizeId == null || sizeId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(sizeId, out _sizeID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            if (productId == null || productId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(productId, out _proID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            SizeProductDetail spd = new SizeProductDetail();
+            spd.SizeID = _sizeID;
+            spd.ProID = _proID;
+
+            _sizeProductDetailsServices.add(spd);
+            return "Success";
+        }
+
+        [HttpPost]
+        public string deleteSize(string sizeId, string productId)
+        {
+            int _sizeID = -1;
+            int _proID = -1;
+            if (sizeId == null || sizeId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(sizeId, out _sizeID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            if (productId == null || productId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(productId, out _proID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            SizeProductDetail delSizeItem = new SizeProductDetail();
+            List<SizeProductDetail> listProSize = _sizeProductDetailsServices.getByProductId(_proID);
+            foreach (var item in listProSize)
+            {
+                if(item.SizeID == _sizeID)
+                {
+                    delSizeItem = _sizeProductDetailsServices.findByID(item.ID);
+                    _sizeProductDetailsServices.delete(delSizeItem);
+                    return "Success";
+                }
+            }
+            return "Success";
+        }
+
+        //==========================END FUNCTION OF ORDER
 
         public void WriteLog(string text)
         {
