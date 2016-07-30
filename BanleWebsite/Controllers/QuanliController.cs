@@ -21,6 +21,7 @@ namespace BanleWebsite.Controllers
         ProductServices _productServices = new ProductServices();
         ImageServices _imageServices = new ImageServices();
         OrderServices _orderServices = new OrderServices();
+        SizeProductDetailServices _sizeProductDetailServices = new SizeProductDetailServices();
 
         // GET: Quanli
         public ActionResult Index()
@@ -441,6 +442,15 @@ namespace BanleWebsite.Controllers
 
             return RedirectToAction("Order");
             
+        }
+
+        public void saveSize(int sizeId, int productId)
+        {
+            SizeProductDetail spd = new SizeProductDetail();
+            spd.SizeID = sizeId;
+            spd.ProID = productId;
+
+            _sizeProductDetailServices.add(spd);
         }
 
         //==========================END FUNCTION OF ORDER
