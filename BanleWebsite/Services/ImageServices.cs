@@ -100,5 +100,10 @@ namespace BanleWebsite.Services
 
             _imageRepository.Add(img);
         }
+
+        public List<Image> getByProductId(int productId)
+        {
+            return getAll().Where(img => img.IDProduct == productId).ToList();
+        }
     }
 }

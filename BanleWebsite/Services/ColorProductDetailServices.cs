@@ -44,5 +44,10 @@ namespace BanleWebsite.Services
         {
             _colorProductDetailRepository.Delete(cpd);
         }
+
+        public List<ColorProductDetail> getByProductId(int productId)
+        {
+            return getAll().Where(cpd => cpd.ProID == productId).ToList();
+        }
     }
 }
