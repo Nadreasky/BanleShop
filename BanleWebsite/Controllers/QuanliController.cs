@@ -22,6 +22,9 @@ namespace BanleWebsite.Controllers
         ImageServices _imageServices = new ImageServices();
         OrderServices _orderServices = new OrderServices();
         ColorServices _colorServices = new ColorServices();
+        SizeServices _sizeServices = new SizeServices();
+        ColorProductDetailServices _colorProductDetailsServices = new ColorProductDetailServices();
+        SizeProductDetailServices _sizeProductDetailsServices = new SizeProductDetailServices();
 
         // GET: Quanli
         public ActionResult Index()
@@ -50,7 +53,15 @@ namespace BanleWebsite.Controllers
             Product mainProduct = _productServices.findByID(id.Value);
             ViewBag.mainProduct = mainProduct;
             List<Color> allColor = _colorServices.getAll();
-
+            ViewBag.allColor = allColor;
+            List<ColorProductDetail> colorMainProduct = _colorProductDetailsServices.getByProductId(id.Value);
+            ViewBag.colorMainProduct = colorMainProduct;
+            List<SizeProductDetail> sizeMainProduct = _sizeProductDetailsServices.getByProductId(id.Value);
+            ViewBag.sizeMainProduct = sizeMainProduct;
+            List<Image> imgMainProduct = _imageServices.getByProductId(id.Value);
+            ViewBag.imgMainProduct = imgMainProduct;
+            List<Size> allSize = _sizeServices.getAll();
+            ViewBag.allSize = allSize;
             List<Category> categories = _categoryServices.getAll();
             ViewBag.categories = categories;
             return View();
@@ -455,7 +466,24 @@ namespace BanleWebsite.Controllers
             
         }
 
-        //==========================END FUNCTION OF ORDER
+        //==========================END FUNCTION OF ORDER======================
+
+        //========================START FUNCTION OF IMAGE SSERVICES=================
+
+        [HttpPost]
+        public ActionResult addColorImgProduct(int colorID, HttpPostedFileBase imgColor, int productID)
+        {
+            string path = "";
+            string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+            WebImage img = _imageServices.reSizeImgBig(imgColor);
+            img.FileName = imgColor.FileName;
+            img.Save(newPathBig + "/" + img.FileName);
+            path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
+            _imageServices.add(colorID, path, productID);
+            return RedirectToAction("ProductDetails", new { id = productID});
+        }
+        //========================END FUNCTION OF IMAGE SSERVICES=================
+
 
         public void WriteLog(string text)
         {

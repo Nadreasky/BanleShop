@@ -51,14 +51,20 @@ namespace BanleWebsite
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "ProductDetails",
+                url: "Quanli/ProductDetails/{id}",
+                defaults: new { controller = "Quanli", action = "ProductDetails" }
+            );
+
             //routes.MapRoute(
             //    name: "DanhMuc",
             //    url: "DanhMuc/{id}",
             //    defaults: new { controller = "DanhMuc", action = "Index" }
             //);
-            routes.Add("ProductMange", new SeoFriendlyRoute("Quanli/ProductDetails/{id}",
-                new RouteValueDictionary(new { controller = "Quanli", action = "ProductDetails" }),
-                new MvcRouteHandler()));
+            //routes.Add("ProductMange", new SeoFriendlyRoute("Quanli/ProductDetails/{id}",
+            //    new RouteValueDictionary(new { controller = "Quanli", action = "ProductDetails" }),
+            //    new MvcRouteHandler()));
 
             routes.Add("DanhMuc", new SeoFriendlyRoute("DanhMuc/{id}",
                 new RouteValueDictionary(new { controller = "DanhMuc", action = "Index" }),
