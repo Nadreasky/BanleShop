@@ -44,6 +44,13 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public ActionResult ProductDetails()
+        {
+            List<Category> categories = _categoryServices.getAll();
+            ViewBag.categories = categories;
+            return View();
+        }
+
         public ActionResult Order()
         {
             

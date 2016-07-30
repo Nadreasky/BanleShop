@@ -12,7 +12,113 @@
         font-family:VNOswald;
         line-height:150%;
     }
+
+    #pcr {
+        list-style-type:none;
+        overflow:hidden;
+    }
+
+    #pcr li {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+    }
+    #pcr li::selection {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+    }
+
+    #pcr li a{
+        display:block;
+        height:12px;
+        width:12px;
+        border: 1px solid #999;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:15px;
+        border-radius:50%;
+        font-size:12px;
+    }
+    #pcr li a::selection{
+        display:block;
+        height:12px;
+        width:12px;
+        border: 1px solid #999;
+        
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:15px;
+        border-radius:50%;
+        font-size:12px;
+    }
+
+    #psz {
+        list-style-type:none;
+        overflow:hidden;
+    }
+
+    #psz li {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+        border-radius:5px;
+        border:1px solid #999;
+    }
+
+    #psz li a{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        /*border: 1px solid #999;*/
+        color:#999;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }
+
+    #psz li a:hover{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        color:#ffffff;
+        background-color:#9D3BC6;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }
+
+    #psz li a::selection{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        color:#ffffff;
+        background-color:#9D3BC6;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }
 </style>
+
+<script>
+    function colorSelect(color) {
+        jQuery("#color").val(color);
+        console.log(color)
+    }
+    function sizeSelect(size) {
+        jQuery("#size").val(size);
+        console.log(size)
+    }
+</script>
 
 <section id="content">
     <div class="container top" role="main">
@@ -157,17 +263,61 @@
                             <div class="short-description">
                                 <p style="font:VNOswald;">@Html.Raw(mainProduct.Descriptions)</p>
                             </div>
-                            <div id="sz" style="margin-top:10px; max-width:100px;">
+                            <div id="pColor" style="margin-top:10px; max-width:500px;">
+                                <label><strong>Màu sắc</strong></label>
+                                <ul id="pcr">
+                                    <li>
+                                        <a href="#" style="background-color:#F40120 !important" onclick="colorSelect('F40120')"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="background-color:#ffffff !important" onclick="colorSelect('ffffff')"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="background-color:#9D3BC6 !important" onclick="colorSelect('9D3BC6')"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="background-color:#000000 !important" onclick="colorSelect('000000')"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="background-color:#0026ff !important" onclick="colorSelect('#0026ff')"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="background-color:#00ff21 !important" onclick="colorSelect('#00ff21')"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="background-color:#808080 !important" onclick="colorSelect('808080')"></a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <div id="pSize" style="margin-top:10px; max-width:500px;">
                                 <label><strong>Size</strong></label>
-                                <ul>
-                                    <li>XL</li>
-                                    <li>XL</li>
-                                    <li>XL</li>
-                                    <li>XL</li>
-                                    <li>XL</li>
-                                    <li>XL</li>
-                                    <li>XL</li>
-                                    <li>XL</li>
+                                <ul id="psz">
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('XS')">XS</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('S')">S</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('M')">M</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('L')">L</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('XL')">XL</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('2XL')">2XL</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('3XL')">3XL</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="sizeSelect('4XL')">4XL</a>
+                                    </li>
+
                                 </ul>
                             </div>
                             <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -200,8 +350,8 @@
                                         </div>*@
 
                                         <input type="hidden" name="id" value="@mainProduct.ID" />
-                                        <input type="hidden" id="color" name="color" value="white" />
-                                        <input type="hidden" id="size" name="size" value="XL" />
+                                        <input type="hidden" id="color" name="color" value="" />
+                                        <input type="hidden" id="size" name="size" value="" />
                                         @*<input type="submit" value="Submit" />*@
                                         <button type="submit" class="button btn-cart"><i class="icon-basket"></i>Mua ngay</button>
                                     }

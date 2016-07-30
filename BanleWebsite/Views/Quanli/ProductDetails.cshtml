@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Category> categories = ViewBag.categories;
+}
+
+<head>
+    <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+
+<style>
+    #psz {
+        list-style-type:none;
+        overflow:hidden;
+    }
+
+    #psz li {
+        float:left;
+        margin:0 5px;
+        line-height:20px;
+        border-radius:5px;
+        font-size:20px;
+        line-height:20px;
+        display:flex;
+        align-items:center;
+    }
+
+    .splColor{
+        border-radius:50%;
+    }
+</style>
+
+<div class="container">
+    <section id="content">
+        <div id="productBasicInfo">
+            @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <input class="form-control" id="id" name="id" type="hidden" />
+                    <label>Tên sản phẩm</label>
+                    <input class="form-control" id="productName" name="productName" />
+                </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Giá sản phẩm</label>
+                    <input class="form-control" id="productPrice" name="productPrice" />
+                </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Category</label>
+                    <select class="form-control" name="productCateID" id="productCateID">
+                        @{
+                            for (int i = 0; i < categories.Count; i++)
+                            {
+                                Category c = categories.ElementAt(i);
+                                <option value="@c.ID">@c.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Số lượng</label>
+                    <input class="form-control" id="quantity" name="quantity" />
+                </div>
+                <div class="clearfix"></div>
+                <label>Hình ảnh sản phẩm</label><br />
+                <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
+                <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
+                <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
+                <label>Description</label>
+                <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                <script>
+                    CKEDITOR.replace('description')
+                </script>
+                <div class="clearfix"></div>
+                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Add" />
+
+            }
+        </div>
+
+        <label><strong>Chọn size</strong></label>
+        <div id="sizeInfo">
+            <ul id="psz">
+                <li>
+                    <input type="checkbox" name="" value="" />S
+                </li>
+                <li>
+                    <input type="checkbox" name="" value="" />M
+                </li>
+                <li>
+                    <input type="checkbox" name="" value="" />L
+                </li>
+                <li>
+                    <input type="checkbox" name="" value="" />XL
+                </li>
+                <li>
+                    <input type="checkbox" name="" value="" />2XL
+                </li>
+                <li>
+                    <input type="checkbox" name="" value="" />3XL
+                </li>
+            </ul>
+        </div>
+
+        <label><strong>Chọn màu</strong></label>
+        <div id="colorInfo">
+            @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+            {
+                <select id="colorDrpBox" name="colorDrpBox">
+                    <option value="" style="background: rgba(200,200,200,0.3)">
+                    </option>
+                </select>
+                <input class="form-control" type="file" id="colorImg" name="colorImg" />
+                <input type="submit" value="Submit" />
+            }
+
+            <table id="tblColorImg" class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Màu</th>
+                        <th>Hình</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td>
+                            <div class="splColor" style="background-color:#ff0000; width:50px; height:50px;"></div>
+                        </td>
+                        <td>
+                            <img src="~/Content/SiteImages/BGR1.jpg" height="80" width="80" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

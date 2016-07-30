@@ -4,29 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-<h2>Available Roles For Application</h2>
+<div class="container">
 
-@Html.ActionLink("Create Role", "Create", "Role")
+    @Html.ActionLink("Create Role", "Create", "Role")
 
-<style type="text/css">
-    #tbrole, .c {
-        border: double;
-    }
-</style>
+    <style type="text/css">
+        #tbrole, .c {
+            border: double;
+        }
+    </style>
 
-<table id="tbrole">
-    <tr>
-        <td class="c">
-            Role Name
-        </td>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <table id="tbrole">
         <tr>
             <td class="c">
-                @item.Name
+                Role Name
             </td>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="c">
+                    @item.Name
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
