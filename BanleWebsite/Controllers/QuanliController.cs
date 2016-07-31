@@ -585,7 +585,7 @@ namespace BanleWebsite.Controllers
 
 
                     //WebImage img = _imageServices.reSizeImg();
-                    pic.SaveAs(newPath + "\\" + pic.FileName);
+                    pic.SaveAs(newPath + "/" + pic.FileName);
 
                     object obj = new
                     {
@@ -605,6 +605,32 @@ namespace BanleWebsite.Controllers
                 //response.StatusCode = -1;
                 result.message = "Tải lên tập tin thất bại";
             }
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult loadMultiColorImage(string ID)
+        {
+            ResultViewModels result = new ResultViewModels();
+            int _ID = -1;
+           
+            if (ID == null || ID.Equals(""))
+            {
+                result.message = "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(ID, out _ID) == false)
+            {
+                result.message = "Error: Lỗi khi parse sizeID";
+            }
+
+            Image i = _imageServices.findByID(_ID);
+
+            object obj = new
+            {
+                imageURL = i.Path
+            };
+            result.data = obj;
 
             return Json(result);
         }

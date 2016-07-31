@@ -18,7 +18,7 @@ namespace BanleWebsite.Services
             _productOrderRepository = new ProductOrderRepository();
         }
 
-        public void AddToCart(int productId, string color, string size)
+        public void AddToCart(int productId, int color, int size)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -60,7 +60,7 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public void UpdateQuantity(int productId, int quantity, string color, string size)
+        public void UpdateQuantity(int productId, int quantity, int color, int size)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)
@@ -80,7 +80,7 @@ namespace BanleWebsite.Services
             HttpContext.Current.Session.Add("CartSession", cart);
         }
 
-        public void DeleteCartItem(int productId, string color, string size)
+        public void DeleteCartItem(int productId, int color, int size)
         {
             List<CartItem> cart = new List<CartItem>();
             if (HttpContext.Current.Session["CartSession"] != null)

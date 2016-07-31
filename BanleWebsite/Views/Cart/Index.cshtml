@@ -7,6 +7,8 @@
     List<CartItem> cart = ViewBag.cart;
     ProductServices _productServices = new ProductServices();
     OrderServices _orderServices = new OrderServices();
+    ColorServices _colorServices = new ColorServices();
+    SizeServices _sizeServices = new SizeServices();
     int itemInCart = _orderServices.getNumberOfItemInCart();
     double total = 0;
 
@@ -53,6 +55,8 @@
                                 </a>
                                 <h3 style="text-align:left;">@p.Name</h3>
                                 <h3 style="text-align:left; color:red; font-size:20px; font-family:VNOswald;">@p.Price VND</h3>
+                                <p style="font-family:VNOswald; font-size:17px;">Màu áo: @_colorServices.findByID(item.color).Name</p>
+                                <p style="font-family:VNOswald; font-size:17px;">Kích cỡ: @_sizeServices.findByID(item.size).Name</p>
                                 <div class="clearfix"></div>
                                 <div class="action" style="display:block; margin-top:10px;">
                                     <p style="display:block; float:left; font-family:VNOswald; font-size:20px; margin:5px 10px 0 0;">Số lượng: </p>

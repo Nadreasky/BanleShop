@@ -38,6 +38,5 @@ namespace BanleWebsite
             byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
             return System.Text.Encoding.ASCII.GetString(bytes);
         }
-
     }
 }

@@ -18,7 +18,7 @@ namespace BanleWebsite
         public int OrderID { get; set; }
         public int ProductID { get; set; }
         public int Quantity { get; set; }
-        public string Color { get; set; }
-        public string Size { get; set; }
+        public Nullable<int> Color { get; set; }
+        public Nullable<int> Size { get; set; }
     }
 }

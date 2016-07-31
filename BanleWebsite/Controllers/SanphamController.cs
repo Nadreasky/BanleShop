@@ -11,6 +11,8 @@ namespace BanleWebsite.Controllers
     public class SanphamController : Controller
     {
         ProductServices _productService = new ProductServices();
+        ImageServices _imageServices = new ImageServices();
+        SizeProductDetailServices _sizeProductDetailServices = new SizeProductDetailServices();
 
         public ActionResult Index(int? id)
         {
@@ -29,6 +31,12 @@ namespace BanleWebsite.Controllers
 
             List<Category> proTree = _productService.getProductTree(id.Value);
             ViewBag.proTree = proTree;
+
+            List<Image> colorImgProduct = _imageServices.getByProductId(id.Value);
+            ViewBag.colorImgProduct = colorImgProduct;
+
+            List<SizeProductDetail> sizeProduct = _sizeProductDetailServices.getByProductId(id.Value);
+            ViewBag.sizeProduct = sizeProduct;
 
             // cap nhat link cho "Quay lai mua sam"
             AddressBar ab = new AddressBar();

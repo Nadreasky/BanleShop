@@ -5,6 +5,13 @@
     List<Product> relativeProducts = ViewBag.relativeProducts;
     List<Category> proTree = ViewBag.proTree;
     ProductServices _productServices = new ProductServices();
+    List<Image> colorImgProduct = ViewBag.colorImgProduct;
+    List<SizeProductDetail> sizeProduct = ViewBag.sizeProduct;
+    ColorServices _colorServices = new ColorServices();
+    SizeServices _sizeServices = new SizeServices();
+
+    int defaultColor = colorImgProduct.ElementAt(0).IDColor.Value;
+    int defaultSize = sizeProduct.ElementAt(0).SizeID.Value;
 }
 
 <style>
@@ -23,29 +30,12 @@
         margin:0 2px;
         line-height:20px;
     }
-    #pcr li::selection {
-        float:left;
-        margin:0 2px;
-        line-height:20px;
-    }
 
     #pcr li a{
         display:block;
         height:12px;
         width:12px;
         border: 1px solid #999;
-        padding: 5px 5px;
-        text-decoration:none;
-        line-height:15px;
-        border-radius:50%;
-        font-size:12px;
-    }
-    #pcr li a::selection{
-        display:block;
-        height:12px;
-        width:12px;
-        border: 1px solid #999;
-        
         padding: 5px 5px;
         text-decoration:none;
         line-height:15px;
@@ -63,7 +53,16 @@
         margin:0 2px;
         line-height:20px;
         border-radius:5px;
-        border:1px solid #999;
+        border:2px solid #999;
+    }
+
+    #psz li:hover {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+        border-radius:5px;
+        border:2px solid #999;
+        border-color:#9D3BC6;
     }
 
     #psz li a{
@@ -80,7 +79,22 @@
         font-size:12px;
     }
 
-    #psz li a:hover{
+    /*#psz li a:hover{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        color:#9D3BC6;
+        /*background-color:#9D3BC6;
+        border-color: #9D3BC6;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }*/
+
+    #psz li a:{
         display:block;
         height:20px;
         width:20px;
@@ -94,33 +108,86 @@
         font-size:12px;
     }
 
-    #psz li a::selection{
+    .picked {
         display:block;
         height:20px;
         width:20px;
         text-align:center;
-        color:#ffffff;
         background-color:#9D3BC6;
+        color:#ffffff;
+        border-color: #9D3BC6;
         font-weight:bold;
         padding: 5px 5px;
         text-decoration:none;
         line-height:20px;
         font-size:12px;
     }
+
+    #psz li a.picked{
+        color:#fff;
+    }
+
 </style>
 
 <script>
-    function colorSelect(color) {
+    jQuery(document).ready(function () {
+        var c = jQuery("#color").val();
+        console.log(c)
+        var s = jQuery("#size").val();
+        console.log(s)
+        jQuery("#proImgDiv").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        }),
+        jQuery("#wrap").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        }),
+        jQuery(".mousetrap").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        }),
+        jQuery("#zoomdiv").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        })
+    });
+
+    function colorSelect(color, id) {
         jQuery("#color").val(color);
-        console.log(color)
+        //load hinh
+        jQuery.ajax({
+            url: "/Quanli/loadMultiColorImage",
+            data: {
+                format: 'json',
+                ID: id,
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (successData) {
+                console.log(successData);
+                var imageURL = successData.data.imageURL;
+                jQuery("#clzo").attr("src", imageURL);
+                jQuery("#zoom1").attr("href", imageURL);
+                
+            },
+            type: "POST"
+        })
+        console.log(color);
+        event.preventDefault();
+        return false;
     }
     function sizeSelect(size) {
         jQuery("#size").val(size);
         console.log(size)
+        event.preventDefault();
+        return false;
     }
 </script>
 
 <section id="content">
+    <input type="hidden" id="proID" />
     <div class="container top" role="main">
         <div class="content_top">
             <div class="wrapper_w">
@@ -219,8 +286,8 @@
                                 </div>
                             </div>
 
-                            <div class="span4">
-                                <div class="product-image"><a class="cloud-zoom" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
+                            <div class="span4" id="zoomdiv">
+                                <div class="product-image" id="proImgDiv"><a class="cloud-zoom" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img id="clzo" alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
                             </div>
 
                         </div>
@@ -266,60 +333,54 @@
                             <div id="pColor" style="margin-top:10px; max-width:500px;">
                                 <label><strong>Màu sắc</strong></label>
                                 <ul id="pcr">
-                                    <li>
-                                        <a href="#" style="background-color:#F40120 !important" onclick="colorSelect('F40120')"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color:#ffffff !important" onclick="colorSelect('ffffff')"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color:#9D3BC6 !important" onclick="colorSelect('9D3BC6')"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color:#000000 !important" onclick="colorSelect('000000')"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color:#0026ff !important" onclick="colorSelect('#0026ff')"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color:#00ff21 !important" onclick="colorSelect('#00ff21')"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color:#808080 !important" onclick="colorSelect('808080')"></a>
-                                    </li>
+                                    @{ 
+                                        foreach (var item in colorImgProduct)
+                                        {
+                                            string color = _colorServices.findByID(item.IDColor.Value).ColorCode;
+                                            <li>
+                                                <a href="#" style="background-color: @color !important" onclick="colorSelect('@item.IDColor', '@item.ID')"></a>
+                                            </li>
+                                        }
+                                    }
+                                  
                                     
                                 </ul>
                             </div>
                             <div id="pSize" style="margin-top:10px; max-width:500px;">
                                 <label><strong>Size</strong></label>
-                                <ul id="psz">
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('XS')">XS</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('S')">S</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('M')">M</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('L')">L</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('XL')">XL</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('2XL')">2XL</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('3XL')">3XL</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onclick="sizeSelect('4XL')">4XL</a>
-                                    </li>
+                                <ul id="psz" class="btn-group">
+                                    @{
+                                        string size = "";
+                                        for (int i = 0; i < sizeProduct.Count; i++)
+                                        {
+                                            SizeProductDetail item = sizeProduct.ElementAt(i);
+                                            if (i == 0)
+                                            {
+                                                size = _sizeServices.findByID(item.SizeID.Value).Name;
+                                                <li>
+                                                    <a href="#" class="btnSize picked" onclick="sizeSelect('@item.SizeID')">@size</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                size = _sizeServices.findByID(item.SizeID.Value).Name;
+                                                <li>
+                                                    <a href="#" class="btnSize" onclick="sizeSelect('@item.SizeID')">@size</a>
+                                                </li>
+                                            }
+
+                                        }
+                                    }
+                                    
 
                                 </ul>
                             </div>
+                            <script>
+                                jQuery("#pSize li a").click(function () {
+                                    jQuery("#pSize li a").removeClass('picked');
+                                    jQuery(this).addClass('picked');
+                                })
+                            </script>
                             <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
                                 <span class="amount">@mainProduct.Price VND</span>
@@ -348,10 +409,9 @@
                                             <label for="qty">Qty:</label>
                                             <input type="number" name="quantity" maxlength="12" value="1" class="input-text qty" id="qty" min="1" max="999967" name="quantity" value="1" title="Qty">
                                         </div>*@
-
                                         <input type="hidden" name="id" value="@mainProduct.ID" />
-                                        <input type="hidden" id="color" name="color" value="" />
-                                        <input type="hidden" id="size" name="size" value="" />
+                                        <input type="hidden" id="color" name="color" value="@defaultColor" />
+                                        <input type="hidden" id="size" name="size" value="@defaultSize" />
                                         @*<input type="submit" value="Submit" />*@
                                         <button type="submit" class="button btn-cart"><i class="icon-basket"></i>Mua ngay</button>
                                     }
@@ -654,14 +714,6 @@
     </div>
 </section>
 
-<script>
-    jQuery(document).ready(function () {
-        var color = jQuery("#color").val();
-        var size = jQuery("#size").val();
-        console.log(color);
-        console.log(size);
-    });
-</script>
 
 <link rel='stylesheet' id='cloud-zoom-css' href='~/Content/Buyshop/wp-content/themes/buyshop/css/cloud-zoom7350.css?ver=4.2.9' type='text/css' media='all' />
 <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/cloud-zoom.1.0.27350.js?ver=4.2.9'></script>

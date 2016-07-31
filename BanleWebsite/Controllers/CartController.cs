@@ -23,8 +23,8 @@ namespace BanleWebsite.Controllers
                 && Request["size"]!=null)
             {
                 int id = Int32.Parse(Request["id"]);
-                string color = Request["color"].ToString();
-                string size = Request["size"].ToString();
+                int color = Int32.Parse(Request["color"]);
+                int size = Int32.Parse(Request["size"]);
                 _orderServices.AddToCart(id, color, size);
             }
 
@@ -98,7 +98,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult UpdateQuantity(int productId, int quantity, string color, string size)
+        public ActionResult UpdateQuantity(int productId, int quantity, int color, int size)
         {
             _orderServices.UpdateQuantity(productId, quantity, color, size);
             return RedirectToAction("index", "cart");
@@ -106,7 +106,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult DeleteCartItem(int productId, string color, string size)
+        public ActionResult DeleteCartItem(int productId, int color, int size)
         {
             _orderServices.DeleteCartItem(productId, color, size);
             return RedirectToAction("index", "cart");

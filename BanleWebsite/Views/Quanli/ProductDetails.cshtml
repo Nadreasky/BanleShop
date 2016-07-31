@@ -162,7 +162,7 @@
                 <input type="hidden" id="mainPID" value="@mainProduct.ID" name="productID"/>
                 <input type="submit" style="font-family:VNOswald;" value="Lưu" />
             }
-            <img src="" id="imgReview" width="200" height="200" />
+            @*<img src="" id="imgReview" width="200" height="200" />*@
             <table id="tblColorImg" class="table">
                 <thead>
                     <tr>
@@ -504,7 +504,7 @@
         }
     });
 
-    jQuery("#colorImg").change(function () {
+    @*jQuery("#colorImg").change(function () {
         var data = new FormData();
         console.log("dien gi cung duoc xD");
         data.append("dir", "@BanleWebsite.SLIMCONFIG.BIG_PRODUCT_IMG_PATH");
@@ -545,6 +545,6 @@
             }
 
         });
-    });
+    });*@
 
 </script>

@@ -26,13 +26,13 @@ namespace BanleWebsite
         }
     
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Color> Colors { get; set; }
+        public virtual DbSet<ColorProductDetail> ColorProductDetails { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductDetail> ProductDetails { get; set; }
-        public virtual DbSet<Color> Colors { get; set; }
-        public virtual DbSet<ColorProductDetail> ColorProductDetails { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<SizeProductDetail> SizeProductDetails { get; set; }
     }
