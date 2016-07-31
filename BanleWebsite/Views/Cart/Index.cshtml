@@ -64,12 +64,16 @@
                                     {
                                         <input type="hidden" class="form-control" value="@item.productId" name="productId" />
                                         <input type="text" class="form-control" value="@item.quantity" name="quantity" style="width:20px; margin: 0 0 0 0; display:block; float:left;" />
+                                        <input type="hidden" class="form-control" value="@item.color" name="color" />
+                                        <input type="hidden" class="form-control" value="@item.size" name="size" />
                                         <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 0; display:block; float:left;" />
                                     }
 
                                     @using (Html.BeginForm("DeleteCartItem", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0px; margin-right:10px;" }))
                                     {
                                         <input type="hidden" class="form-control" value="@item.productId" name="productId" />
+                                        <input type="hidden" class="form-control" value="@item.color" name="color" />
+                                        <input type="hidden" class="form-control" value="@item.size" name="size" />
                                         <input type="submit" value="Xóa" style="margin: 0 0 0 0; display:block;float:right;" />
                                     }
                                 </div>
