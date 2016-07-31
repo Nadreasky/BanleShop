@@ -484,6 +484,55 @@ namespace BanleWebsite.Controllers
             _imageServices.add(colorID, path, productID);
             return RedirectToAction("ProductDetails", new { id = productID});
         }
+
+        //[HttpPost]
+        //public string addColorImgProduct()
+        //{
+        //    ResultViewModels result = new ResultViewModels();
+        //    string path = "";
+
+        //    if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+        //    {
+        //        var pic = System.Web.HttpContext.Current.Request.Files["image"];
+        //        var proID = Int32.Parse(Request.Form["proID"]);
+        //        var colorID = Int32.Parse(Request.Form["colorID"]);
+
+        //        if (pic != null)
+        //        {
+        //            string newPath = Server.MapPath(SLIMCONFIG.PRODUCT_IMG_PATH + "ProductImages");
+
+        //            if (!Directory.Exists(newPath))
+        //            {
+        //                System.IO.Directory.CreateDirectory(newPath);
+        //            }
+        //            pic.SaveAs(newPath + "/" + pic.FileName);
+        //            path = "/Images/" + "ProductImages/" + pic.FileName;
+        //            _imageServices.add(colorID, path, proID);
+
+        //        }
+        //        else
+        //        {
+        //            return "Tải lên tập tin thất bại";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return "Tải lên tập tin thất bại";
+        //    }
+
+        //    return "sucess";
+            
+
+        //    //string path = "";
+        //    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+        //    //WebImage img = _imageServices.reSizeImgBig(imgColor);
+        //    //img.FileName = imgColor.FileName;
+        //    //img.Save(newPathBig + "/" + img.FileName);
+        //    //path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
+        //    //_imageServices.add(colorID, path, productID);
+        //    //return RedirectToAction("ProductDetails", new { id = productID });
+        //}
+
         //========================END FUNCTION OF IMAGE SSERVICES=================
 
         [HttpPost]

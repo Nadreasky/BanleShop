@@ -162,6 +162,7 @@
                 <input type="hidden" id="mainPID" value="@mainProduct.ID" name="productID"/>
                 <input type="submit" style="font-family:VNOswald;" value="Lưu" />
             }
+            @*<button class="btn btn-success" onclick="saveImage()">Save</button>*@
             @*<img src="" id="imgReview" width="200" height="200" />*@
             <table id="tblColorImg" class="table">
                 <thead>
@@ -222,7 +223,7 @@
             },
             type: 'POST'
         })
-    }
+    };
     jQuery("#size-XS").change(function () {
         var jq = jQuery.noConflict();
         var proID = jQuery("#mainPID").val();
@@ -503,6 +504,39 @@
             })
         }
     });
+
+    //function saveImage() {
+    //    var data = new FormData();
+    //    var proID = jQuery("#mainPID").val();
+    //    console.log(proID)
+    //    var colorID = jQuery("#colorDrpBox").val();
+    //    console.log(colorID)
+
+    //    var files = jQuery("#colorImg").get(0).files;
+    //    if (files.length > 0) {
+    //        data.append("image", files[0]);
+    //        data.append("proID", proID);
+    //        data.append("colorID", colorID);
+    //    }
+
+    //    jQuery.ajax({
+    //        url: "/Quanli/addColorImgProduct",
+    //        type: "POST",
+    //        processData: false,
+    //        contentType: false,
+    //        data: data,
+
+    //        success: function (successData) {
+    //            console.log(successData)
+    //            jQuery("#tblColorImg").load("/Quanli/ProductDetails #tblColorImg");
+    //            //var imageData = successData.data.imageUrl;
+    //            //console.log(imageData)
+    //        },
+    //        error: function (er) {
+    //            alert(er);
+    //        }
+    //    });
+    //};
 
     @*jQuery("#colorImg").change(function () {
         var data = new FormData();
