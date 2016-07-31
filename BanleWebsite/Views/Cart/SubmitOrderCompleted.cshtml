@@ -1,8 +1,10 @@
 ﻿@using BanleWebsite.Models
-
+@using BanleWebsite.Services;
 @{
     ViewBag.Title = "Đặt hàng thành công";
     Invoice invoice = ViewBag.invoice;
+    ColorServices _colorServices = new ColorServices();
+    SizeServices _sizeServices = new SizeServices();
 }
 
 <style>
@@ -85,7 +87,7 @@
                             <tr>
                                 <td>@soThuTu</td>
                                 <td>@item.productName</td>
-                                <td>@item.color - @item.size</td>
+                                <td>@_colorServices.findByID(item.color).Name - @_sizeServices.findByID(item.size).Name</td>
                                 <td>@item.price</td>
                                 <td>@item.quantity</td>
                                 @{ thanhTien = item.price * item.quantity;
