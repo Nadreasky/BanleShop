@@ -153,6 +153,11 @@
         })
     });
 
+    function changeImg() {
+        var imgURL = document.getElementById("zoom1").href;
+        document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+    };
+
     function colorSelect(color, id) {
         jQuery("#color").val(color);
         //load hinh
@@ -286,8 +291,8 @@
                                 </div>
                             </div>
 
-                            <div class="span4" id="zoomdiv">
-                                <div class="product-image" id="proImgDiv"><a class="cloud-zoom" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img id="clzo" alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
+                            <div class="span4" id="zoomdiv" onmouseover="changeImg()">
+                                <div class="product-image" id="proImgDiv" onmouseover="changeImg()"><a class="cloud-zoom" onmouseover="changeImg()" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img id="clzo" onmouseover="changeImg()" alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
                             </div>
 
                         </div>

@@ -14,7 +14,7 @@ using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
-    [AuthLog(Roles = "Admin")]
+    //[AuthLog(Roles = "Admin")]
     public class QuanliController : Controller
     {
         CategoryServices _categoryServices = new CategoryServices();
