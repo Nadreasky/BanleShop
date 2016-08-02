@@ -103,7 +103,12 @@ namespace BanleWebsite.Services
 
         public List<Image> getByProductId(int productId)
         {
-            return getAll().Where(img => img.IDProduct == productId).ToList();
+            return getAll().Where(img => img.IDProduct == productId).OrderBy(o=>o.IDColor).ToList();
+        }
+
+        public void update(Image img)
+        {
+            _imageRepository.Update(img);
         }
     }
 }

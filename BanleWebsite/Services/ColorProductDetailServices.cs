@@ -17,7 +17,7 @@ namespace BanleWebsite.Services
 
         public List<ColorProductDetail> getAll()
         {
-            return _colorProductDetailRepository.List.ToList();
+            return _colorProductDetailRepository.List.OrderBy(c=>c.ColorID).ToList();
         }
 
         public ColorProductDetail findByID(int id)

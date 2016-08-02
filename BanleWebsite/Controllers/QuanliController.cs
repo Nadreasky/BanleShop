@@ -306,6 +306,8 @@ namespace BanleWebsite.Controllers
             return "Success";
         }
 
+        
+
         //=======================END FUNCTION OF PRODUCT==============
 
         //=======================START FUNCTION OF CATEGORY=============
@@ -475,15 +477,41 @@ namespace BanleWebsite.Controllers
         [HttpPost]
         public ActionResult addColorImgProduct(int colorID, HttpPostedFileBase imgColor, int productID)
         {
+            
+
             string path = "";
             string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
             WebImage img = _imageServices.reSizeImgBig(imgColor);
             img.FileName = imgColor.FileName;
             img.Save(newPathBig + "/" + img.FileName);
             path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
-            _imageServices.add(colorID, path, productID);
+
+            Image imgExist = _imageServices.getAll().FirstOrDefault(a => a.IDColor.Equals(colorID) && a.IDProduct.Equals(productID));
+            if (imgExist!=null)
+            {
+                imgExist.Path = path;
+                _imageServices.update(imgExist);
+            }
+            else
+            {
+                _imageServices.add(colorID, path, productID);
+            }
+
+            
             return RedirectToAction("ProductDetails", new { id = productID});
         }
+
+        [HttpPost]
+        public string deleteColorImgProduct(int imageId)
+        {
+            Image img = new Image();
+            img = _imageServices.findByID(imageId);
+            _imageServices.delete(img);
+
+            return "Success";
+        }
+
+
 
         //[HttpPost]
         //public string addColorImgProduct()
@@ -521,7 +549,7 @@ namespace BanleWebsite.Controllers
         //    }
 
         //    return "sucess";
-            
+
 
         //    //string path = "";
         //    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
