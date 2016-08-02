@@ -170,6 +170,7 @@
                         <th>STT</th>
                         <th>Màu</th>
                         <th>Hình</th>
+                        <th>Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -187,6 +188,7 @@
                                     <td>
                                          <img src="@item.Path" height="80" width="80" />
                                     </td>
+                                    <td><button class="btn btn-danger"onclick="deleteColorImgProduct(@item.ID)">Xóa</button></td>
                                 </tr>
                                 stt++;
                             }
@@ -206,6 +208,24 @@
 </div>
 
 <script>
+    function deleteColorImgProduct(id) {
+        jQuery.ajax({
+            url: "/Quanli/deleteColorImgProduct",
+            data: {
+                format: 'json',
+                imageId: id
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (data) {
+                if (data === "Success") {
+                    location.href = location.href;
+                }
+            },
+            type: 'POST'
+        })
+    };
     function deleteProduct(id) {
         jQuery.ajax({
             url: "/Quanli/deleteProduct",

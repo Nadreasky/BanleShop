@@ -17,7 +17,7 @@ namespace BanleWebsite.Services
 
         public List<SizeProductDetail> getAll()
         {
-            return _sizeProductDetailRepository.List.ToList();
+            return _sizeProductDetailRepository.List.OrderBy(t => t.SizeID).ToList();
         }
 
         public SizeProductDetail findByID(int id)
