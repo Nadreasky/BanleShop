@@ -4,24 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BanleWebsite.Services;
-using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
     public class HomeController : Controller
     {
         ProductServices _productServices;
+        ProductDetailServices _ProductDetailServices;
 
         public ActionResult Index()
         {
             _productServices = new ProductServices();
+            _ProductDetailServices = new ProductDetailServices();
             List<Product> allProduct = _productServices.getAll();
+            List<ProductDetail> pDetail = _ProductDetailServices.getAll();
+
+            //Random 
             ViewBag.allProduct = allProduct;
-
-            // cap nhat link cho "Quay lai mua sam"
-            AddressBar ab = new AddressBar();
-            ab.UpdateLinkBackToShopping();
-
+            ViewBag.pDetail = pDetail;
             return View();
         }
 

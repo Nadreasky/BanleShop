@@ -169,6 +169,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -212,6 +224,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressBar.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\ChangeCurrency.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceItem.cs" />
@@ -237,6 +250,7 @@
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\ProductDetailRepository.cs" />
     <Compile Include="Repository\ProductOrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\OrderDetailRepository.cs" />
@@ -248,6 +262,7 @@
     <Compile Include="Services\ImageServices.cs" />
     <Compile Include="Services\OrderDetailServices.cs" />
     <Compile Include="Services\OrderServices.cs" />
+    <Compile Include="Services\ProductDetailServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="Services\SizeProductDetailServices.cs" />
     <Compile Include="Services\SizeServices.cs" />
@@ -388,6 +403,7 @@
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
     <Folder Include="Views\Order\" />
+    <Folder Include="Views\ProductDetail\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
