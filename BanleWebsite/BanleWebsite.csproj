@@ -271,6 +271,9 @@
     <Content Include="Content\bootstrap-3.3.6-dist\js\npm.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Datatables\dataTables.bootstrap.min.css" />
+    <Content Include="Content\Datatables\dataTables.bootstrap.min.js" />
+    <Content Include="Content\Datatables\jquery.dataTables.js" />
     <Content Include="Content\SiteImages\BGR1.jpg" />
     <Content Include="Content\SiteImages\empty_bin.png" />
     <Content Include="Content\SiteImages\favi.png" />

@@ -124,7 +124,9 @@
         <div id="sizeInfo">
             <ul id="psz">
                 @{
+
                     
+
                     foreach (var item in allSize)
                     {
                         foreach (var item2 in sizeMainProduct)
@@ -170,6 +172,7 @@
                         <th>STT</th>
                         <th>Màu</th>
                         <th>Hình</th>
+                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -505,38 +508,38 @@
         }
     });
 
-    //function saveImage() {
-    //    var data = new FormData();
-    //    var proID = jQuery("#mainPID").val();
-    //    console.log(proID)
-    //    var colorID = jQuery("#colorDrpBox").val();
-    //    console.log(colorID)
+    function saveImage() {
+        var data = new FormData();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        var colorID = jQuery("#colorDrpBox").val();
+        console.log(colorID)
 
-    //    var files = jQuery("#colorImg").get(0).files;
-    //    if (files.length > 0) {
-    //        data.append("image", files[0]);
-    //        data.append("proID", proID);
-    //        data.append("colorID", colorID);
-    //    }
+        var files = jQuery("#colorImg").get(0).files;
+        if (files.length > 0) {
+            data.append("image", files[0]);
+            data.append("proID", proID);
+            data.append("colorID", colorID);
+        }
 
-    //    jQuery.ajax({
-    //        url: "/Quanli/addColorImgProduct",
-    //        type: "POST",
-    //        processData: false,
-    //        contentType: false,
-    //        data: data,
+        jQuery.ajax({
+            url: "/Quanli/addColorImgProduct",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
 
-    //        success: function (successData) {
-    //            console.log(successData)
-    //            jQuery("#tblColorImg").load("/Quanli/ProductDetails #tblColorImg");
-    //            //var imageData = successData.data.imageUrl;
-    //            //console.log(imageData)
-    //        },
-    //        error: function (er) {
-    //            alert(er);
-    //        }
-    //    });
-    //};
+            success: function (successData) {
+                console.log(successData)
+                jQuery("#tblColorImg").load("/Quanli/ProductDetails #tblColorImg");
+                //var imageData = successData.data.imageUrl;
+                //console.log(imageData)
+            },
+            error: function (er) {
+                alert(er);
+            }
+        });
+    };
 
     @*jQuery("#colorImg").change(function () {
         var data = new FormData();

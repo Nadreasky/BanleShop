@@ -521,16 +521,16 @@ namespace BanleWebsite.Controllers
         //    }
 
         //    return "sucess";
-            
 
-        //    //string path = "";
-        //    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
-        //    //WebImage img = _imageServices.reSizeImgBig(imgColor);
-        //    //img.FileName = imgColor.FileName;
-        //    //img.Save(newPathBig + "/" + img.FileName);
-        //    //path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
-        //    //_imageServices.add(colorID, path, productID);
-        //    //return RedirectToAction("ProductDetails", new { id = productID });
+
+            //    //string path = "";
+            //    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+            //    //WebImage img = _imageServices.reSizeImgBig(imgColor);
+            //    //img.FileName = imgColor.FileName;
+            //    //img.Save(newPathBig + "/" + img.FileName);
+            //    //path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
+            //    //_imageServices.add(colorID, path, productID);
+            //    //return RedirectToAction("ProductDetails", new { id = productID });
         //}
 
         //========================END FUNCTION OF IMAGE SSERVICES=================

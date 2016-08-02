@@ -74,14 +74,14 @@
 
                         <div class="">
                             <div class="woocommerce">
-                                @*<section class="filters-by-category clearfix">
+                                <section class="filters-by-category clearfix">
                                     <ul class="option-set" data-option-key="filter">
                                         <li><a href="#filter" data-option-value="*" class="selected" data-per-page="8">all</a></li>
                                         <li><a href="#filter" data-option-value=".featured" data-per-page="8">FEATURED</a></li>
                                         <li><a href="#filter" data-option-value=".new_product" data-per-page="8">NEW PRODUCTS</a></li>
                                         <li><a href="#filter" data-option-value=".sale" data-per-page="8">ON SALE</a></li>
                                     </ul>
-                                </section>*@
+                                </section>
                                 <div class="row isotope-outer big_with_description">
                                     @{
                                         int Count = 0;
@@ -113,14 +113,14 @@
 
                                                             <div class="product-tocart">
                                                                 @*@Html.TextBox("id");*@
-                                                                @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                 {
                                                                     <input type="hidden" name="id" value="@p.ID" />
-                                                                    @*<input type="submit" value="Submit" />*@
+                                                                    <input type="submit" value="Submit" />
                                                                     <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
                                                                         <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
                                                                     </button>
-                                                                }
+                                                                }*@
                                                                 
                                                                 @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
                                                                     <i class="icon-basket"></i>
@@ -184,14 +184,14 @@
 
 
                                                                     <div class="product-tocart">
-                                                                        @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                        @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                         {
                                                                             <input type="hidden" name="id" value="@p.ID" />
-                                                                            @*<input type="submit" value="Submit" />*@
+                                                                            <input type="submit" value="Submit" />
                                                                             <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
                                                                                 <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
                                                                             </button>
-                                                                        }
+                                                                        }*@
                                                                     </div>
 
                                                                 </div>
@@ -268,20 +268,20 @@
                                     <div class="pull-left">
                                         <div class="wrapper_w">
                                             <div class="box animate-delay scale">
-                                                <div class="inside"> <a href="#"><span class="icon_circle dark"><i class="icon-truck"></i></span><span class="text">FREE SHIPPING</span></a> </div>
+                                                <div class="inside"> <a href="#"><span class="icon_circle dark"><i class="icon-truck"></i></span><span class="text" style="font-family:VNOswald;">FREE SHIP NỘI THÀNH</span></a> </div>
                                             </div>
-                                            <div class="box animate-delay scale">
-                                                <div class="inside"><a href="#"><span class="icon_circle light"><i class="icon-dollar"></i></span><span class="text">CASH ON DELIVERY</span></a> </div>
+                                            <div class="box animate-delay scale" style="width:290px">
+                                                <div class="inside"><a href="#"><span class="icon_circle light"><i class="icon-dollar"></i></span><span class="text" style="font-family:VNOswald;">THANH TOÁN KHI NHẬN HÀNG</span></a> </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="pull-left">
                                         <div class="wrapper_w">
-                                            <div class="box animate-delay scale">
-                                                <div class="inside"><a href="#"><span class="icon_circle dark"><i class="icon-clock"></i></span><span class="text">30-DAY RETURNS</span></a> </div>
+                                            <div class="box animate-delay scale" style="width:230px">
+                                                <div class="inside"><a href="#"><span class="icon_circle dark"><i class="icon-clock"></i></span><span class="text" style="font-family:VNOswald;">6H - 3 NGÀY</span></a> </div>
                                             </div>
                                             <div class="box animate-delay scale">
-                                                <div class="inside"><a href="#"><span class="icon_circle light"><i class="icon-flight"></i></span><span class="text">World Shipping</span></a> </div>
+                                                <div class="inside"><a href="#"><span class="icon_circle light"><i class="icon-flight"></i></span><span class="text" style="font-family:VNOswald;">GIAO HÀNG TOÀN QUỐC</span></a> </div>
                                             </div>
                                         </div>
                                     </div>
