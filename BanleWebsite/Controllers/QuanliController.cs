@@ -126,7 +126,8 @@ namespace BanleWebsite.Controllers
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult saveProduct(string id, string productName, string productPrice, string productCateID, string description,
-            string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3)
+            string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3,
+            string featured, string salePercent)
         {
             int _id = -1;
             double _productPrice = -1;
@@ -135,6 +136,8 @@ namespace BanleWebsite.Controllers
             string filePath1 = "";
             string filePath2 = "";
             string filePath3 = "";
+            bool _featured = false;
+            double _salePercent = 0;
             ViewBag.Error = "";
 
             if (id == null || id.Equals(""))
@@ -177,7 +180,20 @@ namespace BanleWebsite.Controllers
             {
                 ViewBag.Error += "Error: Không thể parse quantity của sản phẩm <br/>";
             }
-            
+            if (featured == null || featured.Equals(""))
+            {
+                _featured = false;
+            }
+            _featured = featured == "1";
+            if (salePercent == null || salePercent.Equals(""))
+            {
+                _salePercent = 0;
+            }
+            else if (double.TryParse(salePercent, out _salePercent) == false)
+            {
+                ViewBag.Error += "Error: Không thể parse salePercent của sản phẩm <br/>";
+            }
+
 
             //check image
             if (productImg1 == null && productImg2 == null && productImg3 == null && _productServices.isProductHasImage(_id) == false)
@@ -278,7 +294,7 @@ namespace BanleWebsite.Controllers
 
             else
             {
-                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3);
+                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3, _featured, _salePercent);
                 return RedirectToAction("Product");
             }
         }

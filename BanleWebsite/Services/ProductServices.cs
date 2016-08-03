@@ -36,7 +36,7 @@ namespace BanleWebsite.Services
             return p;
         }
 
-        public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity, string imgPath1, string imgPath2, string imgPath3)
+        public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity, string imgPath1, string imgPath2, string imgPath3, bool featured, double salePercent)
         {
             Product p = findByID(id);
             if (p == null)
@@ -50,6 +50,8 @@ namespace BanleWebsite.Services
                 p.Img1 = imgPath1;
                 p.Img2 = imgPath2;
                 p.Img3 = imgPath3;
+                p.Featured = featured;
+                p.SalePercent = salePercent;
                 _productRepository.Add(p);
             }
             else
@@ -71,7 +73,8 @@ namespace BanleWebsite.Services
                 {
                     p.Img3 = imgPath3;
                 }
-                
+                p.Featured = featured;
+                p.SalePercent = salePercent;
                 _productRepository.Update(p);
             }
         }
