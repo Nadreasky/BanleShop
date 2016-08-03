@@ -9,6 +9,7 @@
     OrderServices _orderServices = new OrderServices();
     ColorServices _colorServices = new ColorServices();
     SizeServices _sizeServices = new SizeServices();
+    ImageServices _imageServices = new ImageServices();
     int itemInCart = _orderServices.getNumberOfItemInCart();
     double total = 0;
 
@@ -49,9 +50,11 @@
                             Product p = _productServices.findByID(item.productId);
                             double thanhtien = p.Price.Value * item.quantity;
                             total += thanhtien;
+
+                            Image img = _imageServices.findByProductIdAndColorId(p.ID, item.color);
                             <div id="item" style="max-width:680px; margin:auto; padding:10px; border-bottom:1px solid #9D3BC6; padding-bottom:40px;">
                                 <a href="/Sanpham/@p.GenerateSlug()" style="text-decoration:none; cursor:pointer;">
-                                    <img height="80" width="80" src="@p.Img1" style="float:right;" />
+                                    <img height="80" width="80" src="@img.Path" style="float:right;" />
                                 </a>
                                 <h3 style="text-align:left;">@p.Name</h3>
                                 <h3 style="text-align:left; color:red; font-size:20px; font-family:VNOswald;">@p.Price VND</h3>

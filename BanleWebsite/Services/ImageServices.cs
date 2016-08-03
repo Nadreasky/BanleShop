@@ -110,5 +110,11 @@ namespace BanleWebsite.Services
         {
             _imageRepository.Update(img);
         }
+
+        public Image findByProductIdAndColorId(int productId, int colorId)
+        {
+            return _imageRepository.List.Where(img => img.IDProduct.Value == productId
+                && img.IDColor==colorId).FirstOrDefault();
+        }
     }
 }
