@@ -154,16 +154,9 @@
           <Property Name="Img3" Type="nvarchar(max)" />
           <Property Name="OldPrice" Type="float" />
           <Property Name="isActived" Type="bit" />
-        </EntityType>
-        <EntityType Name="ProductDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="Featured" Type="bit" Nullable="false" />
-          <Property Name="SalePercent" Type="float" Nullable="false" />
-          <Property Name="Promotion" Type="text" Nullable="false" />
+          <Property Name="Featured" Type="bit" />
+          <Property Name="SalePercent" Type="float" />
+          <Property Name="Promotion" Type="text" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -354,18 +347,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductDetail_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SizeProductDetail_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="SizeProductDetail" Type="Self.SizeProductDetail" Multiplicity="*" />
@@ -405,7 +386,6 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SizeProductDetail" EntityType="Self.SizeProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -461,10 +441,6 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductDetail_Product" Association="Self.FK_ProductDetail_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_SizeProductDetail_Product" Association="Self.FK_SizeProductDetail_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="SizeProductDetail" EntitySet="SizeProductDetail" />
@@ -478,145 +454,23 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BanleShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PreCateID" Type="Int32" />
-          <Property Name="isActived" Type="Boolean" />
-          <NavigationProperty Name="Products" Relationship="BanleShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Color">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ColorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Color" FromRole="Color" ToRole="ColorProductDetail" />
-          <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Color" FromRole="Color" ToRole="Image" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Color" FromRole="Color" ToRole="OrderDetail" />
-        </EntityType>
-        <EntityType Name="ColorProductDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProID" Type="Int32" />
-          <Property Name="ColorID" Type="Int32" />
-          <NavigationProperty Name="Color" Relationship="BanleShopModel.FK_ColorProductDetail_Color" FromRole="ColorProductDetail" ToRole="Color" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="ColorProductDetail" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Image">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDColor" Type="Int32" />
-          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IDProduct" Type="Int32" />
-          <NavigationProperty Name="Color" Relationship="BanleShopModel.FK_Image_Color" FromRole="Image" ToRole="Color" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_Image_Product" FromRole="Image" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="Staff" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
-        </EntityType>
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Color" Type="Int32" />
-          <Property Name="Size" Type="Int32" />
-          <NavigationProperty Name="Color1" Relationship="BanleShopModel.FK_OrderDetail_Color" FromRole="OrderDetail" ToRole="Color" />
-          <NavigationProperty Name="Order" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
-          <NavigationProperty Name="Size1" Relationship="BanleShopModel.FK_OrderDetail_Size" FromRole="OrderDetail" ToRole="Size" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CateID" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Img1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Img2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Img3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="OldPrice" Type="Double" />
-          <Property Name="isActived" Type="Boolean" />
-          <NavigationProperty Name="Category" Relationship="BanleShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="Product" ToRole="ColorProductDetail" />
-          <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Product" FromRole="Product" ToRole="Image" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="ProductDetails" Relationship="BanleShopModel.FK_ProductDetail_Product" FromRole="Product" ToRole="ProductDetail" />
-          <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="Product" ToRole="SizeProductDetail" />
-        </EntityType>
-        <EntityType Name="ProductDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Featured" Type="Boolean" Nullable="false" />
-          <Property Name="SalePercent" Type="Double" Nullable="false" />
-          <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_ProductDetail_Product" FromRole="ProductDetail" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Size">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Size" FromRole="Size" ToRole="OrderDetail" />
-          <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Size" FromRole="Size" ToRole="SizeProductDetail" />
-        </EntityType>
-        <EntityType Name="SizeProductDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProID" Type="Int32" />
-          <Property Name="SizeID" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="SizeProductDetail" ToRole="Product" />
-          <NavigationProperty Name="Size" Relationship="BanleShopModel.FK_SizeProductDetail_Size" FromRole="SizeProductDetail" ToRole="Size" />
-        </EntityType>
         <EntityContainer Name="BanleShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Colors" EntityType="Self.Color" />
-          <EntitySet Name="ColorProductDetails" EntityType="Self.ColorProductDetail" />
-          <EntitySet Name="Images" EntityType="Self.Image" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="ProductDetails" EntityType="Self.ProductDetail" />
-          <EntitySet Name="Sizes" EntityType="Self.Size" />
-          <EntitySet Name="SizeProductDetails" EntityType="Self.SizeProductDetail" />
+          <EntitySet Name="Agencies" EntityType="BanleShopModel.Agency" />
           <EntitySet Name="AspNetRoles" EntityType="BanleShopModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="BanleShopModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="BanleShopModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="BanleShopModel.AspNetUser" />
+          <EntitySet Name="Categories" EntityType="BanleShopModel.Category" />
+          <EntitySet Name="Colors" EntityType="BanleShopModel.Color" />
+          <EntitySet Name="ColorProductDetails" EntityType="BanleShopModel.ColorProductDetail" />
+          <EntitySet Name="Images" EntityType="BanleShopModel.Image" />
+          <EntitySet Name="News" EntityType="BanleShopModel.News" />
+          <EntitySet Name="Orders" EntityType="BanleShopModel.Order" />
+          <EntitySet Name="OrderDetails" EntityType="BanleShopModel.OrderDetail" />
+          <EntitySet Name="Products" EntityType="BanleShopModel.Product" />
+          <EntitySet Name="Sizes" EntityType="BanleShopModel.Size" />
+          <EntitySet Name="SizeProductDetails" EntityType="BanleShopModel.SizeProductDetail" />
+          <EntitySet Name="sysdiagrams" EntityType="BanleShopModel.sysdiagram" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -625,13 +479,6 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="BanleShopModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Agencies" EntityType="BanleShopModel.Agency" />
-          <EntitySet Name="News" EntityType="BanleShopModel.News" />
-          <EntitySet Name="sysdiagrams" EntityType="BanleShopModel.sysdiagram" />
           <AssociationSet Name="FK_Product_Category" Association="BanleShopModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
@@ -668,10 +515,6 @@
             <End Role="Size" EntitySet="Sizes" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductDetail_Product" Association="BanleShopModel.FK_ProductDetail_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_SizeProductDetail_Product" Association="BanleShopModel.FK_SizeProductDetail_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="SizeProductDetail" EntitySet="SizeProductDetails" />
@@ -680,7 +523,23 @@
             <End Role="Size" EntitySet="Sizes" />
             <End Role="SizeProductDetail" EntitySet="SizeProductDetails" />
           </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="BanleShopModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExcelPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -730,6 +589,143 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="BanleShopModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PreCateID" Type="Int32" />
+          <Property Name="isActived" Type="Boolean" />
+          <NavigationProperty Name="Products" Relationship="BanleShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Color" FromRole="Color" ToRole="ColorProductDetail" />
+          <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Color" FromRole="Color" ToRole="Image" />
+          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Color" FromRole="Color" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="ColorProductDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="Int32" />
+          <Property Name="ColorID" Type="Int32" />
+          <NavigationProperty Name="Color" Relationship="BanleShopModel.FK_ColorProductDetail_Color" FromRole="ColorProductDetail" ToRole="Color" />
+          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="ColorProductDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDColor" Type="Int32" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDProduct" Type="Int32" />
+          <NavigationProperty Name="Color" Relationship="BanleShopModel.FK_Image_Color" FromRole="Image" ToRole="Color" />
+          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_Image_Product" FromRole="Image" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MainImage" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Popular" Type="Int32" />
+          <Property Name="CreateDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Staff" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="Int32" />
+          <Property Name="Size" Type="Int32" />
+          <NavigationProperty Name="Color1" Relationship="BanleShopModel.FK_OrderDetail_Color" FromRole="OrderDetail" ToRole="Color" />
+          <NavigationProperty Name="Order" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Size1" Relationship="BanleShopModel.FK_OrderDetail_Size" FromRole="OrderDetail" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CateID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Img1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Img2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Img3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OldPrice" Type="Double" />
+          <Property Name="isActived" Type="Boolean" />
+          <Property Name="Featured" Type="Boolean" />
+          <Property Name="SalePercent" Type="Double" />
+          <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category" Relationship="BanleShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="Product" ToRole="ColorProductDetail" />
+          <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Product" FromRole="Product" ToRole="Image" />
+          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="Product" ToRole="SizeProductDetail" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Size" FromRole="Size" ToRole="OrderDetail" />
+          <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Size" FromRole="Size" ToRole="SizeProductDetail" />
+        </EntityType>
+        <EntityType Name="SizeProductDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="Int32" />
+          <Property Name="SizeID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="SizeProductDetail" ToRole="Product" />
+          <NavigationProperty Name="Size" Relationship="BanleShopModel.FK_SizeProductDetail_Size" FromRole="SizeProductDetail" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="BanleShopModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -758,44 +754,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="BanleShopModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="BanleShopModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Agency">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ExcelPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ShortDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MainImage" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Popular" Type="Int32" />
-          <Property Name="CreateDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <Association Name="FK_Product_Category">
           <End Type="BanleShopModel.Category" Role="Category" Multiplicity="1" />
           <End Type="BanleShopModel.Product" Role="Product" Multiplicity="*" />
@@ -904,18 +862,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductDetail_Product">
-          <End Type="BanleShopModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="BanleShopModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SizeProductDetail_Product">
           <End Type="BanleShopModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="BanleShopModel.SizeProductDetail" Role="SizeProductDetail" Multiplicity="*" />
@@ -940,119 +886,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="AspNetUserRoles">
+          <End Type="BanleShopModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="BanleShopModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BanleShopModelStoreContainer" CdmEntityContainer="BanleShopEntities">
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="BanleShopModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="isActived" ColumnName="isActived" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PreCateID" ColumnName="PreCateID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Colors">
-            <EntityTypeMapping TypeName="BanleShopModel.Color">
-              <MappingFragment StoreEntitySet="Color">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ColorProductDetails">
-            <EntityTypeMapping TypeName="BanleShopModel.ColorProductDetail">
-              <MappingFragment StoreEntitySet="ColorProductDetail">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProID" ColumnName="ProID" />
-                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="BanleShopModel.Image">
-              <MappingFragment StoreEntitySet="Image">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="BanleShopModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+          <EntitySetMapping Name="Agencies">
+            <EntityTypeMapping TypeName="BanleShopModel.Agency">
+              <MappingFragment StoreEntitySet="Agency">
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="Staff" ColumnName="Staff" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="BanleShopModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="BanleShopModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="isActived" ColumnName="isActived" />
-                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CateID" ColumnName="CateID" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Img1" ColumnName="Img1" />
-                <ScalarProperty Name="Img2" ColumnName="Img2" />
-                <ScalarProperty Name="Img3" ColumnName="Img3" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetails">
-            <EntityTypeMapping TypeName="BanleShopModel.ProductDetail">
-              <MappingFragment StoreEntitySet="ProductDetail">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Featured" ColumnName="Featured" />
-                <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
-                <ScalarProperty Name="Promotion" ColumnName="Promotion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sizes">
-            <EntityTypeMapping TypeName="BanleShopModel.Size">
-              <MappingFragment StoreEntitySet="Size">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SizeProductDetails">
-            <EntityTypeMapping TypeName="BanleShopModel.SizeProductDetail">
-              <MappingFragment StoreEntitySet="SizeProductDetail">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProID" ColumnName="ProID" />
-                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1101,23 +954,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="BanleShopModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Agencies">
-            <EntityTypeMapping TypeName="BanleShopModel.Agency">
-              <MappingFragment StoreEntitySet="Agency">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="BanleShopModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="isActived" ColumnName="isActived" />
+                <ScalarProperty Name="PreCateID" ColumnName="PreCateID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="BanleShopModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorProductDetails">
+            <EntityTypeMapping TypeName="BanleShopModel.ColorProductDetail">
+              <MappingFragment StoreEntitySet="ColorProductDetail">
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="BanleShopModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1135,6 +1005,70 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="BanleShopModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="BanleShopModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BanleShopModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Promotion" ColumnName="Promotion" />
+                <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
+                <ScalarProperty Name="Featured" ColumnName="Featured" />
+                <ScalarProperty Name="isActived" ColumnName="isActived" />
+                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
+                <ScalarProperty Name="Img3" ColumnName="Img3" />
+                <ScalarProperty Name="Img2" ColumnName="Img2" />
+                <ScalarProperty Name="Img1" ColumnName="Img1" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CateID" ColumnName="CateID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="BanleShopModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SizeProductDetails">
+            <EntityTypeMapping TypeName="BanleShopModel.SizeProductDetail">
+              <MappingFragment StoreEntitySet="SizeProductDetail">
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="BanleShopModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1146,6 +1080,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="BanleShopModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

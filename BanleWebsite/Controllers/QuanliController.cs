@@ -19,7 +19,6 @@ namespace BanleWebsite.Controllers
     {
         CategoryServices _categoryServices = new CategoryServices();
         ProductServices _productServices = new ProductServices();
-        ProductDetailServices _productDetailServices = new ProductDetailServices();
         ImageServices _imageServices = new ImageServices();
         OrderServices _orderServices = new OrderServices();
         ColorServices _colorServices = new ColorServices();
@@ -67,8 +66,8 @@ namespace BanleWebsite.Controllers
             ViewBag.allSize = allSize;
             List<Category> categories = _categoryServices.getAll();
             ViewBag.categories = categories;
-            ProductDetail proDetail = _productDetailServices.finbByProID(id.Value);
-            ViewBag.proDetail = proDetail;
+            //ProductDetail proDetail = _productDetailServices.finbByProID(id.Value);
+            //ViewBag.proDetail = proDetail;
 
             return View();
         }
@@ -310,30 +309,30 @@ namespace BanleWebsite.Controllers
             return "Success";
         }
 
-        [HttpPost]
-        public string saveDetailProduct(int id, int featured, string salePercent, string promote )
-        {
-            double _salePercent = 0;
-            bool _featured = false;
-            if (salePercent == null || salePercent.Equals(""))
-            {
-                return "Error: salePercent không hợp lệ!";
-            }
-            else if (double.TryParse(salePercent, out _salePercent) == false)
-            {
-                return "Error: Lỗi khi parse salePercent";
-            }
-            if (featured == 1)
-            {
-                _featured = true;
-            }
-            ProductDetail pd = _productDetailServices.finbByProID(id);
-            if(pd != null)
-            {
-                _productDetailServices.addOrUpdateProductDetail(id, _featured, _salePercent, promote);
-            }
-            return "success";
-        }
+        //[HttpPost]
+        //public string saveDetailProduct(int id, int featured, string salePercent, string promote )
+        //{
+        //    double _salePercent = 0;
+        //    bool _featured = false;
+        //    if (salePercent == null || salePercent.Equals(""))
+        //    {
+        //        return "Error: salePercent không hợp lệ!";
+        //    }
+        //    else if (double.TryParse(salePercent, out _salePercent) == false)
+        //    {
+        //        return "Error: Lỗi khi parse salePercent";
+        //    }
+        //    if (featured == 1)
+        //    {
+        //        _featured = true;
+        //    }
+        //    ProductDetail pd = _productDetailServices.finbByProID(id);
+        //    if(pd != null)
+        //    {
+        //        _productDetailServices.addOrUpdateProductDetail(id, _featured, _salePercent, promote);
+        //    }
+        //    return "success";
+        //}
 
         //=======================END FUNCTION OF PRODUCT==============
 
