@@ -102,7 +102,7 @@
                                                                     @if (pd.SalePercent != 0)
                                                                     {
                                                                         double percent = pd.SalePercent * 100;
-                                                            <div class="sale_discount img-rounded">-@percent%</div>
+                                                                        <div class="sale_discount img-rounded">-@percent%</div>
                                                                     }
 
                                                                     <a href="/sanpham/@p.GenerateSlug()">
@@ -118,7 +118,7 @@
                                                                     <div class="wrapper">
                                                                         @if (pd.SalePercent != 0)
                                                                         {
-                                                                <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</s> </span></div>
+                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</s> </span></div>
                                                                         }
                                                                         @{ double newPrice = p.Price.Value - p.Price.Value * pd.SalePercent;}
 
@@ -129,11 +129,11 @@
                                                                             @*@Html.TextBox("id");*@
                                                                             @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
-                                                                    <input type="hidden" name="id" value="@p.ID" />
-                                                                    @*<input type="submit" value="Submit" />*@
-                                                                    <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                    </button>
+                                                                                <input type="hidden" name="id" value="@p.ID" />
+                                                                                @*<input type="submit" value="Submit" />*@
+                                                                                <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                    <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                </button>
                                                                             }
 
                                                                             @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
@@ -172,7 +172,7 @@
                                                                             @if (pd.SalePercent != 0)
                                                                             {
                                                                                 double percent = pd.SalePercent * 100;
-                                                                    <div class="sale_discount img-rounded">-@percent%</div>
+                                                                                <div class="sale_discount img-rounded">-@percent%</div>
                                                                             }
                                                                             <div style="height:300px;">
                                                                                 <a href="/sanpham/@p.GenerateSlug()">
@@ -190,33 +190,33 @@
 
                                                                                 @if (pd.SalePercent != 0)
                                                                                 {
-                                                                        <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</s> </span></div>
+                                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</s> </span></div>
                                                                                 }
-                                                                        @*  @{ double newPrice = p.Price.Value - p.Price.Value * pd.SalePercent;}*@
+                                                                                @*  @{ double newPrice = p.Price.Value - p.Price.Value * pd.SalePercent;}*@
 
 
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(newPrice.ToString())&#8363</strong></span></div>
+                                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(newPrice.ToString())&#8363</strong></span></div>
 
 
-                                                                        <div class="product-tocart">
-                                                                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                                            {
-                                                                            <input type="hidden" name="id" value="@p.ID" />
-                                                                            @*<input type="submit" value="Submit" />*@
-                                                                            <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                            </button>
-                                                                            }
+                                                                                <div class="product-tocart">
+                                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                                    {
+                                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                                        @*<input type="submit" value="Submit" />*@
+                                                                                        <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                            <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                        </button>
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="clearfix"></div>
+                                                                            @*<div class="product-link">
+                                                                                    <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
+                                                                                </div>*@
                                                                         </div>
                                                                     </div>
-                                                                    <div class="clearfix"></div>
-                                                                    @*<div class="product-link">
-                                                                            <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
-                                                                        </div>*@
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
                                                                             }
                                                                             else if (pd.SalePercent != 0)
                                                                             {
@@ -242,11 +242,11 @@
                                                                                                 @*@Html.TextBox("id");*@
                                                                                                 @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                                                 {
-                                                                    <input type="hidden" name="id" value="@p.ID" />
-                                                                    @*<input type="submit" value="Submit" />*@
-                                                                    <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                    </button>
+                                                                                                    <input type="hidden" name="id" value="@p.ID" />
+                                                                                                    @*<input type="submit" value="Submit" />*@
+                                                                                                    <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                                    </button>
                                                                                                 }
 
                                                                                                 @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
@@ -301,11 +301,11 @@
                                                                                                     <div class="product-tocart">
                                                                                                         @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                                                         {
-                                                                            <input type="hidden" name="id" value="@p.ID" />
-                                                                            @*<input type="submit" value="Submit" />*@
-                                                                            <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                            </button>
+                                                                                                            <input type="hidden" name="id" value="@p.ID" />
+                                                                                                            @*<input type="submit" value="Submit" />*@
+                                                                                                            <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                                            </button>
                                                                                                         }
                                                                                                     </div>
                                                                                                 </div>
@@ -343,11 +343,11 @@
                                                                                                 @*@Html.TextBox("id");*@
                                                                                                 @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                                                 {
-                                                                    <input type="hidden" name="id" value="@p.ID" />
-                                                                    @*<input type="submit" value="Submit" />*@
-                                                                    <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                    </button>
+                                                                                                    <input type="hidden" name="id" value="@p.ID" />
+                                                                                                    @*<input type="submit" value="Submit" />*@
+                                                                                                    <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                                    </button>
                                                                                                 }
 
                                                                                                 @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
@@ -402,11 +402,11 @@
                                                                                                     <div class="product-tocart">
                                                                                                         @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                                                         {
-                                                                            <input type="hidden" name="id" value="@p.ID" />
-                                                                            @*<input type="submit" value="Submit" />*@
-                                                                            <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                            </button>
+                                                                                                            <input type="hidden" name="id" value="@p.ID" />
+                                                                                                            @*<input type="submit" value="Submit" />*@
+                                                                                                            <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                                            </button>
                                                                                                         }
                                                                                                     </div>
                                                                                                 </div>

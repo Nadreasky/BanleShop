@@ -610,14 +610,14 @@
                                                             @*<a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
                                                                 <i class="icon-basket"></i>
                                                             </a>*@
-                                                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                            @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                             {
                                                                 <input type="hidden" name="id" value="@p.ID" />
-                                                                @*<input type="submit" value="Submit" />*@
+                                                                <input type="submit" value="Submit" />
                                                                 <button type="submit" style="border-radius:50%; background-color:transparent;">
                                                                     <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
                                                                 </button>
-                                                            }
+                                                            }*@
                                                         </div>
                                                         <div class="clearfix"></div>
                                                     </div>
@@ -678,14 +678,14 @@
 
 
                                                                 <div class="product-tocart">
-                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                    @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
                                                                         <input type="hidden" name="id" value="@p.ID" />
-                                                                        @*<input type="submit" value="Submit" />*@
+                                                                        <input type="submit" value="Submit" />
                                                                         <button type="submit" style="border-radius:50%; background-color:transparent;">
                                                                             <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
                                                                         </button>
-                                                                    }
+                                                                    }*@
                                                                 </div>
 
                                                             </div>

@@ -49,7 +49,7 @@
         </div>
         <div style="display:inline-block; float:left; margin-left:20px;">
             <label><strong>Ngày</strong></label>
-            <p>Từ ngày: <input type="text" id="fromDate" name="fromDate" onchange="get()" /> Đến ngày: <input type="text" id="toDate" name="toDate" /></p>
+            <p>Từ ngày: <input type="text" id="fromDate" name="fromDate" /> Đến ngày: <input type="text" id="toDate" name="toDate" /></p>
         </div>
         <label></label>
         <input type="submit" class="btn-success" value="Chọn" style="display:inline-block;float:left;font-family:VNOswald; margin:25px 0 0 5px;"/>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="form-group" style="float:left; display:block; margin-left:25px;">
                     <label>Tình trạng</label>
-                    <select id="orderStatus" style="width:150px;">
+                    <select id="orderStatus" style="width:120px;">
                         <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
                         <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
                         <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
@@ -206,7 +206,7 @@
 </div>
 
 <div id="successModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -294,6 +294,87 @@
         return item;
     }
 
+    function getcolor(id)
+    {
+        switch(id) {
+            case 1:
+                return "Trắng";
+                break;
+            case 2:
+                return "Đen";
+                break;
+            case 3:
+                return "Xám";
+                break;
+            case 4:
+                return "Đỏ tươi";
+                break;
+            case 5:
+                return "Đỏ thẫm";
+                break;
+            case 6:
+                return "Hồng";
+                break;
+            case 7:
+                return "Cam";
+                break;
+            case 8:
+                return "Vàng";
+                break;
+            case 9:
+                return "Xanh lá cây tươi";
+                break;
+            case 10:
+                return "Xanh lá cây đậm";
+                break;
+            case 11:
+                return "Xanh da trời";
+                break;
+            case 12:
+                return "Xanh dương";
+                break;
+            case 13:
+                return "Xanh dương đậm";
+                break;
+            case 14:
+                return "Tím";
+                break;
+            case 15:
+                return "Hồng phấm";
+                break;
+            case 16:
+                return "Nâu";
+                break;
+        }
+    }
+
+    function getSize(id)
+    {
+        switch(id) {
+            case 1:
+                return "XS";
+                break;
+            case 2:
+                return "S";
+                break;
+            case 3:
+                return "M";
+                break;
+            case 4:
+                return "L";
+                break;
+            case 5:
+                return "XL";
+                break;
+            case 6:
+                return "XXL";
+                break;
+            case 7:
+                return "XXXL";
+                break;
+        }
+    }
+
     function getOrderDetail(id) {
         jQuery.ajax({
             url: "/Quanli/getOrderDetail",
@@ -327,7 +408,7 @@
                     var quantity_Cell = row.insertCell(2);
                     var thanhtien_Cell = row.insertCell(3)
 
-                    proName_Cell.innerHTML = product.Name;
+                    proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color) + "-" + getSize(orderDetailList[i].Size);
                     price_Cell.innerHTML = product.Price;
                     quantity_Cell.innerHTML = orderDetailList[i].Quantity;
                     thanhtien_Cell.innerHTML = product.Price * orderDetailList[i].Quantity;
