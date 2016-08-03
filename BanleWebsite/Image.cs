@@ -18,5 +18,8 @@ namespace BanleWebsite
         public Nullable<int> IDColor { get; set; }
         public string Path { get; set; }
         public Nullable<int> IDProduct { get; set; }
+    
+        public virtual Color Color { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

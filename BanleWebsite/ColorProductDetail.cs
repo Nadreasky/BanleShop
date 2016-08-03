@@ -17,5 +17,8 @@ namespace BanleWebsite
         public int ID { get; set; }
         public Nullable<int> ProID { get; set; }
         public Nullable<int> ColorID { get; set; }
+    
+        public virtual Color Color { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

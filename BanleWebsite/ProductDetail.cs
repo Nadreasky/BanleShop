@@ -19,5 +19,7 @@ namespace BanleWebsite
         public bool Featured { get; set; }
         public double SalePercent { get; set; }
         public string Promotion { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

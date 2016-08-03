@@ -59,6 +59,12 @@ namespace BanleWebsite.Repository
             return result;
         }
 
+        public ProductDetail FindByProID(int Id)
+        {
+            var result = (from r in _productDetailContext.ProductDetails where r.ProductID == Id select r).FirstOrDefault();
+            return result;
+        }
+
         public void Update(ProductDetail entity)
         {
             _productDetailContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;

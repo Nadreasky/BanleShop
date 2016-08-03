@@ -14,6 +14,12 @@ namespace BanleWebsite
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string PhoneNo { get; set; }
@@ -23,5 +29,8 @@ namespace BanleWebsite
         public Nullable<int> Staff { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

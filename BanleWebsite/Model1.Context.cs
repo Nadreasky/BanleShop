@@ -35,5 +35,12 @@ namespace BanleWebsite
         public virtual DbSet<ProductDetail> ProductDetails { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<SizeProductDetail> SizeProductDetails { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Agency> Agencies { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

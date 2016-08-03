@@ -15,6 +15,28 @@
         <EntityTypeShape EntityType="BanleShopModel.ProductDetail" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BanleShopModel.SizeProductDetail" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetRole" Width="1.5" PointX="5.375" PointY="9.5" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetUserClaim" Width="1.5" PointX="9.875" PointY="8" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetUserLogin" Width="1.5" PointX="9.875" PointY="10.75" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetUser" Width="1.5" PointX="7.625" PointY="8.375" />
+        <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BanleShopModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="BanleShopModel.Agency" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BanleShopModel.News" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BanleShopModel.sysdiagram" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="BanleShopModel.FK_Product_Category" />
+        <AssociationConnector Association="BanleShopModel.FK_ColorProductDetail_Color" />
+        <AssociationConnector Association="BanleShopModel.FK_Image_Color" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Color" />
+        <AssociationConnector Association="BanleShopModel.FK_ColorProductDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_Image_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Order" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Size" />
+        <AssociationConnector Association="BanleShopModel.FK_ProductDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_SizeProductDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_SizeProductDetail_Size" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

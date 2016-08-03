@@ -14,8 +14,23 @@ namespace BanleWebsite
     
     public partial class Color
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Color()
+        {
+            this.ColorProductDetails = new HashSet<ColorProductDetail>();
+            this.Images = new HashSet<Image>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string ColorCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ColorProductDetail> ColorProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

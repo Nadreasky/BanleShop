@@ -20,5 +20,10 @@ namespace BanleWebsite
         public int Quantity { get; set; }
         public Nullable<int> Color { get; set; }
         public Nullable<int> Size { get; set; }
+    
+        public virtual Color Color1 { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Size Size1 { get; set; }
     }
 }

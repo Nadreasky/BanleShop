@@ -16,6 +16,16 @@ namespace BanleWebsite
 
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.ColorProductDetails = new HashSet<ColorProductDetail>();
+            this.Images = new HashSet<Image>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+            this.ProductDetails = new HashSet<ProductDetail>();
+            this.SizeProductDetails = new HashSet<SizeProductDetail>();
+    }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public int CateID { get; set; }
@@ -25,12 +35,26 @@ namespace BanleWebsite
         public string Img1 { get; set; }
         public string Img2 { get; set; }
         public string Img3 { get; set; }
+        public Nullable<double> OldPrice { get; set; }
+        public Nullable<bool> isActived { get; set; }
+    
+        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ColorProductDetail> ColorProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductDetail> ProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SizeProductDetail> SizeProductDetails { get; set; }
+
 
         public string GenerateSlug()
         {
             VietnameseSymbol vs = new VietnameseSymbol();
             string phrase = string.Format("{0}-{1}", vs.ClearSymbol(Name), ID);
-
             string str = RemoveAccent(phrase).ToLower();
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             str = Regex.Replace(str, @"\s+", " ").Trim();
@@ -38,7 +62,6 @@ namespace BanleWebsite
             str = Regex.Replace(str, @"\s", "-");
             return str;
         }
-
         private string RemoveAccent(string text)
         {
             byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
