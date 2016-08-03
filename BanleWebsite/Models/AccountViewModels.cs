@@ -64,6 +64,11 @@ namespace BanleWebsite.Models
 
     public class RegisterViewModel
     {
+
+        IList<System.Web.Mvc.SelectListItem> _roleList = new List<System.Web.Mvc.SelectListItem>();
+        public string Role { get; set; }
+        public IList<System.Web.Mvc.SelectListItem> RoleList { get { return _roleList; } set { _roleList = value; } }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

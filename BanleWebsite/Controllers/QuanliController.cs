@@ -7,14 +7,25 @@ using BanleWebsite.Services;
 using Newtonsoft.Json;
 using System.IO;
 using System.Web.Helpers;
+using System.Text;
+using System.Globalization;
+using System.Web.Security;
+using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
+    //[AuthLog(Roles = "Admin")]
     public class QuanliController : Controller
     {
         CategoryServices _categoryServices = new CategoryServices();
         ProductServices _productServices = new ProductServices();
         ImageServices _imageServices = new ImageServices();
+        OrderServices _orderServices = new OrderServices();
+        ColorServices _colorServices = new ColorServices();
+        SizeServices _sizeServices = new SizeServices();
+        ColorProductDetailServices _colorProductDetailsServices = new ColorProductDetailServices();
+        SizeProductDetailServices _sizeProductDetailsServices = new SizeProductDetailServices();
+
 
         // GET: Quanli
         public ActionResult Index()
@@ -38,8 +49,75 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public ActionResult ProductDetails(int? id)
+        {
+
+            Product mainProduct = _productServices.findByID(id.Value);
+            ViewBag.mainProduct = mainProduct;
+            List<Color> allColor = _colorServices.getAll();
+            ViewBag.allColor = allColor;
+            List<ColorProductDetail> colorMainProduct = _colorProductDetailsServices.getByProductId(id.Value);
+            ViewBag.colorMainProduct = colorMainProduct;
+            List<SizeProductDetail> sizeMainProduct = _sizeProductDetailsServices.getByProductId(id.Value);
+            ViewBag.sizeMainProduct = sizeMainProduct;
+            List<Image> imgMainProduct = _imageServices.getByProductId(id.Value);
+            ViewBag.imgMainProduct = imgMainProduct;
+            List<Size> allSize = _sizeServices.getAll();
+            ViewBag.allSize = allSize;
+            List<Category> categories = _categoryServices.getAll();
+            ViewBag.categories = categories;
+            //ProductDetail proDetail = _productDetailServices.finbByProID(id.Value);
+            //ViewBag.proDetail = proDetail;
+
+            return View();
+        }
+
         public ActionResult Order()
         {
+            
+            //var orders = _orderServices.getOrderFilter("Q",2,null,null);
+            if(string.IsNullOrWhiteSpace(Request.Form["status"]) == false ||
+                string.IsNullOrWhiteSpace(Request.Form["fromDate"]) == false || string.IsNullOrWhiteSpace(Request.Form["toDate"]) == false)
+            {
+                int? status = Int32.Parse(Request.Form["status"]);
+                if (status == -1)
+                {
+                    status = null;
+                }
+                DateTime? fromDate = null;
+                DateTime? toDate = null;
+                List<Order> filteredOrders;
+            
+                if (string.IsNullOrWhiteSpace(Request.Form["fromDate"]) == false)
+                {
+                    fromDate = DateTime.ParseExact(Request.Form["fromDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                }
+                if (string.IsNullOrWhiteSpace(Request.Form["toDate"]) == false)
+                {
+                    toDate = DateTime.ParseExact(Request.Form["toDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                }
+                    
+                   
+                filteredOrders = _orderServices.getOrderFilter("", status, fromDate, toDate);
+                ViewBag.status = status;
+                ViewBag.orders = filteredOrders;
+                return View();
+               
+            }
+            else
+            {
+                List<Order> orders = _orderServices.getAllOrder();
+                ViewBag.orders = orders;
+            }
+            
+            return View(); // chua co
+        }
+
+        public ActionResult OrderClone()
+        {
+            List<Order> orders = _orderServices.getAllOrder();
+            ViewBag.orders = orders;
+
             return View();
         }
 
@@ -231,6 +309,31 @@ namespace BanleWebsite.Controllers
             return "Success";
         }
 
+        //[HttpPost]
+        //public string saveDetailProduct(int id, int featured, string salePercent, string promote )
+        //{
+        //    double _salePercent = 0;
+        //    bool _featured = false;
+        //    if (salePercent == null || salePercent.Equals(""))
+        //    {
+        //        return "Error: salePercent không hợp lệ!";
+        //    }
+        //    else if (double.TryParse(salePercent, out _salePercent) == false)
+        //    {
+        //        return "Error: Lỗi khi parse salePercent";
+        //    }
+        //    if (featured == 1)
+        //    {
+        //        _featured = true;
+        //    }
+        //    ProductDetail pd = _productDetailServices.finbByProID(id);
+        //    if(pd != null)
+        //    {
+        //        _productDetailServices.addOrUpdateProductDetail(id, _featured, _salePercent, promote);
+        //    }
+        //    return "success";
+        //}
+
         //=======================END FUNCTION OF PRODUCT==============
 
         //=======================START FUNCTION OF CATEGORY=============
@@ -315,52 +418,349 @@ namespace BanleWebsite.Controllers
 
         //=======================END FUNCTION OF CATEGORY=============
 
-        //=======================START FUNCTION OF ORDER==============
 
-        public void addOrder()
+
+        //=========================START FUNCTION OF ORDER============================
+
+        //Tìm detail cua order theo OrderID
+        public Object getOrderDetail(int id)
         {
-
+            return JsonConvert.SerializeObject(_orderServices.getOrderDetail(id));
         }
 
-        public void changeStateOrder()
+        //Tim order theo orderID
+        public Object getOrderInfo(int id)
         {
-
+            return JsonConvert.SerializeObject(_orderServices.findOrderByID(id));
         }
 
-
-
-
-        //=======================END FUNCTION OF ORDER================
-
-        public ActionResult UpdateCategory()
+        [HttpPost]
+        public string UpdateOrderStatus(string id, string status)
         {
-            List<Category> categoryList =_categoryServices.getAll();
-            ViewBag.categoryList = categoryList;
-
-            List<Category> categoryNoPreList = new List<Category>();
-            ViewBag.categoryNoPreList = categoryNoPreList;
-            foreach (var itemCategory in categoryList)
+            int _id = -1;
+            int _status = -1;
+            if (id == null || id.Equals(""))
             {
-                if (itemCategory.PreCateID == null)
-                {
-                    categoryNoPreList.Add(itemCategory);
-                }
+                return "Error: ID không hợp lệ!";
+            }
+            else if (int.TryParse(id, out _id) == false)
+            {
+                return "Error: Lỗi khi parse ID";
             }
 
+            if (status == null || status.Equals(""))
+            {
+                return "Error: status không hợp lệ!";
+            }
+            else if (int.TryParse(status, out _status) == false)
+            {
+                return "Error: Lỗi khi parse status";
+            }
+
+            Order o = _orderServices.findOrderByID(_id);
+            if ( o == null)
+            {
+                return "Không tìm thấy order yêu cầu";
+            }
+            o.Status = _status;
+            _orderServices.updateOrder(o);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Action: UpdateOrderStatus");
+            sb.Append(Environment.NewLine);
+            sb.Append("Id: ");
+            sb.Append(id);
+            sb.Append(Environment.NewLine);
+            sb.Append("Status: ");
+            sb.Append(status);
+
+            WriteLog(sb.ToString());
+
+            return "Success";
+        }
+
+        [HttpPost]
+        public ActionResult filterOrder(string status, string fromDate, string toDate)
+        {
+            int _status = -1;
+            DateTime _fromDate;
+            DateTime _toDate;
+
+            int.TryParse(status, out _status);
+            _fromDate = DateTime.ParseExact(fromDate, "MM-dd-yyyy", CultureInfo.InvariantCulture);
+            _toDate = DateTime.ParseExact(toDate, "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
+            List<Order> orders = _orderServices.getOrderFilter("", _status, _fromDate, _toDate);
+            ViewBag.orders = orders;
+
+            return RedirectToAction("Order");
+            
+        }
+
+        //==========================END FUNCTION OF ORDER======================
+
+        //========================START FUNCTION OF IMAGE SSERVICES=================
+
+        [HttpPost]
+        public ActionResult addColorImgProduct(int colorID, HttpPostedFileBase imgColor, int productID)
+        {
+            
+
+            string path = "";
+            string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+            WebImage img = _imageServices.reSizeImgBig(imgColor);
+            img.FileName = imgColor.FileName;
+            img.Save(newPathBig + "/" + img.FileName);
+            path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
+
+            Image imgExist = _imageServices.getAll().FirstOrDefault(a => a.IDColor.Equals(colorID) && a.IDProduct.Equals(productID));
+            if (imgExist!=null)
+            {
+                imgExist.Path = path;
+                _imageServices.update(imgExist);
+            }
+            else
+            {
+                _imageServices.add(colorID, path, productID);
+            }
+
+            
+            return RedirectToAction("ProductDetails", new { id = productID});
+        }
+
+        [HttpPost]
+        public string deleteColorImgProduct(int imageId)
+        {
+            Image img = new Image();
+            img = _imageServices.findByID(imageId);
+            _imageServices.delete(img);
+
+            return "Success";
+        }
 
 
-            //foreach (var itemCategoryNoPre in categoryNoPreList)
-            //{
-            //    foreach (var itemCategory in categoryList)
-            //    {
-            //        if (itemCategory.PreCateID == itemCategoryNoPre.ID) { }
 
-            //    }
-            //}
+        //[HttpPost]
+        //public string addColorImgProduct()
+        //{
+        //    ResultViewModels result = new ResultViewModels();
+        //    string path = "";
 
-            //Product p = null;
-            //ViewBag.pro1 = p;
-            return View();
+        //    if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+        //    {
+        //        var pic = System.Web.HttpContext.Current.Request.Files["image"];
+        //        var proID = Int32.Parse(Request.Form["proID"]);
+        //        var colorID = Int32.Parse(Request.Form["colorID"]);
+
+        //        if (pic != null)
+        //        {
+        //            string newPath = Server.MapPath(SLIMCONFIG.PRODUCT_IMG_PATH + "ProductImages");
+
+        //            if (!Directory.Exists(newPath))
+        //            {
+        //                System.IO.Directory.CreateDirectory(newPath);
+        //            }
+        //            pic.SaveAs(newPath + "/" + pic.FileName);
+        //            path = "/Images/" + "ProductImages/" + pic.FileName;
+        //            _imageServices.add(colorID, path, proID);
+
+        //        }
+        //        else
+        //        {
+        //            return "Tải lên tập tin thất bại";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return "Tải lên tập tin thất bại";
+        //    }
+
+        //    return "sucess";
+
+
+            //    //string path = "";
+            //    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+            //    //WebImage img = _imageServices.reSizeImgBig(imgColor);
+            //    //img.FileName = imgColor.FileName;
+            //    //img.Save(newPathBig + "/" + img.FileName);
+            //    //path = "/BigImages/" + "/Images/" + "ProductImages/" + imgColor.FileName;
+            //    //_imageServices.add(colorID, path, productID);
+            //    //return RedirectToAction("ProductDetails", new { id = productID });
+        //}
+
+        //========================END FUNCTION OF IMAGE SSERVICES=================
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public string saveSize(string sizeId, string productId)
+        {
+            int _sizeID = -1;
+            int _proID = -1;
+            if (sizeId == null || sizeId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(sizeId, out _sizeID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            if (productId == null || productId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(productId, out _proID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            SizeProductDetail spd = new SizeProductDetail();
+            spd.SizeID = _sizeID;
+            spd.ProID = _proID;
+
+            _sizeProductDetailsServices.add(spd);
+            return "Success";
+        }
+
+        [HttpPost]
+        public string deleteSize(string sizeId, string productId)
+        {
+            int _sizeID = -1;
+            int _proID = -1;
+            if (sizeId == null || sizeId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(sizeId, out _sizeID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            if (productId == null || productId.Equals(""))
+            {
+                return "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(productId, out _proID) == false)
+            {
+                return "Error: Lỗi khi parse sizeID";
+            }
+            SizeProductDetail delSizeItem = new SizeProductDetail();
+            List<SizeProductDetail> listProSize = _sizeProductDetailsServices.getByProductId(_proID);
+            foreach (var item in listProSize)
+            {
+                if(item.SizeID == _sizeID)
+                {
+                    delSizeItem = _sizeProductDetailsServices.findByID(item.ID);
+                    _sizeProductDetailsServices.delete(delSizeItem);
+                    return "Success";
+                }
+            }
+            return "Success";
+        }
+
+        //======================END FUNCTION OF ORDER=====================
+
+
+        [HttpPost]
+        //[Route("BigImages/Images/ProductImages")]
+        public ActionResult UploadPostImage()
+        {
+            ResultViewModels result = new ResultViewModels();
+            string fileName = "";
+            string thumbFileName = "";
+
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                var pic = System.Web.HttpContext.Current.Request.Files["image"];
+                int width = Int32.Parse(Request.Form["width"]);
+                int height = Int32.Parse(Request.Form["height"]);
+
+                int thumbWidth = Int32.Parse(Request.Form["thumbWidth"]);
+                int thumbHeight = Int32.Parse(Request.Form["thumbHeight"]);
+
+                if (pic != null)
+                {
+                    string newPath = Server.MapPath(SLIMCONFIG.PRODUCT_IMG_PATH + "ProductImages");
+                    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+                    if (!Directory.Exists(newPath))
+                    {
+                        System.IO.Directory.CreateDirectory(newPath);
+                    }
+                    //WebImage imgBig = _imageServices.reSizeImgBig(productImg1);
+                    //imgBig.FileName = productImg1.FileName;
+                    //imgBig.Save(newPathBig + "/" + imgBig.FileName);
+
+
+                    //WebImage img = _imageServices.reSizeImg();
+                    pic.SaveAs(newPath + "/" + pic.FileName);
+
+                    object obj = new
+                    {
+                        imageUrl = "/Images/ProductImages/" + pic.FileName,
+                        thumbnailUrl = "/Images/ProductImages/" + pic.FileName,
+                    };
+                    result.data = obj;
+                }
+                else
+                {
+
+                    result.message = "Tải lên tập tin thất bại";
+                }
+            }
+            else
+            {
+                //response.StatusCode = -1;
+                result.message = "Tải lên tập tin thất bại";
+            }
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult loadMultiColorImage(string ID)
+        {
+            ResultViewModels result = new ResultViewModels();
+            int _ID = -1;
+           
+            if (ID == null || ID.Equals(""))
+            {
+                result.message = "Error: sizeID không hợp lệ!";
+            }
+            else if (int.TryParse(ID, out _ID) == false)
+            {
+                result.message = "Error: Lỗi khi parse sizeID";
+            }
+
+            Image i = _imageServices.findByID(_ID);
+
+            object obj = new
+            {
+                imageURL = i.Path
+            };
+            result.data = obj;
+
+            return Json(result);
+        }
+
+        public void WriteLog(string text)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(DateTime.Now.ToLongDateString());
+            sb.Append(" - ");
+            sb.Append(DateTime.Now.ToLongTimeString());
+            sb.Append(Environment.NewLine);
+
+            sb.Append(text);
+            sb.Append(Environment.NewLine);
+            sb.Append(Environment.NewLine);
+
+            string path = Server.MapPath(Url.Content("~/"));
+            //string fileName = Server.MapPath("logYourFashion.txt");
+            if (!System.IO.File.Exists(path + "/logYourFashion.txt"))
+            {
+                System.IO.File.Create(path + "/logYourFashion.txt").Close();
+            }
+            System.IO.File.AppendAllText(path + "/logYourFashion.txt", sb.ToString());
+
+            sb.Clear();
         }
     }
 }

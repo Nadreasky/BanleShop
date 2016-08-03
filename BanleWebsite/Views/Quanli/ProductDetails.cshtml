@@ -1,0 +1,646 @@
+﻿@using BanleWebsite.Services;
+@using BanleWebsite;
+@{
+    Product mainProduct = ViewBag.mainProduct;
+    ViewBag.Title = "Cập nhật " + mainProduct.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Category> categories = ViewBag.categories;
+    List<Color> allColor = ViewBag.allColor;
+    List<Size> allSize = ViewBag.allSize;
+    var colorMainProduct = ViewBag.colorMainProduct;
+    List<Image> imgMainProduct = ViewBag.imgMainProduct;
+    List<SizeProductDetail> sizeMainProduct = ViewBag.sizeMainProduct;
+
+    ColorServices _colorServices = new ColorServices();
+}
+
+<head>
+    <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+
+
+
+<style>
+    #psz {
+        list-style-type:none;
+        overflow:hidden;
+    }
+
+    #psz li {
+        float:left;
+        margin:0 5px;
+        line-height:20px;
+        border-radius:5px;
+        font-size:20px;
+        line-height:20px;
+        display:flex;
+        align-items:center;
+    }
+
+    .splColor{
+        border-radius:50%;
+        border:1px solid #999;
+    }
+</style>
+
+<div class="container">
+    <section id="content">
+        <div id="productBasicInfo">
+            @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <input class="form-control" id="id" name="id" type="hidden" value="@mainProduct.ID"/>
+                    <label>Tên sản phẩm</label>
+                    <input class="form-control" id="productName" name="productName" value="@mainProduct.Name"/>
+                </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Giá sản phẩm</label>
+                    <input class="form-control" id="productPrice" name="productPrice" value="@mainProduct.Price"/>
+                </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Category</label>
+                    <select class="form-control" name="productCateID" id="productCateID">
+                        @{
+                            for (int i = 0; i < categories.Count; i++)
+                            {
+                                Category c = categories.ElementAt(i);
+                                if (c.ID == mainProduct.CateID)
+                                {
+                                    <option selected value="@c.ID">@c.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@c.ID">@c.Name</option>
+                                }
+
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Số lượng</label>
+                    <input class="form-control" id="quantity" name="quantity" value="@mainProduct.Quantity" />
+                </div>
+                <div class="clearfix"></div>
+                <label>Hình ảnh sản phẩm</label><br />
+                <div id="pimg">
+                    <div id="pimg1" style="display:block; float:left; margin-right:15px;">
+                        <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
+                        <img src="@mainProduct.Img1" width="100" height="100" style="margin-top:10px;"/>
+                    </div>
+                    <div id="pimg2" style="display:block; float:left; margin-right:15px;">
+                        <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
+                        <img src="@mainProduct.Img2" width="100" height="100" style="margin-top:10px;"/>
+                    </div>
+                    <div id="pimg3" style="display:block; float:left; margin-right:15px;">
+                        <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
+                        <img src="@mainProduct.Img3" width="100" height="100" style="margin-top:10px;"/>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <label><strong>Mô tả sản phẩm</strong></label>
+                <textarea name="description" id="description" class="form-control" rows="5">@mainProduct.Descriptions</textarea>
+                <script>
+                    CKEDITOR.replace('description')
+                </script>
+                <div class="clearfix"></div>
+                <input type="submit" class="btn btn-primary" id="btnAddProduct" style="font-family:VNOswald;" value="Cập nhật" />
+                <button class="btn btn-warning" onclick="deleteProduct(@mainProduct.ID)" style="float:right;">Xóa sản phẩm</button>
+
+            }
+        </div>
+
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Thông tin khuyến mãi</button>
+        
+
+        <label><strong>Chọn size</strong></label>
+        <div id="sizeInfo">
+            <ul id="psz">
+                @{
+
+                    
+
+                    foreach (var item in allSize)
+                    {
+                        foreach (var item2 in sizeMainProduct)
+                        {
+                            if (item.ID == item2.SizeID)
+                            {
+                                <li>
+                                    <input type="checkbox" id="size-@item.Name" value="@item.ID" checked />@item.Name
+                                </li>
+                            }
+                        }
+                        <li>
+                            <input type="checkbox" id="size-@item.Name" value="@item.ID" />@item.Name
+                        </li>
+
+                    }
+                }
+            </ul>
+        </div>
+
+        <label><strong>Chọn màu</strong></label>
+        <div id="colorInfo">
+            @using (Html.BeginForm("addColorImgProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+            {
+                <select id="colorDrpBox" name="colorID">
+                    @{
+                        foreach (var item in allColor)
+                        {
+                            <option value="@item.ID">@item.Name</option>
+                        }
+                    }
+                    
+                </select>
+                <input class="form-control" type="file" id="colorImg" name="imgColor" />
+                <input type="hidden" id="mainPID" value="@mainProduct.ID" name="productID"/>
+                <input type="submit" style="font-family:VNOswald;" value="Lưu" />
+            }
+            @*<button class="btn btn-success" onclick="saveImage()">Save</button>*@
+            @*<img src="" id="imgReview" width="200" height="200" />*@
+            <table id="tblColorImg" class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Màu</th>
+                        <th>Hình</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        @{
+                            int stt = 1;
+                            foreach (var item in imgMainProduct)
+                            {
+                                var colorCode = _colorServices.findByID(item.IDColor.Value).ColorCode;
+                                <tr>
+                                    <td>@stt</td>
+                                    <td>
+                                        <div class="splColor" id="color-@item.ID" style="background-color:@colorCode;width:50px; height:50px;"></div>
+                                    </td>
+                                    <td>
+                                         <img src="@item.Path" height="80" width="80" />
+                                    </td>
+                                    <td><button class="btn btn-danger"onclick="deleteColorImgProduct(@item.ID)">Xóa</button></td>
+                                </tr>
+                                stt++;
+                            }
+                        }
+                                    @*<td>1.</td>
+                                    <td>
+                                        <div class="splColor" style="background-color:#ff0000; width:50px; height:50px;"></div>
+                                    </td>
+                                    <td>
+                                        <img src="~/Content/SiteImages/BGR1.jpg" height="80" width="80" />
+                                    </td>*@
+                                
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Các thông tin về khuyến mãi</h4>
+            </div>
+            <div class="modal-body">
+                <div id="productDetail">
+                    <div class="form-group" style="display:block; float:left; margin-right:30px;">
+                        <label>Sản phẩm HOT</label>
+                        <input type="checkbox" id="featured" value="1" />
+                    </div>
+                    <div class="form-group" style="display:block; float:left; margin-right:30px;">
+                        <label>Nhập % giảm giá (nếu có)</label>
+                        <input type="text" id="salePercent" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <label>Promotion</label>
+                    <textarea id="promotion"></textarea>
+                    <script>
+                        CKEDITOR.replace('promotion')
+                    </script>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function deleteColorImgProduct(id) {
+        jQuery.ajax({
+            url: "/Quanli/deleteColorImgProduct",
+            data: {
+                format: 'json',
+                imageId: id
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (data) {
+                if (data === "Success") {
+                    location.href = location.href;
+                }
+            },
+            type: 'POST'
+        })
+    };
+    function deleteProduct(id) {
+        jQuery.ajax({
+            url: "/Quanli/deleteProduct",
+            data: {
+                format: 'json',
+                proId: id
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (data) {
+                if (data === "Success") {
+                    location.href = "/Quanli/Product";
+                }
+            },
+            type: 'POST'
+        })
+    };
+    jQuery("#size-XS").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XS").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XS").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-S").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-S").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-S").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-M").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-M").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-M").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-L").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-L").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-L").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-XL").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-2XL").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-2XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-2XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+    jQuery("#size-3XL").change(function () {
+        var jq = jQuery.noConflict();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        if (this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/saveSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-3XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+
+            })
+        }
+        if (!this.checked) {
+            jQuery.ajax({
+                url: "/Quanli/deleteSize",
+                data: {
+                    format: 'json',
+                    sizeId: jq("#size-3XL").val(),
+                    productId: proID
+                },
+                error: function () {
+                    alert("Problem")
+                },
+                success: function (data) {
+
+                },
+                type: 'POST'
+            })
+        }
+    });
+
+    function saveImage() {
+        var data = new FormData();
+        var proID = jQuery("#mainPID").val();
+        console.log(proID)
+        var colorID = jQuery("#colorDrpBox").val();
+        console.log(colorID)
+
+        var files = jQuery("#colorImg").get(0).files;
+        if (files.length > 0) {
+            data.append("image", files[0]);
+            data.append("proID", proID);
+            data.append("colorID", colorID);
+        }
+
+        jQuery.ajax({
+            url: "/Quanli/addColorImgProduct",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+
+            success: function (successData) {
+                console.log(successData)
+                jQuery("#tblColorImg").load("/Quanli/ProductDetails #tblColorImg");
+                //var imageData = successData.data.imageUrl;
+                //console.log(imageData)
+            },
+            error: function (er) {
+                alert(er);
+            }
+        });
+    };
+
+    @*jQuery("#colorImg").change(function () {
+        var data = new FormData();
+        console.log("dien gi cung duoc xD");
+        data.append("dir", "@BanleWebsite.SLIMCONFIG.BIG_PRODUCT_IMG_PATH");
+
+        var files = jQuery("#colorImg").get(0).files;
+        if (files.length > 0) {
+            data.append("image", files[0]);
+            data.append("thumbWidth", 480);
+            data.append("thumbHeight", 480);
+
+            data.append("width", 1200);
+            data.append("height", 627);
+        }
+
+        // progessBar(true);
+        jQuery.ajax({
+            url: "/quanli/UploadPostImage",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+
+            success: function (successData) {
+                console.log(successData);
+                var thumbnailData = successData.data.thumbnailUrl;
+                var imageData = successData.data.imageUrl;
+                
+                //addImageToPreviewList(thumbnailData, listUploadImage.length);
+                //listUploadImage[listUploadImage.length] = imageData;
+                //listUploadThumnailImage[listUploadThumnailImage.length] = thumbnailData;
+                jQuery("#imgReview").attr("src", imageData);
+                // progessBar(false);
+
+            },
+            error: function (er) {
+                alert(er);
+                //progessBar(false);
+            }
+
+        });
+    });*@
+
+</script>

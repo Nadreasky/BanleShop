@@ -9,13 +9,42 @@
 
 namespace BanleWebsite
 {
+    using Models;
     using System;
     using System.Collections.Generic;
-    
+    using System.Text.RegularExpressions;
+
     public partial class Category
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<int> PreCateID { get; set; }
+        public Nullable<bool> isActived { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
+
+        public string GenerateSlug()
+        {
+            VietnameseSymbol vs = new VietnameseSymbol();
+            string phrase = string.Format("{0}-{1}", vs.ClearSymbol(Name), ID);
+            string str = RemoveAccent(phrase).ToLower();
+            str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
+            str = Regex.Replace(str, @"\s+", " ").Trim();
+            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+            str = Regex.Replace(str, @"\s", "-");
+            return str;
+        }
+        private string RemoveAccent(string text)
+        {
+            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
+            return System.Text.Encoding.ASCII.GetString(bytes);
+        }
     }
 }

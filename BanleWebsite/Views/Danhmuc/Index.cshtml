@@ -15,11 +15,11 @@
             <div class="wrapper_w">
                 <div class="pull-left">
                     <div class="breadcrumbs">
-                        <a class="home" href="/">Home</a>
+                        <a class="home" href="/">Trang chủ</a>
                         @{
                             for (int i = categoryTree.Count - 1; i >= 0; i--)
                             {
-                                <span>›</span><a href="/danhmuc/@categoryTree[i].ID">@categoryTree[i].Name</a>
+                                <span>›</span><a href="/danhmuc/@categoryTree[i].GenerateSlug()">@categoryTree[i].Name</a>
                             }
 
                         }
@@ -80,7 +80,7 @@
 
 
                                 <div class="product-image-wrapper onhover animate scale" style="height:300px;">
-                                    <a href="/sanpham/@item.ID">
+                                    <a href="/sanpham/@item.GenerateSlug()">
                                         <img style="max-height:300px;" width="300" height="300" src="@item.Img1" class="attachment-shop_single wp-post-image" alt="@item.Name" />
                                     </a>
                                 </div>
@@ -89,17 +89,29 @@
                                 <div class="wrapper-hover">
 
                                     <div class="product-name">
-                                        <a href="/sanpham/@item.ID">
+                                        <a href="/sanpham/@item.GenerateSlug()">
                                             @item.Name
                                         </a>
-                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@item.ID" data-product-id="78">Chi tiết</a>
+                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@item.GenerateSlug()" data-product-id="78">Chi tiết</a>
                                     <div class="wrapper">
 
 
                                         <div class="product-price"><span class="amount">@item.Price VND</span></div>
 
 
-                                        <div class="product-tocart"><a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                        <div class="product-tocart">
+                                            @*<a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                <i class="icon-basket"></i>
+                                            </a>*@
+                                            @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                <input type="hidden" name="id" value="@item.ID" />
+                                                <input type="submit" value="Submit" />
+                                                <button type="submit" style="border-radius:50%; background-color:transparent;">
+                                                    <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                </button>
+                                            }*@
+                                        </div>
                                         <div class="clearfix"></div>
                                     </div>
 
@@ -136,7 +148,7 @@
                                     </div>
                                     <div class="col-2 with_media">
                                         <div class="big_image">
-                                            <a href="/sanpham/@item.ID">
+                                            <a href="/sanpham/@item.GenerateSlug()">
                                                 <div style="height:300px;">
                                                     <img style="max-height:300px;" width="300" height="300" src="@item.Img1" class="attachment-shop_single wp-post-image" alt="@item.Name" />
                                                 </div>
@@ -146,17 +158,29 @@
                                         <div class="wrapper-hover">
 
                                             <div class="product-name">
-                                                <a href="/sanpham/@item.ID">
+                                                <a href="/sanpham/@item.GenerateSlug()">
                                                     @item.Name
                                                 </a>
-                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78" href="/sanpham/@item.ID">Chi tiết</a>
+                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78" href="/sanpham/@item.GenerateSlug()">Chi tiết</a>
                                             <div class="wrapper">
 
 
                                                 <div class="product-price"><span class="amount">@item.Price VND</span></div>
 
 
-                                                <div class="product-tocart"><a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                                <div class="product-tocart">
+                                                    @*<a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                        <i class="icon-basket"></i>
+                                                    </a>*@
+                                                    @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+                                                        <input type="hidden" name="id" value="@item.ID" />
+                                                        <input type="submit" value="Submit" />
+                                                        <button type="submit" style="border-radius:50%; background-color:transparent;">
+                                                            <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                        </button>
+                                                    }*@
+                                                </div>
 
                                             </div>
                                             <div class="clearfix"></div>

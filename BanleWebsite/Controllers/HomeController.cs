@@ -10,16 +10,20 @@ namespace BanleWebsite.Controllers
     public class HomeController : Controller
     {
         ProductServices _productServices;
+
         public ActionResult Index()
         {
             _productServices = new ProductServices();
             List<Product> allProduct = _productServices.getAll();
+
+            //Random 
             ViewBag.allProduct = allProduct;
             return View();
         }
 
         public ActionResult About()
         {
+
             ViewBag.Message = "Your application description page.";
 
             return View();

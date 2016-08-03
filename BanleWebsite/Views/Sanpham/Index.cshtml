@@ -5,26 +5,205 @@
     List<Product> relativeProducts = ViewBag.relativeProducts;
     List<Category> proTree = ViewBag.proTree;
     ProductServices _productServices = new ProductServices();
+    List<Image> colorImgProduct = ViewBag.colorImgProduct;
+    List<SizeProductDetail> sizeProduct = ViewBag.sizeProduct;
+    ColorServices _colorServices = new ColorServices();
+    SizeServices _sizeServices = new SizeServices();
+
+    int defaultColor = colorImgProduct.ElementAt(0).IDColor.Value;
+    int defaultSize = sizeProduct.ElementAt(0).SizeID.Value;
 }
 
 <style>
     h2{
         font-family:VNOswald;
+        line-height:150%;
     }
+
+    #pcr {
+        list-style-type:none;
+        overflow:hidden;
+    }
+
+    #pcr li {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+    }
+
+    #pcr li a{
+        display:block;
+        height:12px;
+        width:12px;
+        border: 1px solid #999;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:15px;
+        border-radius:50%;
+        font-size:12px;
+    }
+
+    #psz {
+        list-style-type:none;
+        overflow:hidden;
+    }
+
+    #psz li {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+        border-radius:5px;
+        border:2px solid #999;
+    }
+
+    #psz li:hover {
+        float:left;
+        margin:0 2px;
+        line-height:20px;
+        border-radius:5px;
+        border:2px solid #999;
+        border-color:#9D3BC6;
+    }
+
+    #psz li a{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        /*border: 1px solid #999;*/
+        color:#999;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }
+
+    /*#psz li a:hover{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        color:#9D3BC6;
+        /*background-color:#9D3BC6;
+        border-color: #9D3BC6;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }*/
+
+    #psz li a:{
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        color:#ffffff;
+        background-color:#9D3BC6;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }
+
+    .picked {
+        display:block;
+        height:20px;
+        width:20px;
+        text-align:center;
+        background-color:#9D3BC6;
+        color:#ffffff;
+        border-color: #9D3BC6;
+        font-weight:bold;
+        padding: 5px 5px;
+        text-decoration:none;
+        line-height:20px;
+        font-size:12px;
+    }
+
+    #psz li a.picked{
+        color:#fff;
+    }
+
 </style>
 
+<script>
+    jQuery(document).ready(function () {
+        var c = jQuery("#color").val();
+        console.log(c)
+        var s = jQuery("#size").val();
+        console.log(s)
+        jQuery("#proImgDiv").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        }),
+        jQuery("#wrap").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        }),
+        jQuery(".mousetrap").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        }),
+        jQuery("#zoomdiv").hover(function () {
+            var imgURL = document.getElementById("zoom1").href;
+            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+        })
+    });
+
+    function changeImg() {
+        var imgURL = document.getElementById("zoom1").href;
+        document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+    };
+
+    function colorSelect(color, id) {
+        jQuery("#color").val(color);
+        //load hinh
+        jQuery.ajax({
+            url: "/Quanli/loadMultiColorImage",
+            data: {
+                format: 'json',
+                ID: id,
+            },
+            error: function () {
+                alert("Problem!")
+            },
+            success: function (successData) {
+                console.log(successData);
+                var imageURL = successData.data.imageURL;
+                jQuery("#clzo").attr("src", imageURL);
+                jQuery("#zoom1").attr("href", imageURL);
+                
+            },
+            type: "POST"
+        })
+        console.log(color);
+        event.preventDefault();
+        return false;
+    }
+    function sizeSelect(size) {
+        jQuery("#size").val(size);
+        console.log(size)
+        event.preventDefault();
+        return false;
+    }
+</script>
+
 <section id="content">
+    <input type="hidden" id="proID" />
     <div class="container top" role="main">
         <div class="content_top">
             <div class="wrapper_w">
                 <div class="pull-left">
                     <div class="breadcrumbs">
-                        <a class="home" href="/">Home</a><span>›</span>
+                        <a class="home" href="/">Trang chủ</a><span>›</span>
                         @{ 
                             for (int i = proTree.Count - 1; i >= 0; i--)
                             {
                                 Category c = proTree.ElementAt(i);
-                                <a href="/danhmuc/@c.ID">@c.Name</a><span>></span>
+                                <a href="/danhmuc/@c.GenerateSlug()">@c.Name</a><span>></span>
                             }
                         }
                         <a href="#">@mainProduct.Name</a>
@@ -37,7 +216,7 @@
                             if (prevProduct != null)
                             {
                                 <span class="prev">
-                                    <a href="/sanpham/@prevProduct.ID" rel="prev">
+                                    <a href="/sanpham/@prevProduct.GenerateSlug()" rel="prev">
                                         <i class="icon-left-thin"></i>
                                     </a>
                                     <div class="small_preview prev hidden-phone hidden-tablet" style="display: none;">
@@ -49,7 +228,7 @@
                             if (nextProduct != null)
                             {
                                 <span class="next">
-                                    <a href="/sanpham/@nextProduct.ID" rel="next">
+                                    <a href="/sanpham/@nextProduct.GenerateSlug()" rel="next">
                                         <i class="icon-right-thin"></i>
                                     </a>
                                     <div class="small_preview next hidden-phone hidden-tablet" style="display: none;">
@@ -112,8 +291,8 @@
                                 </div>
                             </div>
 
-                            <div class="span4">
-                                <div class="product-image"><a class="cloud-zoom" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
+                            <div class="span4" id="zoomdiv" onmouseover="changeImg()">
+                                <div class="product-image" id="proImgDiv" onmouseover="changeImg()"><a class="cloud-zoom" onmouseover="changeImg()" href="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" id="zoom1" data-rel="position: 'right', adjustX: 10, adjustY: 0" title=""><img id="clzo" onmouseover="changeImg()" alt="" src="@SLIMCONFIG.BIG_PRODUCT_IMG_PATH_WEB@mainProduct.Img1" /></a></div>
                             </div>
 
                         </div>
@@ -122,6 +301,7 @@
 
                 <div class="span7">
                     <div class="product-shop">
+
                         @*<div class="product_custom">
                             <h3>
                                 PRODUCT
@@ -155,6 +335,57 @@
                             <div class="short-description">
                                 <p style="font:VNOswald;">@Html.Raw(mainProduct.Descriptions)</p>
                             </div>
+                            <div id="pColor" style="margin-top:10px; max-width:500px;">
+                                <label><strong>Màu sắc</strong></label>
+                                <ul id="pcr">
+                                    @{ 
+                                        foreach (var item in colorImgProduct)
+                                        {
+                                            string color = _colorServices.findByID(item.IDColor.Value).ColorCode;
+                                            <li>
+                                                <a href="#" style="background-color: @color !important" onclick="colorSelect('@item.IDColor', '@item.ID')"></a>
+                                            </li>
+                                        }
+                                    }
+                                  
+                                    
+                                </ul>
+                            </div>
+                            <div id="pSize" style="margin-top:10px; max-width:500px;">
+                                <label><strong>Size</strong></label>
+                                <ul id="psz" class="btn-group">
+                                    @{
+                                        string size = "";
+                                        for (int i = 0; i < sizeProduct.Count; i++)
+                                        {
+                                            SizeProductDetail item = sizeProduct.ElementAt(i);
+                                            if (i == 0)
+                                            {
+                                                size = _sizeServices.findByID(item.SizeID.Value).Name;
+                                                <li>
+                                                    <a href="#" class="btnSize picked" onclick="sizeSelect('@item.SizeID')">@size</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                size = _sizeServices.findByID(item.SizeID.Value).Name;
+                                                <li>
+                                                    <a href="#" class="btnSize" onclick="sizeSelect('@item.SizeID')">@size</a>
+                                                </li>
+                                            }
+
+                                        }
+                                    }
+                                    
+
+                                </ul>
+                            </div>
+                            <script>
+                                jQuery("#pSize li a").click(function () {
+                                    jQuery("#pSize li a").removeClass('picked');
+                                    jQuery(this).addClass('picked');
+                                })
+                            </script>
                             <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
                                 <span class="amount">@mainProduct.Price VND</span>
@@ -167,19 +398,33 @@
 
 
                             <div class="add-to-cart">
-                                <form class="cart" id="form-add_to_cart" method="post" enctype='multipart/form-data'>
+                                @*<form class="cart" id="form-add_to_cart" method="post" enctype='multipart/form-data'>
 
 
 
                                     <div class="qty">
                                         <label for="qty">Qty:</label>
                                         <input type="number" name="quantity" maxlength="12" value="1" class="input-text qty" id="qty" min="1" max="999967" name="quantity" value="1" title="Qty">
-                                    </div>			<button style="font-family:VNOswald;" type="submit" class="button btn-cart"><i class="icon-basket"></i>Thêm vào giỏ hàng</button>
+                                    </div>*@
 
-                                    <input type="hidden" name="add-to-cart" value="78" />
+                                    @*<button type="submit" class="button btn-cart"><i class="icon-basket"></i>Add to cart</button>*@
+                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @class = "cart" }))
+                                    {
+                                        @*<div class="qty">
+                                            <label for="qty">Qty:</label>
+                                            <input type="number" name="quantity" maxlength="12" value="1" class="input-text qty" id="qty" min="1" max="999967" name="quantity" value="1" title="Qty">
+                                        </div>*@
+                                        <input type="hidden" name="id" value="@mainProduct.ID" />
+                                        <input type="hidden" id="color" name="color" value="@defaultColor" />
+                                        <input type="hidden" id="size" name="size" value="@defaultSize" />
+                                        @*<input type="submit" value="Submit" />*@
+                                        <button type="submit" class="button btn-cart"><i class="icon-basket"></i>Mua ngay</button>
+                                    }
 
 
-                                </form>
+
+
+                                @*</form>*@
 
                             </div>
                             @*<div class="add-to-links"><ul><li class="yith-wcwl-add-to-wishlist"><a class="small_icon_color" href="index58ea.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=78"><i class="icon-heart"></i></a><a href="index58ea.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=78" data-product-id="78" data-product-type="simple" class="wft_add_to_wishlist">Add to Wishlist</a><img src="wp-admin/images/wpspin_light.gif" class="ajax-loading" id="add-items-ajax-loading" alt="" width="16" height="16" style="visibility:hidden" /></li></ul></div><div class="clear"></div>
@@ -235,7 +480,7 @@
                         <div id="tabreviews" class="tab-pane ">
                             <div id="reviews">
 
-                                <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@mainProduct.ID" data-width="1130" data-numposts="5"></div>
+                                <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@mainProduct.GenerateSlug()" data-width="1130" data-numposts="5"></div>
 
                                 @*<div id="comments"><h2>Reviews</h2><p class="noreviews">There are no reviews yet, would you like to <a href="#review_form" class="inline show_review_form">submit yours</a>?</p></div>
                                 <div id="review_form_wrapper">
@@ -328,7 +573,7 @@
 
                 <div class="related products span12">
 
-                    <h2>Related Products</h2>
+                    <h2>Các sản phẩm liên quan</h2>
 
                     <div class="carousel es-carousel-wrapper style0">
                         <div class="es-carousel">
@@ -344,14 +589,14 @@
 
 
                                                 <div class="product-image-wrapper onhover animate scale" style="height:300px;">
-                                                    <a href="/sanpham/@p.ID"><img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" /></a>
+                                                    <a href="/sanpham/@p.GenerateSlug()"><img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" /></a>
                                                 </div>
 
 
                                                 <div class="wrapper-hover">
 
                                                     <div class="product-name">
-                                                        <a href="/sanpham/@p.ID">
+                                                        <a href="/sanpham/@p.GenerateSlug()">
                                                             @p.Name
                                                         </a>
                                                     </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Chi tiết</a>
@@ -361,7 +606,19 @@
                                                         <div class="product-price"><span class="amount">@p.Price VND</span></div>
 
 
-                                                        <div class="product-tocart"><a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                                        <div class="product-tocart">
+                                                            @*<a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                                <i class="icon-basket"></i>
+                                                            </a>*@
+                                                            @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                            {
+                                                                <input type="hidden" name="id" value="@p.ID" />
+                                                                <input type="submit" value="Submit" />
+                                                                <button type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                    <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                </button>
+                                                            }*@
+                                                        </div>
                                                         <div class="clearfix"></div>
                                                     </div>
 
@@ -399,7 +656,7 @@
                                                     </div>
                                                     <div class="col-2 with_media">
                                                         <div class="big_image">
-                                                            <a href="/sanpham/@p.ID">
+                                                            <a href="/sanpham/@p.GenerateSlug()">
                                                                 <div style="height:300px;">
                                                                     <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
                                                                 </div>
@@ -410,7 +667,7 @@
                                                         <div class="wrapper-hover">
 
                                                             <div class="product-name">
-                                                                <a href="/sanpham/@p.ID">
+                                                                <a href="/sanpham/@p.GenerateSlug()">
                                                                     @p.Name
                                                                 </a>
                                                             </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Chi tiết</a>
@@ -420,14 +677,20 @@
                                                                 <div class="product-price"><span class="amount">@p.Price VND</span></div>
 
 
-                                                                <div class="product-tocart"><a href="indexce1a.html?product=a-l-c-gerry-dress&amp;add-to-cart=723" rel="nofollow" data-product_id="723" data-product_sku="1" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                                                <div class="product-tocart">
+                                                                    @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                    {
+                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                        <input type="submit" value="Submit" />
+                                                                        <button type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                            <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                        </button>
+                                                                    }*@
+                                                                </div>
 
                                                             </div>
                                                             <div class="clearfix"></div>
 
-                                                            @*<div class="product-link">
-                                                                <a class="wft_add_to_wishlist" href="index8968.html?product=a-l-c-gerry-dress&amp;add_to_wishlist=723" data-product-id="723" data-product-type="simple">Add to Wishlist</a>
-                                                            </div>*@
                                                         </div>
                                                     </div>
                                                 </div>
@@ -455,6 +718,7 @@
 
     </div>
 </section>
+
 
 <link rel='stylesheet' id='cloud-zoom-css' href='~/Content/Buyshop/wp-content/themes/buyshop/css/cloud-zoom7350.css?ver=4.2.9' type='text/css' media='all' />
 <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/cloud-zoom.1.0.27350.js?ver=4.2.9'></script>

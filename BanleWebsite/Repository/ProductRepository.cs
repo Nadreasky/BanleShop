@@ -13,6 +13,7 @@ namespace BanleWebsite.Repository
         {
             _productContext = new BanleShopEntities();
         }
+
         public IEnumerable<Product> List
         {
             get

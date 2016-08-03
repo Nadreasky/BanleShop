@@ -7,27 +7,32 @@ namespace BanleWebsite.Repository
 {
     public class OrderRepository : IRepository<Order>
     {
-        BanleShopEntities _orderCOntext;
+        BanleShopEntities _orderContext;
 
         public OrderRepository()
         {
-            _orderCOntext = new BanleShopEntities();
+            _orderContext = new BanleShopEntities();
+
         }
 
         public IEnumerable<Order> List
         {
             get
             {
-                return _orderCOntext.Orders;
+                return _orderContext.Orders;
+
             }
         }
 
         public void Add(Order entity)
         {
-            _orderCOntext.Orders.Add(entity);
+            _orderContext.Orders.Add(entity);
+            //newOrderId =_orderContext.Orders.Add(entity).ID;    // lay Id cua cai Order moi tao
+
             try
             {
-                _orderCOntext.SaveChanges();
+                _orderContext.SaveChanges();
+
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
@@ -50,20 +55,21 @@ namespace BanleWebsite.Repository
 
         public void Delete(Order entity)
         {
-            _orderCOntext.Orders.Remove(entity);
-            _orderCOntext.SaveChanges();
+            _orderContext.Orders.Remove(entity);
+            _orderContext.SaveChanges();
+
         }
 
         public Order FindById(int Id)
         {
-            var result = (from r in _orderCOntext.Orders where r.ID == Id select r).FirstOrDefault();
+            var result = (from r in _orderContext.Orders where r.ID == Id select r).FirstOrDefault();
             return result;
         }
 
         public void Update(Order entity)
         {
-            _orderCOntext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            _orderCOntext.SaveChanges();
+            _orderContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            _orderContext.SaveChanges();
         }
     }
 }

@@ -19,6 +19,20 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
+<!--Datatables-->
+@*<script src="~/Content/Datatables/jquery-3.1.0.min.js"></script>*@
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
+<link rel="stylesheet" href="~/Content/Datatables/dataTables.bootstrap.min.css" />
+<script src="~/Content/Datatables/jquery.dataTables.js"></script>
+<script src="~/Content/Datatables/dataTables.bootstrap.min.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery('#productTable').DataTable({
+            stateSave: true
+        });
+    });
+</script>
 
 <div class="container">
     @{
@@ -32,36 +46,61 @@
     }
     <div class="row">
         <div class="col-md-4">
-            <h2>Thêm sản phẩm mới</h2>
-            @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <input class="form-control" id="id" name="id" type="hidden" />
-                <label>Tên sản phẩm</label>
-                <input class="form-control" id="productName" name="productName" />
-                <label>Giá sản phẩm</label>
-                <input class="form-control" id="productPrice" name="productPrice" />
-                <label>Category</label>
-                <select class="form-control" name="productCateID" id="productCateID">
-                    @{
-                        for (int i = 0; i < categories.Count; i++)
-                        {
-                            Category c = categories.ElementAt(i);
-                            <option value="@c.ID">@c.Name</option>
-                        }
-                    }
-                </select>
-                <label>Số lượng</label>
-                <input class="form-control" id="quantity" name="quantity" />
-                <label>Hình ảnh sản phẩm</label><br />
-                <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
-                <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
-                <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
-                <label>Description</label>
-                <textarea name="description" id="description" class="form-control" rows="10"></textarea>
-
-                <input type="submit" class="btn btn-success" id="btnAddProduct" value="Add" />
-
-             }
+            <div id="productBasicInfo">
+                @using (Html.BeginForm("saveProduct", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                        <input class="form-control" id="id" name="id" type="hidden" value="" />
+                        <label>Tên sản phẩm</label>
+                        <input class="form-control" id="productName" name="productName" value="" />
+                    </div>
+                    <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                        <label>Giá sản phẩm</label>
+                        <input class="form-control" id="productPrice" name="productPrice" value="" />
+                    </div>
+                    <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                        <label>Category</label>
+                        <select class="form-control" name="productCateID" id="productCateID">
+                            @{
+                                for (int i = 0; i < categories.Count; i++)
+                                {
+                                    Category c = categories.ElementAt(i);
+                                    <option value="@c.ID">@c.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                        <label>Số lượng</label>
+                        <input class="form-control" id="quantity" name="quantity" value="" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <label>Hình ảnh sản phẩm</label><br />
+                    <div id="pimg">
+                        <div id="pimg1" style="display:block; float:left; margin-right:15px;">
+                            <span>1.</span><input class="form-control" type="file" id="productImg1" name="productImg1" />
+                            <img src="" width="100" height="100" style="margin-top:10px;" />
+                        </div>
+                        <div id="pimg2" style="display:block; float:left; margin-right:15px;">
+                            <span>2.</span><input class="form-control" type="file" id="productImg2" name="productImg2" />
+                            <img src="" width="100" height="100" style="margin-top:10px;" />
+                        </div>
+                        <div id="pimg3" style="display:block; float:left; margin-right:15px;">
+                            <span>3.</span><input class="form-control" type="file" id="productImg3" name="productImg3" />
+                            <img src="" width="100" height="100" style="margin-top:10px;" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="clearfix"></div>
+                    <label><strong>Mô tả sản phẩm</strong></label>
+                    <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                    <script>
+                    CKEDITOR.replace('description')
+                    </script>
+                    <div class="clearfix"></div>
+                    <input type="submit" class="btn btn-primary" id="btnAddProduct" style="font-family:VNOswald;" value="Thêm sản phẩm" />
+                }
+            </div>
         </div>
         <div class="col-md-8">
             <table class="table" id="productTable">
@@ -71,8 +110,7 @@
                         <th>Tên sản phẩm</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,18 +123,17 @@
                                 <td>@p.Name</td>
                                 <td>@p.Price</td>
                                 <td>@p.Quantity</td>
-                                <td rowspan="2"><button style="margin-top:50px;" class="btn btn-warning" onclick="editProduct(@p.ID)">Edit</button></td>
-                                <td rowspan="2"><button style="margin-top:50px;" class="btn btn-danger" onclick="deleteProduct(@p.ID)">Delete</button></td>
+                                <td><a href="/Quanli/ProductDetails/@p.ID" style="font-family:VNOswald;" class="btn btn-warning">Chi tiết</a></td>
                             </tr>
-                            <tr>
+                            @*<tr>
                                 <td colspan="3">
                                     <span>1.</span><img src="@p.Img1" style="height:100px;width:100px;" />
                                     <span>2.</span><img src="@p.Img2" style="height:100px;width:100px;" />
                                     <span>3.</span><img src="@p.Img3" style="height:100px;width:100px;" />
-                                    @*<img src="@p.Img4" style="height:100px;width:100px;"/>*@
+                                    <img src="@p.Img4" style="height:100px;width:100px;"/>
                                 </td>
 
-                            </tr>
+                            </tr>*@
                         }
                     }
                 </tbody>
@@ -108,50 +145,3 @@
     CKEDITOR.replace('description')
 </script>
 
-<script>
-    function editProduct(id)
-    {
-       jQuery.ajax({
-            url: "/Quanli/getProductInfo",
-            data: {
-                format: 'json',
-                proId:id
-            },
-            error: function() {
-                alert("Problem");
-            },
-            success: function (data) {
-                var proObj = JSON.parse(data);
-                var jq = jQuery.noConflict();
-
-                jq("#id").val(proObj.ID);
-                jq("#productName").val(proObj.Name);
-                jq("#productPrice").val(proObj.Price);
-                jq("#productCateID").val(proObj.CateID);
-                jq("#quantity").val(proObj.Quantity);
-                jq("#trend").val(proObj.Trend);
-                CKEDITOR.instances['description'].setData(proObj.Descriptions);
-                jq("#btnAddProduct").val("Update");
-            }
-        })
-    }
-
-    function deleteProduct(id) {
-        jQuery.ajax({
-            url: "/Quanli/deleteProduct",
-            data: {
-                format: 'json',
-                proId: id
-            },
-            error: function () {
-                alert("Problem!")
-            },
-            success: function (data) {
-                if (data === "Success") {
-                    location.href = location.href;
-                }
-            },
-            type: 'POST'
-        })
-    }
-</script>

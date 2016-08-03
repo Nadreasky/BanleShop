@@ -1,6 +1,10 @@
 ﻿@using BanleWebsite.Services;
+@RenderSection("scripts", required: false)
 @{
     CategoryServices _categoryServices = new CategoryServices();
+    OrderServices _orderServices = new OrderServices();
+
+    int numberItemInCart = _orderServices.getNumberOfItemInCart();
 
     List<Category> categoryList = _categoryServices.getAll();
     List<Category> categoryListNoPre = new List<Category>();
@@ -556,11 +560,11 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                 <div class="shoppingcart">
                     <div class="fadelink">
                         <span class="pull-right">
-                            <a class="btn" href="index5534.html?page_id=6">
+                            <a class="btn" href="/Cart">
                                 <i class="icon-basket icon-large"></i>
                             </a>
                         </span>
-                        <span class="badge badge-inverse">0</span>
+                        <span class="badge badge-inverse">@numberItemInCart</span>
                         <div class="shopping_cart_mini hidden-phone hidden-tablet widget_shopping_cart_content">
                         </div>
                     </div>
@@ -603,8 +607,9 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                             <a href="#">Account</a>
                             <div class="ul_wrapper">
                                 <ul id="menu-account-menu" class="menu">
-                                    <li id="menu-item-1122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1122 dropdown"><a href="index3f35.html?page_id=8"><span>My Account</span></a></li>
+                                    <li id="menu-item-1122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1122 dropdown"><a href="~/Account/Login"><span>Login</span></a></li>
                                     <li id="menu-item-1123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1123 dropdown"><a href="index5534.html?page_id=6"><span>Cart</span></a></li>
+                                    <li id="menu-item-1123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1123 dropdown">@Html.ActionLink("Role", "Index", "Role")</li>
                                 </ul>
                             </div>
                         </div>
@@ -659,11 +664,11 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                             <div class="shoppingcart">
                                 <div class="fadelink">
                                     <span class="pull-right">
-                                        <a class="btn" href="index5534.html?page_id=6">
+                                        <a class="btn" href="/Cart">
                                             <i class="icon-basket icon-large"></i>
                                         </a>
                                     </span>
-                                    <span class="badge badge-inverse">0</span>
+                                    <span class="badge badge-inverse">@numberItemInCart</span>
                                     <div class="shopping_cart_mini hidden-phone hidden-tablet widget_shopping_cart_content">
                                     </div>
                                 </div>
@@ -700,57 +705,30 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                     </a>
 
                                     <ul id="level0" class="collapse in">
-                                        <li id="menu-item-1150" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-24 current_page_item menu-item-1150 dropdown"><a href="index.html"><span>Home page</span></a></li>
-                                        <li id="menu-item-1153" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-1153 dropdown">
-                                            <a href="index90fa.html?product_cat=women"><span>Women</span><span class="sub">Vestibulum justo. Nulla mauris ipsum, convallis ut, vestibulum eu, tincidunt vel, nisi. Curabitur molestie euismod erat. Proin eros odio, mattis rutrum. et, egestas vitae, magna. Integer semper, velit ut interNam lectus nulla, bibendum pretium, dictum a, mattis nec, dolor. Nullam id justo sed diam aliquam tincidunt. Duis sollicitudin, dui ac commodo iaculis, mi risus sagittis odio, vel ultrices enim sem ut pede. Aenean quam. Nulla neque purus, ullamcorper nec, eleifend at, fermentum ut, turpis. Nullam id justo sed labore diam diam aliquam nonumy. Integer ligula magna, dictum et, pulvinar non, ultricies ac, nibh. Vivamus euismod nulla vel nunc. Fusce tincidunt, justo congue egestas molestie, tortor tortor blandit erat, et scelerisque metus metus at ipsum.</span></a><a class="icon-collapse collapsed" href="#collapsed_item_1153" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
-                                            <ul class="collapse in level0" id="collapsed_item_1153">
-                                                <li id="menu-item-1155" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-1155">
-                                                    <a href="index3a7f.html?product_cat=dresses">	<span>Dresses</span>	</a><a class="icon-collapse collapsed" href="#collapsed_item_1155" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
-                                                    <ul class="collapse in level1" id="collapsed_item_1155">
-                                                        <li id="menu-item-1156" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1156">		<a href="index156d.html?product_cat=club-dresses">		<span>Club Dresses</span>		</a>		</li>
-                                                        <li id="menu-item-1157" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1157">		<a href="index8c35.html?product_cat=evening-dresses">		<span>Evening Dresses</span>		</a>		</li>
-                                                        <li id="menu-item-1158" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1158">		<a href="index1e07.html?product_cat=prom-dresses">		<span>Prom Dresses</span>		</a>		</li>
+                                        <li id="home" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-24 current_page_item menu-item-1150 dropdown"><a href="/"><span style="font-family:VNOswald;">Trang chủ</span></a></li>
+                                        @{
+                                            foreach (var item in categoryListNoPre)
+                                            {
+                                                <li id="menu-item-@item.ID" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-@item.ID dropdown">
+                                                    <a href="/Danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a><a class="icon-collapse collapsed" href="#collapsed_item_@item.ID" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
+                                                    <ul class="collapse in level0" id="collapsed_item_@item.ID">
+                                                        @{
+                                                            foreach (var item2 in categoryList)
+                                                            {
+                                                                if (item2.PreCateID == item.ID)
+                                                                {
+                                                                    <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href="/Danhmuc/@item2.GenerateSlug()">	<span style="font-family:VNOswald;">@item2.Name</span>	</a>	</li>
+                                                                }
+                                                            }
+                                                        }
                                                     </ul>
                                                 </li>
-                                                <li id="menu-item-1162" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1162">	<a href="index6b3e.html?product_cat=shirts">	<span>Shirts</span>	</a>	</li>
-                                                <li id="menu-item-1154" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1154">	<a href="index0835.html?product_cat=coats">	<span>Coats</span>	</a>	</li>
-                                                <li id="menu-item-1170" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1170">	<a href="indexd1f0.html?product_cat=jeans">	<span>Jeans</span>	</a>	</li>
-                                                <li id="menu-item-1159" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1159">	<a href="index18d8.html?product_cat=jackets">	<span>Jackets</span>	</a>	</li>
-                                                <li id="menu-item-1161" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1161">	<a href="index8104.html?product_cat=lingerie">	<span>Lingerie</span>	</a>	</li>
-                                                <li id="menu-item-1163" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1163">	<a href="indexe20d.html?product_cat=shorts">	<span>Shorts</span>	</a>	</li>
-                                                <li id="menu-item-1164" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1164">	<a href="index64d2.html?product_cat=skirts">	<span>Skirts</span>	</a>	</li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-1165" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-1165 dropdown">
-                                            <a href="indexefad.html?product_cat=man"><span>Man</span></a><a class="icon-collapse collapsed" href="#collapsed_item_1165" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
-                                            <ul class="collapse in level0" id="collapsed_item_1165">
-                                                <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href="index3218.html?product_cat=jeans-man">	<span>Jeans</span>	</a>	</li>
-                                                <li id="menu-item-1167" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1167">	<a href="indexc842.html?product_cat=jumpers">	<span>Jumpers</span>	</a>	</li>
-                                                <li id="menu-item-1168" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1168">	<a href="index2b84.html?product_cat=polo-shirts">	<span>Polo Shirts</span>	</a>	</li>
-                                                <li id="menu-item-1169" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1169">	<a href="index90fd.html?product_cat=shirts-man">	<span>Shirts</span>	</a>	</li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-1151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1151 dropdown"><a href="indexcbc0.html?page_id=26"><span>Blog</span></a></li>
-                                        <li id="menu-item-1152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1152 dropdown"><a href="indexced4.html?page_id=472"><span>Gallery</span></a></li>
-                                        <li id="menu-item-1171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-1171 dropdown">
-                                            <a href="indexc988.html?page_id=257"><span>Pages</span></a><a class="icon-collapse collapsed" href="#collapsed_item_1171" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
-                                            <ul class="collapse in level0" id="collapsed_item_1171">
-                                                <li id="menu-item-1172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1172">	<a href="indexc988.html?page_id=257">	<span>Typography</span>	</a>	</li>
-                                                <li id="menu-item-1173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1173">	<a href="index0c4f.html?page_id=270">	<span>Infographic</span>	</a>	</li>
-                                                <li id="menu-item-1174" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1174">	<a href="indexbb36.html?page_id=280">	<span>Page 404</span>	</a>	</li>
-                                                <li id="menu-item-1175" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1175">	<a href="indexedd1.html?page_id=288">	<span>About Us</span>	</a>	</li>
-                                                <li id="menu-item-1176" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1176">	<a href="index86af.html?page_id=291">	<span>Our Office</span>	</a>	</li>
-                                                <li id="menu-item-1177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1177">	<a href="index23de.html?page_id=312">	<span>FAQ</span>	</a>	</li>
-                                                <li id="menu-item-1178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1178">	<a href="index9db3.html?page_id=564">	<span>Team Members</span>	</a>	</li>
-                                                <li id="menu-item-1179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1179">	<a href="index4a1e.html?page_id=340">	<span>Our Store</span>	</a>	</li>
-                                                <li id="menu-item-1180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1180">	<a href="index179c.html?page_id=349">	<span>Pricing Tables</span>	</a>	</li>
-                                                <li id="menu-item-1181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1181">	<a href="index938b.html?page_id=366">	<span>Our Services</span>	</a>	</li>
-                                                <li id="menu-item-1182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1182">	<a href="index0e81.html?page_id=389">	<span>Delivery</span>	</a>	</li>
-                                                <li id="menu-item-1183" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1183">	<a href="index988b.html?page_id=401">	<span>Sitemap</span>	</a>	</li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-1184" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1184 dropdown"><a href="index3473.html?page_id=986"><span>Contact Us</span></a></li>
-                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span>Buy</span></a></li>
+                                            }
+                                        }
+
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Tin tức</span></a></li>
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Liên hệ</span></a></li>
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Giới thiệu</span></a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -804,7 +782,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                     foreach (var item in categoryListNoPre)
                                     {
                                         <li id="menu-item-928" class="dropdown menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-1062 dropdown">
-                                            <a href="/danhmuc/@item.ID"><span style="font-family:VNOswald;">@item.Name</span></a>
+                                            <a href="/danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a>
                                             <ul class="level0">
                                                 <ul class="shadow">
                                                     <li class="row_middle">
@@ -820,7 +798,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                                                     if (item2.PreCateID == item.ID)
                                                                                     {
                                                                                         <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		
-                                                                                            <a href="/danhmuc/@item2.ID">		
+                                                                                            <a href="/danhmuc/@item2.GenerateSlug()">		
                                                                                                 <span>@item2.Name</span>		
                                                                                             </a>		
                                                                                         </li>
@@ -1102,7 +1080,7 @@ var wc_add_to_cart_variation_params = {"i18n_no_matching_variations_text":"Sorry
     </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min7e78.js?ver=2.3.8'></script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/custom7350.js?ver=4.2.9'></script>
-    <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/retina-1.1.07350.js?ver=4.2.9'></script>
+    @*<script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/retina-1.1.07350.js?ver=4.2.9'></script>*@ @*ANTT COMMENTED*@
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/add-to-cart7350.js?ver=4.2.9'></script>
     <script type='text/javascript'>
 /* <![CDATA[ */
@@ -1111,7 +1089,7 @@ var icl_vars = {"current_language":"en","icl_home":"http:\/\/demo.ethemeuk.com\/
     </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/sitepress-multilingual-cms/res/js/sitepress7350.js?ver=4.2.9'></script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/js_composer/assets/js/js_composer_front11b8.js?ver=4.5'></script>
-    <script type="text/javascript" async src="../../../../assets.pinterest.com/js/pinit.js"></script>
+    @*<script type="text/javascript" async src="../../../../assets.pinterest.com/js/pinit.js"></script>*@
 
 </body>
 
