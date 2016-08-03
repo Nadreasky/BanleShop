@@ -2,6 +2,7 @@
     ViewBag.Title = "Your Fashion";
     List<Product> allProduct = ViewBag.allProduct;
     List<ProductDetail> pDetail = ViewBag.pDetail;
+    List<Product> randomProduct = ViewBag.randomProduct;
 }
 
 <section class="slider">
@@ -78,27 +79,28 @@
                                         <li><a href="#filter" data-option-value=".sale" data-per-page="8" style="font-family:VNOswald;">GIẢM GIÁ</a></li>
                                     </ul>
                                 </section>
-                                @*--Thiếu random cho thẻ all--*@
+                                
                                 <div class="row isotope-outer big_with_description">
                                     @{
-                                        int Count = 0;
+                                            int Count = 0;
 
-                                        for (int i = allProduct.Count - 1; i >= 0; i--)
-                                        {
-                                            Product p = allProduct.ElementAt(i);
-                                            if (Count < 16)
+                                            for (int i = allProduct.Count - 1; i >= 0; i--)
                                             {
-                                                for (int j = pDetail.Count - 1; j >= 0; j--)
+                                                Product p = allProduct.ElementAt(i);
+                                                Product rp = randomProduct.ElementAt(i);
+                                                if (Count < 16)
                                                 {
-                                                    ProductDetail pd = pDetail.ElementAt(j);
-                                                    if (p.ID == pd.ProductID)
+                                                    for (int j = pDetail.Count - 1; j >= 0; j--)
                                                     {
-                                                        if (pd.Featured == true)
+                                                        ProductDetail pd = pDetail.ElementAt(j);
+                                                        if (p.ID == pd.ProductID)
                                                         {
+                                                            if (pd.Featured == true)
+                                                            {
                                                     <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
 
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
-                                                            <div class="label_new_top_left">New!</div>
+                                                            <div class="label_new_top_left">Hot!</div>
                                                             <a href="/sanpham/@p.GenerateSlug()">
                                                                 <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
                                                             </a>
@@ -156,7 +158,7 @@
                                                             </div>
                                                             <div class="col-2 with_media">
                                                                 <div class="big_image">
-                                                                    <div class="label_new_top_left">New!</div>
+                                                                    <div class="label_new_top_left">Hot!</div>
                                                                     <div style="height:300px;">
                                                                         <a href="/sanpham/@p.GenerateSlug()">
                                                                             <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
@@ -299,25 +301,25 @@
 
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
                                                             <div class="label_new_top_left">New!</div>
-                                                            <a href="/sanpham/@p.GenerateSlug()">
-                                                                <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            <a href="/sanpham/@rp.GenerateSlug()">
+                                                                <img style="max-height:300px;" width="300" height="300" src="@rp.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
                                                             </a>
                                                         </div>
                                                         <div class="wrapper-hover">
                                                             <div class="product-name">
-                                                                <a href="/sanpham/@p.GenerateSlug()">
-                                                                    @p.Name
+                                                                <a href="/sanpham/@rp.GenerateSlug()">
+                                                                    @rp.Name
                                                                 </a>
-                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@rp.GenerateSlug()">Chi tiết</a>
                                                             <div class="wrapper">
 
-                                                                <div class="product-price"><span class="amount">@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</span></div>
+                                                                <div class="product-price"><span class="amount">@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(rp.Price.ToString())&#8363</span></div>
 
                                                                 <div class="product-tocart">
                                                                     @*@Html.TextBox("id");*@
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
-                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                        <input type="hidden" name="id" value="@rp.ID" />
                                                                         @*<input type="submit" value="Submit" />*@
                                                                         <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
                                                                             <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
@@ -333,24 +335,24 @@
                                                         </div>
 
                                                         <span class="sort-date hidden">1396632733</span>
-                                                        <span class="sort-price hidden">@p.Price</span>
-                                                        <span class="sort-product_name hidden">@p.Name</span>
+                                                        <span class="sort-price hidden">@rp.Price</span>
+                                                        <span class="sort-product_name hidden">@rp.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
 
-                                                                <a class="image" data-rel="@p.Img1" href="#">
-                                                                    <img class="thumb" alt="" src="@p.Img1" />
+                                                                <a class="image" data-rel="@rp.Img1" href="#">
+                                                                    <img class="thumb" alt="" src="@rp.Img1" />
                                                                 </a>
 
-                                                                <a class="image" data-rel="@p.Img2" href="#">
-                                                                    <img class="thumb" alt="" src="@p.Img2" />
+                                                                <a class="image" data-rel="@rp.Img2" href="#">
+                                                                    <img class="thumb" alt="" src="@rp.Img2" />
                                                                 </a>
 
-                                                                <a class="image" data-rel="@p.Img3" href="#">
-                                                                    <img class="thumb" alt="" src="@p.Img3" />
+                                                                <a class="image" data-rel="@rp.Img3" href="#">
+                                                                    <img class="thumb" alt="" src="@rp.Img3" />
                                                                 </a>
 
                                                             </div>
@@ -358,25 +360,25 @@
                                                                 <div class="big_image">
                                                                     <div class="label_new_top_left">New!</div>
                                                                     <div style="height:300px;">
-                                                                        <a href="/sanpham/@p.GenerateSlug()">
-                                                                            <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                                        <a href="/sanpham/@rp.GenerateSlug()">
+                                                                            <img style="max-height:100%;" width="300" height="300" src="@rp.Img1" class="attachment-shop_single wp-post-image" alt="@rp.Name" />
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
                                                                     <div class="product-name">
-                                                                        <a href="/sanpham/@p.GenerateSlug()">
-                                                                            @p.Name
+                                                                        <a href="/sanpham/@rp.GenerateSlug()">
+                                                                            @rp.Name
                                                                         </a>
                                                                     </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
                                                                     <div class="wrapper">
 
-                                                                        <div class="product-price"><span class="amount">@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</span></div>
+                                                                        <div class="product-price"><span class="amount">@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(rp.Price.ToString())&#8363</span></div>
 
                                                                         <div class="product-tocart">
                                                                             @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
-                                                                                <input type="hidden" name="id" value="@p.ID" />
+                                                                                <input type="hidden" name="id" value="@rp.ID" />
                                                                                 @*<input type="submit" value="Submit" />*@
                                                                                 <button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
                                                                                     <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
