@@ -95,15 +95,15 @@
                     <label>Hot</label><br />
                     <select name="featured" id="featured" style="width:100px;">
                         @{
-                            if (mainProduct.Featured == false)
-                            {
-                                <option value="0" selected>KHÔNG</option>
-                                <option value="1">CÓ</option>
-                            }
-                            else
+                            if (mainProduct.Featured == true)
                             {
                                 <option value="0">KHÔNG</option>
                                 <option value="1" selected>CÓ</option>
+                            }
+                            else
+                            {
+                                <option value="0" selected>KHÔNG</option>
+                                <option value="1">CÓ</option>
                             }
                         }
                         
