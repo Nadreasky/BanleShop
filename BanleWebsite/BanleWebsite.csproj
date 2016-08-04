@@ -252,6 +252,7 @@
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\NewsRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductOrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Services\ColorProductDetailServices.cs" />
     <Compile Include="Services\ColorServices.cs" />
     <Compile Include="Services\ImageServices.cs" />
+    <Compile Include="Services\NewsServices.cs" />
     <Compile Include="Services\OrderDetailServices.cs" />
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
@@ -275,9 +277,6 @@
     </Compile>
     <Compile Include="SLIMCONFIG.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-3.3.6-dist\css\bootstrap-theme.css" />
@@ -401,6 +400,7 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Quanli\ProductDetails.cshtml" />
+    <Content Include="Views\Quanli\Blog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

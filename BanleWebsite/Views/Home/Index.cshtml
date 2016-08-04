@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Your Fashion";
     List<Product> allProduct = ViewBag.allProduct;
+    List<News> listNews = ViewBag.listNews;
 }
 
 <section class="slider">
@@ -548,88 +549,26 @@
                                 <div class="es-carousel">
                                     <div class="row">
                                         <div class="carousel_items">
-                                            <div class="span6 carousel_item">
-                                                <div class="row">
-                                                    <div class="span3">
-                                                        <a href="indexd7bf.html?p=1015"><img src="~/Content/Buyshop/wp-content/uploads/2014/02/img_blog-03.jpg" alt="" class="img-rounded animate flip" /></a>
-                                                    </div><div class="span3">
-                                                        <h4>The coollest post from blog</h4>
-                                                        <p><a href="indexd7bf.html?p=1015#comments">3 Comments</a></p>
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc.
+                                            @{
+                                                foreach (var item in listNews)
+                                                {
+                                                    <div class="span6 carousel_item">
+                                                        <div class="row">
+                                                            <div class="span3">
 
-                                                        </p>
+                                                                <a href="indexd7bf.html?p=1015"><img src="@item.MainImage" alt="" class="img-rounded animate flip" /></a>
+                                                            </div><div class="span3">
+                                                                <h4>@item.Title</h4>
+                                                                <p><a href="indexd7bf.html?p=1015#comments">3 Comments</a></p>
+                                                                <p>
+                                                                    @Html.Raw(item.ShortDes)
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="span6 carousel_item">
-                                                <div class="row">
-                                                    <div class="span3">
-                                                        <a href="index5a2e.html?p=1013"><img src="~/Content/Buyshop/wp-content/uploads/2014/02/img_blog-02.jpg" alt="" class="img-rounded animate flip" /></a>
-                                                    </div><div class="span3">
-                                                        <h4>Another awesome blog post</h4>
-                                                        <p><a href="index5a2e.html?p=1013#comments">4 Comments</a></p>
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc.
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="span6 carousel_item">
-                                                <div class="row">
-                                                    <div class="span3">
-                                                        <a href="index3388.html?p=1011"><img src="~/Content/Buyshop/wp-content/uploads/2014/01/img_blog.jpg" alt="" class="img-rounded animate flip" /></a>
-                                                    </div><div class="span3">
-                                                        <h4>Some mega post</h4>
-                                                        <p><a href="index3388.html?p=1011#comments">0 Comments</a></p>
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc.
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="span6 carousel_item">
-                                                <div class="row">
-                                                    <div class="span3">
-                                                        <a href="index0ced.html?p=586"><img src="~/Content/Buyshop/wp-content/uploads/2014/02/img_blog-02.jpg" alt="" class="img-rounded animate flip" /></a>
-                                                    </div><div class="span3">
-                                                        <h4>Blog Post 3</h4>
-                                                        <p><a href="index0ced.html?p=586#comments">4 Comments</a></p>
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc.
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="span6 carousel_item">
-                                                <div class="row">
-                                                    <div class="span3">
-                                                        <a href="indexc74d.html?p=579"><img src="~/Content/Buyshop/wp-content/uploads/2014/02/img_blog-03.jpg" alt="" class="img-rounded animate flip" /></a>
-                                                    </div><div class="span3">
-                                                        <h4>Blog Post 2</h4>
-                                                        <p><a href="indexc74d.html?p=579#comments">0 Comments</a></p>
-                                                        <p><p class="mce-wp-more" title="More...">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc.</p>
-                                                        <p class="mce-wp-more" title="More..."></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="span6 carousel_item">
-                                                <div class="row">
-                                                    <div class="span3">
-                                                        <a href="index905c.html?p=212"><img src="~/Content/Buyshop/wp-content/uploads/2014/01/img_blog.jpg" alt="" class="img-rounded animate flip" /></a>
-                                                    </div><div class="span3">
-                                                        <h4>Blog Post 1</h4>
-                                                        <p><a href="index905c.html?p=212#comments">6 Comments</a></p>
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc.
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                }
+                                            }
+                                            
                                         </div>
                                     </div>
                                 </div>

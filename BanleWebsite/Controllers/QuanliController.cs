@@ -23,6 +23,7 @@ namespace BanleWebsite.Controllers
         OrderServices _orderServices = new OrderServices();
         ColorServices _colorServices = new ColorServices();
         SizeServices _sizeServices = new SizeServices();
+        NewsServices _newsServices = new NewsServices();
         ColorProductDetailServices _colorProductDetailsServices = new ColorProductDetailServices();
         SizeProductDetailServices _sizeProductDetailsServices = new SizeProductDetailServices();
 
@@ -48,6 +49,84 @@ namespace BanleWebsite.Controllers
             ViewBag.products = products;
             return View();
         }
+
+        // Kun 4.8.16
+        public ActionResult Blog()
+        {
+            List<News> listNews = _newsServices.getAll();
+            ViewBag.listNews = listNews;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult saveBlog(int? id, string title, string shortDes, string content, string mainImage)
+        {
+            ViewBag.Error = "";
+
+            if (title == null || title.Equals(""))
+            {
+                ViewBag.Error += "Error: Không có tên Blog!";
+            }
+            if (!"".Equals(ViewBag.Error))
+            {
+                TempData["error"] = ViewBag.Error;
+                return RedirectToAction("Category");
+            }
+
+            if (id.HasValue) // new co id thi update
+            {
+                News news = _newsServices.findByID(id.Value);
+                news.Title = title;
+                news.ShortDes = shortDes;
+                news.Content = content;
+                news.MainImage = mainImage;
+                _newsServices.update(news);
+            }
+            else // khong co id thi add
+            {
+                News news = new News(); // mother of new 8-}
+                news.Title = title;
+                news.ShortDes = shortDes;
+                news.Content = content;
+                news.MainImage = mainImage;
+                news.CreateDate = DateTime.Now;
+                _newsServices.add(news);
+            }
+
+            return RedirectToAction("Blog");
+        }
+
+        [HttpPost]
+        public string deleteBlog(string id)
+        {
+            int _id = -1;
+            if (id == null || id.Equals(""))
+            {
+                return "Error: ID không hợp lệ!";
+            }
+            else if (int.TryParse(id, out _id) == false)
+            {
+                return "Error: Lỗi khi parse ID";
+            }
+            News news = _newsServices.findByID(_id);
+            if (news == null)
+            {
+                return "Error: Không tìm thấy News yêu cầu!";
+            }
+
+            _newsServices.delete(news);
+            return "Success";
+        }
+    
+
+        public Object getBlogInfo(int newsId)
+        {
+            return JsonConvert.SerializeObject(_newsServices.findByID(newsId));
+        }
+
+        //-------------end of News function-------------
+        
 
         public ActionResult ProductDetails(int? id)
         {
