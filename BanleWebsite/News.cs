@@ -20,6 +20,6 @@ namespace BanleWebsite
         public string Content { get; set; }
         public string MainImage { get; set; }
         public Nullable<int> Popular { get; set; }
-        public string CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     }
 }

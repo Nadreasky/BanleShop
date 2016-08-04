@@ -52,4 +52,10 @@ namespace BanleWebsite.Models
     //    str = Regex.Replace(str, @"\s", "-");
     //    return str;
     //}
+
+    //private string RemoveAccent(string text)
+    //{
+    //    byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
+    //    return System.Text.Encoding.ASCII.GetString(bytes);
+    //}
 }

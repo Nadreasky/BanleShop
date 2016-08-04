@@ -275,9 +275,6 @@
     </Compile>
     <Compile Include="SLIMCONFIG.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-3.3.6-dist\css\bootstrap-theme.css" />
