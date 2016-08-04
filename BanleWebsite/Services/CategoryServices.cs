@@ -18,7 +18,7 @@ namespace BanleWebsite.Services
 
         public List<Category> getAll()
         {
-            return _categoryRepository.List.ToList();
+            return _categoryRepository.getAllCategoryActived();
         }
 
         public Category findByid(int id)
@@ -63,6 +63,11 @@ namespace BanleWebsite.Services
                 }
                 _categoryRepository.Update(c);
             }
+        }
+
+        public void updateCategoryEntity(Category c)
+        {
+            _categoryRepository.Update(c);
         }
 
         public List<Product> getProductByCate(int id)

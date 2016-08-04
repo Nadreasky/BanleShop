@@ -75,5 +75,15 @@ namespace BanleWebsite.Repository
             }
             return result;
         }
+
+        public List<Product> getAllProductActived()
+        {
+            var result = (from r in _productContext.Products where r.isActived == true select r).ToList();
+            if (result == null)
+            {
+                result = new List<Product>();
+            }
+            return result;
+        }
     }
 }

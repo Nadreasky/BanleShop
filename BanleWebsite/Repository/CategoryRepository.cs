@@ -65,5 +65,15 @@ namespace BanleWebsite.Repository
             _categoryContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             _categoryContext.SaveChanges();
         }
+
+        public List<Category> getAllCategoryActived()
+        {
+            var result = (from r in _categoryContext.Categories where r.isActived == true select r).ToList();
+            if (result == null)
+            {
+                result = new List<Category>();
+            }
+            return result;
+        }
     }
 }

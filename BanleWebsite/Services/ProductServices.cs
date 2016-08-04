@@ -18,7 +18,7 @@ namespace BanleWebsite.Services
 
         public List<Product> getAll()
         {
-            return _productRepository.List.ToList();
+            return _productRepository.getAllProductActived();
         }
 
         public List<Product> getProductsByCategory(int categoryId)
@@ -52,6 +52,7 @@ namespace BanleWebsite.Services
                 p.Img3 = imgPath3;
                 p.Featured = featured;
                 p.SalePercent = salePercent;
+                p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
                 _productRepository.Add(p);
             }
             else
@@ -75,8 +76,14 @@ namespace BanleWebsite.Services
                 }
                 p.Featured = featured;
                 p.SalePercent = salePercent;
+                p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
                 _productRepository.Update(p);
             }
+        }
+
+        public void updateProductentity(Product p)
+        {
+            _productRepository.Update(p);
         }
 
         public void delete(Product p)

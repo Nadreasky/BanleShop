@@ -321,7 +321,8 @@ namespace BanleWebsite.Controllers
             {
                 return "Error: Không tìm thấy Category yêu cầu!";
             }
-            _productServices.delete(p);
+            p.isActived = false;
+            _productServices.updateProductentity(p);
             return "Success";
         }
 
@@ -428,7 +429,8 @@ namespace BanleWebsite.Controllers
             {
                 return "Error: Không tìm thấy Category yêu cầu!";
             }
-            _categoryServices.delete(c);
+            c.isActived = false;
+            _categoryServices.updateCategoryEntity(c);
             return "Success";
         }
 
