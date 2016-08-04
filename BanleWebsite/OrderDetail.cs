@@ -9,9 +9,12 @@
 
 namespace BanleWebsite
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [JsonObject(IsReference = true)]
     public partial class OrderDetail
     {
         public int ID { get; set; }
@@ -20,7 +23,7 @@ namespace BanleWebsite
         public int Quantity { get; set; }
         public Nullable<int> Color { get; set; }
         public Nullable<int> Size { get; set; }
-    
+
         public virtual Color Color1 { get; set; }
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

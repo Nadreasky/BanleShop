@@ -9,9 +9,11 @@
 
 namespace BanleWebsite
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
+    [JsonObject(IsReference = true)]
     public partial class SizeProductDetail
     {
         public int ID { get; set; }

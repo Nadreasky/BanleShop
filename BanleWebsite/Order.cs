@@ -9,9 +9,12 @@
 
 namespace BanleWebsite
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [JsonObject(IsReference = true)]
     public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,7 +32,9 @@ namespace BanleWebsite
         public Nullable<int> Staff { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-    
+
+        //[JsonIgnore]
+        //[IgnoreDataMember]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
