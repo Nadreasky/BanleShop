@@ -71,37 +71,122 @@
                             <div class="woocommerce">
                                 <section class="filters-by-category clearfix">
                                     <ul class="option-set" data-option-key="filter">
-                                        <li><a href="#filter" data-option-value="*" class="selected" data-per-page="8" style="font-family:VNOswald;" onclick="randomProduct()">TẤT CẢ</a></li>
-                                        <li><a href="#filter" data-option-value=".featured" data-per-page="8" style="font-family:VNOswald;">NỔI BẬT</a></li>
-                                        <li><a href="#filter" data-option-value=".new_product" data-per-page="8" style="font-family:VNOswald;">SẢN PHẨM MỚI</a></li>
-                                        <li><a href="#filter" data-option-value=".sale" data-per-page="8" style="font-family:VNOswald;">GIẢM GIÁ</a></li>
+                                        <li><a href="#filter" data-option-value="*" class="selected" data-per-page="16" style="font-family:VNOswald;">TẤT CẢ</a></li>
+                                        <li><a href="#filter" data-option-value=".featured" data-per-page="16" style="font-family:VNOswald;">NỔI BẬT</a></li>
+                                        <li><a href="#filter" data-option-value=".new_product" data-per-page="16" style="font-family:VNOswald;">SẢN PHẨM MỚI</a></li>
+                                        <li><a href="#filter" data-option-value=".sale" data-per-page="16" style="font-family:VNOswald;">GIẢM GIÁ</a></li>
                                     </ul>
                                 </section>
-
+                                
                                 <div class="row isotope-outer big_with_description">
-                                    @{
-                                        int Count = 0;
-
-                                        for (int i = allProduct.Count - 1; i >= 0; i--)
+                                @{
+                                    int Count = 0;
+                                    for (int i = allProduct.Count - 1; i >= 0; i--)
+                                    {
+                                        Product p = allProduct.ElementAt(i);
+                                        if (Count < 16)
                                         {
-                                            Product p = allProduct.ElementAt(i);
-                                            if (Count < 16)
-                                            {
-                                                        if (p.Featured == true)
-                                                        {
-                                                            <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
+                                            int c = 0;
+                                            if (p.Featured == null && p.SalePercent == null)
+                                            { c = 1; }
+                                            if (p.Featured == null && p.SalePercent != null && p.SalePercent == 0)
+                                            { c = 2; }
+                                            if (p.Featured != null && p.SalePercent == null && p.Featured == false)
+                                            { c = 3; }
+                                            if (p.Featured != null && p.SalePercent != null && p.Featured == false && p.SalePercent == 0)
+                                            { c = 4; }
 
-                                                                <div class="product-image-wrapper onhover animate scale" style="height:300px;">
-                                                                    @* <div class="label_new_top_left">Hot!</div>*@
-                                                                    @if (p.SalePercent != 0)
+                                            if (p.Featured != null && p.SalePercent == null && p.Featured == true)
+                                            { c = 5; }
+                                            if (p.Featured != null && p.SalePercent != null && p.Featured == true && p.SalePercent == 0)
+                                            { c = 6; }
+
+                                            if (p.Featured == null && p.SalePercent != null && p.SalePercent != 0)
+                                            { c = 7; }
+                                            if (p.Featured != null && p.SalePercent != null && p.Featured == false && p.SalePercent != 0)
+                                            { c = 8; }
+
+                                            if (p.Featured != null && p.SalePercent != null && p.Featured == true && p.SalePercent != 0)
+                                            { c = 9; }
+
+                                            switch (c)
+                                            {
+                                                case 1:
+                                                case 2:
+                                                case 3:
+                                                case 4:
+                                                    <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
+
+                                                        <div class="product-image-wrapper onhover animate scale" style="height:300px;">
+                                                            <div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>
+                                                            @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                            {
+                                                                <div class="label_sale_top_right">Giảm giá</div>
+                                                                double percent = p.SalePercent.Value * 100;
+                                                                <div class="sale_discount img-rounded">-@percent%</div>
+                                                            }
+                                                            <a href="/sanpham/@p.GenerateSlug()">
+                                                                <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="wrapper-hover">
+                                                            <div class="product-name">
+                                                                <a href="/sanpham/@p.GenerateSlug()">
+                                                                    @p.Name
+                                                                </a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            <div class="wrapper">
+                                                                @if (p.OldPrice != 0)
+                                                                {
+                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                }
+                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-tocart">
+                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
+                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                    }
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <span class="sort-date hidden">1396632733</span>
+                                                        <span class="sort-price hidden">@p.Price</span>
+                                                        <span class="sort-product_name hidden">@p.Name</span>
+                                                        <span class="sort-rating hidden">0</span>
+                                                    </div>
+                                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
+                                                        <div class="wrapper">
+                                                            <div class="col-1">
+
+                                                                <a class="image" data-rel="@p.Img1" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img1" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img2" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img2" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img3" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img3" />
+                                                                </a>
+
+                                                            </div>
+                                                            <div class="col-2 with_media">
+                                                                <div class="big_image">
+                                                                    <div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>
+                                                                    @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                                    {
+                                                                        <div class="label_sale_top_right">Giảm giá</div>
                                                                         double percent = p.SalePercent.Value * 100;
                                                                         <div class="sale_discount img-rounded">-@percent%</div>
                                                                     }
-
-                                                                    <a href="/sanpham/@p.GenerateSlug()">
-                                                                        <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
-                                                                    </a>
+                                                                    <div style="height:300px;">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
                                                                     <div class="product-name">
@@ -110,316 +195,470 @@
                                                                         </a>
                                                                     </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
                                                                     <div class="wrapper">
-                                                                        @if (p.SalePercent != 0)
+                                                                        @if (p.OldPrice != 0)
                                                                         {
-                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</s> </span></div>
+                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                         }
-                                                                        @{ double newPrice = p.Price.Value - p.Price.Value * p.SalePercent.Value;}
+                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-tocart">
+                                                                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                            {
+                                                                                <input type="hidden" name="id" value="@p.ID" />
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    break; // New
+                                                case 5:
+                                                case 6:
+                                                    <div class="span3 product carousel_item post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
+                                                        <div class="product-image-wrapper onhover animate scale" style="height:300px;">
+                                                            @*<div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>*@
+                                                            <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
+                                                            @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                            {
+                                                                <div class="label_sale_top_right">Giảm giá</div>
+                                                                double percent = p.SalePercent.Value * 100;
+                                                                <div class="sale_discount img-rounded">-@percent%</div>
+                                                            }
 
+                                                            <a href="/sanpham/@p.GenerateSlug()">
+                                                                <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="wrapper-hover">
+                                                            <div class="product-name">
+                                                                <a href="/sanpham/@p.GenerateSlug()">
+                                                                    @p.Name
+                                                                </a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            <div class="wrapper">
+                                                                @if (p.OldPrice != 0)
+                                                                {
+                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                }
+                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-tocart">
+                                                                    @*@Html.TextBox("id");*@
+                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                    {
+                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                        @*<input type="submit" value="Submit" />*@
+                                                                        @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                            </button>*@
+                                                                    }
 
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(newPrice.ToString())&#8363</strong></span></div>
+                                                                    @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                                            <i class="icon-basket"></i>
+                                                                        </a>*@
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <span class="sort-date hidden">1396632733</span>
+                                                        <span class="sort-price hidden">@p.Price</span>
+                                                        <span class="sort-product_name hidden">@p.Name</span>
+                                                        <span class="sort-rating hidden">0</span>
+                                                    </div>
+                                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
+                                                        <div class="wrapper">
+                                                            <div class="col-1">
+
+                                                                <a class="image" data-rel="@p.Img1" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img1" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img2" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img2" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img3" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img3" />
+                                                                </a>
+
+                                                            </div>
+                                                            <div class="col-2 with_media">
+                                                                <div class="big_image">
+                                                                    @*<div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>*@
+                                                                    <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
+                                                                    @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                                    {
+                                                                        <div class="label_sale_top_right">Giảm giá</div>
+                                                                        double percent = p.SalePercent.Value * 100;
+                                                                        <div class="sale_discount img-rounded">-@percent%</div>
+                                                                    }
+                                                                    <div style="height:300px;">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="wrapper-hover">
+                                                                    <div class="product-name">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            @p.Name
+                                                                        </a>
+                                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                                    <div class="wrapper">
+                                                                        @if (p.OldPrice != 0)
+                                                                        {
+                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                        }
+                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+
 
                                                                         <div class="product-tocart">
-                                                                            @*@Html.TextBox("id");*@
                                                                             @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
                                                                                 <input type="hidden" name="id" value="@p.ID" />
                                                                                 @*<input type="submit" value="Submit" />*@
                                                                                 @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                    <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                                </button>*@
+                                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                    </button>*@
                                                                             }
-
-                                                                            @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
-                                                                                    <i class="icon-basket"></i>
-                                                                                </a>*@
-                                                                        </div>
-                                                                        <div class="clearfix"></div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <span class="sort-date hidden">1396632733</span>
-                                                                <span class="sort-price hidden">@p.Price</span>
-                                                                <span class="sort-product_name hidden">@p.Name</span>
-                                                                <span class="sort-rating hidden">0</span>
-                                                            </div>
-                                                            <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                                                <div class="wrapper">
-                                                                    <div class="col-1">
-
-                                                                        <a class="image" data-rel="@p.Img1" href="#">
-                                                                            <img class="thumb" alt="" src="@p.Img1" />
-                                                                        </a>
-
-                                                                        <a class="image" data-rel="@p.Img2" href="#">
-                                                                            <img class="thumb" alt="" src="@p.Img2" />
-                                                                        </a>
-
-                                                                        <a class="image" data-rel="@p.Img3" href="#">
-                                                                            <img class="thumb" alt="" src="@p.Img3" />
-                                                                        </a>
-
-                                                                    </div>
-                                                                    <div class="col-2 with_media">
-                                                                        <div class="big_image">
-                                                                            @*  <div class="label_new_top_left">Hot!</div>*@
-                                                                            @if (p.SalePercent != 0)
-                                                                            {
-                                                                                double percent = p.SalePercent.HasValue?p.SalePercent.Value:0 * 100;
-                                                                                <div class="sale_discount img-rounded">-@percent%</div>
-                                                                            }
-                                                                            <div style="height:300px;">
-                                                                                <a href="/sanpham/@p.GenerateSlug()">
-                                                                                    <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="wrapper-hover">
-                                                                            <div class="product-name">
-                                                                                <a href="/sanpham/@p.GenerateSlug()">
-                                                                                    @p.Name
-                                                                                </a>
-                                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
-                                                                            <div class="wrapper">
-
-                                                                                @if (p.SalePercent != 0)
-                                                                                {
-                                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</s> </span></div>
-                                                                                }
-                                                                                @*  @{ double newPrice = p.Price.Value - p.Price.Value * pd.SalePercent;}*@
-
-
-                                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(newPrice.ToString())&#8363</strong></span></div>
-
-
-                                                                                <div class="product-tocart">
-                                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                                                    {
-                                                                                        <input type="hidden" name="id" value="@p.ID" />
-                                                                                        @*<input type="submit" value="Submit" />*@
-                                                                                        @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                            <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                                        </button>*@
-                                                                                    }
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="clearfix"></div>
-                                                                            @*<div class="product-link">
-                                                                                    <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
-                                                                                </div>*@
                                                                         </div>
                                                                     </div>
+                                                                    <div class="clearfix"></div>
+                                                                    @*<div class="product-link">
+                                                                            <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
+                                                                        </div>*@
                                                                 </div>
                                                             </div>
-                                                                            }
-                                                                         if (p.SalePercent != 0)
+                                                        </div>
+                                                    </div>
+                                                    break; // Hot
+                                                case 7:
+                                                case 8:
+                                                    <div class="span3 product carousel_item sale post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
+                                                        <div class="product-image-wrapper onhover animate scale" style="height:300px;">
+                                                            
+                                                            @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                            {
+                                                                <div class="label_sale_top_right">Giảm giá</div>
+                                                                double percent = p.SalePercent.Value * 100;
+                                                                <div class="sale_discount img-rounded">-@percent%</div>
+                                                            }
+                                                            <a href="/sanpham/@p.GenerateSlug()">
+                                                                <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="wrapper-hover">
+                                                            <div class="product-name">
+                                                                <a href="/sanpham/@p.GenerateSlug()">
+                                                                    @p.Name
+                                                                </a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            <div class="wrapper">
+                                                                @if (p.OldPrice != 0)
+                                                                {
+                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                }
+                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-tocart">
+                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                    {
+                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                    }
+
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <span class="sort-date hidden">1396632733</span>
+                                                        <span class="sort-price hidden">@p.Price</span>
+                                                        <span class="sort-product_name hidden">@p.Name</span>
+                                                        <span class="sort-rating hidden">0</span>
+                                                    </div>
+                                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
+                                                        <div class="wrapper">
+                                                            <div class="col-1">
+
+                                                                <a class="image" data-rel="@p.Img1" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img1" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img2" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img2" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img3" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img3" />
+                                                                </a>
+
+                                                            </div>
+                                                            <div class="col-2 with_media">
+                                                                <div class="big_image">
+                                                                    
+                                                                    @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                                    {
+                                                                        <div class="label_sale_top_right">Giảm giá</div>
+                                                                        double percent = p.SalePercent.Value * 100;
+                                                                        <div class="sale_discount img-rounded">-@percent%</div>
+                                                                    }
+                                                                    <div style="height:300px;">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="wrapper-hover">
+                                                                    <div class="product-name">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            @p.Name
+                                                                        </a>
+                                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                                    <div class="wrapper">
+                                                                        @if (p.OldPrice != 0)
+                                                                        {
+                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                        }
+                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-tocart">
+                                                                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
-                                                                                <div class="span3 product carousel_item new_product sale post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
-
-                                                                                    <div class="product-image-wrapper onhover animate scale" style="height:300px;">
-                                                                                        <div class="label_sale_top_right">Sale!</div>
-                                                                                        <a href="/sanpham/@p.GenerateSlug()">
-                                                                                            <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="wrapper-hover">
-                                                                                        <div class="product-name">
-                                                                                            <a href="/sanpham/@p.GenerateSlug()">
-                                                                                                @p.Name
-                                                                                            </a>
-                                                                                        </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
-                                                                                        <div class="wrapper">
-
-                                                                                            <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
-
-                                                                                            <div class="product-tocart">
-                                                                                                @*@Html.TextBox("id");*@
-                                                                                                @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                                                                {
-                                                                                                    <input type="hidden" name="id" value="@p.ID" />
-                                                                                                    @*<input type="submit" value="Submit" />*@
-                                                                                                    @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                                                    </button>*@
-                                                                                                }
-
-                                                                                                @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
-                                                                                                        <i class="icon-basket"></i>
-                                                                                                    </a>*@
-                                                                                            </div>
-                                                                                            <div class="clearfix"></div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <span class="sort-date hidden">1396632733</span>
-                                                                                    <span class="sort-price hidden">@p.Price</span>
-                                                                                    <span class="sort-product_name hidden">@p.Name</span>
-                                                                                    <span class="sort-rating hidden">0</span>
-                                                                                </div>
-                                                                                <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                                                                    <div class="wrapper">
-                                                                                        <div class="col-1">
-
-                                                                                            <a class="image" data-rel="@p.Img1" href="#">
-                                                                                                <img class="thumb" alt="" src="@p.Img1" />
-                                                                                            </a>
-
-                                                                                            <a class="image" data-rel="@p.Img2" href="#">
-                                                                                                <img class="thumb" alt="" src="@p.Img2" />
-                                                                                            </a>
-
-                                                                                            <a class="image" data-rel="@p.Img3" href="#">
-                                                                                                <img class="thumb" alt="" src="@p.Img3" />
-                                                                                            </a>
-
-                                                                                        </div>
-                                                                                        <div class="col-2 with_media">
-                                                                                            <div class="big_image">
-                                                                                                <div class="label_sale_top_right">Sale!</div>
-                                                                                                <div style="height:300px;">
-                                                                                                    <a href="/sanpham/@p.GenerateSlug()">
-                                                                                                        <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
-                                                                                                    </a>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="wrapper-hover">
-                                                                                                <div class="product-name">
-                                                                                                    <a href="/sanpham/@p.GenerateSlug()">
-                                                                                                        @p.Name
-                                                                                                    </a>
-                                                                                                </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
-                                                                                                <div class="wrapper">
-
-                                                                                                    <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
-
-                                                                                                    <div class="product-tocart">
-                                                                                                        @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                                                                        {
-                                                                                                            <input type="hidden" name="id" value="@p.ID" />
-                                                                                                            @*<input type="submit" value="Submit" />*@
-                                                                                                            @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                                                            </button>*@
-                                                                                                        }
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="clearfix"></div>
-                                                                                                @*<div class="product-link">
-                                                                                                        <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
-                                                                                                    </div>*@
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                                                                                <input type="hidden" name="id" value="@p.ID" />
                                                                             }
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    break; // Sale
+                                                case 9:
+                                                    <div class="span3 product carousel_item sale post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
+                                                        <div class="product-image-wrapper onhover animate scale" style="height:300px;">
+                                                            @*<div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>*@
+                                                            <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
+                                                            @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                            {
+                                                                <div class="label_sale_top_right">Giảm giá</div>
+                                                                double percent = p.SalePercent.Value * 100;
+                                                                <div class="sale_discount img-rounded">-@percent%</div>
+                                                            }
 
-                                                                            else
+                                                            <a href="/sanpham/@p.GenerateSlug()">
+                                                                <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="wrapper-hover">
+                                                            <div class="product-name">
+                                                                <a href="/sanpham/@p.GenerateSlug()">
+                                                                    @p.Name
+                                                                </a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            <div class="wrapper">
+                                                                @if (p.OldPrice != 0)
+                                                                {
+                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                }
+                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-tocart">
+                                                                    @*@Html.TextBox("id");*@
+                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                    {
+                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                        @*<input type="submit" value="Submit" />*@
+                                                                        @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                            </button>*@
+                                                                    }
+
+                                                                    @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
+                                                                            <i class="icon-basket"></i>
+                                                                        </a>*@
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <span class="sort-date hidden">1396632733</span>
+                                                        <span class="sort-price hidden">@p.Price</span>
+                                                        <span class="sort-product_name hidden">@p.Name</span>
+                                                        <span class="sort-rating hidden">0</span>
+                                                    </div>
+                                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
+                                                        <div class="wrapper">
+                                                            <div class="col-1">
+
+                                                                <a class="image" data-rel="@p.Img1" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img1" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img2" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img2" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img3" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img3" />
+                                                                </a>
+
+                                                            </div>
+                                                            <div class="col-2 with_media">
+                                                                <div class="big_image">
+                                                                    @*<div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>*@
+                                                                    <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
+                                                                    @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                                    {
+                                                                        <div class="label_sale_top_right">Giảm giá</div>
+                                                                        double percent = p.SalePercent.Value * 100;
+                                                                        <div class="sale_discount img-rounded">-@percent%</div>
+                                                                    }
+                                                                    <div style="height:300px;">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="wrapper-hover">
+                                                                    <div class="product-name">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            @p.Name
+                                                                        </a>
+                                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                                    <div class="wrapper">
+                                                                        @if (p.OldPrice != 0)
+                                                                        {
+                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                        }
+                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+
+
+                                                                        <div class="product-tocart">
+                                                                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
-                                                                                <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
-
-                                                                                    <div class="product-image-wrapper onhover animate scale" style="height:300px;">
-                                                                                        <div class="label_new_top_left">New!</div>
-                                                                                        <a href="/sanpham/@p.GenerateSlug()">
-                                                                                            <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="wrapper-hover">
-                                                                                        <div class="product-name">
-                                                                                            <a href="/sanpham/@p.GenerateSlug()">
-                                                                                                @p.Name
-                                                                                            </a>
-                                                                                        </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
-                                                                                        <div class="wrapper">
-
-                                                                                            <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
-
-                                                                                            <div class="product-tocart">
-                                                                                                @*@Html.TextBox("id");*@
-                                                                                                @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                                                                {
-                                                                                                    <input type="hidden" name="id" value="@p.ID" />
-                                                                                                    @*<input type="submit" value="Submit" />*@
-                                                                                                    @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                                                    </button>*@
-                                                                                                }
-
-                                                                                                @*<a href="/cart/@items.ID" rel="nofollow" data-product_id="1018" data-product_sku="2" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
-                                                                                                        <i class="icon-basket"></i>
-                                                                                                    </a>*@
-                                                                                            </div>
-                                                                                            <div class="clearfix"></div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <span class="sort-date hidden">1396632733</span>
-                                                                                    <span class="sort-price hidden">@p.Price</span>
-                                                                                    <span class="sort-product_name hidden">@p.Name</span>
-                                                                                    <span class="sort-rating hidden">0</span>
-                                                                                </div>
-                                                                                <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                                                                                    <div class="wrapper">
-                                                                                        <div class="col-1">
-
-                                                                                            <a class="image" data-rel="@p.Img1" href="#">
-                                                                                                <img class="thumb" alt="" src="@p.Img1" />
-                                                                                            </a>
-
-                                                                                            <a class="image" data-rel="@p.Img2" href="#">
-                                                                                                <img class="thumb" alt="" src="@p.Img2" />
-                                                                                            </a>
-
-                                                                                            <a class="image" data-rel="@p.Img3" href="#">
-                                                                                                <img class="thumb" alt="" src="@p.Img3" />
-                                                                                            </a>
-
-                                                                                        </div>
-                                                                                        <div class="col-2 with_media">
-                                                                                            <div class="big_image">
-                                                                                                <div class="label_new_top_left">New!</div>
-                                                                                                <div style="height:300px;">
-                                                                                                    <a href="/sanpham/@p.GenerateSlug()">
-                                                                                                        <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
-                                                                                                    </a>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="wrapper-hover">
-                                                                                                <div class="product-name">
-                                                                                                    <a href="/sanpham/@p.GenerateSlug()">
-                                                                                                        @p.Name
-                                                                                                    </a>
-                                                                                                </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
-                                                                                                <div class="wrapper">
-
-                                                                                                    <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
-
-                                                                                                    <div class="product-tocart">
-                                                                                                        @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                                                                        {
-                                                                                                            <input type="hidden" name="id" value="@p.ID" />
-                                                                                                            @*<input type="submit" value="Submit" />*@
-                                                                                                            @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
-                                                                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                                                                            </button>*@
-                                                                                                        }
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="clearfix"></div>
-                                                                                                @*<div class="product-link">
-                                                                                                        <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
-                                                                                                    </div>*@
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                }
+                                                                                <input type="hidden" name="id" value="@p.ID" />
+                                                                                @*<input type="submit" value="Submit" />*@
+                                                                                @*<button data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple" type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                                                    </button>*@
                                                                             }
-                                                                                                                    Count++;
-                                                                                                                }
-                                                                                                            }
-                                                                                                        
-                                                                                                    
-                                    
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    @*<div class="product-link">
+                                                                            <a class="wft_add_to_wishlist" href="index9fd6.html?add_to_wishlist=1018" data-product-id="1018" data-product-type="simple">Add to Wishlist</a>
+                                                                        </div>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    break; // Hot + Sale 
+                                                default:
+                                                    <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
+
+                                                        <div class="product-image-wrapper onhover animate scale" style="height:300px;">
+                                                            <div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>
+                                                            @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                            {
+                                                                <div class="label_sale_top_right">Giảm giá</div>
+                                                                double percent = p.SalePercent.Value * 100;
+                                                                <div class="sale_discount img-rounded">-@percent%</div>
+                                                            }
+                                                            <a href="/sanpham/@p.GenerateSlug()">
+                                                                <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="wrapper-hover">
+                                                            <div class="product-name">
+                                                                <a href="/sanpham/@p.GenerateSlug()">
+                                                                    @p.Name
+                                                                </a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            <div class="wrapper">
+                                                                @if (p.OldPrice != 0)
+                                                                {
+                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                }
+                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-tocart">
+                                                                    @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                    {
+                                                                        <input type="hidden" name="id" value="@p.ID" />
+                                                                    }
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <span class="sort-date hidden">1396632733</span>
+                                                        <span class="sort-price hidden">@p.Price</span>
+                                                        <span class="sort-product_name hidden">@p.Name</span>
+                                                        <span class="sort-rating hidden">0</span>
+                                                    </div>
+                                                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
+                                                        <div class="wrapper">
+                                                            <div class="col-1">
+
+                                                                <a class="image" data-rel="@p.Img1" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img1" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img2" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img2" />
+                                                                </a>
+
+                                                                <a class="image" data-rel="@p.Img3" href="#">
+                                                                    <img class="thumb" alt="" src="@p.Img3" />
+                                                                </a>
+
+                                                            </div>
+                                                            <div class="col-2 with_media">
+                                                                <div class="big_image">
+                                                                    <div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>
+                                                                    @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                                    {
+                                                                        <div class="label_sale_top_right">Giảm giá</div>
+                                                                        double percent = p.SalePercent.Value * 100;
+                                                                        <div class="sale_discount img-rounded">-@percent%</div>
+                                                                    }
+                                                                    <div style="height:300px;">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            <img style="max-height:100%;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="wrapper-hover">
+                                                                    <div class="product-name">
+                                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                                            @p.Name
+                                                                        </a>
+                                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                                    <div class="wrapper">
+                                                                        @if (p.OldPrice != 0)
+                                                                        {
+                                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                        }
+                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-tocart">
+                                                                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                            {
+                                                                                <input type="hidden" name="id" value="@p.ID" />
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    break; // New
+                                            }
+                                        }
+                                        Count++;
+                                    }
+                                }   
+
+
+
 
                                 </div>
                             </div>
@@ -704,9 +943,9 @@
                                             0989 144 981
                                         </li>
                                         @*<li>
-                                            <i class="icon-mobile-alt"></i><strong>CELL PHONE:</strong><br>
-                                            (+84) 6652. 2468 | (+84) 934 090 050
-                                        </li>*@
+                                                <i class="icon-mobile-alt"></i><strong>CELL PHONE:</strong><br>
+                                                (+84) 6652. 2468 | (+84) 934 090 050
+                                            </li>*@
                                         <li>
                                             <i class="icon-mail-1"></i><strong>E-MAIL ADDRESSES:</strong><br>
                                             <a href="">SALE@YOURFASHION.VN</a>
@@ -729,39 +968,3 @@
         </div>
     </div><!-- end container -->
 </section>
-
-<script>
-    // A $( document ).ready() block.
-    function randomProduct() {
-        console.log("ready!");
-        //ajax =>json all product
-        console.log("");
-        @{
-            List<Product> listRandom = new List<Product>();
-
-            Random ran = new Random();
-            int ranNum = 0;
-
-            //Console.WriteLine();
-            //while (true)
-            {
-                while (allProduct.Count != 0)
-                {
-                    ranNum = ran.Next(0, allProduct.Count);
-                    listRandom.Add(allProduct[ranNum]);
-                    allProduct.RemoveAt(ranNum);
-                }
-
-                allProduct = listRandom.ToList();
-                //foreach (var item in allProduct)
-                //{
-                //    Console.WriteLine(" " + item);
-                //}
-                listRandom.Clear();
-
-                //Console.ReadLine();
-            }
-        }
-    };
-
-</script>

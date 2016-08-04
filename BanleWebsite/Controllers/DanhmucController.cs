@@ -16,7 +16,7 @@ namespace BanleWebsite.Controllers
         // GET: Danhmuc
         public ActionResult Index(int? id)
         {
-            List<Product> productList = _categoryServices.getProductByCate(id.Value);
+            List<Product> productList = _categoryServices.getProductByCate(id.Value).OrderByDescending(i => i.ID).ToList();
             ViewBag.productList = productList;
 
             List<Category> categoryTree = _categoryServices.getCategoryTree(id.Value);

@@ -377,7 +377,6 @@
                                         }
                                     }
                                     
-
                                 </ul>
                             </div>
                             <script>
@@ -387,8 +386,11 @@
                                 })
                             </script>
                             <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-
-                                <span class="amount">@mainProduct.Price VND</span>
+                                @if (mainProduct.OldPrice != 0)
+                                {
+                                    <span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(mainProduct.OldPrice.ToString())&#8363</s></span>
+                                }
+                                <span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(mainProduct.Price.ToString())&#8363</strong></span>
                                 <meta itemprop="price" content="260" />
                                 <meta itemprop="priceCurrency" content="GBP" />
                                 <link itemprop="availability" href="http://schema.org/InStock" />
@@ -456,30 +458,21 @@
 
                 <div class="span12">
                     <ul id="myTab" class="nav-tabs">
-
-
                         <li class="active" data-tab="description">
                             <a href="#tabdescription">Chi tiết sản phẩm</a>
                         </li>
-
-
                         <li class="" data-tab="reviews">
                             <a href="#tabreviews">Nhận xét</a>
                         </li>
-
                     </ul>
 
                     <div class="tab-content" id="tab_content">
-
                         <div id="tabdescription" class="tab-pane active">
-
                             <h2>CHi tiết sản phẩm</h2>
-
                             <p style="font-family:VNOswald;">@Html.Raw(mainProduct.Descriptions)</p>
                         </div>
                         <div id="tabreviews" class="tab-pane ">
                             <div id="reviews">
-
                                 <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@mainProduct.GenerateSlug()" data-width="1130" data-numposts="5"></div>
 
                                 @*<div id="comments"><h2>Reviews</h2><p class="noreviews">There are no reviews yet, would you like to <a href="#review_form" class="inline show_review_form">submit yours</a>?</p></div>
@@ -488,18 +481,15 @@
                                         <input type="hidden" id="1" name="1" value="20085a2f62" />						<div id="respond" class="comment-respond">
                                             <h3 id="reply-title" class="comment-reply-title">Be the first to review &ldquo;A.L.C - Gerry Dress&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="indexb436.html?product=a-l-c-gerry-dress#respond" style="display:none;">Cancel reply</a></small></h3>
                                             <form action="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-comments-post.php" method="post" id="commentform" class="comment-form">
-
                                                 <!--
                                                     wsl_render_auth_widget
                                                     WordPress Social Login 2.2.3.
                                                     http://wordpress.org/plugins/wordpress-social-login/
                                                 -->
-
                                                 <style type="text/css">
                                                     #wp-social-login-connect-with {
                                                         font-weight: bold;
                                                     }
-
                                                     #wp-social-login-connect-options {
                                                         padding: 10px;
                                                     }
@@ -568,13 +558,8 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="related products span12">
-
                     <h2>Các sản phẩm liên quan</h2>
-
                     <div class="carousel es-carousel-wrapper style0">
                         <div class="es-carousel">
                             <div class="row ">
@@ -584,11 +569,16 @@
                                         for (int i = 0; i < relativeProducts.Count; i++)
                                         {
                                             Product p = relativeProducts.ElementAt(i);
-
                                             <div class="span3 product carousel_item post-723 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-dress product_tag-sexy product_tag-style shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-dress product-tag-sexy product-tag-style instock">
 
-
                                                 <div class="product-image-wrapper onhover animate scale" style="height:300px;">
+                                                    <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
+                                                    @if (p.SalePercent != 0 && p.SalePercent != null)
+                                                    {
+                                                        <div class="label_sale_top_right">Giảm giá</div>
+                                                        double percent = p.SalePercent.Value * 100;
+                                                        <div class="sale_discount img-rounded">-@percent%</div>
+                                                    }
                                                     <a href="/sanpham/@p.GenerateSlug()"><img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" /></a>
                                                 </div>
 
@@ -602,8 +592,11 @@
                                                     </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Chi tiết</a>
                                                     <div class="wrapper">
 
-
-                                                        <div class="product-price"><span class="amount">@p.Price VND</span></div>
+                                                        @if (p.OldPrice != 0)
+                                                        {
+                                                            <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                        }
+                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
 
 
                                                         <div class="product-tocart">
@@ -631,7 +624,6 @@
                                                 <span class="sort-rating hidden">0</span>
 
                                             </div>
-
                                             <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                 <div class="wrapper">
 
@@ -656,6 +648,7 @@
                                                     </div>
                                                     <div class="col-2 with_media">
                                                         <div class="big_image">
+                                                            <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
                                                             <a href="/sanpham/@p.GenerateSlug()">
                                                                 <div style="height:300px;">
                                                                     <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
@@ -672,11 +665,11 @@
                                                                 </a>
                                                             </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Chi tiết</a>
                                                             <div class="wrapper">
-
-
-                                                                <div class="product-price"><span class="amount">@p.Price VND</span></div>
-
-
+                                                                @if (p.OldPrice != 0)
+                                                                {
+                                                                    <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
+                                                                }
+                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
@@ -696,29 +689,17 @@
                                                 </div>
                                             </div>
                                         }
-
-
-
                                     }
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
                 <meta itemprop="url" content="indexb436.html?product=a-l-c-gerry-dress" />
-
             </div> <!-- .row -->
         </div><!-- #product-78 -->
-
-
     </div>
 </section>
-
 
 <link rel='stylesheet' id='cloud-zoom-css' href='~/Content/Buyshop/wp-content/themes/buyshop/css/cloud-zoom7350.css?ver=4.2.9' type='text/css' media='all' />
 <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/cloud-zoom.1.0.27350.js?ver=4.2.9'></script>
