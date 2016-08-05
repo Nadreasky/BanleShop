@@ -1,0 +1,13 @@
+August 5, 2016 - 4:50:01 PM
+Action: SubmitOrder
+Username: qweqwe
+PhoneNumber: 123
+Address: 
+Email: 
+ProductId: 97 - Quantity: 1 - Color: 1 - Size: 1
+
+August 5, 2016 - 5:11:24 PM
+Action: UpdateOrderStatus
+Id: 4
+Status: 2
+

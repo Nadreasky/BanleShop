@@ -35,6 +35,30 @@ namespace BanleWebsite.Services
             Product p = _productRepository.FindById(id);
             return p;
         }
+        public ProductMapping findByIDMapping(int id)
+        {
+            if (id < 0)
+            {
+                return null;
+            }
+            Product p = _productRepository.FindById(id);
+            ProductMapping pMapping = new ProductMapping();
+            pMapping.CateID = p.CateID;
+            pMapping.Descriptions = p.Descriptions;
+            pMapping.Featured = p.Featured;
+            pMapping.ID = p.ID;
+            pMapping.Img1 = p.Img1;
+            pMapping.Img2 = p.Img2;
+            pMapping.Img3 = p.Img3;
+            pMapping.isActived = p.isActived;
+            pMapping.Name = p.Name;
+            pMapping.OldPrice = p.OldPrice;
+            pMapping.Price = p.Price;
+            pMapping.Promotion = p.Promotion;
+            pMapping.Quantity = p.Quantity;
+            pMapping.SalePercent = p.SalePercent;
+            return pMapping;
+        }
 
         public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity, string imgPath1, string imgPath2, string imgPath3, bool featured, double salePercent)
         {
@@ -173,4 +197,22 @@ namespace BanleWebsite.Services
             return false;
         }
     }
+}
+public class ProductMapping
+{
+
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public int CateID { get; set; }
+    public Nullable<double> Price { get; set; }
+    public string Descriptions { get; set; }
+    public Nullable<int> Quantity { get; set; }
+    public string Img1 { get; set; }
+    public string Img2 { get; set; }
+    public string Img3 { get; set; }
+    public Nullable<double> OldPrice { get; set; }
+    public Nullable<bool> isActived { get; set; }
+    public Nullable<bool> Featured { get; set; }
+    public Nullable<double> SalePercent { get; set; }
+    public string Promotion { get; set; }
 }

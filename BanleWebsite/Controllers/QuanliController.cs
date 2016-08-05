@@ -301,7 +301,7 @@ namespace BanleWebsite.Controllers
 
         public Object getProductInfo(int proId)
         {
-            return JsonConvert.SerializeObject(_productServices.findByID(proId));
+            return JsonConvert.SerializeObject(_productServices.findByIDMapping(proId));
         }
 
         [HttpPost]
@@ -443,13 +443,14 @@ namespace BanleWebsite.Controllers
         //Tìm detail cua order theo OrderID
         public Object getOrderDetail(int id)
         {
-            return JsonConvert.SerializeObject(_orderServices.getOrderDetail(id));
+
+            return JsonConvert.SerializeObject(_orderServices.getOrderDetailMapping(id));
         }
 
         //Tim order theo orderID
         public Object getOrderInfo(int id)
         {
-            return JsonConvert.SerializeObject(_orderServices.findOrderByID(id));
+            return JsonConvert.SerializeObject(_orderServices.findOrderByIDMapping(id));
         }
 
         [HttpPost]

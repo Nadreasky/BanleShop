@@ -172,6 +172,18 @@ namespace BanleWebsite.Services
         {
             return _orderRepository.FindById(id);
         }
+        public OrderMapping findOrderByIDMapping(int id)
+        {
+            Order order = findOrderByID(id);
+            OrderMapping orderMapping = new OrderMapping();
+            orderMapping.CreateDate = order.CreateDate;
+            orderMapping.ID = order.ID;
+            orderMapping.Name = order.Name;
+            orderMapping.PhoneNo = order.PhoneNo;
+            orderMapping.Status = order.Status;
+            return orderMapping;
+        }
+
 
         public List<Order> getAllOrder()
         {
@@ -191,6 +203,31 @@ namespace BanleWebsite.Services
 
             return orderDetailListOfAnOrder;
         }
+
+        public List<OrderDetailMapping> getOrderDetailMapping(int Id)
+        {
+                    List<OrderDetail> orderDetailListOfAnOrder = new List<OrderDetail>();
+            foreach (var item in _productOrderRepository.List.ToList())
+            {
+                if (item.OrderID==Id)
+                {
+                    orderDetailListOfAnOrder.Add(item);
+                }
+            }
+            List<OrderDetailMapping> result = new List<OrderDetailMapping>();
+            foreach(OrderDetail od in orderDetailListOfAnOrder)
+            {
+                OrderDetailMapping odm = new OrderDetailMapping();
+                odm.ID = od.ID;
+                odm.OrderID = od.OrderID;
+                odm.ProductID = od.ProductID;
+                odm.Quantity = od.Quantity;
+                odm.Size = od.Size;
+                odm.Color = od.Color;
+                result.Add(odm);
+            }
+            return result;
+        }
         
         public void updateOrder(Order order)
         {
@@ -208,5 +245,27 @@ namespace BanleWebsite.Services
                 && (!fromDate.HasValue || o.CreateDate >= fromDate.Value)
                 && (!toDate.HasValue || o.CreateDate <= toDate.Value)).ToList();
         }
+    }
+}
+public class OrderDetailMapping
+{
+    public int ID { get; set; }
+    public int OrderID { get; set; }
+    public int ProductID { get; set; }
+    public int Quantity { get; set; }
+    public Nullable<int> Color { get; set; }
+    public Nullable<int> Size { get; set; }
+}
+public class OrderMapping
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string PhoneNo { get; set; }
+    public Nullable<int> Status { get; set; }
+    public System.DateTime CreateDate
+    {
+        get;
+        set;
+
     }
 }
