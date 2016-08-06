@@ -1,9 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sản phẩm nổi bật nhất tuần";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Product highlightProduct = ViewBag.highlightProduct;
     double salep = highlightProduct.SalePercent.Value * 100;
+
+    List<Image> colorImgProduct = ViewBag.colorImgProduct;
+    List<SizeProductDetail> sizeProduct = ViewBag.sizeProduct;
+    int defaultColor = colorImgProduct.ElementAt(0).IDColor.Value;
+    int defaultSize = sizeProduct.ElementAt(0).SizeID.Value;
 }
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -160,6 +165,10 @@
 
 <div class="container">
     <section id="content">
+        <h2 style="color:#ff9616;">
+            <i class="fa fa-tags fa-2x" style="vertical-align:middle" aria-hidden="true"></i>
+            <span class="title" style="font-family:Tahoma;">Sản phẩm nổi bật nhất tuần</span>
+        </h2>
         <div id="bestProduct">
             <div id="salePercent">
                 <div id="dis-text">Giảm</div>
@@ -187,10 +196,21 @@
                 </div>
                 <div id="right">
                     <div id="btn">
-                        <button id="btn_buy">
+                        @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin:0;" }))
+                        {
+                            <input type="hidden" name="id" value="@highlightProduct.ID" />
+                            <input type="hidden" id="color" name="color" value="@defaultColor" />
+                            <input type="hidden" id="size" name="size" value="@defaultSize" />
+                            @*<button type="submit" class="button btn-cart" style="font-family:VNOswald;"><i class="icon-basket"></i>Thêm vào giỏ hàng</button>*@
+                            <button id="btn_buy" type="submit">
+                                <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
+                                <span class="text">Thêm vào giỏ hàng</span>
+                            </button>
+                        }
+                        @*<button id="btn_buy">
                             <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
                             <span class="text">Thêm vào giỏ hàng</span>
-                        </button>
+                        </button>*@
                     </div>
                 </div>
             </div>
