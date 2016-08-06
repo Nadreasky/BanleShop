@@ -108,8 +108,8 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ShortDes" Type="text" />
-          <Property Name="Content" Type="text" />
+          <Property Name="ShortDes" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="MainImage" Type="text" />
           <Property Name="Popular" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
@@ -157,6 +157,7 @@
           <Property Name="Featured" Type="bit" />
           <Property Name="SalePercent" Type="float" />
           <Property Name="Promotion" Type="text" />
+          <Property Name="isPromoted" Type="bit" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -625,8 +626,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ShortDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ShortDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MainImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Popular" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -684,6 +685,7 @@
           <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Product" FromRole="Product" ToRole="Image" />
           <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="Product" ToRole="SizeProductDetail" />
+          <Property Name="isPromoted" Type="Boolean" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -1013,6 +1015,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="BanleShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="isPromoted" ColumnName="isPromoted" />
                 <ScalarProperty Name="Promotion" ColumnName="Promotion" />
                 <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
                 <ScalarProperty Name="Featured" ColumnName="Featured" />

@@ -127,7 +127,7 @@ namespace BanleWebsite.Controllers
         [ValidateInput(false)]
         public ActionResult saveProduct(string id, string productName, string productPrice, string productCateID, string description,
             string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3,
-            string featured, string salePercent)
+            string featured, string salePercent, string isPromoted)
         {
             int _id = -1;
             double _productPrice = -1;
@@ -138,6 +138,7 @@ namespace BanleWebsite.Controllers
             string filePath3 = "";
             bool _featured = false;
             double _salePercent = 0;
+            bool _isPromoted = false;
             ViewBag.Error = "";
 
             if (id == null || id.Equals(""))
@@ -193,7 +194,11 @@ namespace BanleWebsite.Controllers
             {
                 ViewBag.Error += "Error: Không thể parse salePercent của sản phẩm <br/>";
             }
-
+            if (isPromoted == null || isPromoted.Equals(""))
+            {
+                _isPromoted = false;
+            }
+            _isPromoted = isPromoted == "1";
 
             //check image
             if (productImg1 == null && productImg2 == null && productImg3 == null && _productServices.isProductHasImage(_id) == false)
@@ -294,7 +299,7 @@ namespace BanleWebsite.Controllers
 
             else
             {
-                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3, _featured, _salePercent);
+                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3, _featured, _salePercent, _isPromoted);
                 return RedirectToAction("Product");
             }
         }

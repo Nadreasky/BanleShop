@@ -60,7 +60,8 @@ namespace BanleWebsite.Services
             return pMapping;
         }
 
-        public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity, string imgPath1, string imgPath2, string imgPath3, bool featured, double salePercent)
+        public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity,
+            string imgPath1, string imgPath2, string imgPath3, bool featured, double salePercent, bool isPromoted)
         {
             Product p = findByID(id);
             if (p == null)
@@ -77,6 +78,7 @@ namespace BanleWebsite.Services
                 p.Featured = featured;
                 p.SalePercent = salePercent;
                 p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
+                p.isPromoted = false;
                 _productRepository.Add(p);
             }
             else
@@ -101,6 +103,7 @@ namespace BanleWebsite.Services
                 p.Featured = featured;
                 p.SalePercent = salePercent;
                 p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
+                p.isPromoted = isPromoted;
                 _productRepository.Update(p);
             }
         }
@@ -195,6 +198,12 @@ namespace BanleWebsite.Services
                 return true;
             }
             return false;
+        }
+
+        public Product getHighlightProduct()
+        {
+            Product p = _productRepository.getHighLightProduct();
+            return p;
         }
     }
 }
