@@ -85,5 +85,15 @@ namespace BanleWebsite.Repository
             }
             return result;
         }
+
+        public Product getHighLightProduct()
+        {
+            var result = (from r in _productContext.Products select r).ToList().LastOrDefault();
+            if (result == null)
+            {
+                result = new Product();
+            }
+            return result;
+        }
     }
 }
