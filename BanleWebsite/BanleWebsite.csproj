@@ -199,9 +199,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\QuanliController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
+    <Compile Include="Controllers\SanphamNoibatController.cs" />
     <Compile Include="CustomFilters\AuthLogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,8 +296,10 @@
     <Content Include="Content\SiteImages\empty_bin.png" />
     <Content Include="Content\SiteImages\favi.png" />
     <Content Include="Content\SiteImages\logo.png" />
+    <Content Include="Content\SiteImages\logo2.jpg" />
     <Content Include="Content\SiteImages\logo_rightbar.png" />
     <Content Include="Content\SiteImages\tphcm.jpg" />
+    <Content Include="Content\SiteImages\YOUR LOGO_FA-01_CUT.jpg" />
     <Content Include="Content\Slider\8I51IPD.jpg" />
     <Content Include="Content\Slider\Fashion Show Banners-45.jpg" />
     <Content Include="Content\Slider\IMG_2283.jpg" />
@@ -398,6 +402,8 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Quanli\ProductDetails.cshtml" />
+    <Content Include="Views\SanphamNoibat\Index.cshtml" />
+    <Content Include="Views\Promotion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
