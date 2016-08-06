@@ -194,6 +194,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DanhmucController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,6 +250,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AgencyRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ColorProductDetailRepository.cs" />
     <Compile Include="Repository\ColorRepository.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Repository\OrderDetailRepository.cs" />
     <Compile Include="Repository\SizeProductDetailRepository.cs" />
     <Compile Include="Repository\SizeRepository.cs" />
+    <Compile Include="Services\AgencyServices.cs" />
     <Compile Include="Services\CategoryServices.cs" />
     <Compile Include="Services\ColorProductDetailServices.cs" />
     <Compile Include="Services\ColorServices.cs" />
@@ -300,6 +303,7 @@
     <Content Include="Content\SiteImages\logo2.jpg" />
     <Content Include="Content\SiteImages\logo_rightbar.png" />
     <Content Include="Content\SiteImages\tphcm.jpg" />
+    <Content Include="Content\SiteImages\Your Logo _ New.png" />
     <Content Include="Content\SiteImages\YOUR LOGO_FA-01_CUT.jpg" />
     <Content Include="Content\Slider\8I51IPD.jpg" />
     <Content Include="Content\Slider\Banner2.jpg" />
@@ -342,6 +346,7 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Agency\AgencyOrder\Danh sach cac san pham cua shop.xlsx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -406,8 +411,10 @@
     <Content Include="Views\Quanli\ProductDetails.cshtml" />
     <Content Include="Views\SanphamNoibat\Index.cshtml" />
     <Content Include="Views\Promotion\Index.cshtml" />
+    <Content Include="Views\Agency\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AgencyOrder\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
