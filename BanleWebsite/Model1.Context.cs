@@ -40,6 +40,5 @@ namespace BanleWebsite
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<SizeProductDetail> SizeProductDetails { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

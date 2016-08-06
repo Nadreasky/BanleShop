@@ -60,7 +60,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult saveBlog(int? id, string title, string shortDes, string content, string mainImage)
+        public ActionResult saveBlog(int? id, string title, string shortDes, string content, string mainImage, int popular)
         {
             ViewBag.Error = "";
 
@@ -81,6 +81,7 @@ namespace BanleWebsite.Controllers
                 news.ShortDes = shortDes;
                 news.Content = content;
                 news.MainImage = mainImage;
+                news.Popular = popular;
                 _newsServices.update(news);
             }
             else // khong co id thi add
@@ -90,6 +91,7 @@ namespace BanleWebsite.Controllers
                 news.ShortDes = shortDes;
                 news.Content = content;
                 news.MainImage = mainImage;
+                news.Popular = popular;
                 news.CreateDate = DateTime.Now;
                 _newsServices.add(news);
             }
@@ -124,6 +126,8 @@ namespace BanleWebsite.Controllers
         {
             return JsonConvert.SerializeObject(_newsServices.findByID(newsId));
         }
+
+        
 
         //-------------end of News function-------------
         
