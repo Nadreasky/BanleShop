@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Product highlightProduct = ViewBag.highlightProduct;
+    double salep = highlightProduct.SalePercent.Value * 100;
 }
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -126,6 +128,9 @@
         background-color:#9D3BC6;
         color:#ffffff;
     }
+    #dealIMG{
+        text-align:center;
+    }
     #rText{
         padding:2em 0em 0.5em;
         font-size:x-large;
@@ -183,27 +188,24 @@
 <div class="container">
     <section id="content">
         <div id="bestProduct">
-            <div class="salePercent">
-                <div class="dis-text">Giảm</div>
-                <div class="dis-number">25%</div>
             </div>
             <a></a>
             <div id="dealIMG">
-                <a href="https://tiki.vn/oxford-advanced-learner-s-dictionary-paperback-p162972.html?ref=c316.c320.c147.c4587.c282.c4661.c4726.c4760.c2531.c4725.c5980.c5982.">
-                    <img src="http://i.imgur.com/uA6urgV.jpg" alt="Oxford Advanced Learner's Dictionary (9th Edition)"/>
+                <a href="@highlightProduct.GenerateSlug()">
+                    <img src="@highlightProduct.Img1" alt="@highlightProduct.Name"/>
                 </a>
             </div>
             <div id="dealInfo">
                 <div id="left">
                     <div id="deal-name">
-                        <a href="">Oxford Advanced Learner's Dictionary (9th Edition)</a>
+                        <a href="">@highlightProduct.Name</a>
                     </div>
                     <div id="deal-price">
                         <div style="margin-bottom:15px;">
-                            <strike>476.000 ₫</strike>
+                            <strike>@highlightProduct.OldPrice ₫</strike>
                         </div>
                         <div style="margin-top:5px; margin-bottom:5px;">
-                            <div style="color:#ed1c24; font-weight:700; font-size:x-large;">357.000 ₫</div>
+                            <div style="color:#ed1c24; font-weight:700; font-size:x-large;">@highlightProduct.Price ₫</div>
                         </div>
                     </div>
                 </div>

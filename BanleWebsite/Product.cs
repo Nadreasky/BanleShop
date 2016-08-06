@@ -39,6 +39,7 @@ namespace BanleWebsite
         public Nullable<bool> Featured { get; set; }
         public Nullable<double> SalePercent { get; set; }
         public string Promotion { get; set; }
+        public Nullable<bool> isPromoted { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

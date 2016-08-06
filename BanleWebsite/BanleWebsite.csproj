@@ -293,6 +293,7 @@
     <Content Include="Content\Datatables\dataTables.bootstrap.min.js" />
     <Content Include="Content\Datatables\jquery.dataTables.js" />
     <Content Include="Content\SiteImages\BGR1.jpg" />
+    <Content Include="Content\SiteImages\D001-white.jpg" />
     <Content Include="Content\SiteImages\empty_bin.png" />
     <Content Include="Content\SiteImages\favi.png" />
     <Content Include="Content\SiteImages\logo.png" />
@@ -301,6 +302,7 @@
     <Content Include="Content\SiteImages\tphcm.jpg" />
     <Content Include="Content\SiteImages\YOUR LOGO_FA-01_CUT.jpg" />
     <Content Include="Content\Slider\8I51IPD.jpg" />
+    <Content Include="Content\Slider\Banner2.jpg" />
     <Content Include="Content\Slider\Fashion Show Banners-45.jpg" />
     <Content Include="Content\Slider\IMG_2283.jpg" />
     <Content Include="Content\Slider\WEB_Banner_FashionPlea.jpg" />

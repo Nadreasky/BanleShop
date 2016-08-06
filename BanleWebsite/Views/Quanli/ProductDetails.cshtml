@@ -113,6 +113,24 @@
                     <label>Phần trăm giảm giá</label>
                     <input class="form-control" id="salePercent" name="salePercent" value="@mainProduct.SalePercent" style="width:50px;"/>
                 </div>
+                <div class="form-group" style="display:inline-block; float:left; margin-right:10px;">
+                    <label>Chọn là sản phẩm nổi bật</label><br />
+                    <select name="isPromoted" id="isPreomoted" style="width:100px;">
+                        @{
+                            if (mainProduct.isPromoted == true)
+                            {
+                                <option value="0">KHÔNG</option>
+                                <option value="1" selected>CÓ</option>
+                            }
+                            else
+                            {
+                                <option value="0" selected>KHÔNG</option>
+                                <option value="1">CÓ</option>
+                            }
+                        }
+
+                    </select>
+                </div>
                 <div class="clearfix"></div>
                 <label>Hình ảnh sản phẩm</label><br />
                 <div id="pimg">
