@@ -24,6 +24,8 @@ namespace BanleWebsite.Controllers
 
             List<SizeProductDetail> sizeProduct = _sizeProductDetailServices.getByProductId(highlightProduct.ID);
             ViewBag.sizeProduct = sizeProduct;
+            List<Product> saleProducts = _productServices.getSaleProducts();
+            ViewBag.saleProducts = saleProducts;
             return View();
         }
     }

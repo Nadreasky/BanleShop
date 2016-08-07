@@ -205,6 +205,12 @@ namespace BanleWebsite.Services
             Product p = _productRepository.getHighLightProduct();
             return p;
         }
+
+        public List<Product> getSaleProducts()
+        {
+            List<Product> saleProducts = _productRepository.getSaleProducts();
+            return saleProducts;
+        }
     }
 }
 public class ProductMapping
