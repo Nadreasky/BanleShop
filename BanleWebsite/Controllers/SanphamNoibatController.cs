@@ -15,6 +15,9 @@ namespace BanleWebsite.Controllers
         {
             Product highlightProduct = _productServices.getHighlightProduct();
             ViewBag.highlightProduct = highlightProduct;
+
+            List<Product> saleProducts = _productServices.getSaleProducts();
+            ViewBag.saleProducts = saleProducts;
             return View();
         }
     }

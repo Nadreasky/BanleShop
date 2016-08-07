@@ -1,9 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sản phẩm nổi bật nhất tuần";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Product highlightProduct = ViewBag.highlightProduct;
     double salep = highlightProduct.SalePercent.Value * 100;
+
+    List<Product> saleProducts = ViewBag.saleProducts;
 }
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -188,16 +190,18 @@
 <div class="container">
     <section id="content">
         <div id="bestProduct">
+            <div class="salePercent">
+                <div class="dis-text">Giảm</div>
+                <div class="dis-text">@salep%</div>
             </div>
-            <a></a>
             <div id="dealIMG">
                 <a href="@highlightProduct.GenerateSlug()">
-                    <img src="@highlightProduct.Img1" alt="@highlightProduct.Name"/>
+                    <img src="@highlightProduct.Img1" alt="@highlightProduct.Name" />
                 </a>
             </div>
             <div id="dealInfo">
                 <div id="left">
-                    <div id="deal-name">
+                    <div class="title">
                         <a href="">@highlightProduct.Name</a>
                     </div>
                     <div id="deal-price">
@@ -225,106 +229,43 @@
                 <span class="title">GIẢM GIÁ SỐC</span>
             </div>
             <div id="saleProduct">
-                <div class="product">
-                    <div class="salePercent">
-                        <div class="dis-text">Giảm</div>
-                        <div class="dis-number">80%</div>
-                    </div>
-                    <div class="proIMG">
-                        <a href="https://tiki.vn/oxford-advanced-learner-s-dictionary-paperback-p162972.html?ref=c316.c320.c147.c4587.c282.c4661.c4726.c4760.c2531.c4725.c5980.c5982.">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/81/10/b6/8110b6ecd18b611c816d5d9b8052b01a.jpg" alt="Oxford Advanced Learner's Dictionary (9th Edition)" />
-                        </a>
-                    </div>
-                    <div class="proInfo">
-                        <div class="title">
-                            <a href="">Oxford Advanced Learner's Dictionary (9th Edition)</a>
+                @{
+                        int count = 0;
+                        double salePercent = 0;
+                        for (int i = saleProducts.Count - 1; i >= 0 & count < 4; i--)
+                        {
+                            Product p = saleProducts.ElementAt(i);
+                            salePercent = p.SalePercent.Value * 100;
+
+
+                            <div class="product">
+                            <div class="salePercent">
+                                <div class="dis-text">Giảm</div>
+                                <div class="dis-number">@salePercent%</div>
+                            </div>
+                            <div class="proIMG">
+                                <a href="@p.GenerateSlug()">
+                                    <img src="@p.Img1" alt="@p.Name" />
+                                </a>
+                            </div>
+                            <div class="proInfo">
+                                <div class="title">
+                                    <a href="">@p.Name</a>
+                                </div>
+                                <div class="proPrice">
+                                    <strike>@p.OldPrice ₫</strike>
+                                    <div class="newPrice">@p.Price ₫</div>
+                                </div>
+                            </div>
+                            @*<div id="btn">
+                                <button id="btn_buy">
+                                    <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
+                                </button>
+                            </div>*@
                         </div>
-                        <div class="proPrice">
-                            <strike>476.000 ₫</strike>
-                            <div class="newPrice">57.000 ₫</div>
-                        </div>
-                    </div>
-                    <div id="btn">
-                        <button id="btn_buy">
-                            <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="salePercent">
-                        <div class="dis-text">Giảm</div>
-                        <div class="dis-number">80%</div>
-                    </div>
-                    <div class="proIMG">
-                        <a href="https://tiki.vn/oxford-advanced-learner-s-dictionary-paperback-p162972.html?ref=c316.c320.c147.c4587.c282.c4661.c4726.c4760.c2531.c4725.c5980.c5982.">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/81/10/b6/8110b6ecd18b611c816d5d9b8052b01a.jpg" alt="Oxford Advanced Learner's Dictionary (9th Edition)" />
-                        </a>
-                    </div>
-                    <div class="proInfo">
-                        <div class="title">
-                            <a href="">Oxford Advanced Learner's Dictionary (9th Edition)</a>
-                        </div>
-                        <div class="proPrice">
-                            <strike>476.000 ₫</strike>
-                            <div class="newPrice">57.000 ₫</div>
-                        </div>
-                    </div>
-                    <div id="btn">
-                        <button id="btn_buy">
-                            <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="salePercent">
-                        <div class="dis-text">Giảm</div>
-                        <div class="dis-number">80%</div>
-                    </div>
-                    <div class="proIMG">
-                        <a href="https://tiki.vn/oxford-advanced-learner-s-dictionary-paperback-p162972.html?ref=c316.c320.c147.c4587.c282.c4661.c4726.c4760.c2531.c4725.c5980.c5982.">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/81/10/b6/8110b6ecd18b611c816d5d9b8052b01a.jpg" alt="Oxford Advanced Learner's Dictionary (9th Edition)" />
-                        </a>
-                    </div>
-                    <div class="proInfo">
-                        <div class="title">
-                            <a href="">Oxford Advanced Learner's Dictionary (9th Edition)</a>
-                        </div>
-                        <div class="proPrice">
-                            <strike>476.000 ₫</strike>
-                            <div class="newPrice">57.000 ₫</div>
-                        </div>
-                    </div>
-                    <div id="btn">
-                        <button id="btn_buy">
-                            <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="salePercent">
-                        <div class="dis-text">Giảm</div>
-                        <div class="dis-number">80%</div>
-                    </div>
-                    <div class="proIMG">
-                        <a href="https://tiki.vn/oxford-advanced-learner-s-dictionary-paperback-p162972.html?ref=c316.c320.c147.c4587.c282.c4661.c4726.c4760.c2531.c4725.c5980.c5982.">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/81/10/b6/8110b6ecd18b611c816d5d9b8052b01a.jpg" alt="Oxford Advanced Learner's Dictionary (9th Edition)" />
-                        </a>
-                    </div>
-                    <div class="proInfo">
-                        <div class="title">
-                            <a href="">Oxford Advanced Learner's Dictionary (9th Edition)</a>
-                        </div>
-                        <div class="proPrice">
-                            <strike>476.000 ₫</strike>
-                            <div class="newPrice">57.000 ₫</div>
-                        </div>
-                    </div>
-                    <div id="btn">
-                        <button id="btn_buy">
-                            <i class="fa fa-cart-plus" style="display:inline-block; height:25px; width:30px; vertical-align:middle; font-size:x-large;"></i>
-                        </button>
-                    </div>
-                </div>
+                        count++;
+                    }
+                }
             </div>
         </div>
     </section>
