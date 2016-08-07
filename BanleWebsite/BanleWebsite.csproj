@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DanhmucController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\NewsRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductOrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
@@ -267,6 +269,7 @@
     <Compile Include="Services\ColorProductDetailServices.cs" />
     <Compile Include="Services\ColorServices.cs" />
     <Compile Include="Services\ImageServices.cs" />
+    <Compile Include="Services\NewsServices.cs" />
     <Compile Include="Services\OrderDetailServices.cs" />
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
@@ -412,6 +415,8 @@
     <Content Include="Views\SanphamNoibat\Index.cshtml" />
     <Content Include="Views\Promotion\Index.cshtml" />
     <Content Include="Views\Agency\Index.cshtml" />
+    <Content Include="Views\Quanli\Blog.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />

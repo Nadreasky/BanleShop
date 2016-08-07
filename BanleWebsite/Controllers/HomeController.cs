@@ -10,14 +10,18 @@ namespace BanleWebsite.Controllers
     public class HomeController : Controller
     {
         ProductServices _productServices;
+        NewsServices _newsServices;
 
         public ActionResult Index()
         {
             _productServices = new ProductServices();
+            _newsServices = new NewsServices();
             List<Product> allProduct = _productServices.getAll();
+            List<News> listNews = _newsServices.getPopNews();
 
             //Random 
             ViewBag.allProduct = allProduct;
+            ViewBag.listNews = listNews;
             return View();
         }
 
