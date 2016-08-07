@@ -17,7 +17,7 @@ namespace BanleWebsite.Controllers
             _productServices = new ProductServices();
             _newsServices = new NewsServices();
             List<Product> allProduct = _productServices.getAll();
-            List<News> listNews = _newsServices.getAll().Where(n => n.Popular == 1).Reverse().ToList();
+            List<News> listNews = _newsServices.getPopNews();
 
             //Random 
             ViewBag.allProduct = allProduct;

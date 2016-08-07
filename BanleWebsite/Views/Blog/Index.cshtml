@@ -17,12 +17,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
-<!--Datatables-->
-@*<script src="~/Content/Datatables/jquery-3.1.0.min.js"></script>*@
-@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
-<link rel="stylesheet" href="~/Content/Datatables/dataTables.bootstrap.min.css" />
-<script src="~/Content/Datatables/jquery.dataTables.js"></script>
-<script src="~/Content/Datatables/dataTables.bootstrap.min.js"></script>
 
 <style>
     #mainNews img{
@@ -34,6 +28,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8" id="mainNews">
+            <h3 style="font-family:VNOswald;">@news.Title</h3>
             @Html.Raw(news.Content)
         </div>
         <div class="col-md-4">
@@ -44,10 +39,10 @@
                     {
                         <div class="row">
                             <div class="col-md-4">
-                                <a href="/Blog/Index/@item.ID"><img src="@item.MainImage" alt="" class="img-rounded animate flip" /></a>
+                                <a href="/Blog/@item.GenerateSlug()"><img src="@item.MainImage" alt="" class="img-rounded animate flip" /></a>
                             </div>
                             <div class="col-md-8">
-                                <a href="/Blog/Index/@item.ID"><h4>@item.Title</h4></a>
+                                <a href="/Blog/@item.GenerateSlug()"><h4>@item.Title</h4></a>
                             </div>
                         </div>
                         <br />
