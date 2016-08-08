@@ -203,7 +203,7 @@
                             for (int i = proTree.Count - 1; i >= 0; i--)
                             {
                                 Category c = proTree.ElementAt(i);
-                                <a href="/danhmuc/@c.GenerateSlug()">@c.Name</a><span>></span>
+                                <a href="/danhmuc/@SLIMCONFIG.GenerateSlug(c.ID, c.Name)">@c.Name</a><span>></span>
                             }
                         }
                         <a href="#">@mainProduct.Name</a>
@@ -216,7 +216,7 @@
                             if (prevProduct != null)
                             {
                                 <span class="prev">
-                                    <a href="/sanpham/@prevProduct.GenerateSlug()" rel="prev">
+                                    <a href="/sanpham/@SLIMCONFIG.GenerateSlug(prevProduct.ID, prevProduct.Name)" rel="prev">
                                         <i class="icon-left-thin"></i>
                                     </a>
                                     <div class="small_preview prev hidden-phone hidden-tablet" style="display: none;">
@@ -228,7 +228,7 @@
                             if (nextProduct != null)
                             {
                                 <span class="next">
-                                    <a href="/sanpham/@nextProduct.GenerateSlug()" rel="next">
+                                    <a href="/sanpham/@SLIMCONFIG.GenerateSlug(nextProduct.ID, nextProduct.Name)" rel="next">
                                         <i class="icon-right-thin"></i>
                                     </a>
                                     <div class="small_preview next hidden-phone hidden-tablet" style="display: none;">
@@ -473,7 +473,7 @@
                         </div>
                         <div id="tabreviews" class="tab-pane ">
                             <div id="reviews">
-                                <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@mainProduct.GenerateSlug()" data-width="1130" data-numposts="5"></div>
+                                <div class="fb-comments" data-href="http://yourfashion.com.vn/sanpham/@SLIMCONFIG.GenerateSlug(mainProduct.ID, mainProduct.Name)" data-width="1130" data-numposts="5"></div>
 
                                 @*<div id="comments"><h2>Reviews</h2><p class="noreviews">There are no reviews yet, would you like to <a href="#review_form" class="inline show_review_form">submit yours</a>?</p></div>
                                 <div id="review_form_wrapper">
@@ -579,14 +579,14 @@
                                                         double percent = p.SalePercent.Value * 100;
                                                         <div class="sale_discount img-rounded">-@percent%</div>
                                                     }
-                                                    <a href="/sanpham/@p.GenerateSlug()"><img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" /></a>
+                                                    <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)"><img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" /></a>
                                                 </div>
 
 
                                                 <div class="wrapper-hover">
 
                                                     <div class="product-name">
-                                                        <a href="/sanpham/@p.GenerateSlug()">
+                                                        <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                             @p.Name
                                                         </a>
                                                     </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Chi tiết</a>
@@ -649,7 +649,7 @@
                                                     <div class="col-2 with_media">
                                                         <div class="big_image">
                                                             <div class="label_video_bot_right" style="font-family:VNOswald;">Nổi bật</div>
-                                                            <a href="/sanpham/@p.GenerateSlug()">
+                                                            <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                 <div style="height:300px;">
                                                                     <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
                                                                 </div>
@@ -660,7 +660,7 @@
                                                         <div class="wrapper-hover">
 
                                                             <div class="product-name">
-                                                                <a href="/sanpham/@p.GenerateSlug()">
+                                                                <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
                                                             </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723">Chi tiết</a>

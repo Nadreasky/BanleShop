@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BanleWebsite.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace BanleWebsite
@@ -23,5 +25,23 @@ namespace BanleWebsite
         public static bool PRODUCT_IS_ACTIVED = true;
         public static bool PRODUCT_FEATURED_TRUE = true;
         public static bool PRODUCT_FEATURED_FALSE = false;
+        public static string GenerateSlug(int ID, string Name)
+        {
+            VietnameseSymbol vs = new VietnameseSymbol();
+            string phrase = string.Format("{0}-{1}", vs.ClearSymbol(Name), ID);
+
+            string str = RemoveAccent(phrase).ToLower();
+            str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
+            str = Regex.Replace(str, @"\s+", " ").Trim();
+            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+            str = Regex.Replace(str, @"\s", "-");
+            return str;
+        }
+
+        private static string RemoveAccent(string text)
+        {
+            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
+            return System.Text.Encoding.ASCII.GetString(bytes);
+        }
     }
 }
