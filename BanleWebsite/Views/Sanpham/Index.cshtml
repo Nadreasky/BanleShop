@@ -130,28 +130,28 @@
 </style>
 
 <script>
-    jQuery(document).ready(function () {
-        var c = jQuery("#color").val();
-        console.log(c)
-        var s = jQuery("#size").val();
-        console.log(s)
-        jQuery("#proImgDiv").hover(function () {
-            var imgURL = document.getElementById("zoom1").href;
-            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
-        }),
-        jQuery("#wrap").hover(function () {
-            var imgURL = document.getElementById("zoom1").href;
-            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
-        }),
-        jQuery(".mousetrap").hover(function () {
-            var imgURL = document.getElementById("zoom1").href;
-            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
-        }),
-        jQuery("#zoomdiv").hover(function () {
-            var imgURL = document.getElementById("zoom1").href;
-            document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
-        })
-    });
+    //jQuery(document).ready(function () {
+    //    var c = jQuery("#color").val();
+    //    console.log(c)
+    //    var s = jQuery("#size").val();
+    //    console.log(s)
+    //    jQuery("#proImgDiv").hover(function () {
+    //        var imgURL = document.getElementById("zoom1").href;
+    //        document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+    //    }),
+    //    jQuery("#wrap").hover(function () {
+    //        var imgURL = document.getElementById("zoom1").href;
+    //        document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+    //    }),
+    //    jQuery(".mousetrap").hover(function () {
+    //        var imgURL = document.getElementById("zoom1").href;
+    //        document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+    //    }),
+    //    jQuery("#zoomdiv").hover(function () {
+    //        var imgURL = document.getElementById("zoom1").href;
+    //        document.getElementById("cloud-zoom-big").style.backgroundImage = "url('" + imgURL + "')";
+    //    })
+    //});
 
     function changeImg() {
         var imgURL = document.getElementById("zoom1").href;
@@ -171,7 +171,7 @@
                 alert("Problem!")
             },
             success: function (successData) {
-                console.log(successData);
+                //console.log(successData);
                 var imageURL = successData.data.imageURL;
                 jQuery("#clzo").attr("src", imageURL);
                 jQuery("#zoom1").attr("href", imageURL);
@@ -179,13 +179,13 @@
             },
             type: "POST"
         })
-        console.log(color);
+        //console.log(color);
         event.preventDefault();
         return false;
     }
     function sizeSelect(size) {
         jQuery("#size").val(size);
-        console.log(size)
+        //console.log(size)
         event.preventDefault();
         return false;
     }
