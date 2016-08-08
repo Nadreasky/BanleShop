@@ -872,21 +872,21 @@ namespace BanleWebsite.Controllers
 
         //=======Ham search san pham======
 
-        [HttpPost]
-        public List<Product> getProductHint(string hint)
+        
+        public Object getProductHint(string hint)
         {
             List<Product> allProducts = _productServices.getAll();
-            List<Product> resultList = null;
+            List<ProductMapping> resultList = new List<ProductMapping>();
             for (int i = 0; i < allProducts.Count; i++)
             {
                 Product p = allProducts.ElementAt(i);
-                if(p.Name.Contains(hint))
+                if(p.Name.ToUpper().Contains(hint.ToUpper()))
                 {
-                    resultList.Add(p);
+                    resultList.Add(_productServices.findByIDMapping(p.ID));
                 }
             }
 
-            return resultList;
+            return JsonConvert.SerializeObject(resultList);
         }
     }
 }

@@ -492,62 +492,6 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
             left: 9px;
         }
 
-        .searchForm, .collapsed {
-            width: 500px;
-            margin: 20px;
-            width: 230px;
-            position: relative;
-            background-color: #E0E0E0;
-            padding: 20px;
-            float: left;
-            height: 30px;
-            -moz-box-shadow: -8px 8px 20px -6px #000;
-            -webkit-box-shadow: -8px 8px 20px -6px #000;
-            box-shadow: -8px 8px 20px -6px #000;
-            -moz-border-radius-bottomleft: 40px;
-            -webkit-border-bottom-left-radius: 40px;
-            border-bottom-left-radius: 40px;
-            -webkit-transition: height .5s ease;
-            -moz-transition: height .5s ease;
-            -ms-transition: height .5s ease;
-            -o-transition: height .5s ease;
-            transition: height .5s ease;
-        }
-
-        .expanded {
-            height: 160px;
-        }
-
-
-        /* ==========================
-   Search Box
-   ========================== */
-
-        .search-query:focus {
-            width: 175px;
-            background-color: #fff;
-            color: #000;
-            opacity: 1;
-            -webkit-box-shadow: 1px 1px 9px rgba(0,0,0,0.85);
-            -moz-box-shadow: 1px 1px 9px rgba(0,0,0,0.85);
-            box-shadow: 1px 1px 9px rgba(0,0,0,0.85);
-            /*font-weight: 800;*/
-        }
-
-        .search-query {
-            padding: 5px 10px;
-            background: #ccc;
-            color: #444;
-            border: 0;
-            width: 150px;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
-            -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
-            box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
-            outline: 0;
-        }
 
     </style>
     <script type="text/javascript">
@@ -559,7 +503,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 			var contBtn = 'Continue shopping';
 			var checkBtn = 'Checkout';
 
-			var search_autocomplete_enabled = '1';
+			//var search_autocomplete_enabled = '1';
 			var isotope_animation_enabled = '1';
 
 			var hoverfold_js_url = 'Content/Buyshop/wp-content/themes/buyshop/js/jquery.hoverfold.js';
@@ -646,18 +590,18 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
     <!--START SEARCH FUNCTION-->
     <script>
-        jQuery(function () {
-            jQuery('.search-query').on("focus blur", function () {
-                //jQuery(this).parent().toggleClass("expanded collapsed");
-                jQuery(this).siblings('.suggestionBox').toggle();
-            });
-        });
+        //jQuery(function () {
+        //    jQuery('.search-query').on("focus blur", function () {
+        //        //jQuery(this).parent().toggleClass("expanded collapsed");
+        //        jQuery(this).siblings('.suggestionBox').toggle();
+        //    });
+        //});
 
-
+        //main
         function getProductHint()
         {
             var hint = jQuery("#sbm").val();
-            console.log(hint);
+            //console.log(hint);
 
             jQuery.ajax({
                 url: "/Quanli/getProductHint",
@@ -669,18 +613,122 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                     alert("Problem!")
                 },
                 success: function (data) {
-                    console.log(data);
+                    //console.log(data);
                     var resultList = JSON.parse(data);
                     var ul = document.getElementById("suggestionBox");
-                    for (var i = 0; i < resultList.length; i++)
+                    var count = 0;
+
+                    jQuery('#suggestionBox').empty();
+                    for (var i = resultList.length - 1; i >= 0 & count <10 ; i--)
                     {
-                        var li = document.createTextNode("li");
-                        li.appendChild(document.createTextNode(resultList[i].Name));
-                        ul.appendChild(li);
+                        jQuery('#suggestionBox').append('<li><a href="/Sanpham/' + resultList[i].ID + '">' + resultList[i].Name + '</a></li>')
+                        //console.log(resultList[i].Name)
+                        count++;
                     }
                     
-                }
+                    jQuery('#sbm').siblings('#suggestionBox').show();
+                    console.log("done")
+                },
+                type: 'GET'
             })
+        }
+        function hideSuggestBox()
+        {
+            if (jQuery("#suggestionBox").is(':hover'))
+            {
+
+            }
+            else
+            {
+                jQuery('#sbm').siblings('#suggestionBox').hide();
+            }
+            
+        }
+
+        //spy
+        function getProductHint_spy() {
+            var hint = jQuery("#ssp").val();
+            //console.log(hint);
+
+            jQuery.ajax({
+                url: "/Quanli/getProductHint",
+                data: {
+                    format: 'json',
+                    hint: hint
+                },
+                error: function () {
+                    alert("Problem!")
+                },
+                success: function (data) {
+                    //console.log(data);
+                    var resultList = JSON.parse(data);
+                    var ul = document.getElementById("suggestionBox_spy");
+                    var count = 0;
+
+                    jQuery('#suggestionBox_spy').empty();
+                    for (var i = resultList.length - 1; i >= 0 & count < 10 ; i--) {
+                        jQuery('#suggestionBox_spy').append('<li><a href="/Sanpham/' + resultList[i].ID + '">' + resultList[i].Name + '</a></li>')
+                        //console.log(resultList[i].Name)
+                        count++;
+                    }
+
+                    jQuery('#ssp').siblings('#suggestionBox_spy').show();
+                    //console.log("done")
+                },
+                type: 'GET'
+            })
+        }
+        function hideSuggestBox_spy() {
+            if (jQuery("#suggestionBox_spy").is(':hover')) {
+
+            }
+            else {
+                jQuery('#ssp').siblings('#suggestionBox_spy').hide();
+            }
+
+        }
+
+        //side bar
+        function getProductHint_sb() {
+            var hint = jQuery("#ssb").val();
+            //console.log(hint);
+
+            jQuery.ajax({
+                url: "/Quanli/getProductHint",
+                data: {
+                    format: 'json',
+                    hint: hint
+                },
+                error: function () {
+                    alert("Problem!")
+                },
+                success: function (data) {
+                    //console.log(data);
+                    var resultList = JSON.parse(data);
+                    var ul = document.getElementById("suggestionBox_sb");
+                    var count = 0;
+
+                    jQuery('#suggestionBox_sb').empty();
+                    for (var i = resultList.length - 1; i >= 0 & count < 10 ; i--) {
+                        jQuery('#suggestionBox_sb').append('<li><a href="/Sanpham/' + resultList[i].ID + '">' + resultList[i].Name + '</a></li>')
+                        //console.log(resultList[i].Name)
+                        count++;
+                    }
+
+                    jQuery('#ssb').siblings('#suggestionBox_sb').show();
+                    //console.log("done")
+                },
+                type: 'GET'
+            })
+        }
+        function hideSuggestBox_sb() {
+            if (jQuery("#suggestionBox_sb").is(':hover')) {
+
+            }
+            else {
+                jQuery('#ssb').siblings('#suggestionBox_sb').hide();
+            }
+
         }
     </script>
     <!--END SEARCH FUNCTION-->
@@ -707,20 +755,15 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
             </div><!-- //sidebar-widget --><div id="woocommerce_product_search-3" class="woocommerce widget_product_search">
                 <h4 class="widget-title">Search</h4><div class="form-search-wrapper ">
-                    <form id="form-search" class="form-search" action="">
-                        <input type="text" name="s" id="sbm" value="" class="search-query" placeholder="Search for products" onchange="getProductHint()">
-                        <button id="searchsubmit" class="btn" type="submit">
+                    <div id="form-search" class="form-search">
+                        <input type="text" name="s" id="ssb" value="" class="search-query" placeholder="Search for products" oninput="getProductHint_sb()" onblur="hideSuggestBox_sb()">
+                        <button id="searchsubmit" class="btn">
                             <i class="icon-search icon-large"></i>
                         </button>
-                        <ul class="suggestionBox" id="suggestionBox">
-                            <li><b>a</b>pple</li>
-                            <li><b>a</b>ndroid</li>
-                            <li><b>a</b>mazon</li>
-                            <li><b>a</b>ol</li>
-                            <li><b>a</b>tlanta</li>
+                        <ul class="suggestionBox" id="suggestionBox_sb" style="left:-300px; width:280px;">
                         </ul>
                         <input type="hidden" name="post_type" value="product" />
-                    </form>
+                    </div>
                 </div>
             </div><!-- //sidebar-widget -->
             <div id="back-top"> <a href="#top"><i class="icon-up-2"></i></a> </div>
@@ -780,20 +823,15 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                         <div class="spy-right">
                             <div class="spyshop_search">
                                 <div class="form-search-wrapper ">
-                                    <form id="form-search" class="form-search" action="">
-                                        <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products" onchange="getProductHint()" />
-                                        <button id="searchsubmit" class="btn" type="submit">
+                                    <div id="form-search" class="form-search">
+                                        <input type="text" name="s" id="ssp" value="" class="search-query" placeholder="Search for products" oninput="getProductHint_spy()" onblur="hideSuggestBox_spy()"/>
+                                        <button id="searchsubmit" class="btn">
                                             <i class="icon-search icon-large"></i>
                                         </button>
-                                        <ul class="suggestionBox">
-                                            <li><b>a</b>pple</li>
-                                            <li><b>a</b>ndroid</li>
-                                            <li><b>a</b>mazon</li>
-                                            <li><b>a</b>ol</li>
-                                            <li><b>a</b>tlanta</li>
+                                        <ul class="suggestionBox" id="suggestionBox_spy" style="width:220px;">
                                         </ul>
                                         <input type="hidden" name="post_type" value="product" />
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                             <div class="spyshop"> </div>
@@ -827,20 +865,15 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                     </div><!-- //sidebar-widget --><div class="pull-right padding-1">
                         <div id="woocommerce_product_search-2" class="woocommerce widget_product_search">
                             <h4 class="widget-title">Search</h4><div class="form-search-wrapper ">
-                                <form id="form-search" class="form-search" action="">
-                                    <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products" onchange="getProductHint()">
-                                    <button id="searchsubmit" class="btn" type="submit">
+                                <div id="form-search" class="form-search">
+                                    <input type="text" name="s" id="sbm" value="" class="search-query" placeholder="Search for products" oninput="getProductHint()" onblur="hideSuggestBox()">
+                                    <button id="searchsubmit" class="btn">
                                         <i class="icon-search icon-large"></i>
                                     </button>
-                                    <ul class="suggestionBox">
-                                        <li><b>a</b>pple</li>
-                                        <li><b>a</b>ndroid</li>
-                                        <li><b>a</b>mazon</li>
-                                        <li><b>a</b>ol</li>
-                                        <li><b>a</b>tlanta</li>
+                                    <ul class="suggestionBox" id="suggestionBox" style="width:280px;">
                                     </ul>
                                     <input type="hidden" name="post_type" value="product" />
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div><!-- //sidebar-widget -->
@@ -1211,10 +1244,10 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 /* <![CDATA[ */
 //var woocommerce_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-ajax.php"};
 /* ]]> */
-    @*</script>
+    </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min7e78.js?ver=2.3.8'></script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.min330a.js?ver=1.4.1'></script>
-    <script type='text/javascript'>*@
+    <script type='text/javascript'>
 /* <![CDATA[ */
 //var wc_cart_fragments_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-ajax.php","fragment_name":"wc_fragments"};
 /* ]]> */
@@ -1243,7 +1276,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/jquery.fancybox.packbfd4.js?v=2.1.5&amp;ver=4.2.9'></script>
     <script type='text/javascript'>
 /* <![CDATA[ */
-var wc_add_to_cart_variation_params = {"i18n_no_matching_variations_text":"Sorry, no products matched your selection. Please choose a different combination.","i18n_unavailable_text":"Sorry, this product is unavailable. Please choose a different combination."};
+//var wc_add_to_cart_variation_params = {"i18n_no_matching_variations_text":"Sorry, no products matched your selection. Please choose a different combination.","i18n_unavailable_text":"Sorry, this product is unavailable. Please choose a different combination."};
 /* ]]> */
     </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min7e78.js?ver=2.3.8'></script>
@@ -1252,7 +1285,7 @@ var wc_add_to_cart_variation_params = {"i18n_no_matching_variations_text":"Sorry
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/themes/buyshop/js/add-to-cart7350.js?ver=4.2.9'></script>
     <script type='text/javascript'>
 /* <![CDATA[ */
-var icl_vars = {"current_language":"en","icl_home":"http:\/\/demo.ethemeuk.com\/buyshop\/woocommerce\/demo"};
+//var icl_vars = {"current_language":"en","icl_home":"http:\/\/demo.ethemeuk.com\/buyshop\/woocommerce\/demo"};
 /* ]]> */
     </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/sitepress-multilingual-cms/res/js/sitepress7350.js?ver=4.2.9'></script>
