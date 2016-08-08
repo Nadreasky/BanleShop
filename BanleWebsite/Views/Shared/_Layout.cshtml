@@ -27,6 +27,8 @@
     //        }
     //    }
     //}
+
+
 }
 
 <!DOCTYPE html>
@@ -455,6 +457,98 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
         #wp-social-login-connect-options a, #cancel-comment-reply-link, a.more-link {
             color: !important;
         }
+
+        .suggestionBox {
+            display: none;
+            background-color: white;
+            color: #3b3835;
+            border: 1px solid rgba(0,0,0,0.3);
+            border-top: 0;
+            float: left;
+            left: 0;
+            list-style: none;
+            margin: 20px;
+            padding: 8px;
+            position: absolute;
+            top: 31px;
+            width: 250px;
+            z-index: 1000;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        }
+
+        .suggestionBox:before {
+            content: '';
+            display: inline-block;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid #fff;
+            position: absolute;
+            top: -7px;
+            left: 9px;
+        }
+
+        .searchForm, .collapsed {
+            width: 500px;
+            margin: 20px;
+            width: 230px;
+            position: relative;
+            background-color: #E0E0E0;
+            padding: 20px;
+            float: left;
+            height: 30px;
+            -moz-box-shadow: -8px 8px 20px -6px #000;
+            -webkit-box-shadow: -8px 8px 20px -6px #000;
+            box-shadow: -8px 8px 20px -6px #000;
+            -moz-border-radius-bottomleft: 40px;
+            -webkit-border-bottom-left-radius: 40px;
+            border-bottom-left-radius: 40px;
+            -webkit-transition: height .5s ease;
+            -moz-transition: height .5s ease;
+            -ms-transition: height .5s ease;
+            -o-transition: height .5s ease;
+            transition: height .5s ease;
+        }
+
+        .expanded {
+            height: 160px;
+        }
+
+
+        /* ==========================
+   Search Box
+   ========================== */
+
+        .search-query:focus {
+            width: 175px;
+            background-color: #fff;
+            color: #000;
+            opacity: 1;
+            -webkit-box-shadow: 1px 1px 9px rgba(0,0,0,0.85);
+            -moz-box-shadow: 1px 1px 9px rgba(0,0,0,0.85);
+            box-shadow: 1px 1px 9px rgba(0,0,0,0.85);
+            /*font-weight: 800;*/
+        }
+
+        .search-query {
+            padding: 5px 10px;
+            background: #ccc;
+            color: #444;
+            border: 0;
+            width: 150px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
+            -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.65);
+            outline: 0;
+        }
+
     </style>
     <script type="text/javascript">
 			var ajaxFilterEnabled = 0;
@@ -550,11 +644,52 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
     <!--END FACEBOOK SCRIPT-->
 
+    <!--START SEARCH FUNCTION-->
+    <script>
+        jQuery(function () {
+            jQuery('.search-query').on("focus blur", function () {
+                //jQuery(this).parent().toggleClass("expanded collapsed");
+                jQuery(this).siblings('.suggestionBox').toggle();
+            });
+        });
+
+
+        function getProductHint()
+        {
+            var hint = jQuery("#sbm").val();
+            console.log(hint);
+
+            jQuery.ajax({
+                url: "/Quanli/getProductHint",
+                data: {
+                    format: 'json',
+                    hint: hint
+                },
+                error: function () {
+                    alert("Problem!")
+                },
+                success: function (data) {
+                    console.log(data);
+                    var resultList = JSON.parse(data);
+                    var ul = document.getElementById("suggestionBox");
+                    for (var i = 0; i < resultList.length; i++)
+                    {
+                        var li = document.createTextNode("li");
+                        li.appendChild(document.createTextNode(resultList[i].Name));
+                        ul.appendChild(li);
+                    }
+                    
+                }
+            })
+        }
+    </script>
+    <!--END SEARCH FUNCTION-->
+
 
     <div id="wrap">
 
         <div id="right_toolbar" class="hidden-phone hidden-tablet">
-            <div><a href="http://demo.ethemeuk.com/buyshop/woocommerce/demo"><img src="~/Content/SiteImages/logo_rightbar.png" width="52" height="142" alt=""></a></div>
+            <div><a href="/"><img src="~/Content/SiteImages/logo_rightbar.png" width="52" height="142" alt=""></a></div>
 
             <div id="shopping_cart-3" class="woocommerce widget_shopping_cart">
                 <div class="shoppingcart">
@@ -572,11 +707,18 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
             </div><!-- //sidebar-widget --><div id="woocommerce_product_search-3" class="woocommerce widget_product_search">
                 <h4 class="widget-title">Search</h4><div class="form-search-wrapper ">
-                    <form id="form-search" class="form-search" action="http://demo.ethemeuk.com/buyshop/woocommerce/demo/">
-                        <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products">
+                    <form id="form-search" class="form-search" action="">
+                        <input type="text" name="s" id="sbm" value="" class="search-query" placeholder="Search for products" onchange="getProductHint()">
                         <button id="searchsubmit" class="btn" type="submit">
                             <i class="icon-search icon-large"></i>
                         </button>
+                        <ul class="suggestionBox" id="suggestionBox">
+                            <li><b>a</b>pple</li>
+                            <li><b>a</b>ndroid</li>
+                            <li><b>a</b>mazon</li>
+                            <li><b>a</b>ol</li>
+                            <li><b>a</b>tlanta</li>
+                        </ul>
                         <input type="hidden" name="post_type" value="product" />
                     </form>
                 </div>
@@ -638,11 +780,18 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                         <div class="spy-right">
                             <div class="spyshop_search">
                                 <div class="form-search-wrapper ">
-                                    <form id="form-search" class="form-search" action="http://demo.ethemeuk.com/buyshop/woocommerce/demo/">
-                                        <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products">
+                                    <form id="form-search" class="form-search" action="">
+                                        <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products" onchange="getProductHint()" />
                                         <button id="searchsubmit" class="btn" type="submit">
                                             <i class="icon-search icon-large"></i>
                                         </button>
+                                        <ul class="suggestionBox">
+                                            <li><b>a</b>pple</li>
+                                            <li><b>a</b>ndroid</li>
+                                            <li><b>a</b>mazon</li>
+                                            <li><b>a</b>ol</li>
+                                            <li><b>a</b>tlanta</li>
+                                        </ul>
                                         <input type="hidden" name="post_type" value="product" />
                                     </form>
                                 </div>
@@ -678,11 +827,18 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                     </div><!-- //sidebar-widget --><div class="pull-right padding-1">
                         <div id="woocommerce_product_search-2" class="woocommerce widget_product_search">
                             <h4 class="widget-title">Search</h4><div class="form-search-wrapper ">
-                                <form id="form-search" class="form-search" action="http://demo.ethemeuk.com/buyshop/woocommerce/demo/">
-                                    <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products">
+                                <form id="form-search" class="form-search" action="">
+                                    <input type="text" name="s" id="s" value="" class="search-query" placeholder="Search for products" onchange="getProductHint()">
                                     <button id="searchsubmit" class="btn" type="submit">
                                         <i class="icon-search icon-large"></i>
                                     </button>
+                                    <ul class="suggestionBox">
+                                        <li><b>a</b>pple</li>
+                                        <li><b>a</b>ndroid</li>
+                                        <li><b>a</b>mazon</li>
+                                        <li><b>a</b>ol</li>
+                                        <li><b>a</b>tlanta</li>
+                                    </ul>
                                     <input type="hidden" name="post_type" value="product" />
                                 </form>
                             </div>
@@ -1053,14 +1209,14 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.minc8cb.js?ver=2.60'></script>
     <script type='text/javascript'>
 /* <![CDATA[ */
-var woocommerce_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-ajax.php"};
+//var woocommerce_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-ajax.php"};
 /* ]]> */
-    </script>
+    @*</script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min7e78.js?ver=2.3.8'></script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.min330a.js?ver=1.4.1'></script>
-    <script type='text/javascript'>
+    <script type='text/javascript'>*@
 /* <![CDATA[ */
-var wc_cart_fragments_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-ajax.php","fragment_name":"wc_fragments"};
+//var wc_cart_fragments_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-ajax.php","fragment_name":"wc_fragments"};
 /* ]]> */
     </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min7e78.js?ver=2.3.8'></script>
@@ -1069,7 +1225,7 @@ var wc_cart_fragments_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/yith-woocommerce-wishlist/assets/js/jquery.selectBox.min7350.js?ver=4.2.9'></script>
     <script type='text/javascript'>
 /* <![CDATA[ */
-var yith_wcwl_l10n = {"ajax_url":"http:\/\/demo.ethemeuk.com\/buyshop\/woocommerce\/demo\/wp-admin\/admin-ajax.php","redirect_to_cart":"no","multi_wishlist":"","hide_add_button":"1","is_user_logged_in":"","ajax_loader_url":"http:\/\/demo.ethemeuk.com\/buyshop\/woocommerce\/demo\/wp-content\/plugins\/yith-woocommerce-wishlist\/assets\/images\/ajax-loader.gif","remove_from_wishlist_after_add_to_cart":"yes","labels":{"cookie_disabled":"We are sorry, but this feature is available only if cookies are enabled on your browser.","added_to_cart_message":"<div class=\"woocommerce-message\">Product correctly added to cart<\/div>"},"actions":{"add_to_wishlist_action":"add_to_wishlist","remove_from_wishlist_action":"remove_from_wishlist","move_to_another_wishlist_action":"move_to_another_wishlsit"}};
+//var yith_wcwl_l10n = {"ajax_url":"http:\/\/demo.ethemeuk.com\/buyshop\/woocommerce\/demo\/wp-admin\/admin-ajax.php","redirect_to_cart":"no","multi_wishlist":"","hide_add_button":"1","is_user_logged_in":"","ajax_loader_url":"http:\/\/demo.ethemeuk.com\/buyshop\/woocommerce\/demo\/wp-content\/plugins\/yith-woocommerce-wishlist\/assets\/images\/ajax-loader.gif","remove_from_wishlist_after_add_to_cart":"yes","labels":{"cookie_disabled":"We are sorry, but this feature is available only if cookies are enabled on your browser.","added_to_cart_message":"<div class=\"woocommerce-message\">Product correctly added to cart<\/div>"},"actions":{"add_to_wishlist_action":"add_to_wishlist","remove_from_wishlist_action":"remove_from_wishlist","move_to_another_wishlist_action":"move_to_another_wishlsit"}};
 /* ]]> */
     </script>
     <script type='text/javascript' src='~/Content/Buyshop/wp-content/plugins/yith-woocommerce-wishlist/assets/js/jquery.yith-wcwld5f7.js?ver=2.0'></script>

@@ -869,5 +869,24 @@ namespace BanleWebsite.Controllers
 
             sb.Clear();
         }
+
+        //=======Ham search san pham======
+
+        [HttpPost]
+        public List<Product> getProductHint(string hint)
+        {
+            List<Product> allProducts = _productServices.getAll();
+            List<Product> resultList = null;
+            for (int i = 0; i < allProducts.Count; i++)
+            {
+                Product p = allProducts.ElementAt(i);
+                if(p.Name.Contains(hint))
+                {
+                    resultList.Add(p);
+                }
+            }
+
+            return resultList;
+        }
     }
 }
