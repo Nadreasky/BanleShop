@@ -61,7 +61,7 @@ namespace BanleWebsite.Services
         }
 
         public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity,
-            string imgPath1, string imgPath2, string imgPath3, bool featured, double salePercent, bool isPromoted)
+            string imgPath1, string imgPath2, string imgPath3, double oldPrice, bool featured, double salePercent, bool isPromoted)
         {
             Product p = findByID(id);
             if (p == null)
@@ -75,6 +75,7 @@ namespace BanleWebsite.Services
                 p.Img1 = imgPath1;
                 p.Img2 = imgPath2;
                 p.Img3 = imgPath3;
+                p.OldPrice = oldPrice;
                 p.Featured = featured;
                 p.SalePercent = salePercent;
                 p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
@@ -100,6 +101,7 @@ namespace BanleWebsite.Services
                 {
                     p.Img3 = imgPath3;
                 }
+                p.OldPrice = oldPrice;
                 p.Featured = featured;
                 p.SalePercent = salePercent;
                 p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;

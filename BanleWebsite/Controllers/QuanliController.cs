@@ -209,7 +209,7 @@ namespace BanleWebsite.Controllers
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult saveProduct(string id, string productName, string productPrice, string productCateID, string description,
-            string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3,
+            string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3, string oldPrice,
             string featured, string salePercent, string isPromoted)
         {
             int _id = -1;
@@ -219,6 +219,7 @@ namespace BanleWebsite.Controllers
             string filePath1 = "";
             string filePath2 = "";
             string filePath3 = "";
+            double _oldPrice = 0;
             bool _featured = false;
             double _salePercent = 0;
             bool _isPromoted = false;
@@ -248,6 +249,15 @@ namespace BanleWebsite.Controllers
             {
                 ViewBag.Error += "Error: Không thể parse giá của sản phẩm <br/>";
             }
+            if (oldPrice == null || oldPrice.Equals(""))
+            {
+                _oldPrice = 0;
+            }
+            else if (double.TryParse(oldPrice, out _oldPrice) == false)
+            {
+                ViewBag.Error += "Error: Không thể parse giá cũ của sản phẩm <br/>";
+            }
+
             if (productCateID == null || productCateID.Equals(""))
             {
                 _productCateID = -1;
@@ -382,7 +392,7 @@ namespace BanleWebsite.Controllers
 
             else
             {
-                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3, _featured, _salePercent, _isPromoted);
+                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3, _oldPrice, _featured, _salePercent, _isPromoted);
                 return RedirectToAction("Product");
             }
         }
