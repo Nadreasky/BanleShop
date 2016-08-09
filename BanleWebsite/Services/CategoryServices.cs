@@ -32,7 +32,7 @@ namespace BanleWebsite.Services
             return c;
         }
 
-        public void addOrUpdateCategory(int id, String name, int preCateID)
+        public void addOrUpdateCategory(int id, String name, int rank, int preCateID)
         {
             Category c;
             c = findByid(id);
@@ -40,6 +40,7 @@ namespace BanleWebsite.Services
             {
                 c = new Category();
                 c.Name = name;
+                c.Rank = rank;
                 c.isActived = true;
                 if (preCateID < 0)
                 {
@@ -54,6 +55,7 @@ namespace BanleWebsite.Services
             else
             {
                 c.Name = name;
+                c.Rank = rank;
                 c.isActived = true;
                 if (preCateID < 0)
                 {
@@ -146,6 +148,12 @@ namespace BanleWebsite.Services
         public void delete(Category c)
         {
             _categoryRepository.Delete(c);
+        }
+
+        public List<Category> getListCategorySortRank()
+        {
+            List<Category> listCategorySortRank = getAll().Where(c => c.Rank > 0).OrderBy(c => c.Rank).ToList();
+            return listCategorySortRank;
         }
     }
 }

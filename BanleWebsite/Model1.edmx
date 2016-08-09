@@ -588,8 +588,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PreCateID" Type="Int32" />
           <Property Name="isActived" Type="Boolean" />
-          <NavigationProperty Name="Products" Relationship="BanleShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
           <Property Name="Rank" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="BanleShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -683,13 +683,13 @@
           <Property Name="Featured" Type="Boolean" />
           <Property Name="SalePercent" Type="Double" />
           <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isPromoted" Type="Boolean" />
+          <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Category" Relationship="BanleShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="Product" ToRole="ColorProductDetail" />
           <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Product" FromRole="Product" ToRole="Image" />
           <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="Product" ToRole="SizeProductDetail" />
-          <Property Name="isPromoted" Type="Boolean" />
-          <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Size">
           <Key>

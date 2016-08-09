@@ -7,6 +7,7 @@
     int numberItemInCart = _orderServices.getNumberOfItemInCart();
 
     List<Category> categoryList = _categoryServices.getAll();
+    List<Category> listCategorySortRank = _categoryServices.getListCategorySortRank();
     List<Category> categoryListNoPre = new List<Category>();
     foreach (var item in categoryList)
     {
@@ -713,10 +714,14 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                     <a href="/Danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a><a class="icon-collapse collapsed" href="#collapsed_item_@item.ID" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
                                                     <ul class="collapse in level0" id="collapsed_item_@item.ID">
                                                         @{
-                                                            foreach (var item2 in categoryList)
+                                                            foreach (var item2 in listCategorySortRank)
+
+                                                            // before sort rank
+                                                            //foreach (var item2 in categoryList)
                                                             {
-                                                                if (item2.PreCateID == item.ID)
-                                                                {
+                                                                    // bofore sort rank
+                                                                    //if (item2.PreCateID == item.ID)
+                                                                    {
                                                                     <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href="/Danhmuc/@item2.GenerateSlug()">	<span style="font-family:VNOswald;">@item2.Name</span>	</a>	</li>
                                                                 }
                                                             }
@@ -796,10 +801,12 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                                         <a href="#" class="title">	<span></span>	</a>
                                                                         <ul class="level1">
                                                                             @{
-                                                                                foreach (var item2 in categoryList)
-                                                                                {
-                                                                                    if (item2.PreCateID == item.ID)
+                                                                                foreach (var item2 in listCategorySortRank)
+                                                                                    // before sort rank
+                                                                                    //foreach (var item2 in categoryList)
                                                                                     {
+                                                                                        //if (item2.PreCateID == item.ID)
+                                                                                        {
                                                                                         <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		
                                                                                             <a href="/danhmuc/@item2.GenerateSlug()">		
                                                                                                 <span>@item2.Name</span>		

@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Quản lí danh mục";
     List<Category> categories = ViewBag.categories;
+    List<Category> listCategorySortRank = ViewBag.listCategorySortRank;
 }
 
 
@@ -32,6 +33,8 @@
             <input id="id" name="id" class="form-control" type="hidden" />
             <label>Tên Category</label>
             <input id="categoryName" name="categoryName" class="form-control" />
+            <label>Rank</label>
+            <input id="rank" name="rank" class="form-control" />
             <input id="preCateID" name="preCateID" class="form-control" value="@SLIMCONFIG.NONE_PRE_CATEGORY" type="hidden" />
 
             <input id="btnAddCategory" type="submit" class="btn btn-success" value="Add" />
@@ -43,6 +46,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Category Name</th>
+                    <th>Rank</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -57,6 +61,7 @@
                             <tr>
                                 <td>@c.ID</td>
                                 <td>@c.Name</td>
+                                <td>@c.Rank</td>
                                 <td><button class="btn btn-warning" onclick="editCategory(@c.ID)">Edit</button></td>
                                 <td><button class="btn btn-danger" onclick="deleteCategory(@c.ID)">Delete</button></td>
                                 <td>
@@ -68,24 +73,36 @@
                                         </thead>
                                         <tbody>
                                             @{
-                                                for (int j = 0; j < categories.Count; j++)
+                                                foreach (var item in listCategorySortRank)
+                                                {
+                                                    <tr>
+                                                        <td><input id="subCateName+@item.ID" class="form-control" disabled="disabled" value="@item.Name" /></td>
+                                                        <td><input id="rankSubCate+@item.ID" class="form-control" disabled="disabled" value="@item.Rank" /></td>
+                                                        <td><button id="btnEditSubCate+@item.ID" class="btn btn-warning" onclick="editSubCategory(@item.ID)">Edit</button></td>
+                                                        <td><button class="btn btn-danger" onclick="deleteCategory(@item.ID)">Delete</button></td>
+                                                    </tr>
+                                                }
+
+                                                @*for (int j = 0; j < categories.Count; j++)
                                                 {
                                                     Category sc = categories.ElementAt(j);
                                                     if (sc.PreCateID == c.ID)
                                                     {
                                                         <tr>
                                                             <td><input id="subCateName+@sc.ID" class="form-control" disabled="disabled" value="@sc.Name" /></td>
+                                                            <td><input id="rankSubCate+@sc.ID" class="form-control" disabled="disabled" value="@sc.Rank"/></td>
                                                             <td><button id="btnEditSubCate+@sc.ID" class="btn btn-warning" onclick="editSubCategory(@sc.ID)">Edit</button></td>
                                                             <td><button class="btn btn-danger" onclick="deleteCategory(@sc.ID)">Delete</button></td>
                                                         </tr>
                                                     }
-                                                }
+                                            }*@
                                                 <tr>
                                                     @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
                                                         <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
                                                         <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@c.ID" /></td>
                                                         <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
+                                                        <td><input id="rankSubCate" name="rank" class="form-control" placeholder="Rank" /></td>
                                                         <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
                                                     }
                                                 </tr>
@@ -120,7 +137,7 @@
                 var cateObj = JSON.parse(data);
                 jq("#id").val(cateObj.ID);
                 jq("#categoryName").val(cateObj.Name);
-
+                jq("#rank").val(cateObj.Rank);
                 jq("#btnAddCategory").val("Update");
             },
             type: 'GET'
@@ -135,18 +152,21 @@
             var btn = document.getElementById("btnEditSubCate+"+id).firstChild;
             btn.data = btn.data = "Edit" ? "Update" : "Edit";
             var x = document.getElementById("subCateName+"+id).disabled = false;
+            var y = document.getElementById("rankSubCate+"+id).disabled = false;
             editable = true;
         }
         else
         {
             var subCateName = document.getElementById("subCateName+"+id).value;
+            var rankSubCate = document.getElementById("rankSubCate+"+id).value;
             //alert(subCateName);
             jQuery.ajax({
                 url: "/Quanli/editSubCate",
                 data: {
                     format: 'json',
                     id: id,
-                    name: subCateName
+                    name: subCateName,
+                    rank: rankSubCate
                 },
                 error: function() {
                     alert("Problem");
@@ -157,6 +177,7 @@
 
                         editable = false;
                         var x = document.getElementById("subCateName+" + id).disabled = true;
+                        var y = document.getElementById("subCateName+" + id).disabled = true;
                         location.href = location.href;
                     }
                 },
