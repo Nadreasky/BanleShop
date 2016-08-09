@@ -149,5 +149,11 @@ namespace BanleWebsite.Services
         {
             _categoryRepository.Delete(c);
         }
+
+        public List<Category> getListCategorySortRank()
+        {
+            List<Category> listCategorySortRank = getAll().Where(c => c.Rank > 0).OrderBy(c => c.Rank).ToList();
+            return listCategorySortRank;
+        }
     }
 }

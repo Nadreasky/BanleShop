@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Quản lí danh mục";
     List<Category> categories = ViewBag.categories;
+    List<Category> listCategorySortRank = ViewBag.listCategorySortRank;
 }
 
 
@@ -72,7 +73,17 @@
                                         </thead>
                                         <tbody>
                                             @{
-                                                for (int j = 0; j < categories.Count; j++)
+                                                foreach (var item in listCategorySortRank)
+                                                {
+                                                    <tr>
+                                                        <td><input id="subCateName+@item.ID" class="form-control" disabled="disabled" value="@item.Name" /></td>
+                                                        <td><input id="rankSubCate+@item.ID" class="form-control" disabled="disabled" value="@item.Rank" /></td>
+                                                        <td><button id="btnEditSubCate+@item.ID" class="btn btn-warning" onclick="editSubCategory(@item.ID)">Edit</button></td>
+                                                        <td><button class="btn btn-danger" onclick="deleteCategory(@item.ID)">Delete</button></td>
+                                                    </tr>
+                                                }
+
+                                                @*for (int j = 0; j < categories.Count; j++)
                                                 {
                                                     Category sc = categories.ElementAt(j);
                                                     if (sc.PreCateID == c.ID)
@@ -84,7 +95,7 @@
                                                             <td><button class="btn btn-danger" onclick="deleteCategory(@sc.ID)">Delete</button></td>
                                                         </tr>
                                                     }
-                                                }
+                                            }*@
                                                 <tr>
                                                     @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {

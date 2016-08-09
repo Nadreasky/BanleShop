@@ -38,6 +38,7 @@ namespace BanleWebsite.Controllers
         {
             List<Category> categories = _categoryServices.getAll();
             ViewBag.categories = categories;
+            ViewBag.listCategorySortRank = _categoryServices.getListCategorySortRank();
             return View();
         }
 

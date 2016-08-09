@@ -10,15 +10,15 @@
         <EntityTypeShape EntityType="BanleShopModel.AspNetUserClaim" Width="1.5" PointX="12.25" PointY="12.25" />
         <EntityTypeShape EntityType="BanleShopModel.AspNetUserLogin" Width="1.5" PointX="12.25" PointY="15" />
         <EntityTypeShape EntityType="BanleShopModel.AspNetUser" Width="1.5" PointX="10" PointY="12.5" />
-        <EntityTypeShape EntityType="BanleShopModel.Category" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="BanleShopModel.Category" Width="1.5" PointX="0.75" PointY="8.125" />
         <EntityTypeShape EntityType="BanleShopModel.Color" Width="1.5" PointX="3" PointY="13.125" />
         <EntityTypeShape EntityType="BanleShopModel.ColorProductDetail" Width="1.5" PointX="5.25" PointY="11.25" />
         <EntityTypeShape EntityType="BanleShopModel.Image" Width="1.5" PointX="5.25" PointY="8.125" />
         <EntityTypeShape EntityType="BanleShopModel.News" Width="1.5" PointX="10.75" PointY="2.875" />
         <EntityTypeShape EntityType="BanleShopModel.Order" Width="1.5" PointX="6" PointY="0.75" />
         <EntityTypeShape EntityType="BanleShopModel.OrderDetail" Width="1.5" PointX="8.25" PointY="7.75" />
-        <EntityTypeShape EntityType="BanleShopModel.Product" Width="1.5" PointX="3" PointY="6.875" />
-        <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="BanleShopModel.Product" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="3" PointY="3.375" />
         <EntityTypeShape EntityType="BanleShopModel.SizeProductDetail" Width="1.5" PointX="5.25" PointY="5.25" />
         <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
