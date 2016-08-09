@@ -445,13 +445,15 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult saveCategory(string id, string categoryName, string preCateID)
+        public ActionResult saveCategory(string id, string categoryName, string rank, string preCateID)
         {
             ViewBag.Error = "";
             int _id = -1;
             int.TryParse(id, out _id);
             int _preCateID = -1;
             int.TryParse(preCateID, out _preCateID);
+            int _rank = 0;
+            int.TryParse(rank, out _rank);
 
             if (categoryName == null || categoryName.Equals(""))
             {
@@ -462,17 +464,18 @@ namespace BanleWebsite.Controllers
                 TempData["error"] = ViewBag.Error;
                 return RedirectToAction("Category");
             }
-            _categoryServices.addOrUpdateCategory(_id, categoryName, _preCateID);
+            _categoryServices.addOrUpdateCategory(_id, categoryName, _rank, _preCateID);
 
             return RedirectToAction("Category");
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public string editSubCate(string id, string name)
+        public string editSubCate(string id, string name, string rank)
         {
             ViewBag.Error = "";
             int _id = -1;
+            int _rank = 0;
             if (id == null || id.Equals(""))
             {
                 return "Error: ID không hợp lệ!";
@@ -480,6 +483,15 @@ namespace BanleWebsite.Controllers
             else if (int.TryParse(id, out _id) == false)
             {
                 return "Error: Lỗi khi parse ID";
+            }
+
+            if (rank == null || rank.Equals(""))
+            {
+                return "Error: rank không hợp lệ!";
+            }
+            else if (int.TryParse(rank, out _rank) == false)
+            {
+                return "Error: Lỗi khi parse rank";
             }
             if (name == null || name.Equals(""))
             {
@@ -491,7 +503,7 @@ namespace BanleWebsite.Controllers
                 return "Error: Không tìm thấy Category yêu cầu!";
             }
             c.Name = name;
-            _categoryServices.addOrUpdateCategory(c.ID, c.Name, (int)c.PreCateID);
+            _categoryServices.addOrUpdateCategory(c.ID, c.Name, _rank, (int)c.PreCateID);
             return "success";
         }
 
