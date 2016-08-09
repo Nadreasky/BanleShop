@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="BanleShopModel.Product" Width="1.5" PointX="3" PointY="6.875" />
         <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="3" PointY="4.375" />
         <EntityTypeShape EntityType="BanleShopModel.SizeProductDetail" Width="1.5" PointX="5.25" PointY="5.25" />
+
         <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BanleShopModel.FK_Product_Category" />
