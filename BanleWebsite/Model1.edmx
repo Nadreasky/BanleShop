@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BanleShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BanleShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agency">
           <Key>
             <PropertyRef Name="ID" />
@@ -76,6 +76,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PreCateID" Type="int" />
           <Property Name="isActived" Type="bit" />
+          <Property Name="Rank" Type="int" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -588,6 +589,7 @@
           <Property Name="PreCateID" Type="Int32" />
           <Property Name="isActived" Type="Boolean" />
           <NavigationProperty Name="Products" Relationship="BanleShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <Property Name="Rank" Type="Int32" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -939,6 +941,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="BanleShopModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="isActived" ColumnName="isActived" />
                 <ScalarProperty Name="PreCateID" ColumnName="PreCateID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

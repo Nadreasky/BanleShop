@@ -40,6 +40,7 @@ namespace BanleWebsite.Services
             {
                 c = new Category();
                 c.Name = name;
+                c.isActived = true;
                 if (preCateID < 0)
                 {
                     c.PreCateID = SLIMCONFIG.NONE_PRE_CATEGORY;
@@ -53,6 +54,7 @@ namespace BanleWebsite.Services
             else
             {
                 c.Name = name;
+                c.isActived = true;
                 if (preCateID < 0)
                 {
                     c.PreCateID = SLIMCONFIG.NONE_PRE_CATEGORY;

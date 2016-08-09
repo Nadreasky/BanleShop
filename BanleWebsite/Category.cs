@@ -26,6 +26,7 @@ namespace BanleWebsite
         public string Name { get; set; }
         public Nullable<int> PreCateID { get; set; }
         public Nullable<bool> isActived { get; set; }
+        public Nullable<int> Rank { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
@@ -34,7 +35,6 @@ namespace BanleWebsite
         {
             VietnameseSymbol vs = new VietnameseSymbol();
             string phrase = string.Format("{0}-{1}", vs.ClearSymbol(Name), ID);
-
             string str = RemoveAccent(phrase).ToLower();
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             str = Regex.Replace(str, @"\s+", " ").Trim();
@@ -42,7 +42,6 @@ namespace BanleWebsite
             str = Regex.Replace(str, @"\s", "-");
             return str;
         }
-
         private string RemoveAccent(string text)
         {
             byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
