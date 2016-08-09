@@ -148,22 +148,40 @@
             <ul id="psz">
                 @{
 
-                    
+
 
                     foreach (var item in allSize)
                     {
-                        foreach (var item2 in sizeMainProduct)
+                        if (sizeMainProduct.Any(s => s.SizeID == item.ID))
+                        {
+                            <li>
+                                <input type="checkbox" id="size-@item.Name" value="@item.ID" checked />@item.Name
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <input type="checkbox" id="size-@item.Name" value="@item.ID" />@item.Name
+                            </li>
+                        }
+                        @*foreach (var item2 in sizeMainProduct)
                         {
                             if (item.ID == item2.SizeID)
                             {
                                 <li>
                                     <input type="checkbox" id="size-@item.Name" value="@item.ID" checked />@item.Name
                                 </li>
+                                
                             }
-                        }
-                        <li>
-                            <input type="checkbox" id="size-@item.Name" value="@item.ID" />@item.Name
-                        </li>
+                            else
+                            {
+                                <li>
+                                    <input type="checkbox" id="size-@item.Name" value="@item.ID" />@item.Name
+                                </li>
+                                
+                            }
+                        }*@
+
 
                     }
                 }
