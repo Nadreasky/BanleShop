@@ -16,7 +16,7 @@
     string link = ViewBag.link;
 
 }
-
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <style>
     /*div{
@@ -66,10 +66,17 @@
                                     @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0; margin-left:10px;" }))
                                     {
                                         <input type="hidden" class="form-control" value="@item.productId" name="productId" />
-                                        <input type="number" class="form-control" value="@item.quantity" min="1" max="99" name="quantity" style="width:30px; margin: 0 0 0 0; display:block; float:left;" />
-                                        <input type="hidden" class="form-control" value="@item.color" name="color" />
-                                        <input type="hidden" class="form-control" value="@item.size" name="size" />
-                                        <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 0; display:block; float:left;" />
+                                        <div>
+                                            <i class="fa fa-minus" aria-hidden="true" style="display:block; float:left; font-size:20px; margin: 7px 5px 0 0; color:#FF7C33;" onclick="minus()"></i>
+                                            <input type="number" id="quantity" class="form-control" value="@item.quantity" min="1" max="99" name="quantity" oninvalid="this.setCustomValidity('Số lượng từ 1 đến 99')"
+                                                   oninput="setCustomValidity('')" style="width:30px; margin: 0 0 0 0; display:block; float:left;" />
+                                            <i class="fa fa-plus" aria-hidden="true" style="display:block; float:left; font-size:20px; margin: 7px 0 0 5px; color:#FF7C33;" onclick="plus()"></i>
+                                        </div>
+
+                                            <input type="hidden" class="form-control" value="@item.color" name="color" />
+                                            <input type="hidden" class="form-control" value="@item.size" name="size" />
+                                            <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 15px; display:block; float:left;" />
+                                        
                                     }
 
                                     @using (Html.BeginForm("DeleteCartItem", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0px; margin-right:10px;" }))
@@ -148,5 +155,22 @@
             jQuery("#myModal").modal("toggle");
             return false;
         }
+    }
+
+    function plus() {
+        var value = parseInt(jQuery("#quantity").val());
+        if (value <= 98) {
+            value = value + 1;
+            jQuery("#quantity").val(value);
+        }
+        else return;
+    }
+    function minus() {
+        var value = parseInt(jQuery("#quantity").val());
+        if (value >= 2) {
+            value = value - 1;
+            jQuery("#quantity").val(value);
+        }
+        else return;
     }
 </script>
