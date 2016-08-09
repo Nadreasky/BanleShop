@@ -80,6 +80,10 @@ namespace BanleWebsite
                 new RouteValueDictionary(new { controller = "Sanpham", action = "Index" }),
                 new MvcRouteHandler()));
 
+            routes.Add("Blog", new SeoFriendlyRoute("Blog/{id}",
+                new RouteValueDictionary(new { controller = "Blog", action = "Index" }),
+                new MvcRouteHandler()));
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

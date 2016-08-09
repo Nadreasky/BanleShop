@@ -44,5 +44,10 @@ namespace BanleWebsite.Services
         {
             _newsRepository.Delete(s);
         }
+
+        public List<News> getPopNews()
+        {
+            return _newsRepository.getPopNews();
+        }
     }
 }

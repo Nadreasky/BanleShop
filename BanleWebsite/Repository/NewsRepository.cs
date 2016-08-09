@@ -64,5 +64,15 @@ namespace BanleWebsite.Repository
             _newsContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             _newsContext.SaveChanges();
         }
+
+        public List<News> getPopNews()
+        {
+            var result = (from r in _newsContext.News where r.Popular == SLIMCONFIG.POPULAR_NEWS select r).ToList();
+            if (result == null)
+            {
+                result = new List<News>();
+            }
+            return result;
+        }
     }
 }

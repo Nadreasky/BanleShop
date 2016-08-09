@@ -16,17 +16,19 @@ namespace BanleWebsite.Controllers
             News news = _newsServices.findByID(id.Value);
             ViewBag.news = news;
 
-            List<News> listNews = _newsServices.getAll().Where(n => n.Popular == 1).Reverse().ToList();
+            List<News> listNews = _newsServices.getAll();
             List<News> listNews5Items = new List<News>();
+            int count = 0;
             if (listNews.Count <= 5)
             {
                 listNews5Items = listNews.ToList();
             }
             else
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = listNews.Count -1 ; i >= 0 & count < 5; i--)
                 {
                     listNews5Items.Add(listNews[i]);
+                    count++;
                 }
             }
             ViewBag.listNews5Items = listNews5Items;

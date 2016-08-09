@@ -23,5 +23,6 @@ namespace BanleWebsite
         public static bool PRODUCT_IS_ACTIVED = true;
         public static bool PRODUCT_FEATURED_TRUE = true;
         public static bool PRODUCT_FEATURED_FALSE = false;
+        public static int POPULAR_NEWS = 1;
     }
 }
