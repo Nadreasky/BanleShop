@@ -8,11 +8,11 @@ using System.Web.Mvc;
 
 namespace BanleWebsite.Controllers
 {
-    public class AgencyController : Controller
+    public class AgenciesController : Controller
     {
         AgencyServices _agencyServices = new AgencyServices();
 
-        // GET: Agency
+        // GET: Agencies
         public ActionResult Index()
         {
             return View();
@@ -29,8 +29,8 @@ namespace BanleWebsite.Controllers
 
 
                 string extension = fileExcel.FileName.Split('.').Last();
-                string withoutExtension = fileExcel.FileName.Substring(0,fileExcel.FileName.Length - extension.Length-1);
-                string savePath = newPath + "\\" + withoutExtension + Guid.NewGuid().ToString() + "."+extension;
+                string withoutExtension = fileExcel.FileName.Substring(0, fileExcel.FileName.Length - extension.Length - 1);
+                string savePath = newPath + "\\" + withoutExtension + Guid.NewGuid().ToString() + "." + extension;
                 if (!Directory.Exists(newPath))
                 {
                     System.IO.Directory.CreateDirectory(newPath);
@@ -47,7 +47,7 @@ namespace BanleWebsite.Controllers
 
                 _agencyServices.add(agency);
 
-                return RedirectToAction("SubmitAgencyCompleted", "Agency");
+                return RedirectToAction("SubmitAgencyCompleted", "Agencies");
             }
             else
             {
@@ -55,7 +55,7 @@ namespace BanleWebsite.Controllers
                 //ViewBag.Error += "Thiếu hình ảnh 1 <br/>";
             }
 
-            
+
         }
 
         public ActionResult SubmitAgencyCompleted()
