@@ -153,6 +153,12 @@
                 </div>
                 <br />
                 <div class="clearfix"></div>
+                <label><strong>Promotion và các thứ khác</strong></label>
+                <textarea name="promotion" id="promotion" class="form-control" rows="5">@mainProduct.Promotion</textarea>
+                <script>
+                    CKEDITOR.replace('promotion')
+                </script>
+                <div class="clearfix"></div>
                 <label><strong>Mô tả sản phẩm</strong></label>
                 <textarea name="description" id="description" class="form-control" rows="5">@mainProduct.Descriptions</textarea>
                 <script>

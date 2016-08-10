@@ -88,7 +88,7 @@ namespace BanleWebsite.Repository
 
         public Product getHighLightProduct()
         {
-            var result = (from r in _productContext.Products select r).ToList().LastOrDefault();
+            var result = (from r in _productContext.Products where r.isPromoted == true select r).ToList().LastOrDefault();
             if (result == null)
             {
                 result = new Product();
@@ -98,7 +98,7 @@ namespace BanleWebsite.Repository
 
         public List<Product> getSaleProducts()
         {
-            var result = (from r in _productContext.Products where r.SalePercent.HasValue select r).ToList();
+            var result = (from r in _productContext.Products where (r.SalePercent.HasValue && r.SalePercent != 0) select r).ToList();
             if (result == null)
             {
                 result = new List<Product>();

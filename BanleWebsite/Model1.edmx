@@ -157,7 +157,7 @@
           <Property Name="isActived" Type="bit" />
           <Property Name="Featured" Type="bit" />
           <Property Name="SalePercent" Type="float" />
-          <Property Name="Promotion" Type="text" />
+          <Property Name="Promotion" Type="nvarchar(max)" />
           <Property Name="isPromoted" Type="bit" />
           <Property Name="ExpiredDate" Type="datetime" />
         </EntityType>
@@ -682,7 +682,7 @@
           <Property Name="isActived" Type="Boolean" />
           <Property Name="Featured" Type="Boolean" />
           <Property Name="SalePercent" Type="Double" />
-          <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="isPromoted" Type="Boolean" />
           <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Category" Relationship="BanleShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />

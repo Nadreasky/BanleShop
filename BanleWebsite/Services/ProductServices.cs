@@ -63,7 +63,7 @@ namespace BanleWebsite.Services
         }
 
         public void addOrUpdateProduct(int id, string name, double price, int cateID, string des, int quantity,
-            string imgPath1, string imgPath2, string imgPath3, double oldPrice, bool featured, double salePercent, bool isPromoted)
+            string imgPath1, string imgPath2, string imgPath3, double oldPrice, bool featured, double salePercent, bool isPromoted, string promotion)
         {
             Product p = findByID(id);
             if (p == null)
@@ -82,6 +82,7 @@ namespace BanleWebsite.Services
                 p.SalePercent = salePercent;
                 p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
                 p.isPromoted = false;
+                p.Promotion = promotion;
                 _productRepository.Add(p);
             }
             else
@@ -108,6 +109,7 @@ namespace BanleWebsite.Services
                 p.SalePercent = salePercent;
                 p.isActived = SLIMCONFIG.PRODUCT_IS_ACTIVED;
                 p.isPromoted = isPromoted;
+                p.Promotion = promotion;
                 _productRepository.Update(p);
             }
         }

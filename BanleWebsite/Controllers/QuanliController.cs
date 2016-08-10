@@ -211,7 +211,7 @@ namespace BanleWebsite.Controllers
         [ValidateInput(false)]
         public ActionResult saveProduct(string id, string productName, string productPrice, string productCateID, string description,
             string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3, string oldPrice,
-            string featured, string salePercent, string isPromoted)
+            string featured, string salePercent, string isPromoted, string promotion)
         {
             int _id = -1;
             double _productPrice = -1;
@@ -393,7 +393,8 @@ namespace BanleWebsite.Controllers
 
             else
             {
-                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description, _quantity, filePath1, filePath2, filePath3, _oldPrice, _featured, _salePercent, _isPromoted);
+                _productServices.addOrUpdateProduct(_id, productName, _productPrice, _productCateID, description,
+                    _quantity, filePath1, filePath2, filePath3, _oldPrice, _featured, _salePercent, _isPromoted, promotion);
                 return RedirectToAction("Product");
             }
         }
