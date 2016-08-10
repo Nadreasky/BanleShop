@@ -57,6 +57,8 @@ namespace BanleWebsite.Services
             pMapping.Promotion = p.Promotion;
             pMapping.Quantity = p.Quantity;
             pMapping.SalePercent = p.SalePercent;
+            pMapping.isPromoted = p.isPromoted;
+            pMapping.ExpiredDate = p.ExpiredDate;
             return pMapping;
         }
 
@@ -232,4 +234,6 @@ public class ProductMapping
     public Nullable<bool> Featured { get; set; }
     public Nullable<double> SalePercent { get; set; }
     public string Promotion { get; set; }
+    public Nullable<bool> isPromoted { get; set; }
+    public Nullable<DateTime> ExpiredDate { get; set; }
 }
