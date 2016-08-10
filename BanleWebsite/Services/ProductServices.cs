@@ -215,6 +215,21 @@ namespace BanleWebsite.Services
             List<Product> saleProducts = _productRepository.getSaleProducts();
             return saleProducts;
         }
+
+        public ResultProductSearch findProductHint(int id)
+        {
+            if (id < 0)
+            {
+                return null;
+            }
+            Product p = _productRepository.FindById(id);
+            ResultProductSearch rp = new ResultProductSearch();
+            rp.ID = p.ID;
+            rp.Name = p.Name;
+            rp.URL = SLIMCONFIG.GenerateSlug(p.ID, p.Name);
+
+            return rp;
+        }
     }
 }
 public class ProductMapping
@@ -236,4 +251,12 @@ public class ProductMapping
     public string Promotion { get; set; }
     public Nullable<bool> isPromoted { get; set; }
     public Nullable<DateTime> ExpiredDate { get; set; }
+}
+
+
+public class ResultProductSearch
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string URL { get; set; }
 }

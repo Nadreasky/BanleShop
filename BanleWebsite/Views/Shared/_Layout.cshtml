@@ -306,7 +306,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
         input:focus:invalid:focus,
         textarea:focus:invalid:focus,
         select:focus:invalid:focus {
-            border-color: #C68DDE;
+            border-color: #f4570e;
         }
 
         button:hover, .button:hover, .more-link:hover, input[type="submit"]:hover,
@@ -622,7 +622,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                     jQuery('#suggestionBox').empty();
                     for (var i = resultList.length - 1; i >= 0 & count <10 ; i--)
                     {
-                        jQuery('#suggestionBox').append('<li><a href="/Sanpham/' + resultList[i].ID + '">' + resultList[i].Name + '</a></li>')
+                        jQuery('#suggestionBox').append('<li><a href="/Sanpham/' + resultList[i].URL + '">' + resultList[i].Name + '</a></li>')
                         //console.log(resultList[i].Name)
                         count++;
                     }
@@ -668,7 +668,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
                     jQuery('#suggestionBox_spy').empty();
                     for (var i = resultList.length - 1; i >= 0 & count < 10 ; i--) {
-                        jQuery('#suggestionBox_spy').append('<li><a href="/Sanpham/' + resultList[i].ID + '">' + resultList[i].Name + '</a></li>')
+                        jQuery('#suggestionBox_spy').append('<li><a href="/Sanpham/' + resultList[i].URL + '">' + resultList[i].Name + '</a></li>')
                         //console.log(resultList[i].Name)
                         count++;
                     }
@@ -711,7 +711,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
                     jQuery('#suggestionBox_sb').empty();
                     for (var i = resultList.length - 1; i >= 0 & count < 10 ; i--) {
-                        jQuery('#suggestionBox_sb').append('<li><a href="/Sanpham/' + resultList[i].ID + '">' + resultList[i].Name + '</a></li>')
+                        jQuery('#suggestionBox_sb').append('<li><a href="/Sanpham/' + resultList[i].URL + '">' + resultList[i].Name + '</a></li>')
                         //console.log(resultList[i].Name)
                         count++;
                     }

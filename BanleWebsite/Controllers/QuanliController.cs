@@ -899,13 +899,14 @@ namespace BanleWebsite.Controllers
         public Object getProductHint(string hint)
         {
             List<Product> allProducts = _productServices.getAll();
-            List<ProductMapping> resultList = new List<ProductMapping>();
+            List<ResultProductSearch> resultList = new List<ResultProductSearch>();
+            VietnameseSymbol vn = new VietnameseSymbol();
             for (int i = 0; i < allProducts.Count; i++)
             {
                 Product p = allProducts.ElementAt(i);
-                if(p.Name.ToUpper().Contains(hint.ToUpper()))
+                if(vn.ClearSymbol(p.Name.ToUpper()).Contains(vn.ClearSymbol(hint.ToUpper())))
                 {
-                    resultList.Add(_productServices.findByIDMapping(p.ID));
+                    resultList.Add(_productServices.findProductHint(p.ID));
                 }
             }
 
