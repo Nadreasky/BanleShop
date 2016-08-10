@@ -711,7 +711,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                             foreach (var item in categoryListNoPre)
                                             {
                                                 <li id="menu-item-@item.ID" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-@item.ID dropdown">
-                                                    <a href="/Danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a><a class="icon-collapse collapsed" href="#collapsed_item_@item.ID" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
+                                                    <a href="/Danhmuc/@SLIMCONFIG.GenerateSlug(item.ID, item.Name)"><span style="font-family:VNOswald;">@item.Name</span></a><a class="icon-collapse collapsed" href="#collapsed_item_@item.ID" title="" data-toggle="collapse"><i class="icon-up pull-right"></i><i class="icon-down pull-right"></i></a>
                                                     <ul class="collapse in level0" id="collapsed_item_@item.ID">
                                                         @{
                                                             foreach (var item2 in listCategorySortRank)
@@ -722,7 +722,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                                     // bofore sort rank
                                                                     //if (item2.PreCateID == item.ID)
                                                                     {
-                                                                    <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href="/Danhmuc/@item2.GenerateSlug()">	<span style="font-family:VNOswald;">@item2.Name</span>	</a>	</li>
+                                                                    <li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1166">	<a href=""/Danhmuc/@SLIMCONFIG.GenerateSlug(item2.ID, item2.Name)"">	<span style="font-family:VNOswald;">@item2.Name</span>	</a>	</li>
                                                                 }
                                                             }
                                                         }
@@ -735,7 +735,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Deal</span></a></li>
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Promotion</span></a></li>
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Giới thiệu</span></a></li>
-                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Liên hệ</span></a></li>
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Đặt áo nhóm</span></a></li>
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Tuyển đại lý</span></a></li>
                                     </ul>
                                 </li>
@@ -790,7 +790,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                     foreach (var item in categoryListNoPre)
                                     {
                                         <li id="menu-item-928" class="dropdown menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-1062 dropdown">
-                                            <a href="/danhmuc/@item.GenerateSlug()"><span style="font-family:VNOswald;">@item.Name</span></a>
+                                            <a href="/danhmuc/@SLIMCONFIG.GenerateSlug(item.ID, item.Name)"><span style="font-family:VNOswald;">@item.Name</span></a>
                                             <ul class="level0">
                                                 <ul class="shadow">
                                                     <li class="row_middle">
@@ -808,7 +808,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                                                                         //if (item2.PreCateID == item.ID)
                                                                                         {
                                                                                         <li id="menu-item-946" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-946">		
-                                                                                            <a href="/danhmuc/@item2.GenerateSlug()">		
+                                                                                            <a href="/danhmuc/@SLIMCONFIG.GenerateSlug(item2.ID, item2.Name)">		
                                                                                                 <span>@item2.Name</span>		
                                                                                             </a>		
                                                                                         </li>
