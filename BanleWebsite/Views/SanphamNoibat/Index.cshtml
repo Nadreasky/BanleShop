@@ -203,7 +203,7 @@
                 <div class="dis-text">@salep%</div>
             </div>
             <div id="dealIMG">
-                <a href="@highlightProduct.GenerateSlug()">
+                <a href="/sanpham/@SLIMCONFIG.GenerateSlug(highlightProduct.ID, highlightProduct.Name)">
                     <img src="@highlightProduct.Img1" alt="@highlightProduct.Name" />
                 </a>
             </div>
@@ -263,7 +263,7 @@
                                 <div class="dis-number">@salePercent%</div>
                             </div>
                             <div class="proIMG">
-                                <a href="@p.GenerateSlug()">
+                                <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                     <img src="@p.Img1" alt="@p.Name" />
                                 </a>
                             </div>

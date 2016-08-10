@@ -52,17 +52,16 @@
         float:left;
         margin:0 2px;
         line-height:20px;
-        border-radius:5px;
-        border:2px solid #999;
+        
     }
 
-    #psz li:hover {
+    #psz li a:hover {
         float:left;
-        margin:0 2px;
+        /*margin:0 2px;*/
         line-height:20px;
-        border-radius:5px;
-        border:2px solid #999;
-        border-color:#FF7C33;
+        /*border-radius:5px;
+        border:2px solid #999;*/
+        border-color:#f4570e;
     }
 
     #psz li a{
@@ -70,7 +69,8 @@
         height:20px;
         width:20px;
         text-align:center;
-        /*border: 1px solid #999;*/
+        border-radius:5px;
+        border:2px solid #999;
         color:#999;
         font-weight:bold;
         padding: 5px 5px;
@@ -94,28 +94,28 @@
         font-size:12px;
     }*/
 
-    #psz li a:{
+    /*#psz li a:{
         display:block;
         height:20px;
         width:20px;
         text-align:center;
         color:#ffffff;
-        background-color:#FF7C33;
+        background-color:#f4570e;
         font-weight:bold;
         padding: 5px 5px;
         text-decoration:none;
         line-height:20px;
         font-size:12px;
-    }
+    }*/
 
     .picked {
         display:block;
         height:20px;
         width:20px;
         text-align:center;
-        background-color:#FF7C33;
+        background-color:#f4570e;
         color:#ffffff;
-        border-color: #FF7C33;
+        border-color: #f4570e;
         font-weight:bold;
         padding: 5px 5px;
         text-decoration:none;
@@ -125,6 +125,7 @@
 
     #psz li a.picked{
         color:#fff;
+        border-color:#f4570e;
     }
 
 </style>
@@ -589,7 +590,7 @@
                                                         <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                             @p.Name
                                                         </a>
-                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723" href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">Chi tiết</a>
                                                     <div class="wrapper">
 
                                                         @if (p.OldPrice != 0)
@@ -663,7 +664,7 @@
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
-                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723" href="/sanpham/@p.GenerateSlug()">Chi tiết</a>
+                                                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="723" href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">Chi tiết</a>
                                                             <div class="wrapper">
                                                                 @if (p.OldPrice != 0)
                                                                 {

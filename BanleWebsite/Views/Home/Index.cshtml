@@ -784,7 +784,7 @@
                     <div class=" span12">
 
                         <div class="">
-                            <h3 class="padding">FROM THE BLOG</h3><div class="carousel es-carousel-wrapper style2 from-blog">
+                            <h3 class="padding" style="font-family:VNOswald;">TIN TỨC THỜI TRANG</h3><div class="carousel es-carousel-wrapper style2 from-blog">
                                 <div class="es-carousel">
                                     <div class="row">
                                         <div class="carousel_items">
@@ -795,13 +795,13 @@
                                                         <div class="row">
                                                             <div class="span3">
 
-                                                                <a href="/Blog/@item.GenerateSlug()">
+                                                                <a href="/Blog/@SLIMCONFIG.GenerateSlug(item.ID, item.Title)">
                                                                     @*<img width="270" height="114" src="@item.MainImage" alt="" class="img-rounded animate flip" />*@
                                                                     <div style="width:270px; height:114px; background-image: url(@item.MainImage); background-repeat: no-repeat; background-position:-200px -100px;"></div>
                                                                 </a>
                                                             </div>
                                                             <div class="span3">
-                                                                <a href="/Blog/@item.GenerateSlug()"><h4 style="font-family:VNOswald;">@item.Title</h4></a>
+                                                                <a href="/Blog/@SLIMCONFIG.GenerateSlug(item.ID, item.Title)"><h4 style="font-family:VNOswald;">@item.Title</h4></a>
                                                                 @*<p><a href="indexd7bf.html?p=1015#comments">3 Comments</a></p>*@
                                                                 <p>
                                                                     @Html.Raw(item.ShortDes)
