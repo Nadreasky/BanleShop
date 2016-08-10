@@ -783,7 +783,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
         <!--HEADER-->
 
 
-        <div id="topline">
+        @*<div id="topline">
             <div class="container">
                 <div class="wrapper_w">
 
@@ -804,7 +804,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
 
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div id="header">
 
@@ -920,13 +920,22 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                             }
                                         }
 
-                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Giá tốt nhất tuần</span></a></li>
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="/SanphamNoibat"><span style="font-family:VNOswald;">Giá tốt nhất tuần</span></a></li>
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Deal</span></a></li>
-                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Promotion</span></a></li>
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="/Promotion"><span style="font-family:VNOswald;">Promotion</span></a></li>
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Giới thiệu</span></a></li>
                                         <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Đặt áo nhóm</span></a></li>
-                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="#"><span style="font-family:VNOswald;">Tuyển đại lý</span></a></li>
+                                        <li id="menu-item-1185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1185 dropdown"><a href="/Agencies"><span style="font-family:VNOswald;">Tuyển đại lý</span></a></li>
                                     </ul>
+                                    <script>
+                                        jQuery("#level0 li").click(function () {
+                                            jQuery("#level0 li").removeClass('current-menu-item');
+                                            jQuery(this).addClass('current-menu-item');
+
+                                            //jQuery("#nav li").removeClass('current-menu-item');
+                                            //jQuery(this).addClass('current-menu-item');
+                                        })
+                                    </script>
                                 </li>
                             </ul>
                         </nav>
@@ -1037,7 +1046,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                     <a href="#"><span style="font-family:VNOswald;">Đặt áo nhóm</span></a>
                                 </li>
                                 <li id="menu-item-1033" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1033 dropdown">
-                                    <a href="/Agency"><span style="font-family:VNOswald;">Tuyển đại lý</span></a>
+                                    <a href="/Agencies"><span style="font-family:VNOswald;">Tuyển đại lý</span></a>
                                 </li>
 
                                 @*<li id="menu-item-928" class="widemenu menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-parent-item menu-item-928">
@@ -1121,6 +1130,15 @@ var wc_add_to_cart_params = {"ajax_url":"\/Content\/Buyshop\/wp-admin\/admin-aja
                                 </li>
                                 <li id="menu-item-1086" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1086 dropdown"><a href="index3473.html?page_id=986"><span>Contact Us</span></a></li>*@
                             </ul>
+                            <script>
+                                jQuery("#nav li").click(function () {
+                                    //jQuery("#level0 li").removeClass('current-menu-item');
+                                    //jQuery(this).addClass('current-menu-item');
+
+                                    jQuery("#nav li").removeClass('current-menu-item');
+                                    jQuery(this).addClass('current-menu-item');
+                                })
+                            </script>
                         </nav>
 
 
