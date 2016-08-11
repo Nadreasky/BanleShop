@@ -155,5 +155,22 @@ namespace BanleWebsite.Services
             List<Category> listCategorySortRank = getAll().Where(c => c.Rank > 0).OrderBy(c => c.Rank).ToList();
             return listCategorySortRank;
         }
+
+        public List<int> getFashionCategoriesID()
+        {
+            List<Category> allProduct = _categoryRepository.getAllCategoryActived();
+            List<int> fashionCateID = new List<int>();
+            for (int i = 0; i < allProduct.Count; i++)
+            {
+                for (int j = 0; j < SLIMCONFIG.FASHION_PRODUCT_CATEGORIES.Count; j++)
+                {
+                    if (allProduct.ElementAt(i).Name.ToUpper().Contains(SLIMCONFIG.FASHION_PRODUCT_CATEGORIES.ElementAt(j).ToUpper()))
+                    {
+                        fashionCateID.Add(allProduct.ElementAt(i).ID);
+                    }
+                }
+            }
+            return fashionCateID;
+        }
     }
 }

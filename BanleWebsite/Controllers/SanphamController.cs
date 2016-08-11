@@ -11,6 +11,7 @@ namespace BanleWebsite.Controllers
     public class SanphamController : Controller
     {
         ProductServices _productService = new ProductServices();
+        CategoryServices _categoryServices = new CategoryServices();
         ImageServices _imageServices = new ImageServices();
         SizeProductDetailServices _sizeProductDetailServices = new SizeProductDetailServices();
 
@@ -41,6 +42,9 @@ namespace BanleWebsite.Controllers
             // cap nhat link cho "Quay lai mua sam"
             AddressBar ab = new AddressBar();
             ab.UpdateLinkBackToShopping();
+
+            List<int> fashionIDs = _categoryServices.getFashionCategoriesID();
+            ViewBag.fashionIDs = fashionIDs;
 
             return View();
         }

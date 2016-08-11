@@ -9,9 +9,19 @@
     List<SizeProductDetail> sizeProduct = ViewBag.sizeProduct;
     ColorServices _colorServices = new ColorServices();
     SizeServices _sizeServices = new SizeServices();
+    List<int> fashionIDs = ViewBag.fashionIDs;
 
     int defaultColor = colorImgProduct.ElementAt(0).IDColor.Value;
     int defaultSize = sizeProduct.ElementAt(0).SizeID.Value;
+
+    bool isFashionProduct = false;
+    for (int i = 0; i < fashionIDs.Count; i++)
+    {
+        if(mainProduct.CateID == fashionIDs.ElementAt(i))
+        {
+            isFashionProduct = true;
+        }
+    }
 }
 
 <style>
@@ -352,34 +362,40 @@
                                     
                                 </ul>
                             </div>
-                            <div id="pSize" style="margin-top:10px; max-width:500px;">
-                                <label><strong>Size</strong></label>
-                                <ul id="psz" class="btn-group">
-                                    @{
-                                        string size = "";
-                                        for (int i = 0; i < sizeProduct.Count; i++)
-                                        {
-                                            SizeProductDetail item = sizeProduct.ElementAt(i);
-                                            if (i == 0)
-                                            {
-                                                size = _sizeServices.findByID(item.SizeID.Value).Name;
-                                                <li>
-                                                    <a href="#" class="btnSize picked" onclick="sizeSelect('@item.SizeID')">@size</a>
-                                                </li>
-                                            }
-                                            else
-                                            {
-                                                size = _sizeServices.findByID(item.SizeID.Value).Name;
-                                                <li>
-                                                    <a href="#" class="btnSize" onclick="sizeSelect('@item.SizeID')">@size</a>
-                                                </li>
+                            @{
+                                if (isFashionProduct == true)
+                                {
+                                    <div id="pSize" style="margin-top:10px; max-width:500px;">
+                                        <label><strong>Size</strong></label>
+                                        <ul id="psz" class="btn-group">
+                                            @{
+                                                string size = "";
+                                                for (int i = 0; i < sizeProduct.Count; i++)
+                                                {
+                                                    SizeProductDetail item = sizeProduct.ElementAt(i);
+                                                    if (i == 0)
+                                                    {
+                                                        size = _sizeServices.findByID(item.SizeID.Value).Name;
+                                                        <li>
+                                                            <a href="#" class="btnSize picked" onclick="sizeSelect('@item.SizeID')">@size</a>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        size = _sizeServices.findByID(item.SizeID.Value).Name;
+                                                        <li>
+                                                            <a href="#" class="btnSize" onclick="sizeSelect('@item.SizeID')">@size</a>
+                                                        </li>
+                                                    }
+
+                                                }
                                             }
 
-                                        }
-                                    }
-                                    
-                                </ul>
-                            </div>
+                                        </ul>
+                                    </div>
+                                }
+                            }
+                            
                             <script>
                                 jQuery("#pSize li a").click(function () {
                                     jQuery("#pSize li a").removeClass('picked');
@@ -463,7 +479,7 @@
                             <a href="#tabdescription">Chi tiết sản phẩm</a>
                         </li>
                         <li class="" data-tab="reviews">
-                            <a href="#tabreviews">Nhận xét</a>
+                            <a href="#tabreviews">Nhận xét (<span class="fb-comments-count" data-href="/post-link">0</span>)</a>
                         </li>
                     </ul>
 
