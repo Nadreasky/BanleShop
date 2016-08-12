@@ -232,6 +232,44 @@ namespace BanleWebsite.Services
 
             return rp;
         }
+
+        public List<Product> getFashionProduct()
+        {
+            _categoryServices = new CategoryServices();
+            List<Product> allProduct = _productRepository.getAllProductActived();
+            List<int> fashionID = _categoryServices.getFashionCategoriesID();
+            List<Product> fashionProducts = new List<Product>();
+            for (int i = 0; i < allProduct.Count; i++)
+            {
+                for (int j = 0; j < fashionID.Count; j++)
+                {
+                    if(allProduct.ElementAt(i).CateID == fashionID.ElementAt(j))
+                    {
+                        fashionProducts.Add(allProduct.ElementAt(i));
+                    }
+                }
+            }
+            return fashionProducts;
+        }
+
+        public List<Product> getNonFashionProduct()
+        {
+            _categoryServices = new CategoryServices();
+            List<Product> allProduct = _productRepository.getAllProductActived();
+            List<int> fashionID = _categoryServices.getFashionCategoriesID();
+            List<Product> nonFashionProducts = new List<Product>();
+            for (int i = 0; i < allProduct.Count; i++)
+            {
+                for (int j = 0; j < fashionID.Count; j++)
+                {
+                    if (allProduct.ElementAt(i).CateID == fashionID.ElementAt(j))
+                    {
+                        nonFashionProducts.Add(allProduct.ElementAt(i));
+                    }
+                }
+            }
+            return nonFashionProducts;
+        }
     }
 }
 public class ProductMapping

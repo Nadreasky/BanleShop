@@ -19,6 +19,9 @@ namespace BanleWebsite.Controllers
             List<Product> allProduct = _productServices.getAll();
             List<News> listNews = _newsServices.getPopNews();
 
+            List<Product> fashionProduct = _productServices.getFashionProduct();
+            List<Product> nonFashionProduct = _productServices.getNonFashionProduct();
+
             //Random 
             ViewBag.allProduct = allProduct;
             ViewBag.listNews = listNews;
