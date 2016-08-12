@@ -351,6 +351,7 @@
                                                     break; // Hot
                                                 case 7:
                                                 case 8:
+                                                    <!--Sale unhover.start-->
                                                     <div class="span3 product carousel_item sale post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
                                                             
@@ -365,7 +366,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="wrapper-hover">
-                                                            <div class="product-name">
+                                                            <div class="product-name" style="font-size:14px">
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
@@ -375,7 +376,7 @@
                                                                 {
                                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                 }
-                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
@@ -392,6 +393,8 @@
                                                         <span class="sort-product_name hidden">@p.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
+                                                    <!--Sale unhover.end-->
+                                                    <!--Sale hover.start-->
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
@@ -425,7 +428,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
-                                                                    <div class="product-name">
+                                                                    <div class="product-name" style="font-size:14px">
                                                                         <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                             @p.Name
                                                                         </a>
@@ -435,7 +438,7 @@
                                                                         {
                                                                             <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                         }
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-price" style="color:red;font-size:20px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                         <div class="product-tocart">
                                                                             @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
@@ -448,6 +451,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--Sale hover.end-->
                                                     break; // Sale
                                                 case 9:
                                                     <div class="span3 product carousel_item sale post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
