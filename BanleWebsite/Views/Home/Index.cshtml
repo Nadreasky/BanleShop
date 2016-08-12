@@ -126,12 +126,15 @@
                                                                 double percent = p.SalePercent.Value * 100;
                                                                 <div class="sale_discount img-rounded">-@percent%</div>
                                                             }
-                                                            <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
+                                                            <a style="font-size:14px" href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                 <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
                                                             </a>
                                                         </div>
+
+                                                        <!--Product in normal.start-->
+
                                                         <div class="wrapper-hover">
-                                                            <div class="product-name">
+                                                            <div class="product-name" style="font-size:14px">
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
@@ -139,9 +142,11 @@
                                                             <div class="wrapper">
                                                                 @if (p.OldPrice != 0)
                                                                 {
+                                                                    //Old price
                                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                 }
-                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                @*New price*@
+                                                                <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
@@ -152,11 +157,15 @@
                                                             </div>
                                                         </div>
 
+                                                        <!--Product in normal.end-->
+
                                                         <span class="sort-date hidden">1396632733</span>
                                                         <span class="sort-price hidden">@p.Price</span>
                                                         <span class="sort-product_name hidden">@p.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
+
+                                                    <!--Product hovered.start-->
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
@@ -190,7 +199,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
-                                                                    <div class="product-name">
+                                                                    <div class="product-name" style="font-size:14px">
                                                                         <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                             @p.Name
                                                                         </a>
@@ -200,7 +209,7 @@
                                                                         {
                                                                             <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                         }
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-price" style="color:red;font-size:20px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                         <div class="product-tocart">
                                                                             @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
@@ -213,6 +222,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--Product hovered.end-->
                                                     break; // New
                                                 case 5:
                                                 case 6:
@@ -231,8 +241,11 @@
                                                                 <img style="max-height:300px;" width="300" height="300" src="@p.Img1" class="attachment-shop_single wp-post-image" alt="@p.Name" />
                                                             </a>
                                                         </div>
+
+                                                        <!--Product hover.start-->
+
                                                         <div class="wrapper-hover">
-                                                            <div class="product-name">
+                                                            <div class="product-name" style="font-size:14px">
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
@@ -242,7 +255,7 @@
                                                                 {
                                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                 }
-                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-price" style="color:red;font-size:90px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @*@Html.TextBox("id");*@
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -261,6 +274,8 @@
                                                                 <div class="clearfix"></div>
                                                             </div>
                                                         </div>
+
+                                                        <!--Product hover.end-->
 
                                                         <span class="sort-date hidden">1396632733</span>
                                                         <span class="sort-price hidden">@p.Price</span>
