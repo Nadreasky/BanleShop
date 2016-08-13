@@ -116,6 +116,7 @@
                                                 case 2:
                                                 case 3:
                                                 case 4:
+                                                    <!--New unhover.start-->
                                                     <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
 
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
@@ -164,8 +165,8 @@
                                                         <span class="sort-product_name hidden">@p.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
-
-                                                    <!--Product hovered.start-->
+                                                    <!--New unhover.end-->
+                                                    <!--New hovered.start-->
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
@@ -222,10 +223,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--Product hovered.end-->
+                                                    <!--New hovered.end-->
                                                     break; // New
                                                 case 5:
                                                 case 6:
+                                                    <!--Hot unhover.start-->
                                                     <div class="span3 product carousel_item post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
                                                             @*<div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>*@
@@ -242,8 +244,6 @@
                                                             </a>
                                                         </div>
 
-                                                        <!--Product hover.start-->
-
                                                         <div class="wrapper-hover">
                                                             <div class="product-name" style="font-size:14px">
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
@@ -255,7 +255,7 @@
                                                                 {
                                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                 }
-                                                                <div class="product-price" style="color:red;font-size:90px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @*@Html.TextBox("id");*@
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -275,13 +275,13 @@
                                                             </div>
                                                         </div>
 
-                                                        <!--Product hover.end-->
-
                                                         <span class="sort-date hidden">1396632733</span>
                                                         <span class="sort-price hidden">@p.Price</span>
                                                         <span class="sort-product_name hidden">@p.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
+                                                    <!--Hot unhover.end-->
+                                                    <!--Hot hover.start-->
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
@@ -316,7 +316,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
-                                                                    <div class="product-name">
+                                                                    <div class="product-name" style="font-size:14px">
                                                                         <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                             @p.Name
                                                                         </a>
@@ -326,7 +326,7 @@
                                                                         {
                                                                             <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                         }
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-price" style="color:red;font-size:20px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
 
 
                                                                         <div class="product-tocart">
@@ -348,6 +348,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--Hot hover.end-->
                                                     break; // Hot
                                                 case 7:
                                                 case 8:
@@ -454,6 +455,7 @@
                                                     <!--Sale hover.end-->
                                                     break; // Sale
                                                 case 9:
+                                                    <!--Hot&sale unhover.start-->
                                                     <div class="span3 product carousel_item sale post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless featured shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
                                                             @*<div class="label_new_top_left" style="font-family:VNOswald;">Mới</div>*@
@@ -470,7 +472,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="wrapper-hover">
-                                                            <div class="product-name">
+                                                            <div class="product-name" style="font-size:14px">
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
@@ -480,7 +482,7 @@
                                                                 {
                                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                 }
-                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @*@Html.TextBox("id");*@
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -505,6 +507,8 @@
                                                         <span class="sort-product_name hidden">@p.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
+                                                    <!--Hot&sale unhover.end-->
+                                                    <!--Hot&sale hover.start-->
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
@@ -539,7 +543,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
-                                                                    <div class="product-name">
+                                                                    <div class="product-name" style="font-size:14px">
                                                                         <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                             @p.Name
                                                                         </a>
@@ -549,7 +553,7 @@
                                                                         {
                                                                             <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                         }
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
 
 
                                                                         <div class="product-tocart">
@@ -571,8 +575,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    break; // Hot + Sale 
+                                                    <!--Hot&sale hover.end-->
+                                                    break; // Hot + Sale
                                                 default:
+                                                    <!--Default unhover.start-->
                                                     <div class="span3 product carousel_item new_product post-1018 type-product status-publish has-post-thumbnail product_cat-club-dresses product_cat-dresses product_cat-women product_tag-club-dresses product_tag-dress product_tag-dresses product_tag-jackets product_tag-lingerie product_tag-sexy product_tag-shirts product_tag-shorts product_tag-silk product_tag-skirts product_tag-strapless shipping-taxable purchasable product-type-simple product-cat-club-dresses product-cat-dresses product-cat-women product-tag-club-dresses product-tag-dress product-tag-dresses product-tag-jackets product-tag-lingerie product-tag-sexy product-tag-shirts product-tag-shorts product-tag-silk product-tag-skirts product-tag-strapless instock">
 
                                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
@@ -588,7 +594,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="wrapper-hover">
-                                                            <div class="product-name">
+                                                            <div class="product-name" style="font-size:14px">
                                                                 <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                     @p.Name
                                                                 </a>
@@ -598,7 +604,7 @@
                                                                 {
                                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                 }
-                                                                <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                 <div class="product-tocart">
                                                                     @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                     {
@@ -614,6 +620,8 @@
                                                         <span class="sort-product_name hidden">@p.Name</span>
                                                         <span class="sort-rating hidden">0</span>
                                                     </div>
+                                                    <!--Default unhover.end-->
+                                                    <!--Default hover.start-->
                                                     <div class="preview hidden-tablet hidden-phone " style="display: none;">
                                                         <div class="wrapper">
                                                             <div class="col-1">
@@ -647,7 +655,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="wrapper-hover">
-                                                                    <div class="product-name">
+                                                                    <div class="product-name" style="font-size:14px">
                                                                         <a href="/sanpham/@SLIMCONFIG.GenerateSlug(p.ID, p.Name)">
                                                                             @p.Name
                                                                         </a>
@@ -657,7 +665,7 @@
                                                                         {
                                                                             <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.OldPrice.ToString())&#8363</s></span></div>
                                                                         }
-                                                                        <div class="product-price"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
+                                                                        <div class="product-price" style="color:red;font-size:20px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</strong></span></div>
                                                                         <div class="product-tocart">
                                                                             @using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                                             {
@@ -670,6 +678,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--Default hover.end-->
                                                     break; // New
                                             }
                                         }
