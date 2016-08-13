@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BanleWebsite.Repository;
+using BanleWebsite.Models;
 
 namespace BanleWebsite.Services
 {
@@ -171,6 +172,66 @@ namespace BanleWebsite.Services
                 }
             }
             return fashionCateID;
+
+
+        public List<CategoryWithLevel> GenerateListCategoryWithLevel()
+        {
+            List<CategoryWithLevel> listCategoryWithLevel = new List<CategoryWithLevel>();
+            MultiRankMenu(getAll(), getAll(), 1, listCategoryWithLevel);
+
+            return listCategoryWithLevel;
+        }
+
+
+        public void MultiRankMenu(List<Category> listCategorySuper, List<Category> listCategoryFull, int level,
+            List<CategoryWithLevel> listCategoryWithLevel)
+        {
+            List<Category> listCategoryNoPre = new List<Category>();
+            bool isFirstLevel = false;
+            foreach (var item in listCategorySuper)
+            {
+                if (item.PreCateID == -1)
+                {
+                    listCategoryNoPre.Add(item);
+                    isFirstLevel = true;
+                }
+            }
+            if (isFirstLevel)
+            {
+                listCategoryNoPre = listCategoryNoPre.OrderBy(c => c.Rank).ToList();
+                listCategorySuper = listCategoryNoPre;
+            }
+
+            Console.WriteLine();
+
+            listCategorySuper = listCategorySuper.OrderBy(c => c.Rank).ToList();
+            foreach (var item in listCategorySuper)
+            {
+                Console.Write(" ");
+                for (int i = 0; i < level - 1; i++)
+                {
+                    Console.Write("\t");
+                }
+
+                Console.Write(item.Name);
+                CategoryWithLevel cwl = new CategoryWithLevel();
+                cwl.id = item.ID;
+                cwl.name = item.Name;
+                cwl.preCateId = item.PreCateID.Value;
+                cwl.rank = item.Rank.Value;
+                cwl.level = level;
+                listCategoryWithLevel.Add(cwl);
+                List<Category> listCategorySub = new List<Category>();
+                foreach (var itemSub in listCategoryFull)
+                {
+                    if (itemSub.PreCateID == item.ID)
+                    {
+                        listCategorySub.Add(itemSub);
+                    }
+                }
+                MultiRankMenu(listCategorySub, listCategoryFull, ++level, listCategoryWithLevel);
+                level--;
+            }
         }
     }
 }

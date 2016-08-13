@@ -231,6 +231,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressBar.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\CategoryWithLevel.cs" />
     <Compile Include="Models\ChangeCurrency.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />

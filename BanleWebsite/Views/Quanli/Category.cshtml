@@ -1,8 +1,13 @@
-﻿
+﻿@using BanleWebsite.Models;
+@using BanleWebsite.Services;
+
 @{
+    CategoryServices _categoryServices = new CategoryServices();
     ViewBag.Title = "Quản lí danh mục";
     List<Category> categories = ViewBag.categories;
     List<Category> listCategorySortRank = ViewBag.listCategorySortRank;
+
+    List<CategoryWithLevel> listCategoryWithLevel = ViewBag.listCategoryWithLevel;
 }
 
 
@@ -41,80 +46,77 @@
         }
     </div>
     <div class="col-md-8">
-        <table class="table" id="categoryTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Category Name</th>
-                    <th>Rank</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    for (int i = 0; i < categories.Count; i++)
+        
+
+        <table class="table">
+            @{
+                CategoryWithLevel cwl = new CategoryWithLevel();
+                cwl.level = 1;
+                cwl.preCateId = -1;
+                listCategoryWithLevel.Add(cwl);
+
+                for (int i=0;i<listCategoryWithLevel.Count-1;i++)
+                {
+                    <tr>
+                    @for (int j = 0; j < listCategoryWithLevel[i].level - 1; j++)
                     {
-                        Category c = categories.ElementAt(i);
-                        if (c.PreCateID == SLIMCONFIG.NONE_PRE_CATEGORY)
+                        <td></td>
+                    }
+
+                    @*<td>@_categoryServices.findByid(item.id).Name</td>
+                    <td>@_categoryServices.findByid(item.id).Rank</td>
+                    <td><button class="btn btn-warning" onclick="editCategory(@item.id)">Edit</button></td>
+                    <td><button class="btn btn-danger" onclick="deleteCategory(@item.id)">Delete</button></td>*@
+
+                        <td><input id="subCateName+@listCategoryWithLevel[i].id" class="form-control" disabled="disabled" value="@listCategoryWithLevel[i].name" /></td>
+                        <td><input id="rankSubCate+@listCategoryWithLevel[i].id" class="form-control" disabled="disabled" value="@listCategoryWithLevel[i].rank" /></td>
+                        <td><button id="btnEditSubCate+@listCategoryWithLevel[i].id" class="btn btn-warning" onclick="editSubCategory(@listCategoryWithLevel[i].id)">Edit</button></td>
+                        <td><button class="btn btn-danger" onclick="deleteCategory(@listCategoryWithLevel[i].id)">Delete</button></td>
+                    </tr>
+                    if (!listCategoryWithLevel.Any(lwcl => lwcl.preCateId == listCategoryWithLevel[i].id))
+                    {
+                        <tr>
+                            @for (int j = 0; j < listCategoryWithLevel[i].level; j++)
+                            {
+                                <td></td>
+                            }
+                            @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
+                                <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@listCategoryWithLevel[i].id" /></td>
+                                    <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
+                                    <td><input id="rankSubCate" name="rank" class="form-control" placeholder="Rank" /></td>
+                                    <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
+                            }
+                        </tr>
+                    }
+                    if (listCategoryWithLevel[i + 1].level < listCategoryWithLevel[i].level)
+                    {
+                        for (int shift = 0; shift < listCategoryWithLevel[i].level - listCategoryWithLevel[i + 1].level; shift++)
                         {
                             <tr>
-                                <td>@c.ID</td>
-                                <td>@c.Name</td>
-                                <td>@c.Rank</td>
-                                <td><button class="btn btn-warning" onclick="editCategory(@c.ID)">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteCategory(@c.ID)">Delete</button></td>
-                                <td>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td></td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @{
-                                                foreach (var item in listCategorySortRank)
-                                                {
-                                                    <tr>
-                                                        <td><input id="subCateName+@item.ID" class="form-control" disabled="disabled" value="@item.Name" /></td>
-                                                        <td><input id="rankSubCate+@item.ID" class="form-control" disabled="disabled" value="@item.Rank" /></td>
-                                                        <td><button id="btnEditSubCate+@item.ID" class="btn btn-warning" onclick="editSubCategory(@item.ID)">Edit</button></td>
-                                                        <td><button class="btn btn-danger" onclick="deleteCategory(@item.ID)">Delete</button></td>
-                                                    </tr>
-                                                }
-
-                                                @*for (int j = 0; j < categories.Count; j++)
-                                                {
-                                                    Category sc = categories.ElementAt(j);
-                                                    if (sc.PreCateID == c.ID)
-                                                    {
-                                                        <tr>
-                                                            <td><input id="subCateName+@sc.ID" class="form-control" disabled="disabled" value="@sc.Name" /></td>
-                                                            <td><input id="rankSubCate+@sc.ID" class="form-control" disabled="disabled" value="@sc.Rank"/></td>
-                                                            <td><button id="btnEditSubCate+@sc.ID" class="btn btn-warning" onclick="editSubCategory(@sc.ID)">Edit</button></td>
-                                                            <td><button class="btn btn-danger" onclick="deleteCategory(@sc.ID)">Delete</button></td>
-                                                        </tr>
-                                                    }
-                                            }*@
-                                                <tr>
-                                                    @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                    {
-                                                        <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
-                                                        <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@c.ID" /></td>
-                                                        <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
-                                                        <td><input id="rankSubCate" name="rank" class="form-control" placeholder="Rank" /></td>
-                                                        <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
-                                                    }
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </td>
+                                @for (int j = 0; j < listCategoryWithLevel[i].level - 1 - shift; j++)
+                                {
+                                    <td></td>
+                                }
+                                @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
+                                    <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@listCategoryWithLevel[i].preCateId" /></td>
+                                    <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
+                                    <td><input id="rankSubCate" name="rank" class="form-control" placeholder="Rank" /></td>
+                                    <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
+                                }
                             </tr>
-                                                    }
-                                                }
+                        }
+
+                    }
+                    
+
+
                 }
-            </tbody>
+
+            }
         </table>
     </div>
 </div>
@@ -122,6 +124,7 @@
 <script>
     function editCategory(id)
     {
+        console.log(id)
         jQuery.ajax({
             url: "/Quanli/getCategoryInfo",
             data: {
