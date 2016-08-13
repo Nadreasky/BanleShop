@@ -3057,29 +3057,29 @@ input[type="color"]:focus,
 
 /* filters by category */
 
-.filters-by-category {
+.filters-by-category, .filters-by-category1 {
 	display:inline-block;
 	width:100%;
 	text-align:center;
 	margin:30px 0 20px
 }
-.filters-by-category.nomargin {
+.filters-by-category.nomargin, .filters-by-category1.nomargin {
 	margin:0
 }
-.filters-by-category ul {
+.filters-by-category ul, .filters-by-category1 ul {
 	padding:0;
 	margin:0;
 }
-.filters-by-category li {
+.filters-by-category li, .filters-by-category1 li {
 	margin:0 0 10px;
 	height:26px;
 	display:inline-block;
 	border-left:1px solid #e7e7e7
 }
-.filters-by-category ul li:first-child {
+.filters-by-category ul li:first-child, .filters-by-category1 ul li:first-child {
 	border:none
 }
-.filters-by-category li a {
+.filters-by-category li a, .filters-by-category1 li a {
 	display:block;
 	color:#2b2b2b;
 	font:1.23em 'Oswald', sans-serif;
@@ -3090,7 +3090,7 @@ input[type="color"]:focus,
 	border:2px solid transparent;
 	text-decoration:none
 }
-.filters-by-category li a.selected, .filters-by-category li a:hover {
+.filters-by-category li a.selected, .filters-by-category li a:hover, .filters-by-category1 li a.selected, .filters-by-category1 li a:hover {
 	border-color:#f4570e
 }
 .sidebar-left {
@@ -3697,7 +3697,7 @@ input[type="color"]:focus,
 	}
 }
 @media (min-width: 480px) and (max-width: 639px) {
-	.responsive .filters-by-category li a {
+	.responsive .filters-by-category li a, .responsive .filters-by-category1 li a {
 		font-size: 1.21em;
 		margin: -9px 6px 9px;
 		padding: 7px 10px;
@@ -3956,7 +3956,7 @@ input[type="color"]:focus,
 	}
 }
 @media (max-width: 479px) {
-	.responsive .filters-by-category li a {
+	.responsive .filters-by-category li a, .responsive .filters-by-category1 li a {
 		font-size: 0.8em;
 		margin: -3px 4px 9px;
 		padding: 5px 8px;
@@ -4858,20 +4858,20 @@ ul.marked li [class^="icon-"], ul.marked li [class*=" icon-"] {
 	margin-right:5px;
 }
 
-#filters {
+#filters, #filters1 {
 	display:inline-block;
 	width:100%;
 	margin: 0 0 20px 0;
 }
-#filters.nomargin {
+#filters.nomargin, #filters1.nomargin {
 	margin:0;
 }
-#filters li {
+#filters li, #filters1 li {
 	padding: 0 0 4px;
 	margin: 0;
 	display: inline-block;
 }
-#filters li a {
+#filters li a, #filters1 li a {
 	display:inline-block;
 	margin:0 2px 5px;
 	font: 12px/35px 'Oswald', sans-serif;
@@ -4885,7 +4885,7 @@ ul.marked li [class^="icon-"], ul.marked li [class*=" icon-"] {
 	-moz-transition: background 0.25s 0s ease;
 	-o-transition: background 0.25s 0s ease;
 }
-#filters li a:hover, #filters li a.active, #filters li a.selected {
+#filters li a:hover, #filters li a.active, #filters li a.selected, #filters1 li a:hover, #filters1 li a.active, #filters1 li a.selected {
 	background: #f4570e;
 	color:#fff;
 }

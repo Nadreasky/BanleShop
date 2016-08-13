@@ -512,8 +512,100 @@ jQuery(document).ready(function() {
 				}
 			});
 		}
-		return false
+		return false;
 	});
+
+	var $optionSets1 = jQuery("#option-set"),
+		$optionLinks1 = $optionSets1.find("a"),
+		isotopeOuter1 = jQuery('.isotope-outer1');
+    console.log("wtf")
+    $optionLinks1.click(function () {
+        console.log("ham")
+	    var $this = jQuery(this);
+	    if ($this.hasClass("selected")) return false;
+	    var $optionSet = $this.parents("#option-set");
+	    $optionSet.find(".selected").removeClass("selected");
+	    $this.addClass("selected");
+	    console.log("xong")
+	    var options1 = {}, key = $optionSet.attr("data-option-key"),
+			value = $this.attr("data-option-value");
+	    value = value === "false" ? false : value;
+	    options1[key] = value;
+	    console.log(options1);
+	    if ( isotope_animation_enabled == 1 ) {
+	        console.log("qwe");
+	        if (key === "layoutMode" && typeof changeLayoutMode === "function") {
+	            changeLayoutMode($this, options1);
+	        } else if (isotopeOuter1.length != 0) {
+	            isotopeOuter1.isotope(options1);
+	        }
+	    } else {
+	        var data = 'type=' + value + '&per_page=' + $this.attr('data-per-page');
+
+	        jQuery('#ajax_loader').show();
+
+	        jQuery.ajax({
+	            url : woocommerce_params.ajax_url,
+	            method : 'GET',
+	            data : data + '&action=woocommerce_get_products_filtered&context=frontend',
+	            dataType : 'json',
+	            success: function(response) {
+	                console.log("mem xong");
+	                var $row = $this.closest('#woocommerce').find('.row.big_with_description').first();
+	                console.log("seen");
+	                $row.empty().html(response);
+	                jQuery('#ajax_loader').hide();
+	                productImagesInit();
+
+	            }
+	        });
+	    }
+	    return false;
+	});
+
+	//var $optionSets1 = jQuery(".filters-by-category1 .option-set1"),
+	//	$optionLinks1 = $optionSets1.find("a"),
+	//	isotopeOuter1 = jQuery('.isotope-outer1');
+
+	//$optionLinks1.click(function () {
+	//    var $this = jQuery(this);
+	//    if ($this.hasClass("selected")) return false;
+	//    var $optionSet1 = $this.parents(".option-set1");
+	//    $optionSet1.find(".selected").removeClass("selected");
+	//    $this.addClass("selected");
+	//    var options = {}, key = $optionSet1.attr("data-option-key"),
+	//		value = $this.attr("data-option-value");
+	//    value = value === "false" ? false : value;
+	//    options[key] = value;
+	//    console.log(key);
+	//    if ( isotope_animation_enabled == 1 ) {
+	//        if (key === "layoutMode" && typeof changeLayoutMode === "function") {
+	//            changeLayoutMode($this, options);
+	//        } else if (isotopeOuter1.length != 0) {
+	//            isotopeOuter1.isotope(options);
+	//        }
+	//    } else {
+	//        var data = 'type=' + value + '&per_page=' + $this.attr('data-per-page');
+
+	//        jQuery('#ajax_loader').show();
+
+	//        jQuery.ajax({
+	//            url : woocommerce_params.ajax_url,
+	//            method : 'GET',
+	//            data : data + '&action=woocommerce_get_products_filtered&context=frontend',
+	//            dataType : 'json',
+	//            success: function(response) {
+	//                var $row = $this.closest('#woocommerce').find('.row.big_with_description').first();
+
+	//                $row.empty().html(response);
+	//                jQuery('#ajax_loader').hide();
+	//                productImagesInit();
+
+	//            }
+	//        });
+	//    }
+	//    return false;
+	//});
 
 	if ( zoomSliderEnabled ) {
 
