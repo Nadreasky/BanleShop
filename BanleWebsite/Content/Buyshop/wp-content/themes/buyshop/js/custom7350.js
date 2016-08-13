@@ -517,7 +517,7 @@ jQuery(document).ready(function() {
 
 	var $optionSets1 = jQuery("#option-set"),
 		$optionLinks1 = $optionSets1.find("a"),
-		isotopeOuter1 = jQuery('.isotope-outer1');
+		isotopeOuter1 = jQuery('#isotope-outer');
     console.log("wtf")
     $optionLinks1.click(function () {
         console.log("ham")
