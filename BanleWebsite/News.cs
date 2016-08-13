@@ -9,11 +9,9 @@
 
 namespace BanleWebsite
 {
-    using Models;
     using System;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-
+    
     public partial class News
     {
         public int ID { get; set; }
