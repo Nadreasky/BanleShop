@@ -172,7 +172,7 @@ namespace BanleWebsite.Services
                 }
             }
             return fashionCateID;
-
+        }
 
         public List<CategoryWithLevel> GenerateListCategoryWithLevel()
         {
