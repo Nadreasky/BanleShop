@@ -2,6 +2,8 @@
     ViewBag.Title = "Your Fashion";
     List<Product> allProduct = ViewBag.allProduct;
     List<News> listNews = ViewBag.listNews;
+
+    List<Product> listRandom = ViewBag.listRandom;
 }
 
 <script>
@@ -94,9 +96,11 @@
                                 <div class="row isotope-outer big_with_description">
                                 @{
                                     int Count = 0;
-                                    for (int i = allProduct.Count - 1; i >= 0; i--)
+                                    for (int i = listRandom.Count - 1; i >= 0; i--)
+                                    //for (int i = allProduct.Count - 1; i >= 0; i--)
                                     {
-                                        Product p = allProduct.ElementAt(i);
+                                        Product p = listRandom.ElementAt(i);
+                                        //Product p = allProduct.ElementAt(i);
                                         if (Count < 16)
                                         {
                                             int c = 0;

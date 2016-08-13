@@ -270,6 +270,26 @@ namespace BanleWebsite.Services
             }
             return nonFashionProducts;
         }
+
+        public List<Product> getListProductRandom()
+        {
+            List<Product> list = getAll();
+            List<Product> listRandom = new List<Product>();
+
+            Random ran = new Random();
+            int ranNum = 0;
+
+            while (list.Count != 0)
+            {
+                ranNum = ran.Next(0, list.Count);
+                listRandom.Add(list[ranNum]);
+                list.RemoveAt(ranNum);
+            }
+
+            //list = listRandom.ToList();
+
+            return listRandom;
+        }
     }
 }
 public class ProductMapping
