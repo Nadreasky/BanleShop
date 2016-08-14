@@ -5,10 +5,18 @@
     List<Category> categoryTree = ViewBag.categoryTree;
     List<Product> productList = ViewBag.productList;
 }
+<head>
+<meta property="og:url" content="/Danhmuc/@SLIMCONFIG.GenerateSlug(mainCate.ID, mainCate.Name)" />
+<meta property="og:type" content="product.group" />
+<meta property="og:title" content="@mainCate.Name" />
+@foreach (Product items in productList)
+{
+    <meta property="og:description" content="@items.Descriptions" />
+    <meta property="og:image" content="@items.Images" />
+}
+<meta property="og:image" content="~/Content/SiteImages/Your Logo _ New.png" />
 
-
-
-
+</head>
 <section id="content">
     <div class="container top" role="main">
         <div class="content_top">
