@@ -11,6 +11,9 @@
     SizeServices _sizeServices = new SizeServices();
     List<int> fashionIDs = ViewBag.fashionIDs;
 
+    string ogUrl = "http://yourfashion.com.vn/sanpham/" + SLIMCONFIG.GenerateSlug(mainProduct.ID, mainProduct.Name);
+    string ogImgUrl = "http://yourfashion.com.vn" + mainProduct.Img1;
+
     int defaultColor = colorImgProduct.ElementAt(0).IDColor.Value;
     int defaultSize = sizeProduct.ElementAt(0).SizeID.Value;
 
@@ -23,6 +26,15 @@
         }
     }
 }
+
+@section head{
+    <meta property="og:url" content="@ogUrl" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="@mainProduct.Name" />
+    <meta property="og:description" content="@mainProduct.Name" />
+    <meta property="og:image" content="@ogImgUrl" />
+}
+
 
 <style>
     h2{

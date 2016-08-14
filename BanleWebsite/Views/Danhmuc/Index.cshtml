@@ -4,7 +4,17 @@
     ViewBag.Title = mainCate.Name;
     List<Category> categoryTree = ViewBag.categoryTree;
     List<Product> productList = ViewBag.productList;
+    string ogUrl = "http://yourfashion.com.vn/Danhmuc/" + SLIMCONFIG.GenerateSlug(mainCate.ID, mainCate.Name);
+    string ogImgUrl = "http://yourfashion.com.vn" + productList[0].Img1;
 }
+
+@section head{
+    <meta property="og:url" content="@ogUrl" />
+    <meta property="og:type" content="product.group" />
+    <meta property="og:title" content="@mainCate.Name" />
+    <meta property="og:description" content="@mainCate.Name" />
+    <meta property="og:image" content="@ogImgUrl" />
+    }
 
 
 

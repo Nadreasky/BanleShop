@@ -302,13 +302,11 @@
     <Content Include="Content\Promotion_Img\Back To School - 2.1.jpg" />
     <Content Include="Content\SiteImages\BGR1.jpg" />
     <Content Include="Content\SiteImages\empty_bin.png" />
-    <Content Include="Content\SiteImages\logo.png" />
-    <Content Include="Content\SiteImages\logo2.jpg" />
     <Content Include="Content\SiteImages\logo_rightbar.png" />
     <Content Include="Content\SiteImages\favi.png" />
     <Content Include="Content\SiteImages\tphcm.jpg" />
-    <Content Include="Content\SiteImages\Your Logo _ New.png" />
-    <Content Include="Content\SiteImages\YOUR LOGO_FA-01_CUT.jpg" />
+    <Content Include="Content\SiteImages\logo.png" />
+    <Content Include="Content\SiteImages\logo_vertical.jpg" />
     <Content Include="Content\Slider\8I51IPD.jpg" />
     <Content Include="Content\Slider\Back To School - 3.1.jpg" />
     <Content Include="Content\Slider\Banner2.jpg" />

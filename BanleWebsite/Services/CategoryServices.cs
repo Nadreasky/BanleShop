@@ -81,21 +81,18 @@ namespace BanleWebsite.Services
             Category mainCate = findByid(id);
             List<Product> allProduct = _productServices.getAll();
             List<Product> productListByCate = new List<Product>();
-            if (mainCate.PreCateID == SLIMCONFIG.NONE_PRE_CATEGORY)
+            List<Category> allCate = getAll();
+            for (int i = 0; i < allCate.Count; i++)
             {
-                List<Category> allCate = getAll();
-                for (int i = 0; i < allCate.Count; i++)
+                Category c = allCate.ElementAt(i);
+                if (c.PreCateID == mainCate.ID)
                 {
-                    Category c = allCate.ElementAt(i);
-                    if (c.PreCateID == mainCate.ID)
+                    for (int j = 0; j < allProduct.Count; j++)
                     {
-                        for (int j = 0; j < allProduct.Count; j++)
+                        Product p = allProduct.ElementAt(j);
+                        if (p.CateID == c.ID)
                         {
-                            Product p = allProduct.ElementAt(j);
-                            if (p.CateID == c.ID)
-                            {
-                                productListByCate.Add(p);
-                            }
+                            productListByCate.Add(p);
                         }
                     }
                 }
