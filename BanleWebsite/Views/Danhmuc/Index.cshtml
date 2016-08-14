@@ -9,12 +9,8 @@
 <meta property="og:url" content="/Danhmuc/@SLIMCONFIG.GenerateSlug(mainCate.ID, mainCate.Name)" />
 <meta property="og:type" content="product.group" />
 <meta property="og:title" content="@mainCate.Name" />
-@foreach (Product items in productList)
-{
-    <meta property="og:description" content="@items.Descriptions" />
-    <meta property="og:image" content="@items.Images" />
-}
-<meta property="og:image" content="~/Content/SiteImages/Your Logo _ New.png" />
+<meta property="og:description" content="@productList[0].Descriptions" />
+<meta property="og:image" content="@productList[0].Img1" />
 
 </head>
 <section id="content">
