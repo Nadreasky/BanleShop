@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace BanleWebsite.Controllers
 {
+    [AuthLog(Roles = "Admin")]
     public class DanhmucController : Controller
     {
         ProductServices _productServices = new ProductServices();

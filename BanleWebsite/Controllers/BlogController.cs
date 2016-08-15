@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace BanleWebsite.Controllers
 {
+    [AuthLog(Roles = "Admin")]
     public class BlogController : Controller
     {
         NewsServices _newsServices = new NewsServices();

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BanleWebsite.Controllers
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class OrderController : Controller
     {
         // GET: Order
