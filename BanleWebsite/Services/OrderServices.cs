@@ -245,6 +245,15 @@ namespace BanleWebsite.Services
                 && (!fromDate.HasValue || o.CreateDate >= fromDate.Value)
                 && (!toDate.HasValue || o.CreateDate <= toDate.Value)).ToList();
         }
+
+        public List<Order> getOrderFilterByPhoneNumber(string phoneNo)
+        {
+            //var getAny = string.IsNullOrWhiteSpace(phoneNo);
+
+            var orderListFull = _orderRepository.List;
+
+            return orderListFull.Where(o => ((o.PhoneNo.ToString()).Equals(phoneNo))).ToList();
+        }
     }
 }
 public class OrderDetailMapping

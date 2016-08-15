@@ -418,13 +418,13 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Agencies\Index.cshtml" />
     <Content Include="Views\Agencies\SubmitAgencyCompleted.cshtml" />
+    <Content Include="Views\Order\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
-    <Folder Include="Views\Order\" />
     <Folder Include="Views\ProductDetail\" />
   </ItemGroup>
   <ItemGroup>
