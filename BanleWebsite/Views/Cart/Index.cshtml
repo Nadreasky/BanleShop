@@ -23,20 +23,18 @@
         border: 1px solid black;
     }*/
     h3 {
-        font-family:VNOswald;
+        font-family: VNOswald;
     }
-}
+
+    }
 </style>
 
 <div class="container">
-    @{ 
+    @{
         if (itemInCart == 0)
         {
             <section style="text-align:center;">
                 <img src="~/Content/SiteImages/empty_bin.png" />
-                <div class="row">
-                    <a href="@link">Tiếp tục mua sắm</a>
-                </div>
             </section>
         }
         else
@@ -73,10 +71,10 @@
                                             <i class="fa fa-plus" aria-hidden="true" style="display:block; float:left; font-size:20px; margin: 7px 0 0 5px; color:#FF7C33;" onclick="plus()"></i>
                                         </div>
 
-                                            <input type="hidden" class="form-control" value="@item.color" name="color" />
-                                            <input type="hidden" class="form-control" value="@item.size" name="size" />
-                                            <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 15px; display:block; float:left;" />
-                                        
+                                        <input type="hidden" class="form-control" value="@item.color" name="color" />
+                                        <input type="hidden" class="form-control" value="@item.size" name="size" />
+                                        <input type="submit" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 15px; display:block; float:left;" />
+
                                     }
 
                                     @using (Html.BeginForm("DeleteCartItem", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", @style = "margin-bottom:0px; margin-right:10px;" }))
@@ -101,7 +99,7 @@
                             <div class="form-inline">
                                 <input type="text" placeholder="Họ và tên" id="name" name="name" required oninvalid="this.setCustomValidity('Quý khách cần điền tên')"
                                        oninput="setCustomValidity('')" style="margin:10px; height:30px; width:220px;" />
-                             <input type="number" placeholder="Số điện thoại" id="phone" name="phoneNo" required oninvalid="this.setCustomValidity('Quý khách cần điền số điện thoại')"
+                                <input type="number" placeholder="Số điện thoại" id="phone" name="phoneNo" required oninvalid="this.setCustomValidity('Quý khách cần điền số điện thoại')"
                                        oninput="setCustomValidity('')" style="margin:10px; height:30px; width:220px;" />
                             </div>
                             <div class="form-inline">
@@ -114,15 +112,14 @@
                         }
                     </div>
                 </div>
-
-                <div style="margin-top:20px; text-align:center;">
-                    <a href="@link">Tiếp tục mua sắm</a>
-                </div>
             </section>
-            
+
                         }
     }
-    
+    <div style="margin-bottom:50px; margin-top:20px; text-align:center;">
+        <a href="@link" class="btn btn-danger" style="font-family:VNOswald">Tiếp tục mua sắm</a>
+    </div>
+
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
