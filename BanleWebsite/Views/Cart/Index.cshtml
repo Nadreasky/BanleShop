@@ -43,9 +43,11 @@
             <section>
                 <div id="cart" style="max-width:700px; border: 1px solid #9D3BC6; border-radius:4px; margin:auto;">
                     @{
+
                         foreach (var item in cart)
                         {
                             Product p = _productServices.findByID(item.productId);
+                            bool isFashionProduct = false;
                             double thanhtien = p.Price.Value * item.quantity;
                             total += thanhtien;
 
@@ -56,8 +58,24 @@
                                 </a>
                                 <h3 style="text-align:left;">@p.Name</h3>
                                 <h3 style="text-align:left; color:red; font-size:20px; font-family:VNOswald;">@ChangeCurrency.NayThiCurrency(p.Price.ToString())&#8363</h3>
-                                <p style="font-family:VNOswald; font-size:17px;">Màu áo: @_colorServices.findByID(item.color).Name</p>
-                                <p style="font-family:VNOswald; font-size:17px;">Kích cỡ: @_sizeServices.findByID(item.size).Name</p>
+                                
+                                @foreach (string categoryName in SLIMCONFIG.FASHION_PRODUCT_CATEGORIES)
+                                {
+                                    if (p.Category.Name.ToUpper().Contains(categoryName.ToUpper()))
+                                    {
+                                        isFashionProduct = true;
+                                    }
+                                }
+
+                                @if (isFashionProduct == true)
+                                {
+                                    <p style="font-family:VNOswald; font-size:17px;"> Màu áo: @_colorServices.findByID(item.color).Name</p>
+                                    <p style="font-family:VNOswald; font-size:17px;"> Kích cỡ: @_sizeServices.findByID(item.size).Name</p>
+                                }
+                                else
+                                {
+                                    <p style="font-family:VNOswald; font-size:17px;"> Màu sắc: @_colorServices.findByID(item.color).Name</p>
+                                }
                                 <div class="clearfix"></div>
                                 <div class="action" style="display:block; margin-top:10px;">
                                     <p style="display:block; float:left; font-family:VNOswald; font-size:20px; margin:5px 10px 0 0;">Số lượng: </p>
@@ -72,7 +90,9 @@
                                         </div>
 
                                         <input type="hidden" class="form-control" value="@item.color" name="color" />
+                                        
                                         <input type="hidden" class="form-control" value="@item.size" name="size" />
+                                        
                                         <input type="submit" id="update_@item.productId" value="Cập nhật" style="font-family:VNOswald; margin: 0 0 0 15px; display:block; float:left;visibility:hidden" />
 
                                     }
