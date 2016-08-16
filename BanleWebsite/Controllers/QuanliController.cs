@@ -869,7 +869,7 @@ namespace BanleWebsite.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult loadMultiColorImage(string ID)
         {
             ResultViewModels result = new ResultViewModels();

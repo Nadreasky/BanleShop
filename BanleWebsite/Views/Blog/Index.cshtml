@@ -4,7 +4,7 @@
     List<News> listNews5Items = ViewBag.listNews5Items;
 }
 
-<head>
+@*<head>
     <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
 </head>
 
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="~/Content/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+<script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>*@
 
 
 <style>
@@ -26,23 +26,23 @@
     }
 </style>
 <div class="container">
-    <div class="row">
-        <div class="col-md-8" id="mainNews">
-            <h3 style="font-family:VNOswald;">@news.Title</h3>
+    <div class="row-fluid">
+        <div class="span8" id="mainNews">
+            <h3 style="font-family:VNOswald; margin-top:20px;">@news.Title</h3>
             @Html.Raw(news.Content)
         </div>
-        <div class="col-md-4">
-            <h2>Tin nổi bật</h2>
+        <div class="span4">
+            <h3 style="font-family:VNOswald; margin-top:20px;">Tin nổi bật</h3>
             
                 @{
                     foreach (var item in listNews5Items)
                     {
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="row-fluid">
+                            <div class="span4">
                                 <a href="/Blog/@SLIMCONFIG.GenerateSlug(item.ID, item.Title)"><img src="@item.MainImage" alt="" class="img-rounded animate flip" /></a>
                             </div>
-                            <div class="col-md-8">
-                                <a href="/Blog/@SLIMCONFIG.GenerateSlug(item.ID, item.Title)"><h4>@item.Title</h4></a>
+                            <div class="span8">
+                                <a href="/Blog/@SLIMCONFIG.GenerateSlug(item.ID, item.Title)"><h4 style="font-family:VNOswald;">@item.Title</h4></a>
                             </div>
                         </div>
                         <br />
