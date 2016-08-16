@@ -14,7 +14,6 @@ using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
-    //[AuthLog(Roles = "Admin")]
     public class QuanliController : Controller
     {
         CategoryServices _categoryServices = new CategoryServices();
@@ -29,11 +28,13 @@ namespace BanleWebsite.Controllers
 
 
         // GET: Quanli
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Category()
         {
             List<Category> categories = _categoryServices.getAll();
@@ -44,6 +45,7 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Product()
         {
             List<Category> categories = _categoryServices.getAll();
@@ -54,6 +56,7 @@ namespace BanleWebsite.Controllers
         }
 
         // Kun 4.8.16
+        [Authorize(Roles = "Admin")]
         public ActionResult Blog()
         {
             List<News> listNews = _newsServices.getAll();
@@ -103,6 +106,7 @@ namespace BanleWebsite.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public string deleteBlog(string id)
         {
             int _id = -1;
@@ -123,18 +127,18 @@ namespace BanleWebsite.Controllers
             _newsServices.delete(news);
             return "Success";
         }
-    
 
+        [Authorize(Roles = "Admin")]
         public Object getBlogInfo(int newsId)
         {
             return JsonConvert.SerializeObject(_newsServices.findByID(newsId));
         }
 
-        
+
 
         //-------------end of News function-------------
-        
 
+        [Authorize(Roles = "Admin")]
         public ActionResult ProductDetails(int? id)
         {
 
@@ -158,6 +162,7 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Order()
         {
             
@@ -199,6 +204,7 @@ namespace BanleWebsite.Controllers
             return View(); // chua co
         }
 
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult OrderClone()
         {
             List<Order> orders = _orderServices.getAllOrder();
@@ -211,6 +217,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Authorize(Roles = "Admin")]
         public ActionResult saveProduct(string id, string productName, string productPrice, string productCateID, string description,
             string quantity, HttpPostedFileBase productImg1, HttpPostedFileBase productImg2, HttpPostedFileBase productImg3, string oldPrice,
             string featured, string salePercent, string isPromoted, string promotion)
@@ -401,12 +408,14 @@ namespace BanleWebsite.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin, Manager")]
         public Object getProductInfo(int proId)
         {
             return JsonConvert.SerializeObject(_productServices.findByIDMapping(proId));
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public string deleteProduct(string proId)
         {
             int _id = -1;
@@ -459,6 +468,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Authorize(Roles = "Admin")]
         public ActionResult saveCategory(string id, string categoryName, string rank, string preCateID)
         {
             ViewBag.Error = "";
@@ -485,6 +495,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Authorize(Roles = "Admin")]
         public string editSubCate(string id, string name, string rank)
         {
             ViewBag.Error = "";
@@ -521,12 +532,14 @@ namespace BanleWebsite.Controllers
             return "success";
         }
 
+        [Authorize(Roles = "Admin")]
         public Object getCategoryInfo(int cateID)
         {
             return JsonConvert.SerializeObject(_categoryServices.findByid(cateID));
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public string deleteCategory(string id)
         {
             int _id = -1;
@@ -555,6 +568,7 @@ namespace BanleWebsite.Controllers
         //=========================START FUNCTION OF ORDER============================
 
         //Tìm detail cua order theo OrderID
+        [Authorize(Roles = "Admin, Manager")]
         public Object getOrderDetail(int id)
         {
 
@@ -562,12 +576,14 @@ namespace BanleWebsite.Controllers
         }
 
         //Tim order theo orderID
+        [Authorize(Roles = "Admin, Manager")]
         public Object getOrderInfo(int id)
         {
             return JsonConvert.SerializeObject(_orderServices.findOrderByIDMapping(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Manager")]
         public string UpdateOrderStatus(string id, string status)
         {
             int _id = -1;
@@ -613,6 +629,7 @@ namespace BanleWebsite.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult filterOrder(string status, string fromDate, string toDate)
         {
             int _status = -1;
@@ -635,6 +652,7 @@ namespace BanleWebsite.Controllers
         //========================START FUNCTION OF IMAGE SSERVICES=================
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult addColorImgProduct(int colorID, HttpPostedFileBase imgColor, int productID)
         {
             
@@ -662,6 +680,7 @@ namespace BanleWebsite.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public string deleteColorImgProduct(int imageId)
         {
             Image img = new Image();
@@ -725,6 +744,7 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Authorize(Roles = "Admin")]
         public string saveSize(string sizeId, string productId)
         {
             int _sizeID = -1;
@@ -754,6 +774,7 @@ namespace BanleWebsite.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public string deleteSize(string sizeId, string productId)
         {
             int _sizeID = -1;
@@ -793,11 +814,12 @@ namespace BanleWebsite.Controllers
 
         [HttpPost]
         //[Route("BigImages/Images/ProductImages")]
+        [Authorize(Roles = "Admin")]
         public ActionResult UploadPostImage()
         {
             ResultViewModels result = new ResultViewModels();
-            string fileName = "";
-            string thumbFileName = "";
+            //string fileName = "";
+            //string thumbFileName = "";
 
             if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
             {
@@ -847,6 +869,7 @@ namespace BanleWebsite.Controllers
         }
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         public ActionResult loadMultiColorImage(string ID)
         {
             ResultViewModels result = new ResultViewModels();
