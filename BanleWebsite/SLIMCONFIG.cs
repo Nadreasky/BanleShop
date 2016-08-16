@@ -18,9 +18,9 @@ namespace BanleWebsite
         public static int PRODUCT_IMG_HEIGHT = 100000;
         public static int BIG_PRODUCT_IMG_WIDTH = 900;
         public static int BIG_PRODUCT_IMG_HEIGHT = 100000;
-        public static int ORDER_STATUS_UNCHECK = 1;
-        public static int ORDER_STATUS_CHECKED = 2;
-        public static int ORDER_STATUS_PAID = 3;
+        public static int ORDER_STATUS_UNCHECK = 1; // dang xu li
+        public static int ORDER_STATUS_CHECKED = 2; // dang giao hang
+        public static int ORDER_STATUS_PAID = 3; // da xong
         public static int ORDER_STATUS_CANCEL = 4;
         public static bool PRODUCT_IS_ACTIVED = true;
         public static bool PRODUCT_FEATURED_TRUE = true;
@@ -45,5 +45,7 @@ namespace BanleWebsite
             byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(text);
             return System.Text.Encoding.ASCII.GetString(bytes);
         }
+
+        
     }
 }

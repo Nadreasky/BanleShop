@@ -68,20 +68,20 @@
                         @{
                             if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
                             {
-                                <p>Mới tạo</p>
+                                <p>Đang xử lí</p>
                             }
                             if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
                             {
-                                <p>Đã xác nhận</p>
+                                <p>Đang giao hàng</p>
                             }
                             if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
                             {
-                                <p>Đã thanh toán</p>
+                                <p>Đã xong</p>
                             }
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                            @*if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
                             {
                                 <p>Đã hủy đơn hàng</p>
-                            }
+                            }*@
                         }
                         @*<select style="width:150px;">
                                 @{
@@ -154,11 +154,12 @@
                 </div>
                 <div class="form-group" style="float:left; display:block; margin-left:25px;">
                     <label>Tình trạng</label>
-                    <select id="orderStatus" style="width:120px;">
-                        <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
-                        <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
-                        <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
-                        <option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>
+                    <h4></h4>
+                    <select id="orderStatus" style="width:120px;" disabled>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Đang xử lí</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đang giao hàng</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã xong</option>
+                        @*<option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>*@
                     </select>
                 </div>
                 <div class="form-group" style="float:right; display:block;">
@@ -414,7 +415,7 @@
                 document.getElementById("createDate").innerText = order.CreateDate;
                 jQuery("#orderStatus").val(order.Status);
                 //button update
-                jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
+                //jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
             },
             type: 'GET'
         })
@@ -437,10 +438,10 @@
         //document.getElementById("createDate").innerText = "";
     });
 
-    jQuery('#myModal').on('hide.bs.modal', function () {
-        var btnUpdateStt = document.getElementById("btnUpdateStt");
-        btnUpdateStt.parentNode.removeChild(btnUpdateStt);
-    });
+    //jQuery('#myModal').on('hide.bs.modal', function () {
+    //    var btnUpdateStt = document.getElementById("btnUpdateStt");
+    //    btnUpdateStt.parentNode.removeChild(btnUpdateStt);
+    //});
 
     function getOrderByStt()
     {
