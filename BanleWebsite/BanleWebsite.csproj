@@ -403,10 +403,8 @@
     <Content Include="Views\Danhmuc\Index.cshtml" />
     <Content Include="Views\Quanli\Category.cshtml" />
     <Content Include="Views\Quanli\Product.cshtml" />
-    <Content Include="Views\Quanli\UpdateCategory.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Quanli\Order.cshtml" />
-    <Content Include="Views\Quanli\OrderClone.cshtml" />
     <Content Include="Views\Cart\SubmitOrderCompleted.cshtml" />
     <Content Include="Views\Quanli\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
