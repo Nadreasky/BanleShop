@@ -199,6 +199,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DanhmucController.cs" />
     <Compile Include="Controllers\ErrorHandleController.cs" />
+    <Compile Include="Controllers\HelpCenterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -418,6 +419,7 @@
     <Content Include="Views\Agencies\Index.cshtml" />
     <Content Include="Views\Agencies\SubmitAgencyCompleted.cshtml" />
     <Content Include="Views\ErrorHandle\Error.cshtml" />
+    <Content Include="Views\HelpCenter\QuyTacTraHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />

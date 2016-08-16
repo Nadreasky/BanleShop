@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Quy Tắc Trả Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/w3.css">
+
+<style>
+    .city {
+        display: none;
+    }
+</style>
+
+<div class="container">
+    <section id="content">
+
+
+        <nav class="w3-sidenav w3-transparent w3-card-2" style="width:230px">
+            <a href="#" id="st" class="tablink" onclick="openCity(event, 'London')">Quy tắc trả hàng</a>
+            <a href="#" class="tablink" onclick="openCity(event, 'Paris')">Quy tắc giao hàng</a>
+        </nav>
+
+        <div style="margin-left:230px">
+
+            <div id="London" class="w3-container city w3-animate-left">
+                <h2>London</h2>
+                <p>London is the capital city of England.</p>
+                <p>It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+            </div>
+
+            <div id="Paris" class="w3-container city w3-animate-left">
+                <h2>Paris</h2>
+                <p>Paris is the capital of France.</p>
+                <p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>
+            </div>
+        </div>
+
+
+        <script>
+            function openCity(evt, cityName) {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("city");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-deep-orange", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " w3-deep-orange";
+            }
+        </script>
+
+    </section>
+</div>
+
+
