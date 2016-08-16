@@ -324,16 +324,34 @@ namespace BanleWebsite.Controllers
                     {
                         System.IO.Directory.CreateDirectory(newPathBig);
                     }
+
+                    
+
                     WebImage imgBig = _imageServices.reSizeImgBig(productImg1);
                     imgBig.FileName = productImg1.FileName;
-                    imgBig.Save(newPathBig + "/" + imgBig.FileName);
+                    DateTime dateTime = DateTime.Now;
+                    string currentDateTime = dateTime.Day.ToString()
+                        + "-" + dateTime.Month.ToString()
+                        + "-" + dateTime.Year.ToString()
+                        + "-" + dateTime.Hour.ToString()
+                        + "-" + dateTime.Minute.ToString()
+                        + "-" + dateTime.Second.ToString()
+                        + "-" + dateTime.Millisecond.ToString();
+                    string extensionBig = imgBig.FileName.Split('.').Last();
+                    string savePathBig = newPathBig + "\\" + productName.Trim() + currentDateTime + "." + extensionBig;
+                    //imgBig.Save(newPathBig + "/" + imgBig.FileName);
+                    imgBig.Save(savePathBig);
 
 
                     WebImage img = _imageServices.reSizeImg(imgBig);
                     img.FileName = productImg1.FileName;
-                    img.Save(newPath + "/" + img.FileName);
+                    string extension = img.FileName.Split('.').Last();
+                    string savePath = newPath + "\\" + productName.Trim() + currentDateTime + "." + extension;
+                    //img.Save(newPath + "/" + img.FileName);
+                    img.Save(savePath);
                     //productImg1.SaveAs(newPath + "/" + productImg1.FileName);
-                    filePath1 = "/Images/" + "ProductImages/" + productImg1.FileName;
+                    //filePath1 = "/Images/" + "ProductImages/" + productImg1.FileName;
+                    filePath1 = "/Images/" + "ProductImages/" + productName.Trim() + currentDateTime + "." + extension;
                 }
                 else
                 {
@@ -353,13 +371,28 @@ namespace BanleWebsite.Controllers
                     }
                     WebImage imgBig = _imageServices.reSizeImgBig(productImg2);
                     imgBig.FileName = productImg2.FileName;
-                    imgBig.Save(newPathBig + "/" + imgBig.FileName);
+                    DateTime dateTime = DateTime.Now;
+                    string currentDateTime = dateTime.Day.ToString()
+                        + "-" + dateTime.Month.ToString()
+                        + "-" + dateTime.Year.ToString()
+                        + "-" + dateTime.Hour.ToString()
+                        + "-" + dateTime.Minute.ToString()
+                        + "-" + dateTime.Second.ToString()
+                        + "-" + dateTime.Millisecond.ToString();
+                    string extensionBig = imgBig.FileName.Split('.').Last();
+                    string savePathBig = newPathBig + "\\" + productName.Trim() + currentDateTime + "." + extensionBig;
+                    //imgBig.Save(newPathBig + "/" + imgBig.FileName);
+                    imgBig.Save(savePathBig);
 
 
                     WebImage img = _imageServices.reSizeImg(imgBig);
                     img.FileName = productImg2.FileName;
-                    img.Save(newPath + "/" + img.FileName);
-                    filePath2 = "/Images/" + "ProductImages/" + productImg2.FileName;
+                    string extension = img.FileName.Split('.').Last();
+                    string savePath = newPath + "\\" + productName.Trim() + currentDateTime + "." + extension;
+                    //img.Save(newPath + "/" + img.FileName);
+                    img.Save(savePath);
+                    //filePath2 = "/Images/" + "ProductImages/" + productImg2.FileName;
+                    filePath2 = "/Images/" + "ProductImages/" + productName.Trim() + currentDateTime + "." + extension;
                 }
                 else
                 {
@@ -379,13 +412,27 @@ namespace BanleWebsite.Controllers
                     }
                     WebImage imgBig = _imageServices.reSizeImgBig(productImg3);
                     imgBig.FileName = productImg3.FileName;
-                    imgBig.Save(newPathBig + "/" + imgBig.FileName);
-
+                    DateTime dateTime = DateTime.Now;
+                    string currentDateTime = dateTime.Day.ToString()
+                        + "-" + dateTime.Month.ToString()
+                        + "-" + dateTime.Year.ToString()
+                        + "-" + dateTime.Hour.ToString()
+                        + "-" + dateTime.Minute.ToString()
+                        + "-" + dateTime.Second.ToString()
+                        + "-" + dateTime.Millisecond.ToString();
+                    string extensionBig = imgBig.FileName.Split('.').Last();
+                    string savePathBig = newPathBig + "\\" + productName.Trim() + currentDateTime + "." + extensionBig;
+                    //imgBig.Save(newPathBig + "/" + imgBig.FileName);
+                    imgBig.Save(savePathBig);
 
                     WebImage img = _imageServices.reSizeImg(imgBig);
                     img.FileName = productImg3.FileName;
-                    img.Save(newPath + "/" + img.FileName);
-                    filePath3 = "/Images/" + "ProductImages/" + productImg3.FileName;
+                    string extension = img.FileName.Split('.').Last();
+                    string savePath = newPath + "\\" + productName.Trim() + currentDateTime + "." + extension;
+                    //img.Save(newPath + "/" + img.FileName);
+                    img.Save(savePath);
+                    //filePath3 = "/Images/" + "ProductImages/" + productImg3.FileName;
+                    filePath3 = "/Images/" + "ProductImages/" + productName.Trim() + currentDateTime + "." + extension;
                 }
                 else
                 {
