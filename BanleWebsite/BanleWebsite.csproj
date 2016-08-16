@@ -319,6 +319,7 @@
     <Content Include="Content\Vertic_Banner\Banner2D.jpg" />
     <Content Include="Content\Vertic_Banner\Banner3D.jpg" />
     <Content Include="Content\Vertic_Banner\Iam-Banner-Vertical.jpg" />
+    <Content Include="Content\w3.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
