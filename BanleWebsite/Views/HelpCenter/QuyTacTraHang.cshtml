@@ -15,14 +15,21 @@
     }
 </style>
 
+<script>
+    jQuery(document).ready(function () {
+        var st = document.getElementById("st");
+        st.className += " w3-deep-orange"
+    });
+</script>
+
 <div class="container">
     <section id="content">
 
         <nav class="w3-sidenav w3-transparent w3-card-2" style="width:230px">
             <h4><strong><a href="~/HelpCenter/">Trung tâm hỗ trợ</a></strong></h4>
-            <strong><a href="~/HelpCenter/Quytacgiaohang" id="st"> Quy tắc giao hàng</a></strong>
+            <strong><a href="~/HelpCenter/Quytacgiaohang"> Quy tắc giao hàng</a></strong>
             <strong><a>Quy tắc trả hàng</a></strong>
-            <a href="#" id="st2" class="tablink" onclick="openHelp(event, 'Thoigiankhieunai')">Thời gian khiếu nại</a>
+            <a href="#" id="st" class="tablink" onclick="openHelp(event, 'Thoigiankhieunai')">Thời gian khiếu nại</a>
             <a href="#" class="tablink" onclick="openHelp(event, 'Dieukientra')"> Điều kiện đổi trả</a>
         </nav>
 

@@ -15,6 +15,13 @@
     }
 </style>
 
+<script>
+    jQuery(document).ready(function () {
+        var st = document.getElementById("st");
+        st.className += " w3-deep-orange"
+    });
+</script>
+
 <div class="container">
     <section id="content">
 
@@ -22,7 +29,7 @@
             <h4><strong><a href="~/HelpCenter/">Trung tâm hỗ trợ</a></strong></h4>
             <strong><a>Quy tắc giao hàng</a></strong>
             <a href="#" id="st" class="tablink" onclick="openHelp(event, 'Kiemtradonhang')">Kiểm tra đơn hàng</a>
-            <a href="#" id="st" class="tablink" onclick="openHelp(event, 'Quytacgiaohang')">Thời gian giao hàng</a>
+            <a href="#" class="tablink" onclick="openHelp(event, 'Quytacgiaohang')">Thời gian giao hàng</a>
             <a href="#" class="tablink" onclick="openHelp(event, 'Phivanchuyen')">   Phí vận chuyển</a>
             <strong><a href="~/HelpCenter/Quytactrahang" class="tablink"> Quy tắc trả hàng</a></strong>
         </nav>
@@ -36,7 +43,7 @@
 
                 <p>1. Truy cập:...</p>
                 <p>2. Điền mã số:...</p>
-                <p>3. Bấm nút “Xem ngay” để xem tình trạng đơn hàng (Chức năng chưa thực hiện)</p>
+                <p>3. Bấm nút “Xem ngay” để xem tình trạng đơn hàng</p>
             </div>
         </div>
         <div style="margin-left:230px">
