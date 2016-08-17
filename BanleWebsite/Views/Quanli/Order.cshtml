@@ -391,8 +391,9 @@
                     var quantity_Cell = row.insertCell(2);
                     var thanhtien_Cell = row.insertCell(3)
                     
-                    
-                    if (checkProduct(orderDetailList[i].ProductID)=="True")
+                    var isFas = checkProduct(orderDetailList[i].ProductID);
+                    console.log(isFas)
+                    if (checkProduct(orderDetailList[i].ProductID) == 1)
                     {
                         proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color) + "-" + getSize(orderDetailList[i].Size);
                     }
@@ -457,6 +458,7 @@
     {
         jQuery.ajax({
             url: "/Quanli/checkProductCategory",
+            async: false,
             data: {
                 format: 'json',
                 productId: id
@@ -466,9 +468,9 @@
             },
             success: function (data) {
                 console.log(data);
-                if (data==="True")
-                {return "True";}
-                else {return "False";}
+                if (data === "True")
+                {return 1*1;}
+                else {return 0*1;}
             },
             type:'get'
 
