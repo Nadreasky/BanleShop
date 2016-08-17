@@ -72,7 +72,6 @@ namespace BanleWebsite.Controllers
                     }
                 }
                 ViewBag.resultList = resultList;
-                ViewBag.title = "Kết quả tìm kiếm";
                 ViewBag.keyword = s;
                 return View("SearchResult");
             }
