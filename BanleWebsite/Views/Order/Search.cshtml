@@ -424,6 +424,12 @@
                 document.getElementById("cusName").innerText = order.Name;
                 document.getElementById("cusPhoneNo").innerText = order.PhoneNo;
                 document.getElementById("createDate").innerText = order.CreateDate;
+
+                // thay the ki tu T bang dau cach trong createDate
+                var createDate = document.getElementById("createDate").innerText;
+                var newCreateDate = createDate.replace("T", " ");
+                document.getElementById("createDate").innerText = newCreateDate;
+
                 jQuery("#orderStatus").val(order.Status);
                 //button update
                 //jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
