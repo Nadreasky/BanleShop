@@ -192,7 +192,7 @@ h6 {
 .wpb_single_image {
 	margin-bottom: 20px;
 }
-#wrap {
+#wraps {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
@@ -907,7 +907,7 @@ nav>#nav.megamenu ul ul ul ul, nav>#nav.megamenu ul ul ul li:hover ul ul, nav>#n
 .shoppingcart {
 	position:relative;
 	float:right;
-	z-index: 5000;
+	/*z-index: 5000;*/
 	margin-top: 2px;
 }
 .shoppingcart:hover {
@@ -2675,7 +2675,7 @@ label, input, button, select, textarea {
 }
 .form-search-wrapper {
 	position:relative;
-	z-index:5000;
+	/*z-index:5000;*/
 	margin-right: 58px;
 }
 .helloween .form-search-wrapper {

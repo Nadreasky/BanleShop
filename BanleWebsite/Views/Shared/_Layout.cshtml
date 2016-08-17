@@ -572,6 +572,19 @@
         "sameAs" : [ "https://www.facebook.com/yourfashionsp/"]
         }
     </script>
+    <script type="application/ld+json">
+        {
+        "@@context" : "http://schema.org",
+        "@@type" : "WebSite",
+        "name" : "Your Fashion",
+        "url" : "http://yourfashion.com.vn",
+        "potentialAction" : {
+        "@@type" : "SearchAction",
+        "target" : "http://yourfashion.com.vn/?s={search_term}",
+        "query-input" : "required name=search_term"
+        }
+        }
+    </script>
 </head>
 <body class="home page page-id-24 page-template-default responsive wide notouch no_msie wpb-js-composer js-comp-ver-4.5 vc_responsive">
     <!--START FACEBOOK SCRIPT-->
@@ -735,7 +748,7 @@
     </script>
     <!--END SEARCH FUNCTION-->
 
-    <div id="wrap">
+    <div id="wraps">
         <div id="right_toolbar" class="hidden-phone hidden-tablet">
             <div><a href="/"><img src="~/Content/SiteImages/logo_rightbar.png" width="52" height="142" alt=""></a></div>
             <div id="shopping_cart-3" class="woocommerce widget_shopping_cart">

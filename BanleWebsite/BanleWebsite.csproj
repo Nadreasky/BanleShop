@@ -315,6 +315,8 @@
     <Content Include="Content\Slider\Fashion Show Banners-45.jpg" />
     <Content Include="Content\Slider\IMG_2283.jpg" />
     <Content Include="Content\Slider\WEB_Banner_FashionPlea.jpg" />
+    <Content Include="Content\TSS\TTS20.jpg" />
+    <Content Include="Content\TSS\TTS21.jpg" />
     <Content Include="Content\Vertic_Banner\Banner1D.jpg" />
     <Content Include="Content\Vertic_Banner\Banner2D.jpg" />
     <Content Include="Content\Vertic_Banner\Banner3D.jpg" />
@@ -423,6 +425,7 @@
     <Content Include="Views\HelpCenter\Quytactrahang.cshtml" />
     <Content Include="Views\HelpCenter\Index.cshtml" />
     <Content Include="Views\HelpCenter\Quytacgiaohang.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />
