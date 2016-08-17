@@ -166,12 +166,13 @@
                 </div>
                 <div class="form-group" style="float:left; display:block; margin-left:25px;">
                     <label>Tình trạng</label>
-                    <select id="orderStatus" style="width:120px;" disabled>
+                    <h4 id="orderStatus"></h4>
+                    @*<select id="orderStatus" style="width:120px;" disabled>
                         <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Đang xử lí</option>
                         <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đang giao hàng</option>
                         <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã xong</option>
                         @*<option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>*@
-                    </select>
+                    @*</select>*@
                 </div>
                 <div class="form-group" style="float:right; display:block;">
                     <label>Ngày tạo</label>
@@ -431,6 +432,20 @@
                 document.getElementById("createDate").innerText = newCreateDate;
 
                 jQuery("#orderStatus").val(order.Status);
+
+                if (order.Status==1)
+                {
+                    document.getElementById("orderStatus").innerText = "Đang xử lí";
+                }
+                if (order.Status == 2)
+                {
+                    document.getElementById("orderStatus").innerText = "Đang giao hàng";
+                }
+                if (order.Status == 3)
+                {
+                    document.getElementById("orderStatus").innerText = "Đã xong";
+                }
+
                 //button update
                 //jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
             },
