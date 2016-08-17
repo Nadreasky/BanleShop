@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BanleWebsite.Services;
+using BanleWebsite.Models;
 
 namespace BanleWebsite.Controllers
 {
@@ -13,46 +14,69 @@ namespace BanleWebsite.Controllers
         NewsServices _newsServices;
         CategoryServices _categoryServices;
 
-        public ActionResult Index()
+        public ActionResult Index(String s)
         {
-            _productServices = new ProductServices();
-            _newsServices = new NewsServices();
-            _categoryServices = new CategoryServices();
-            //List<Product> allProduct = _productServices.getAll();
-            List<News> listNews = _newsServices.getPopNews();
-
-            //List<Product> fashionProduct = _productServices.getFashionProduct();
-            //List<Product> nonFashionProduct = _productServices.getNonFashionProduct();
-
-            //Random 
-            List<Product> listRandom = _productServices.getListProductRandom();
-            ViewBag.listRandom = listRandom;
-
-            //cho giao dien moi
-            Dictionary<Category, List<Product>> productByCateList = new Dictionary<Category, List<Product>>();
-            List<Category> allCate = _categoryServices.getAll();
-            List<Category> showCateHome = new List<Category>();
-            foreach (var item in allCate)
+            if(s == null || s.Equals(""))
             {
-                foreach (var item2 in SLIMCONFIG.HOMEPAGE_SHOW_CATEGORIES)
+                _productServices = new ProductServices();
+                _newsServices = new NewsServices();
+                _categoryServices = new CategoryServices();
+                //List<Product> allProduct = _productServices.getAll();
+                List<News> listNews = _newsServices.getPopNews();
+
+                //List<Product> fashionProduct = _productServices.getFashionProduct();
+                //List<Product> nonFashionProduct = _productServices.getNonFashionProduct();
+
+                //Random 
+                List<Product> listRandom = _productServices.getListProductRandom();
+                ViewBag.listRandom = listRandom;
+
+                //cho giao dien moi
+                Dictionary<Category, List<Product>> productByCateList = new Dictionary<Category, List<Product>>();
+                List<Category> allCate = _categoryServices.getAll();
+                List<Category> showCateHome = new List<Category>();
+                foreach (var item in allCate)
                 {
-                    if(item.Name.ToUpper().Contains(item2.ToUpper()))
+                    foreach (var item2 in SLIMCONFIG.HOMEPAGE_SHOW_CATEGORIES)
                     {
-                        showCateHome.Add(item);
+                        if (item.Name.ToUpper().Contains(item2.ToUpper()))
+                        {
+                            showCateHome.Add(item);
+                        }
+                    }
+
+                }
+                foreach (Category item in showCateHome)
+                {
+                    List<Product> pl = _productServices.getListProductRandomByCate(item.ID);
+                    productByCateList.Add(item, pl);
+                }
+                ViewBag.productByCateList = productByCateList;
+
+                //ViewBag.allProduct = allProduct;
+                ViewBag.listNews = listNews;
+                return View();
+            }
+            else
+            {
+                _productServices = new ProductServices();
+                List<Product> allProducts = _productServices.getAll();
+                List<ProductMapping> resultList = new List<ProductMapping>();
+                VietnameseSymbol vn = new VietnameseSymbol();
+                for (int i = 0; i < allProducts.Count; i++)
+                {
+                    Product p = allProducts.ElementAt(i);
+                    if (vn.ClearSymbol(p.Name.ToUpper()).Contains(vn.ClearSymbol(s.ToUpper())))
+                    {
+                        resultList.Add(_productServices.findByIDMapping(p.ID));
                     }
                 }
-
+                ViewBag.resultList = resultList;
+                ViewBag.title = "Kết quả tìm kiếm";
+                ViewBag.keyword = s;
+                return View("SearchResult");
             }
-            foreach (Category item in showCateHome)
-            {
-                List<Product> pl = _productServices.getListProductRandomByCate(item.ID);
-                productByCateList.Add(item, pl);
-            }
-            ViewBag.productByCateList = productByCateList;
-
-            //ViewBag.allProduct = allProduct;
-            ViewBag.listNews = listNews;
-            return View();
+            
         }
 
         public ActionResult About()

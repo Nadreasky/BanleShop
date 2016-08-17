@@ -421,6 +421,7 @@
     <Content Include="Views\Agencies\SubmitAgencyCompleted.cshtml" />
     <Content Include="Views\ErrorHandle\Error.cshtml" />
     <Content Include="Views\HelpCenter\QuyTacTraHang.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />
