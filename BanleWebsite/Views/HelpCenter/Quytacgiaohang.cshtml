@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Quy Tắc Giao Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/w3.css">
+
+<style>
+    .help {
+        display: none;
+    }
+    .cover{
+        display: normal;
+    }
+</style>
+
+<div class="container">
+    <section id="content">
+
+        <nav class="w3-sidenav w3-transparent w3-card-2" style="width:230px">
+            <h4><strong><a href="~/HelpCenter/">Trung tâm hỗ trợ</a></strong></h4>
+            <strong><a>Quy tắc giao hàng</a></strong>
+            <a href="#" id="st" class="tablink" onclick="openHelp(event, 'Kiemtradonhang')">Kiểm tra đơn hàng</a>
+            <a href="#" id="st" class="tablink" onclick="openHelp(event, 'Quytacgiaohang')">Thời gian giao hàng</a>
+            <a href="#" class="tablink" onclick="openHelp(event, 'Phivanchuyen')">   Phí vận chuyển</a>
+            <strong><a href="~/HelpCenter/Quytactrahang" class="tablink"> Quy tắc trả hàng</a></strong>
+        </nav>
+        <div style="margin-left:230px">
+            <div id="Kiemtradonhang" class="w3-container cover w3-animate-left">
+                <h3>Hướng dẫn kiểm tra đơn hàng</h3>
+
+                <a><span><strong>Làm thế nào để kiểm tra tình trạng đơn hàng của tôi?</strong></span></a>
+
+                <p>Quý khách có thể tra cứu tình trạng đơn hàng trực tuyến 24/7 theo các bước sau:</p>
+
+                <p>1. Truy cập:...</p>
+                <p>2. Điền mã số:...</p>
+                <p>3. Bấm nút “Xem ngay” để xem tình trạng đơn hàng (Chức năng chưa thực hiện)</p>
+            </div>
+        </div>
+        <div style="margin-left:230px">
+            <div id="Kiemtradonhang" class="w3-container cover help w3-animate-left">
+                <h3>Hướng dẫn kiểm tra đơn hàng</h3>
+
+                <a><span><strong>Làm thế nào để kiểm tra tình trạng đơn hàng của tôi?</strong></span></a>
+
+                <p>Quý khách có thể tra cứu tình trạng đơn hàng trực tuyến 24/7 theo các bước sau:</p>
+
+                <p>1. Truy cập:...</p>
+                <p>2. Điền mã số:...</p>
+                <p>3. Bấm nút “Xem ngay” để xem tình trạng đơn hàng (Chức năng chưa thực hiện)</p>
+            </div>
+        </div>
+
+        <div style="margin-left:230px">
+            <div id="Quytacgiaohang" class="w3-container help w3-animate-left">
+                <h3>Thời gian giao hàng</h3>
+
+                <a><span><strong>Làm thế nào để kiểm tra đơn hàng của tôi đang ở đâu?</strong></span></a>
+                <p>Sau khi đơn hàng được chuyển qua đơn vị vận chuyển, thông tin về đơn hàng sẽ được cập nhật lên hệ thống trong vòng 48 tiếng.</p>
+
+                <p>Thời gian giao hàng dự kiến sau khi đơn hàng được chuyển sẽ tùy vào địa chỉ giao hàng của quý khách:</p>
+                <p>- Trong khu vực TPHCM: 1-2 ngày làm việc<br>
+                - Ngoài khu vực TPHCM: 3-8 ngày làm việc</p>
+
+                <p>Ngoài ra quý khách có thể sử dụng công cụ tra cứu đơn hàng trực tuyến của chúng tôi tại Yourfashion.com.vn để theo dõi tình trạng đơn hàng. Thông tin từ hệ thống của Yourfashion được cập nhật hằng ngày để mang đến quý khách dịch vụ tra cứu hoàn hảo nhất.</p>
+
+
+            </div>
+
+            <div id="Phivanchuyen" class="w3-container help w3-animate-left">
+                <h3>Phí vận chuyển</h3>
+
+                <p>YOUR cam kết giao hàng miễn phí trong các quận, huyện thuộc TPHCM khi đơn hàng trị giá trên <b>150,000 VND</b>.</p>
+                <p>Nếu đơn hàng dưới <b>150,000 VND</b> sẽ tính theo giá tiêu chuẩn là <b>7,000 VND</b>.</p>
+
+                <p>YOUR cam kết giao hàng trong vòng 6h – 3 ngày nếu đơn hàng gửi đến các địa chỉ thuộc các quận, huyện của TPHCM và trị giá trên <b>150,000 VND</b>.</p>
+                <p>Khách hàng có thể chọn các hình thức thanh toán trực tuyến (Internet Banking) hoặc có thể thanh toán khi nhận hàng.</p>
+
+                <p>Đối với các khu vực khác ngoài thành phố Hồ Chí Minh, đơn hàng sẽ đến trong vòng 2 – 8 ngày làm việc.</p>
+                <p>Cước phí sẽ được tính theo cước của công ty vận chuyển. Your sẽ thông báo giá cước khi khách hàng đặt hàng.</p>
+            </div>
+
+        </div>
+
+        <script>
+            function openHelp(evt, cityName) {
+                var i, x, y, tablinks;
+                x = document.getElementsByClassName("help");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                y = document.getElementsByClassName("cover");
+                for (i = 0; i < y.length; i++) {
+                    y[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-deep-orange", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " w3-deep-orange";
+            }
+        </script>
+    </section>
+</div>

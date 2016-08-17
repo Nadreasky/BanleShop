@@ -7,42 +7,135 @@
 <link rel="stylesheet" href="~/Content/w3.css">
 
 <style>
-    .city {
+    .help {
         display: none;
+    }
+    .cover {
+        display: normal;
     }
 </style>
 
 <div class="container">
     <section id="content">
 
-
         <nav class="w3-sidenav w3-transparent w3-card-2" style="width:230px">
-            <a href="#" id="st" class="tablink" onclick="openCity(event, 'London')">Quy tắc trả hàng</a>
-            <a href="#" class="tablink" onclick="openCity(event, 'Paris')">Quy tắc giao hàng</a>
+            <h4><strong><a href="~/HelpCenter/">Trung tâm hỗ trợ</a></strong></h4>
+            <strong><a href="~/HelpCenter/Quytacgiaohang" id="st"> Quy tắc giao hàng</a></strong>
+            <strong><a>Quy tắc trả hàng</a></strong>
+            <a href="#" id="st2" class="tablink" onclick="openHelp(event, 'Thoigiankhieunai')">Thời gian khiếu nại</a>
+            <a href="#" class="tablink" onclick="openHelp(event, 'Dieukientra')"> Điều kiện đổi trả</a>
         </nav>
 
         <div style="margin-left:230px">
-
-            <div id="London" class="w3-container city w3-animate-left">
-                <h2>London</h2>
-                <p>London is the capital city of England.</p>
-                <p>It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-            </div>
-
-            <div id="Paris" class="w3-container city w3-animate-left">
-                <h2>Paris</h2>
-                <p>Paris is the capital of France.</p>
-                <p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>
+            <div id="Thoigiankhieunai1" class="w3-container cover w3-animate-left">
+                <h3>Thời gian khiếu nại</h3>
+                <p>Nếu sản phẩm quý khách nhận được không đúng với cam kết trên, quý khách vui lòng thông báo ngay cho YOUR trong vòng 48 giờ kể từ thời điểm nhận hàng. YOUR xin từ chối hỗ trợ mọi khiếu nại về tình trạng ngoại quan của sản phẩm trong trường hợp quý khách thông báo cho YOUR sau thời gian này.</p>
+                <p>Tùy theo chính sách đổi trả mà nhà bán hàng áp dụng, các sản phẩm không đạt yêu cầu nói trên sẽ có thời gian thực hiện việc đổi trả trong vòng 07 hoặc 14 ngày kể từ ngày nhận hàng.</p>
+            </div>   
+        
+        </div>
+        <div style="margin-left:230px">
+            <div id="Thoigiankhieunai" class="w3-container help w3-animate-left">
+                <h3>Thời gian khiếu nại</h3>
+                <p>Nếu sản phẩm quý khách nhận được không đúng với cam kết trên, quý khách vui lòng thông báo ngay cho YOUR trong vòng 48 giờ kể từ thời điểm nhận hàng. YOUR xin từ chối hỗ trợ mọi khiếu nại về tình trạng ngoại quan của sản phẩm trong trường hợp quý khách thông báo cho YOUR sau thời gian này.</p>
+                <p>Tùy theo chính sách đổi trả mà nhà bán hàng áp dụng, các sản phẩm không đạt yêu cầu nói trên sẽ có thời gian thực hiện việc đổi trả trong vòng 07 hoặc 14 ngày kể từ ngày nhận hàng.</p>
             </div>
         </div>
+        <div style="margin-left:230px">
+            <div id="Dieukientra" class="w3-container help w3-animate-left">
+                <h3>Điều kiện đổi trả</h3>
+                <p>Sản phẩm quý khách yêu cầu đổi trả phải được kiểm tra chất lượng. YOUR sẽ đổi sản phẩm mới hoặc hoàn trả toàn bộ giá trị mà khách hàng đã thanh toán cho sản phẩm này nếu sản phẩm đáp ứng các điều kiện đổi trả theo quy định.</p>
 
+                <table style="border:2px solid;">
+                    <tbody>
+                        <tr align="center" valign="middle">
+                            <td rowspan="2" style="border-right:1px solid;" align="center"><strong>Lý do đổi/ trả hàng</strong></td>
+                            <td colspan="5" style="border-bottom:1px solid;"><strong style="color:#F00;">Điều kiện đổi trả hàng</strong></td>
+                        </tr>
+                        <tr align="center">
+                            <td style="border-left:1px solid;"><strong>Còn mới</strong></td>
+                            <td style="border-left:1px solid;"><strong>Còn niêm phong</strong></td>
+                            <td style="border-left:1px solid;"><strong>Còn đầy đủ phụ kiện, quà tặng, bao bì, phiếu bảo hành</strong></td>
+                            <td style="border-left:1px solid;"><strong>Còn nguyên vẹn</strong></td>
+                            <td style="border-left:1px solid;"><strong>Còn tem mạc</strong></td>
+                        </tr>
+                        <tr><td></td></tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;">Bể vỡ</td>
+                            <td>x</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>x</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;">Lỗi kỉ thuật</td>
+                            <td>x</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;">Không vừa (hàng Thời trang)</td>
+                            <td>✓</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr><td></td></tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;">Giao sai hàng</td>
+                            <td>✓</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;">Giao thiếu hàng</td>
+                            <td>✓</td>
+                            <td>x</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr><td></td></tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;"> Nghi ngờ sản phẩm hoặc linh kiện không chính hãng</td>
+                            <td>x</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr align="center" style="border:1px solid;">
+                            <td align="left" style="border-right:1px solid;"> Hàng đã qua sử dụng/Hàng dựng/Hàng tân trang</td>
+                            <td>x</td>
+                            <td>x</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                    </tbody>
+                </table>
 
+                <p style="color:#F00;"><strong>x : Không Cần Thiết | ✓: Cần Thiết </strong></p>
+            </div> 
+        </div>
+    
+          
         <script>
-            function openCity(evt, cityName) {
-                var i, x, tablinks;
-                x = document.getElementsByClassName("city");
+            function openHelp(evt, cityName) {
+                var i, x, y, tablinks;
+                x = document.getElementsByClassName("help");
                 for (i = 0; i < x.length; i++) {
                     x[i].style.display = "none";
+                }
+                y = document.getElementsByClassName("cover");
+                for (i = 0; i < y.length; i++) {
+                    y[i].style.display = "none";
                 }
                 tablinks = document.getElementsByClassName("tablink");
                 for (i = 0; i < x.length; i++) {

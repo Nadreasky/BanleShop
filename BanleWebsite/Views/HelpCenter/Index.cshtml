@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Trung tâm hỗ trợ khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/w3.css">
+
+<style>
+    .help {
+        display: normal;
+    }
+</style>
+
+<div class="container">
+    <section id="content">
+
+        <nav class="w3-sidenav w3-transparent w3-card-2" style="width:230px">
+            <h4><strong><a>Trung tâm hỗ trợ</a></strong></h4>
+            <a href="~/HelpCenter/Quytacgiaohang" id="st" class="tablink"> Quy tắc giao hàng</a>
+            <a href="~/HelpCenter/Quytactrahang" class="tablink"> Quy tắc trả hàng</a>
+        </nav>
+
+        <div style="margin-left:230px">
+            <div id="Quytactrahang" class="w3-container help w3-animate-left">
+                <p>YOUR cam kết bán hàng nguyên mới và đảm bảo đúng chất lượng của nhà sản xuất.</p>
+                <p>Đồng thời, sản phẩm mà khách hàng nhận được phải nguyên vẹn, hoạt động tốt và đúng với các thông tin mô tả trên Website Yourfashion.com.vn</p>
+                <p>Nếu sản phẩm quý khách nhận được không đúng với cam kết trên, quý khách vui lòng thông báo ngay cho YOUR trong vòng 48 giờ kể từ thời điểm nhận hàng.
+                YOUR xin từ chối hỗ trợ mọi khiếu nại về tình trạng ngoại quan của sản phẩm trong trường hợp quý khách thông báo cho YOUR sau thời gian này.</p>
+                <p>Tùy theo chính sách đổi trả mà nhà bán hàng áp dụng, các sản phẩm không đạt yêu cầu nói trên sẽ có thời gian thực hiện việc đổi trả trong vòng 07 hoặc 14 ngày kể từ ngày nhận hàng.</p>
+                
+            </div>
+        </div>
+
+        <script>
+            function openHelp(evt, cityName) {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("help");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-deep-orange", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " w3-deep-orange";
+            }
+        </script>
+
+    </section>
+</div>
+

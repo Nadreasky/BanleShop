@@ -17,5 +17,9 @@ namespace BanleWebsite.Controllers
         {
             return View();
         }
+        public ActionResult Quytacgiaohang()
+        {
+            return View();
+        }
     }
 }
