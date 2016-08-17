@@ -210,6 +210,40 @@
 
 
 <script>
+    function checkProduct(id)
+    {
+        jQuery.ajax({
+            url: "/Quanli/checkProductCategory",
+            async: false,
+            data: {
+                format: 'json',
+                productId: id
+            },
+            error: function() {
+                alert("Check fail!")
+            },
+            success: function (data) {
+                console.log(data);
+                var rs = 1;
+                if (data === "True")
+                {
+                    rs = 1*1
+                    console.log("rs" + "true")
+                    console.log(rs)
+                    return rs;
+                }
+                else {
+                    rs = 0*1;
+                    console.log("rs" + "false")
+                    console.log(rs)
+                    return rs;
+                }
+            },
+            type:'get'
+
+        })
+    }
+
     function updateOrderStatus(id) {
         var status = jQuery("#orderStatus").val();
         console.log(status);
@@ -361,6 +395,7 @@
     function getOrderDetail(id) {
         jQuery.ajax({
             url: "/Quanli/getOrderDetail",
+            async: false,
             data: {
                 format: 'json',
                 id: id
@@ -454,28 +489,7 @@
             
         })
     }
-    function checkProduct(id)
-    {
-        jQuery.ajax({
-            url: "/Quanli/checkProductCategory",
-            async: false,
-            data: {
-                format: 'json',
-                productId: id
-            },
-            error: function() {
-                alert("Check fail!")
-            },
-            success: function (data) {
-                console.log(data);
-                if (data === "True")
-                {return 1*1;}
-                else {return 0*1;}
-            },
-            type:'get'
-
-        })
-    }
+    
 
 </script>
 
