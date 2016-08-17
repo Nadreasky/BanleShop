@@ -43,92 +43,104 @@
         <input type="submit" class="btn-success" value="Tìm kiếm" style="display:inline-block;float:left;font-family:VNOswald; margin:25px 0 0 5px;" />
     }
 
-
-    <table class="table" id="orderTable">
-        <tr>
-            <th>Số thứ tự</th>
-            <th>Ngày tạo</th>
-            <th>Tên khách hàng</th>
-            <th>Số điện thoại</th>
-            <th>Trạng thái</th>
-            <th></th>
-            <th></th>
-        </tr>
-        @{
-            foreach (var item in orders)
-            {
-
+    @{
+        if (orders.Count != 0)
+        {
+            <br />
+            <div>Có @orders.Count kết quả được tìm thấy!</div>
+            <table class="table" id="orderTable">
                 <tr>
-                    @{++soThuTu;}
-                    <td>@soThuTu</td>
-                    <td>@item.CreateDate</td>
-                    <td>@item.Name</td>
-                    <td>@item.PhoneNo</td>
-                    <td>
-                        @{
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
-                            {
-                                <p>Đang xử lí</p>
-                            }
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
-                            {
-                                <p>Đang giao hàng</p>
-                            }
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
-                            {
-                                <p>Đã xong</p>
-                            }
-                            @*if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
-                            {
-                                <p>Đã hủy đơn hàng</p>
-                            }*@
-                        }
-                        @*<select style="width:150px;">
+                    <th>Số thứ tự</th>
+                    <th>Ngày tạo</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @{
+                    foreach (var item in orders)
+                    {
+
+                        <tr>
+                            @{++soThuTu;}
+                            <td>@soThuTu</td>
+                            <td>@item.CreateDate</td>
+                            <td>@item.Name</td>
+                            <td>@item.PhoneNo</td>
+                            <td>
                                 @{
                                     if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
                                     {
-                                        <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
-                                    }
-                                    else
-                                    {
-                                        <option disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                        <p>Đang xử lí</p>
                                     }
                                     if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
                                     {
-                                        <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
-                                    }
-                                    else
-                                    {
-                                        <option disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                        <p>Đang giao hàng</p>
                                     }
                                     if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
                                     {
-                                        <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                        <p>Đã xong</p>
                                     }
-                                    else
-                                    {
-                                        <option disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
-                                    }
-                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
-                                    {
-                                        <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy đơn hàng</option>
-                                    }
-                                    else
-                                    {
-                                        <option disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Mới tạo</option>
-                                    }
+                                    @*if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                                        {
+                                            <p>Đã hủy đơn hàng</p>
+                                        }*@
                                 }
-                            </select>*@
-                    </td>
-                    <td>
-                        <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)" style="font-family:VNOswald;">Chi tiết</button>
-                    </td>
+                                @*<select style="width:150px;">
+                                        @{
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy đơn hàng</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Mới tạo</option>
+                                            }
+                                        }
+                                    </select>*@
+                            </td>
+                            <td>
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)" style="font-family:VNOswald;">Chi tiết</button>
+                            </td>
 
-                </tr>
-                            }
-        }
-    </table>
+                        </tr>
+                                    }
+                }
+            </table>
+                                    }
+                                    else
+                                    {
+                                        <br />
+                                        <div>Không có kết quả nào được tìm thấy!</div>
+                                    }
+    }
+
 
 
 </div>
