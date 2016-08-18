@@ -40,14 +40,14 @@
             <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" style="margin:10px; height:30px; width:220px;" />
         </div>
 
-        <input type="submit" class="btn-success" value="Tìm kiếm" style="display:inline-block;float:left;font-family:VNOswald; margin:25px 0 0 5px;" />
+        <input type="submit" class="btn-success" value="Tìm kiếm" style="display:inline-block;float:left;font-family:VNOswald; margin:0 0 0 5px;" />
     }
 
     @{
         if (orders.Count != 0)
         {
             <br />
-            <div>Có @orders.Count kết quả được tìm thấy!</div>
+            <div style="margin-top:20px;">Có @orders.Count kết quả được tìm thấy!</div>
             <table class="table" id="orderTable">
                 <tr>
                     <th>Số thứ tự</th>
@@ -72,15 +72,21 @@
                                 @{
                                     if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
                                     {
-                                        <p>Đang xử lí</p>
+                                        <div class="alert alert-error alert-dismissable">
+                                            <i class="icon-cog-2" style="font-size:15px;"> Đang xử lí đơn hàng</i>
+                                        </div>
                                     }
                                     if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
                                     {
-                                        <p>Đang giao hàng</p>
+                                        <div class="alert alert-success alert-dismissable">
+                                            <i class="icon-truck" style="font-size:15px;"> Đang giao hàng</i>
+                                        </div>
                                     }
                                     if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
                                     {
-                                        <p>Đã xong</p>
+                                        <div class="alert alert-info alert-dismissable">
+                                            <i class="icon-check" style="font-size:15px;"> Đã xong</i>
+                                        </div>
                                     }
                                     @*if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
                                         {
@@ -137,7 +143,7 @@
                                     else
                                     {
                                         <br />
-                                        <div>Không có kết quả nào được tìm thấy!</div>
+                                        <div style="margin-top:20px;"><p>Không có kết quả nào được tìm thấy!</p></div>
                                     }
     }
 
