@@ -426,6 +426,9 @@
     <Content Include="Views\HelpCenter\Index.cshtml" />
     <Content Include="Views\HelpCenter\Quytacgiaohang.cshtml" />
     <Content Include="Views\Home\SearchResult.cshtml" />
+    <Content Include="Views\HelpCenter\IndexMobile.cshtml" />
+    <Content Include="Views\HelpCenter\QTTHMobile.cshtml" />
+    <Content Include="Views\HelpCenter\QTGHMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />
