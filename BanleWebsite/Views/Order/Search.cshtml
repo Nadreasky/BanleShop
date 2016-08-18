@@ -8,26 +8,9 @@
     int soThuTu = 0;
 }
 
-@section head{
-    <meta name="robots" content="noindex">
-}
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-
-<!--Datatables-->
-<link rel="stylesheet" href="~/Content/Datatables/dataTables.bootstrap.min.css" />
-<script src="~/Content/Datatables/jquery.dataTables.js"></script>
-<script src="~/Content/Datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-    jQuery(document).ready(function () {
-        jQuery('#orderTable').DataTable({
-            stateSave: true
-        });
-    });
-</script>
 
 <script>
   jQuery( function() {
@@ -43,87 +26,127 @@
       if (status != null && status != "") {
           jQuery("#sttSelect").val(status);
       }
-      
-      
+
+
   });
 
 </script>
 
 
 <div class="container">
-    @using (Html.BeginForm("Order", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Search", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div style="display:inline-block; float:left;">
-            <label><strong>Trạng thái</strong></label>
-            <input type="hidden" id="st" value="@status"/>
-            <select id="sttSelect" name="status">
-                <option value="-1">All</option>
-                <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
-                <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
-                <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
-                <option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>
-            </select>
+        <div class="form-inline">
+            <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" style="margin:10px; height:30px; width:220px;" />
         </div>
-        <div style="display:inline-block; float:left; margin-left:20px;">
-            <label><strong>Ngày</strong></label>
-            <p>Từ ngày: <input type="text" id="fromDate" name="fromDate" /> Đến ngày: <input type="text" id="toDate" name="toDate" /></p>
-        </div>
-        <label></label>
-        <input type="submit" class="btn-success" value="Chọn" style="display:inline-block;float:left;font-family:VNOswald; margin:25px 0 0 5px;"/>
-    }
-    
-    <div class="clearfix"></div>
-    <table class="table" id="orderTable">
-        <thead>
-            <tr>
-                <th>Số thứ tự</th>
-                <th>Ngày tạo</th>
-                <th>Tên khách hàng</th>
-                <th>Số điện thoại</th>
-                <th>Trạng thái</th>
-                <th>Chi tiết</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                foreach (var item in orders)
-                {
 
-                    <tr>
-                        @{++soThuTu;}
-                        <td>@soThuTu</td>
-                        <td>@item.CreateDate</td>
-                        <td>@item.Name</td>
-                        <td>@item.PhoneNo</td>
-                        <td>
-                            @{
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
-                            {
-                        <p>Mới tạo</p>
-                            }
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
-                            {
-                        <p>Đã xác nhận</p>
-                            }
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
-                            {
-                        <p>Đã thanh toán</p>
-                            }
-                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
-                            {
-                        <p>Đã hủy đơn hàng</p>
-                            }
-                            }
-                        </td>
-                        <td>
-                            <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)" style="font-family:VNOswald;">Chi tiết</button>
-                        </td>
-                    </tr>
+        <input type="submit" class="btn-success" value="Tìm kiếm" style="display:inline-block;float:left;font-family:VNOswald; margin:0 0 0 5px;" />
+    }
+
+    @{
+        if (orders.Count != 0)
+        {
+            <br />
+            <div style="margin-top:20px;">Có @orders.Count kết quả được tìm thấy!</div>
+            <table class="table" id="orderTable">
+                <tr>
+                    <th>Số thứ tự</th>
+                    <th>Ngày tạo</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @{
+                    foreach (var item in orders)
+                    {
+
+                        <tr>
+                            @{++soThuTu;}
+                            <td>@soThuTu</td>
+                            <td>@item.CreateDate</td>
+                            <td>@item.Name</td>
+                            <td>@item.PhoneNo</td>
+                            <td>
+                                @{
+                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                    {
+                                        <div class="alert alert-error alert-dismissable">
+                                            <i class="icon-cog-2" style="font-size:15px;"> Đang xử lí đơn hàng</i>
+                                        </div>
+                                    }
+                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                    {
+                                        <div class="alert alert-success alert-dismissable">
+                                            <i class="icon-truck" style="font-size:15px;"> Đang giao hàng</i>
+                                        </div>
+                                    }
+                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                    {
+                                        <div class="alert alert-info alert-dismissable">
+                                            <i class="icon-check" style="font-size:15px;"> Đã xong</i>
+                                        </div>
+                                    }
+                                    @*if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                                        {
+                                            <p>Đã hủy đơn hàng</p>
+                                        }*@
                                 }
-            }
-        </tbody>
-    </table>
+                                @*<select style="width:150px;">
+                                        @{
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                                            {
+                                                <option selected disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy đơn hàng</option>
+                                            }
+                                            else
+                                            {
+                                                <option disabled value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Mới tạo</option>
+                                            }
+                                        }
+                                    </select>*@
+                            </td>
+                            <td>
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)" style="font-family:VNOswald;">Chi tiết</button>
+                            </td>
+
+                        </tr>
+                                    }
+                }
+            </table>
+                                    }
+                                    else
+                                    {
+                                        <br />
+                                        <div style="margin-top:20px;"><p>Không có kết quả nào được tìm thấy!</p></div>
+                                    }
+    }
+
 
 
 </div>
@@ -149,12 +172,13 @@
                 </div>
                 <div class="form-group" style="float:left; display:block; margin-left:25px;">
                     <label>Tình trạng</label>
-                    <select id="orderStatus" style="width:120px;">
-                        <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
-                        <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
-                        <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
-                        <option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>
-                    </select>
+                    <h4 id="orderStatus"></h4>
+                    @*<select id="orderStatus" style="width:120px;" disabled>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Đang xử lí</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đang giao hàng</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã xong</option>
+                        @*<option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>*@
+                    @*</select>*@
                 </div>
                 <div class="form-group" style="float:right; display:block;">
                     <label>Ngày tạo</label>
@@ -194,9 +218,9 @@
         <!-- Modal content-->
         <div class="modal-content">
             @*<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" style="font-family:VNOswald;">Lỗi</h4>
-            </div>*@
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="font-family:VNOswald;">Lỗi</h4>
+                </div>*@
             <div class="modal-body" style="text-align:center; background-color:#dff0d8;">
                 <p style="color:#468847; font-size:20px;"><strong>Cập nhật thành công</strong></p>
             </div>
@@ -230,7 +254,7 @@
                     jQuery("#orderTable").load("/Quanli/Order #orderTable");
                     jQuery("#myModal").modal("toggle");
                 }
-                
+
             },
             type: 'POST'
         })
@@ -268,7 +292,7 @@
                 alert("Get product item fail!")
             },
             success: function (data) {
-                
+
                 item += data;
                 //console.log(item + "111111111111111111111");
             }
@@ -373,7 +397,7 @@
                 var orderDetailList = JSON.parse(data);
                 var total = 0;
                 for (var i = orderDetailList.length - 1; i >= 0; i--) {
-                  
+
                     //alert(orderDetailList[i].ID);
                     //find peoduct item in order list
                     var item = getproductItem(orderDetailList[i].ProductID);
@@ -383,7 +407,7 @@
                     if(product==null){
                         continue
                     }
-                    
+
                     var table = document.getElementById("modalTable");
                     var row = table.insertRow(1);
                     var proName_Cell = row.insertCell(0);
@@ -414,8 +438,22 @@
                 document.getElementById("createDate").innerText = newCreateDate;
 
                 jQuery("#orderStatus").val(order.Status);
+
+                if (order.Status==1)
+                {
+                    document.getElementById("orderStatus").innerText = "Đang xử lí";
+                }
+                if (order.Status == 2)
+                {
+                    document.getElementById("orderStatus").innerText = "Đang giao hàng";
+                }
+                if (order.Status == 3)
+                {
+                    document.getElementById("orderStatus").innerText = "Đã xong";
+                }
+
                 //button update
-                jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
+                //jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
             },
             type: 'GET'
         })
@@ -425,7 +463,7 @@
         var x = document.getElementById("modalTable").rows.length;
         for (var i = x; i > 2; i--) {
             document.getElementById("modalTable").deleteRow(1);
-            
+
         }
 
         //document.getElementById("total_cell").innerHTML = "";
@@ -438,16 +476,16 @@
         //document.getElementById("createDate").innerText = "";
     });
 
-    jQuery('#myModal').on('hide.bs.modal', function () {
-        var btnUpdateStt = document.getElementById("btnUpdateStt");
-        btnUpdateStt.parentNode.removeChild(btnUpdateStt);
-    });
+    //jQuery('#myModal').on('hide.bs.modal', function () {
+    //    var btnUpdateStt = document.getElementById("btnUpdateStt");
+    //    btnUpdateStt.parentNode.removeChild(btnUpdateStt);
+    //});
 
     function getOrderByStt()
     {
         var stt = document.getElementById("sttSelect").value;
         jQuery.ajax({
-            
+
         })
     }
 

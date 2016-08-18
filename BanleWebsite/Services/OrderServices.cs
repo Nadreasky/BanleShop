@@ -243,7 +243,16 @@ namespace BanleWebsite.Services
             return orderListFull.Where(o => (getAny || (o.Name+o.PhoneNo.ToString()).Contains(keyword))
                 && (!status.HasValue || o.Status.Value == status.Value)
                 && (!fromDate.HasValue || o.CreateDate >= fromDate.Value)
-                && (!toDate.HasValue || o.CreateDate <= toDate.Value)).ToList();
+                && (!toDate.HasValue || o.CreateDate <= toDate.Value.AddDays(1))).ToList();
+        }
+
+        public List<Order> getOrderFilterByPhoneNumber(string phoneNo)
+        {
+            //var getAny = string.IsNullOrWhiteSpace(phoneNo);
+
+            var orderListFull = _orderRepository.List;
+
+            return orderListFull.Where(o => ((o.PhoneNo.ToString()).Equals(phoneNo))).ToList();
         }
     }
 }
