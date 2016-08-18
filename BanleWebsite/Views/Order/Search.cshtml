@@ -34,13 +34,15 @@
 
 
 <div class="container">
+    <h3 style="font-family:VNOswald; margin-top:20px;">Kiểm tra đơn hàng của bạn</h3>
+
     @using (Html.BeginForm("Search", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="form-inline">
             <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" style="margin:10px; height:30px; width:220px;" />
         </div>
 
-        <input type="submit" class="btn-success" value="Tìm kiếm" style="display:inline-block;float:left;font-family:VNOswald; margin:0 0 0 5px;" />
+        <input type="submit" class="btn-success" value="Kiểm tra" style="display:inline-block;float:left;font-family:VNOswald; margin:0 0 0 5px;" />
     }
 
     @{

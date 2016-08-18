@@ -8,12 +8,13 @@ using System.Web.Mvc;
 
 namespace BanleWebsite.Controllers
 {
-    [Authorize(Roles = "Admin, Manager")]
+    
     public class OrderController : Controller
     {
         OrderServices _orderServices = new OrderServices();
 
         // GET: Order
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Index(int? id)
         {
             Order order = _orderServices.findOrderByID(id.Value);
