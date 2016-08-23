@@ -46,5 +46,9 @@ namespace BanleWebsite.Controllers
                 return View();
             }
         }
+        public ActionResult IframeIndex()
+        {
+            return View();
+        }
     }
 }

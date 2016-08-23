@@ -27,7 +27,15 @@ namespace BanleWebsite
         public static bool PRODUCT_FEATURED_FALSE = false;
         public static int POPULAR_NEWS = 1;
         public static List<string> FASHION_PRODUCT_CATEGORIES = new List<string>(new string[] { "Áo thun đơn", "Áo thun cặp đôi / nhóm", "Áo thun cung hoàng đạo", "Hàng xuất khẩu" });
-        public static List<string> HOMEPAGE_SHOW_CATEGORIES = new List<string>(new string[] { "Áo thun đơn", "Áo thun cặp đôi / nhóm", "Áo thun cung hoàng đạo", "Hàng xuất khẩu", "Tai nghe Yison" });
+        //public static List<string> HOMEPAGE_SHOW_CATEGORIES = new List<string>(new string[] { "Áo thun đơn", "Áo thun cặp đôi / nhóm", "Áo thun cung hoàng đạo", "Hàng xuất khẩu", "Tai nghe Yison" });
+        public static List<CateAndShowNumber> CATE_AND_SHOW_ITEM = new List<CateAndShowNumber>()
+        {
+            new CateAndShowNumber() {name = "Áo thun đơn", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Áo thun cặp đôi / nhóm", noOfItem = 12 },
+            new CateAndShowNumber() {name = "Áo thun cung hoàng đạo", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Hàng xuất khẩu", noOfItem = 12 },
+            new CateAndShowNumber() {name = "Tai nghe Yison", noOfItem = 8 },
+        };
         public static string GenerateSlug(int ID, string Name)
         {
             VietnameseSymbol vs = new VietnameseSymbol();

@@ -1,17 +1,145 @@
 ﻿
 @{
     Layout = null;
+
+    ViewBag.Title = "Quản lí đơn hàng";
+    List<Order> orders = ViewBag.orders;
+    int soThuTu = 0;
 }
 
-<!DOCTYPE html>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>IframeIndex</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Denis Samardjiev" />
+    <meta name="description" content="Particles - Personal + Agency Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Particles - Personal + Agency Template</title>
+
+    <!-- Royal Preloader CSS -->
+    <link href="~/Content/Prac_Theme/css/royal_preloader.css" rel="stylesheet">
+
+    <!-- jQuery Files -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.min.js"></script>
+
+    <!-- Parallax File -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/parallax.min.js"></script>
+
+    <!-- Royal Preloader -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/royal_preloader.min.js"></script>
+    <script type="text/javascript">
+		Royal_Preloader.config({
+		    mode:           'number',
+		    showProgress:   false,
+		    background:     '#1d1d1d'
+		});
+    </script>
+
+    <!-- Stylesheets -->
+    <link href="~/Content/Prac_Theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/ionicons.min.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/pe-icon-7-stroke.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/logoiconfont.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/style.css" rel="stylesheet" title="main-css">
+    <link href="~/Content/Prac_Theme/css/colors/orangelight.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/base-light.css" rel="stylesheet">
 </head>
-<body>
-    <div> 
+<body class="royal_preloader" data-spy="scroll" data-target=".navbar" data-offset="70">
+    <div id="royal_preloader"></div>
+
+
+    <!-- Begin Jumbotron -->
+    <div class="jumbotron jumbotron-main" id="home">
+        <div id="particles-js"></div><!-- /.particles div -->
+        <div class="container center-vertically-holder">
+        @{
+            if (orders.Count == 0)
+            {
+                <div class="center-vertically">
+                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                        @using (Html.BeginForm("Search", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <h1 class="scaleReveal">Nhập số điện thoại bạn đã dùng để đặt hàng</h1>
+                            <hr class="bottomReveal" />
+                            <div class="form-inline">
+                                <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" />
+                            </div>
+                            <input type="submit" style="margin-top:10px;" value="Kiểm tra" class="btn btn-warning btn-lg" />
+                        }
+
+
+
+                    </div><!-- /.column -->
+                </div><!-- /.vertical center -->
+            }
+            else
+            {
+                <div class="col-md-4">
+                    @using (Html.BeginForm("Search", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <h1 class="scaleReveal">Nhập số điện thoại bạn đã dùng để đặt hàng</h1>
+                            <hr class="bottomReveal" />
+                            <div class="form-inline">
+                                <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" />
+                            </div>
+                            <input type="submit" style="margin-top:10px;" value="Kiểm tra" class="btn btn-warning btn-lg" />
+                    }
+                </div>
+            }
+        }
+
+            
+        </div><!-- /.container -->
     </div>
+    <!-- End Jumbotron -->
+   
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArLNT3t4qsJEBmR0R9P_6ueLIQz0Jvt1M&amp;callback=initMap" async defer></script>
+    <script type="text/javascript">
+		/* ---- Google Maps ---- */
+        function initMap() {
+            var mapOptions = {
+                zoom: 15,
+				zoomControl: false,
+				scaleControl: false,
+				scrollwheel: false,
+				disableDoubleClickZoom: true,
+                center: new google.maps.LatLng(40.6700, -73.9400), // New York
+                styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}]
+            };
+            var mapElement = document.getElementById('map');
+            var map = new google.maps.Map(mapElement, mapOptions);
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(40.6700, -73.9400),
+                map: map,
+                title: 'Our Office!'
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/particles.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/particlesRun.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.mixitup.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/form-validator.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.inview.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.countTo.js"></script>
+    <script type="text/javascript">
+		/* ---- Counter (our count) ---- */
+		$('#ourcount').one('inview', function(event, isInView) {
+			if (isInView) {
+				$('.timer').countTo({speed: 3000});
+			}
+		});
+    </script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/scrollreveal.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/style-switcher.js"></script><!-- Remove for production -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/main.js"></script>
 </body>
+
+<!-- Mirrored from aliensix.com/particles-1.3/HTML/index-default-particles.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Aug 2016 07:23:28 GMT -->
 </html>
+

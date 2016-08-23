@@ -1,0 +1,511 @@
+﻿
+@{
+    Layout = null;
+
+    ViewBag.Title = "Quản lí đơn hàng";
+    List<Order> orders = ViewBag.orders;
+    int soThuTu = 0;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Denis Samardjiev" />
+    <meta name="description" content="Particles - Personal + Agency Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Particles - Personal + Agency Template</title>
+
+    <!-- Royal Preloader CSS -->
+    <link href="~/Content/Prac_Theme/css/royal_preloader.css" rel="stylesheet">
+
+    <!-- jQuery Files -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.min.js"></script>
+
+    <!-- Parallax File -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/parallax.min.js"></script>
+
+    <!-- Royal Preloader -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/royal_preloader.min.js"></script>
+    <script type="text/javascript">
+		Royal_Preloader.config({
+		    mode:           'number',
+		    showProgress:   false,
+		    background:     '#1d1d1d'
+		});
+    </script>
+
+    <!-- Stylesheets -->
+    <link href="~/Content/Prac_Theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/ionicons.min.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/pe-icon-7-stroke.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/magnific-popup.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/logoiconfont.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/style.css" rel="stylesheet" title="main-css">
+    <link href="~/Content/Prac_Theme/css/colors/orangelight.css" rel="stylesheet">
+    <link href="~/Content/Prac_Theme/css/base-light.css" rel="stylesheet">
+</head>
+<body class="royal_preloader" data-spy="scroll" data-target=".navbar" data-offset="70">
+    <div id="royal_preloader"></div>
+
+
+    <!-- Begin Jumbotron -->
+    <div class="jumbotron jumbotron-main" id="home">
+        <div id="particles-js"></div><!-- /.particles div -->
+        <div class="container center-vertically-holder">
+            @{
+                if (orders.Count == 0)
+                {
+                    <div class="center-vertically">
+                        <div class="col-sm-8 col-sm-offset-2 text-center">
+                            @using (Html.BeginForm("Search2", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h1 class="scaleReveal">Nhập số điện thoại bạn đã dùng để đặt hàng</h1>
+                                <hr class="bottomReveal" />
+                                <div class="form-inline" style="color:#000;">
+                                    <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" />
+                                </div>
+                                <input type="submit" style="margin-top:10px;" value="Kiểm tra" class="btn btn-warning btn-lg" />
+                            }
+
+
+
+                        </div><!-- /.column -->
+                    </div><!-- /.vertical center -->
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            @using (Html.BeginForm("Search2", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <h3 class="scaleReveal" style="color:#fff;">Nhập số điện thoại bạn đã dùng để đặt hàng</h3>
+                                <div class="form-inline" style="color:#000;">
+                                    <input type="text" placeholder="Số điện thoại" id="phoneNo" name="phoneNo" />
+                                </div>
+                                <input type="submit" style="margin-top:10px;" value="Kiểm tra" class="btn btn-warning btn-lg" />
+                            }
+                        </div>
+                       
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table" id="orderTable" style="background-color:#fff; color:#000;">
+                                <tr>
+                                    <th>Số thứ tự</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Trạng thái</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                @{
+                                    foreach (var item in orders)
+                                    {
+
+                                        <tr style="height:75px;">
+                                            @{++soThuTu;}
+                                            <td style="vertical-align:middle;">@soThuTu</td>
+                                            <td style="vertical-align:middle;">@item.CreateDate</td>
+                                            <td style="vertical-align:middle;">@item.Name</td>
+                                            <td style="vertical-align:middle;">@item.PhoneNo</td>
+                                            <td style="vertical-align:middle;">
+                                                @{
+                                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                                    {
+                                                        <div class="alert alert-danger alert-dismissible">
+                                                            <i class="glyphicon glyphicon-cog" style="font-size:15px;">
+                                                                <span style="font-family:Arial;">Đang xử lí đơn hàng</span>
+                                                            </i>
+                                                        </div>
+                                                    }
+                                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                                    {
+                                                        <div class="alert alert-info alert-dismissable">
+                                                            <i class="glyphicon glyphicon-send" style="font-size:15px;">
+                                                                <span style="font-family:Arial;">Đang giao hàng</span>
+                                                            </i>
+                                                        </div>
+                                                    }
+                                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                                    {
+                                                        <div class="alert alert-success alert-dismissable">
+                                                            <i class="glyphicon glyphicon-ok" style="font-size:15px;">
+                                                                <span style="font-family:Arial;">Đã xong</span>
+                                                            </i>
+                                                        </div>
+                                                    }
+                         
+                                                }
+                                            </td>
+                                            <td style="vertical-align:middle;">
+                                                <!-- Trigger the modal with a button -->
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Chi tiết</button>
+                                            </td>
+
+                                        </tr>
+                                                    }
+                                }
+                            </table>
+                        </div>
+                        
+                    </div>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span class="ion-ios-close-empty"></span>
+                                    </button>
+                                    <h4 class="service-title" id="orderTitle"></h4>
+                                </div>
+                                <div class="modal-body" style="color:#000;">
+                                    <div class="form-group" style="float:left; display:block;">
+                                        <label>Họ tên khách hàng</label>
+                                        <h4 style="font-family:Arial;" id="cusName"></h4>
+                                    </div>
+                                    <div class="form-group" style="float:left; margin-left:30px; display:block;">
+                                        <label>Số điện thoại</label>
+                                        <h4 style="font-family:Arial;" id="cusPhoneNo"></h4>
+                                    </div>
+                                    <div class="form-group" style="float:left; display:block; margin-left:25px;">
+                                        <label>Tình trạng</label>
+                                        <h4 style="font-family:Arial;" id="orderStatus"></h4>
+                                    </div>
+                                    <div class="form-group" style="float:right; display:block;">
+                                        <label>Ngày tạo</label>
+                                        <h4 style="font-family:Arial;" id="createDate"></h4>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <h3 style="text-align:center;font-family:Arial;">Sản phẩm đã đặt</h3>
+                                    <table class="table" id="modalTable">
+                                        <col width="280" />
+                                        <thead>
+                                            <tr>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá</th>
+                                                <th>Số lượng</th>
+                                                <th>Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="modalBoby">
+                                            <tr>
+                                                <td colspan="3"><strong>Tổng cộng</strong></td>
+                                                <td><strong id="total_cell">20 000 000</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                                                    }
+            }
+
+
+        </div><!-- /.container -->
+    </div>
+    <!-- End Jumbotron -->
+
+    <!--Script for order modal function-->
+    <script>
+    function updateOrderStatus(id) {
+        var status = $("#orderStatus").val();
+        console.log(status);
+        $.ajax({
+            url: "/Quanli/UpdateOrderStatus",
+            data: {
+                format: 'json',
+                id: id,
+                status: status
+            },
+            error: function () {
+                alert("Change status order fail!")
+            },
+            success: function (data) {
+                if (data === "Success")
+                {
+                    $("#successModal").modal("toggle");
+                    $("#orderTable").load("/Quanli/Order #orderTable");
+                    $("#myModal").modal("toggle");
+                }
+
+            },
+            type: 'POST'
+        })
+    }
+
+    function getOrder(id) {
+        var order = "";
+        $.ajax({
+            url: "/Quanli/getOrderInfo",
+            async: false,
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function() {
+                alert("Get order info fail!")
+            },
+            success: function(data) {
+                order += data
+            }
+        })
+        console.log(order);
+        return order;
+    }
+    function getproductItem(id) {
+        var item = "";
+        $.ajax({
+            url: "/Quanli/getProductInfo",
+            async: false,
+            data: {
+                format: 'json',
+                proId: id
+            },
+            error: function() {
+                alert("Get product item fail!")
+            },
+            success: function (data) {
+
+                item += data;
+                //console.log(item + "111111111111111111111");
+            }
+        })
+        //console.log(item + "222222222222222222222222");
+        return item;
+    }
+
+    function getcolor(id)
+    {
+        switch(id) {
+            case 1:
+                return "Trắng";
+                break;
+            case 2:
+                return "Đen";
+                break;
+            case 3:
+                return "Xám";
+                break;
+            case 4:
+                return "Đỏ tươi";
+                break;
+            case 5:
+                return "Đỏ thẫm";
+                break;
+            case 6:
+                return "Hồng";
+                break;
+            case 7:
+                return "Cam";
+                break;
+            case 8:
+                return "Vàng";
+                break;
+            case 9:
+                return "Xanh lá cây tươi";
+                break;
+            case 10:
+                return "Xanh lá cây đậm";
+                break;
+            case 11:
+                return "Xanh da trời";
+                break;
+            case 12:
+                return "Xanh dương";
+                break;
+            case 13:
+                return "Xanh dương đậm";
+                break;
+            case 14:
+                return "Tím";
+                break;
+            case 15:
+                return "Hồng phấm";
+                break;
+            case 16:
+                return "Nâu";
+                break;
+        }
+    }
+
+    function getSize(id)
+    {
+        switch(id) {
+            case 1:
+                return "XS";
+                break;
+            case 2:
+                return "S";
+                break;
+            case 3:
+                return "M";
+                break;
+            case 4:
+                return "L";
+                break;
+            case 5:
+                return "XL";
+                break;
+            case 6:
+                return "XXL";
+                break;
+            case 7:
+                return "XXXL";
+                break;
+        }
+    }
+
+    function getOrderDetail(id) {
+        $.ajax({
+            url: "/Quanli/getOrderDetail",
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function() {
+                alert("Get order detail fail!")
+            },
+            success: function (data) {
+                console.log("receiveData: " + data);
+                var orderDetailList = JSON.parse(data);
+                var total = 0;
+                for (var i = orderDetailList.length - 1; i >= 0; i--) {
+
+                    //alert(orderDetailList[i].ID);
+                    //find peoduct item in order list
+                    var item = getproductItem(orderDetailList[i].ProductID);
+                    var product = JSON.parse(item);
+                    //alert(item);
+                    console.log("Product: "+product);
+                    if(product==null){
+                        continue
+                    }
+
+                    var table = document.getElementById("modalTable");
+                    var row = table.insertRow(1);
+                    var proName_Cell = row.insertCell(0);
+                    var price_Cell = row.insertCell(1);
+                    var quantity_Cell = row.insertCell(2);
+                    var thanhtien_Cell = row.insertCell(3)
+
+                    proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color) + "-" + getSize(orderDetailList[i].Size);
+                    price_Cell.innerHTML = product.Price;
+                    quantity_Cell.innerHTML = orderDetailList[i].Quantity;
+                    thanhtien_Cell.innerHTML = product.Price * orderDetailList[i].Quantity;
+                    total += product.Price * orderDetailList[i].Quantity;
+                }
+                var toto_cell = document.getElementById("total_cell");
+                total_cell.innerHTML = total;
+
+                //Cus info
+                var order = JSON.parse(getOrder(id));
+                //console.log(order + "fffffffffffffffffffffff");
+                document.getElementById("orderTitle").innerText = "Thông tin về đơn hàng #" + order.ID;
+                document.getElementById("cusName").innerText = order.Name;
+                document.getElementById("cusPhoneNo").innerText = order.PhoneNo;
+                document.getElementById("createDate").innerText = order.CreateDate;
+
+                // thay the ki tu T bang dau cach trong createDate
+                var createDate = document.getElementById("createDate").innerText;
+                var newCreateDate = createDate.replace("T", " ");
+                document.getElementById("createDate").innerText = newCreateDate;
+
+                $("#orderStatus").val(order.Status);
+
+                if (order.Status==1)
+                {
+                    document.getElementById("orderStatus").innerText = "Đang xử lí";
+                }
+                if (order.Status == 2)
+                {
+                    document.getElementById("orderStatus").innerText = "Đang giao hàng";
+                }
+                if (order.Status == 3)
+                {
+                    document.getElementById("orderStatus").innerText = "Đã xong";
+                }
+
+                //button update
+                //jQuery('#btnModal').before(jQuery('<button class="btn btn-success" id="btnUpdateStt" onclick="updateOrderStatus(' + order.ID + ')">Update</button>'));
+            },
+            type: 'GET'
+        })
+    }
+
+    $('#myModal').on('hidden.bs.modal', function () {
+        var x = document.getElementById("modalTable").rows.length;
+        for (var i = x; i > 2; i--) {
+            document.getElementById("modalTable").deleteRow(1);
+
+        }
+
+        //document.getElementById("total_cell").innerHTML = "";
+        //document.getElementById("cusName").innerHTML = "";
+        //document.getElementById("cusPhoneNo").innerHTML = "";
+        //document.getElementById("createDate").innerHTML = "";
+
+        //document.getElementById("cusName").innerText = "";
+        //document.getElementById("cusPhoneNo").innerText = "";
+        //document.getElementById("createDate").innerText = "";
+    });
+
+    //jQuery('#myModal').on('hide.bs.modal', function () {
+    //    var btnUpdateStt = document.getElementById("btnUpdateStt");
+    //    btnUpdateStt.parentNode.removeChild(btnUpdateStt);
+    //});
+
+    </script>
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArLNT3t4qsJEBmR0R9P_6ueLIQz0Jvt1M&amp;callback=initMap" async defer></script>
+    <script type="text/javascript">
+		/* ---- Google Maps ---- */
+        function initMap() {
+            var mapOptions = {
+                zoom: 15,
+				zoomControl: false,
+				scaleControl: false,
+				scrollwheel: false,
+				disableDoubleClickZoom: true,
+                center: new google.maps.LatLng(40.6700, -73.9400), // New York
+                styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}]
+            };
+            var mapElement = document.getElementById('map');
+            var map = new google.maps.Map(mapElement, mapOptions);
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(40.6700, -73.9400),
+                map: map,
+                title: 'Our Office!'
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/particles.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/particlesRun.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.mixitup.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/form-validator.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.inview.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.countTo.js"></script>
+    <script type="text/javascript">
+		/* ---- Counter (our count) ---- */
+		$('#ourcount').one('inview', function(event, isInView) {
+			if (isInView) {
+				$('.timer').countTo({speed: 3000});
+			}
+		});
+    </script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/scrollreveal.min.js"></script>
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/style-switcher.js"></script><!-- Remove for production -->
+    <script type="text/javascript" src="~/Content/Prac_Theme/js/main.js"></script>
+</body>
+
+<!-- Mirrored from aliensix.com/particles-1.3/HTML/index-default-particles.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Aug 2016 07:23:28 GMT -->
+</html>

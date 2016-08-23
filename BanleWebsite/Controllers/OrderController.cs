@@ -35,8 +35,8 @@ namespace BanleWebsite.Controllers
                 //{
                 //    status = null;
                 //}
-                DateTime? fromDate = null;
-                DateTime? toDate = null;
+                //DateTime? fromDate = null;
+                //DateTime? toDate = null;
                 List<Order> filteredOrders;
 
                 //if (string.IsNullOrWhiteSpace(Request.Form["fromDate"]) == false)
@@ -50,7 +50,7 @@ namespace BanleWebsite.Controllers
 
 
                 filteredOrders = _orderServices.getOrderFilterByPhoneNumber(Request.Form["phoneNo"]);
-                ViewBag.status = null;
+                //ViewBag.status = null;
                 ViewBag.orders = filteredOrders;
                 return View();
 
@@ -61,7 +61,16 @@ namespace BanleWebsite.Controllers
             //    ViewBag.orders = orders;
             //}
 
-            return View(); // chua co
+            //return View(); // chua co
+        }
+
+        public ActionResult Search2()
+        {
+            List<Order> filteredOrders;
+
+            filteredOrders = _orderServices.getOrderFilterByPhoneNumber(Request.Form["phoneNo"]);
+            ViewBag.orders = filteredOrders;
+            return View();
         }
     }
 }
