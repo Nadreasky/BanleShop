@@ -39,7 +39,7 @@ namespace BanleWebsite.Controllers
                 {
                     foreach (var item2 in allCate)
                     {
-                        if (item2.Name.ToUpper().Contains(item.name.ToUpper()))
+                        if (item2.Name.ToUpper().Equals(item.name.ToUpper()))
                         {
                             showCateHome.Add(item2);
                         }

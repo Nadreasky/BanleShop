@@ -26,15 +26,19 @@ namespace BanleWebsite
         public static bool PRODUCT_FEATURED_TRUE = true;
         public static bool PRODUCT_FEATURED_FALSE = false;
         public static int POPULAR_NEWS = 1;
-        public static List<string> FASHION_PRODUCT_CATEGORIES = new List<string>(new string[] { "Áo thun đơn", "Áo thun cặp đôi / nhóm", "Áo thun cung hoàng đạo", "Hàng xuất khẩu" });
+        public static List<string> FASHION_PRODUCT_CATEGORIES = new List<string>(new string[] { "Áo thun in hình", "Áo thun cung hoàng đạo", "Áo thun đôi", "Áo thun nhóm", "Áo thun gia đình",
+            "Hàng thiết kế", "Hàng xuất khẩu" });
         //public static List<string> HOMEPAGE_SHOW_CATEGORIES = new List<string>(new string[] { "Áo thun đơn", "Áo thun cặp đôi / nhóm", "Áo thun cung hoàng đạo", "Hàng xuất khẩu", "Tai nghe Yison" });
         public static List<CateAndShowNumber> CATE_AND_SHOW_ITEM = new List<CateAndShowNumber>()
         {
-            new CateAndShowNumber() {name = "Áo thun đơn", noOfItem = 8 },
-            new CateAndShowNumber() {name = "Áo thun cặp đôi / nhóm", noOfItem = 12 },
-            new CateAndShowNumber() {name = "Áo thun cung hoàng đạo", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Áo thun in hình", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Áo thun cung hoàng đạo", noOfItem = 12 },
+            new CateAndShowNumber() {name = "Áo thun đôi", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Áo thun nhóm", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Áo thun gia đình", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Hàng thiết kế", noOfItem = 12 },
             new CateAndShowNumber() {name = "Hàng xuất khẩu", noOfItem = 12 },
-            new CateAndShowNumber() {name = "Tai nghe Yison", noOfItem = 8 },
+            new CateAndShowNumber() {name = "Tai nghe Yison", noOfItem = 4 }
         };
         public static string GenerateSlug(int ID, string Name)
         {
