@@ -311,6 +311,20 @@ namespace BanleWebsite.Services
 
             return listRandom;
         }
+
+        public List<Product> getPromoteProduct()
+        {
+            List<Product> all = getAll();
+            List<Product> promoteProduct = new List<Product>();
+            foreach (var item in all)
+            {
+                if(item.SalePercent != 0 && item.SalePercent != null)
+                {
+                    promoteProduct.Add(item);
+                }
+            }
+            return promoteProduct;
+        }
     }
 }
 public class ProductMapping
