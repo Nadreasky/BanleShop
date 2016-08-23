@@ -35,13 +35,13 @@ namespace BanleWebsite.Controllers
                 Dictionary<Category, List<Product>> productByCateList = new Dictionary<Category, List<Product>>();
                 List<Category> allCate = _categoryServices.getAll();
                 List<Category> showCateHome = new List<Category>();
-                foreach (var item in allCate)
+                foreach (var item in SLIMCONFIG.HOMEPAGE_SHOW_CATEGORIES)
                 {
-                    foreach (var item2 in SLIMCONFIG.HOMEPAGE_SHOW_CATEGORIES)
+                    foreach (var item2 in allCate)
                     {
-                        if (item.Name.ToUpper().Contains(item2.ToUpper()))
+                        if (item2.Name.ToUpper().Contains(item.ToUpper()))
                         {
-                            showCateHome.Add(item);
+                            showCateHome.Add(item2);
                         }
                     }
 

@@ -374,14 +374,9 @@
     <Content Include="Content\SiteImages\tphcm.jpg" />
     <Content Include="Content\SiteImages\logo.png" />
     <Content Include="Content\SiteImages\logo_vertical.jpg" />
-    <Content Include="Content\Slider\8I51IPD.jpg" />
+    <Content Include="Content\Slider\Back-to-school.jpg" />
     <Content Include="Content\Slider\Banner2.jpg" />
     <Content Include="Content\Slider\Banner_1001.jpg" />
-    <Content Include="Content\Slider\Banner_BackToSchool3.jpg" />
-    <Content Include="Content\Slider\Banner_tainghe.jpg" />
-    <Content Include="Content\Slider\Fashion Show Banners-45.jpg" />
-    <Content Include="Content\Slider\IMG_2283.jpg" />
-    <Content Include="Content\Slider\WEB_Banner_FashionPlea.jpg" />
     <Content Include="Content\TSS\TTS20.jpg" />
     <Content Include="Content\TSS\TTS21.jpg" />
     <Content Include="Content\Vertic_Banner\Banner1D.jpg" />
@@ -491,7 +486,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -546,6 +543,7 @@
     <Content Include="Views\HelpCenter\QTGHMobile.cshtml" />
     <Content Include="Views\Order\Search.cshtml" />
     <Content Include="Views\OrderGroupShirt\OrderGroupShirt.cshtml" />
+    <Content Include="Views\HelpCenter\IframeIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />

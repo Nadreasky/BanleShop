@@ -116,7 +116,7 @@
 	width: 0;
 	height: 2px;
 	background: white;
-	border-bottom: 2px solid #555;
+	/*border-bottom: 2px solid #555;*/
 	opacity: .55;
 	filter: alpha(opacity=55);
 	z-index: 4;
