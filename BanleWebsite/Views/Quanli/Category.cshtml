@@ -86,7 +86,8 @@
                             {
                                 <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
                                 <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@listCategoryWithLevel[i].id" /></td>
-                                    <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
+                                    @*<td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>*@
+                                    <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="@listCategoryWithLevel[i].name-sub" /></td>
                                     <td><input id="rankSubCate" name="rank" class="form-control" placeholder="Rank" /></td>
                                     <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
                             }
@@ -97,15 +98,27 @@
                         for (int shift = 0; shift < listCategoryWithLevel[i].level - listCategoryWithLevel[i + 1].level; shift++)
                         {
                             <tr>
-                                @for (int j = 0; j < listCategoryWithLevel[i].level - 1 - shift; j++)
+                                @{int j=0;}
+                                @for (j = 0; j < listCategoryWithLevel[i].level - 1 - shift; j++)
                                 {
                                     <td></td>
                                 }
                                 @using (Html.BeginForm("saveCategory", "Quanli", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
                                     <td hidden="hidden"><input class="form-control" id="subCateID" name="id" /></td>
-                                    <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@listCategoryWithLevel[i].preCateId" /></td>
-                                    <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>
+                                    int index = 0;
+                                    //CategoryWithLevel cwlSub = listCategoryWithLevel.LastOrDefault(lcwl => lcwl.level == j);
+                                    // lay ra vi tri cua category ma level cua no bang j voi nho hon vi tri i hien tai, tai vi list co them du 1 phan tu phu
+                                    for (int k = 0; k < i; k++)
+                                    {
+                                        if (listCategoryWithLevel[k].level == j)
+                                        {
+                                            index = k;
+                                        }
+                                    }
+                                    <td hidden="hidden"><input class="form-control" id="SubPreID" name="preCateID" value="@listCategoryWithLevel[index].id" /></td>
+                                    @*<td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="Tên sub-category" /></td>*@
+                                    <td><input id="subCategoryName" name="categoryName" class="form-control" placeholder="@listCategoryWithLevel[index].name-sub" /></td>
                                     <td><input id="rankSubCate" name="rank" class="form-control" placeholder="Rank" /></td>
                                     <td><input id="btnAddSubCategory" type="submit" class="btn btn-success" value="Add" /></td>
                                 }
