@@ -3,62 +3,170 @@
     ViewBag.Title = "Trung tâm hỗ trợ khách hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/Content/w3.css">
 
 <style>
-    .help {
-        display: normal;
+     @@font-face {
+            font-family: Lato;
+            src: url('/Content/font/Lato-Regular.ttf');
+        }
+
+     .activebtn{
+         background-color:#fff;
+         color:#fda75a;
+         border: 3px solid #fda75a;
+         padding: 20px;
+         text-align: center;
+         display: table;
+     }
+
+     .span4 a{
+        text-decoration:none;
+    }
+
+    .cus_btn {
+        border: 3px solid #fff;
+        color: #fff;
+        text-align: center;
+        display: table;
+        padding: 20px;
+    }
+
+    .activate{
+        background-color:#fff !important;
+        border: 3px solid #fda75a !important;
+        color:#fda75a !important;
+    }
+
+    .cus_btn h2 {
+        font-family: Lato;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .cus_btn i {
+        margin-right: 5px;
+    }
+
+    #qtgh_btn {
+        margin: auto;
+    }
+
+    #qtth_btn {
+        float: right;
+    }
+
+    #ttht {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    #ttht h3 {
+        font-family: Lato;
+        color: #fda75a;
+        margin-top: 20px;
+    }
+
+    #gioithieu {
+        border-top: 10px solid #ff7623;
+        padding: 15px 60px;
+        background-color: #fff;
+        font-size: large;
+        line-height: normal;
     }
 </style>
 
-<div class="container">
-    <section id="content">
-        <h3 style="font-family:VNOswald; margin-top:20px;">Trung tâm hỗ trợ</h3>
-        @*<div id="info">
-            <p>Your Fashion hooạt động với phương châm <strong>Your personality - Our Product</strong></p>
-            <p>Chúng tôi cam kết mang lại sự thoải mái và hài lòng nhất cho khách hàng để bạn có thể thể hiện cá tính và đẳng cấp qua với các sản phẩm của Your</p>
-            <p>Nếu có bất cứ thắc mắc hay góp ý nào, xin bạn hãy cứ mạnh dạn góp ý đế giúp Your có thể được phục vụ bạn tốt hơn.</p>
-            <p>Your Fashion chân thành cảm ơn các khách hàng đã ủng hộ trong thời gian qua, hi vọng trong tương lai, Your sẽ vẫn nhận được sự quan tâm từ phía khách hàng. Trở thành địa điểm tin cậy trong tâm trí người tiêu dùng.</p>
-        </div>*@
+<div style="background-color:#fda75a; height:80vh;">
+    <div class="container">
+        <section>
+            <div class="row-fluid" style="margin:20px 0;">
+                <div class="span4">
+                    <a href="#">
+                        <div id="ttht_btn" class="cus_btn activate">
+                            <h2><img src="~/Content/HelpCenter/Question-orange.png" width="60" /> Trung tâm hỗ trợ</h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="span4">
+                    <a href="/HelpCenter/Quytacgiaohang">
+                        <div id="qtgh_btn" class="cus_btn">
+                            <h2><img src="~/Content/HelpCenter/Truck-white.png" width="60" /> Quy tắc giao hàng</h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="span4">
+                    <a href="/HelpCenter/Quytactrahang">
+                        <div id="qtth_btn" class="cus_btn">
+                            <h2><img src="~/Content/HelpCenter/Exchange-white.png" width="60" /> Quy tắc trả hàng</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row-fluid" style="background-color:#808080;">
+                <div class="span12" style="background-color:#fff;">
+                    <div id="ttht">
+                        <img src="~/Content/HelpCenter/Question-orange.png" width="150" />
+                        <h3>Trung tâm hỗ trợ</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid" style="height:200px; background-color:#808080;">
+                <div class="span12" style="background-color:#fff; height:180px;">
+                    <div id="gioithieu">
+                        <p>Your Fashion hoạt động với phương châm <strong>Your personality - Our Product</strong></p>
+                        <p>Chúng tôi cam kết mang lại sự thoải mái và hài lòng nhất cho khách hàng để bạn có thể thể hiện cá tính và đẳng cấp qua với các sản phẩm của Your</p>
+                        <p>Nếu có bất cứ thắc mắc hay góp ý nào, xin bạn hãy cứ mạnh dạn góp ý đế giúp Your có thể được phục vụ bạn tốt hơn</p>
+                        <p>Mọi ý kiến đóng góp xin gửi về địa chỉ email: <a href="mailto:support@yourfashion.vn" target="_top" style="text-decoration:underline; color:blue;">support@yourfashion.vn</a></p>
+                        <p>Your Fashion chân thành cảm ơn các khách hàng đã ủng hộ trong thời gian qua, hi vọng trong tương lai, Your sẽ vẫn nhận được sự quan tâm từ phía khách hàng. Trở thành địa điểm tin cậy trong tâm trí người tiêu dùng.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </div>
+</div>
 
-        @*<a href="#" class="icon-truck icon-5x btn rounded animate scale animated"></a>
-
-        <a href="#" class="icon-edit-1 icon-5x btn rounded animate scale animated"></a>*@
 
 
-
-        <nav class="w3-sidenav w3-transparent w3-card-2" style="width:230px">
-            <h4><strong><a>Trung tâm hỗ trợ</a></strong></h4>
-            <a href="~/HelpCenter/Quytacgiaohang" id="st" class="tablink"> Quy tắc giao hàng</a>
-            <a href="~/HelpCenter/Quytactrahang" class="tablink"> Quy tắc trả hàng</a>
-        </nav>
-
-        <div style="margin-left:230px">
-            <div id="Quytactrahang" class="w3-container help w3-animate-left">
-                <p>Your Fashion hooạt động với phương châm <strong>Your personality - Our Product</strong></p>
-                <p>Chúng tôi cam kết mang lại sự thoải mái và hài lòng nhất cho khách hàng để bạn có thể thể hiện cá tính và đẳng cấp qua với các sản phẩm của Your</p>
-                <p>Nếu có bất cứ thắc mắc hay góp ý nào, xin bạn hãy cứ mạnh dạn góp ý đế giúp Your có thể được phục vụ bạn tốt hơn</p>
-                <p>Mọi ý kiến đóng góp xin gửi về địa chỉ email: <a href="mailto:support@yourfashion.vn" target="_top" style="text-decoration:underline; color:blue;">support@yourfashion.vn</a></p>
-                <p>Your Fashion chân thành cảm ơn các khách hàng đã ủng hộ trong thời gian qua, hi vọng trong tương lai, Your sẽ vẫn nhận được sự quan tâm từ phía khách hàng. Trở thành địa điểm tin cậy trong tâm trí người tiêu dùng.</p>
+@*<div style="background-color:#fda75a; height:80vh; width:100%;">
+    <div class="container">
+        <div class="row" id="3button" style="margin-top:30px; margin-left:0;">
+            <div class="span4" style="margin:0;">
+                <div id="ttht_btn" class="cus_btn">
+                    <h2><img src="~/Content/HelpCenter/Question-white.png" width="60" /> Trung tâm hỗ trợ</h2>
+                </div>
+            </div>
+            <div class="span4" style="margin:0;">
+                <div id="qtgh_btn" class="cus_btn">
+                    <h2><img src="~/Content/HelpCenter/Truck-white.png" width="60" /> Quy tắc giao hàng</h2>
+                </div>
+            </div>
+            <div class="span4" style="margin:0;">
+                <div id="qtth_btn" class="cus_btn">
+                    <h2><img src="~/Content/HelpCenter/Exchange-white.png" width="60" /> Quy tắc trả hàng</h2>
+                </div>
             </div>
         </div>
-
-        <script>
-            function openHelp(evt, cityName) {
-                var i, x, tablinks;
-                x = document.getElementsByClassName("help");
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablink");
-                for (i = 0; i < x.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" w3-deep-orange", "");
-                }
-                document.getElementById(cityName).style.display = "block";
-                evt.currentTarget.className += " w3-deep-orange";
-            }
-        </script>
-
-    </section>
-</div>
+        <div class="row">
+            <div class="span12">
+                <div id="ttht">
+                    <img src="~/Content/HelpCenter/Question-orange.png" width="150" />
+                    <h1>Trung tâm hỗ trợ</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div id="gioithieu">
+                    <p>Your Fashion hoạt động với phương châm <strong>Your personality - Our Product</strong></p>
+                    <p>Chúng tôi cam kết mang lại sự thoải mái và hài lòng nhất cho khách hàng để bạn có thể thể hiện cá tính và đẳng cấp qua với các sản phẩm của Your</p>
+                    <p>Nếu có bất cứ thắc mắc hay góp ý nào, xin bạn hãy cứ mạnh dạn góp ý đế giúp Your có thể được phục vụ bạn tốt hơn</p>
+                    <p>Mọi ý kiến đóng góp xin gửi về địa chỉ email: <a href="mailto:support@yourfashion.vn" target="_top" style="text-decoration:underline; color:blue;">support@yourfashion.vn</a></p>
+                    <p>Your Fashion chân thành cảm ơn các khách hàng đã ủng hộ trong thời gian qua, hi vọng trong tương lai, Your sẽ vẫn nhận được sự quan tâm từ phía khách hàng. Trở thành địa điểm tin cậy trong tâm trí người tiêu dùng.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
 
