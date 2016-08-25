@@ -1,4 +1,10 @@
-﻿
+﻿@model PagedList.IPagedList<BanleWebsite.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+
+
 @{
     Category mainCate = ViewBag.mainCate;
     ViewBag.Title = mainCate.Name;
@@ -24,8 +30,7 @@
     <meta property="og:title" content="@mainCate.Name" />
     <meta property="og:description" content="@mainCate.Name" />
     <meta property="og:image" content="@ogImgUrl" />
-    }
-
+}
 
 
 
@@ -97,7 +102,7 @@
 
                         <div class="row big_with_description">
                             @{
-                                foreach (var item in productList)
+                                foreach (var item in Model)
                                 {
                                     <div class="span3 product carousel_item post-78 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
                                         <div class="product-image-wrapper onhover animate scale" style="height:300px;">
@@ -352,6 +357,10 @@
                             </div>*@
                         <div class="clearfix"></div>
 
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                        @Html.PagedListPager(Model, page => SLIMCONFIG.GenerateSlug(mainCate.ID, mainCate.Name) + "?page=" + page)
+
                     </div>
 
 
@@ -454,10 +463,10 @@
                                 }
                                 else
                                 {
-                <p>Hiện chưa có sản phẩm nào trong danh mục này</p>
-            }
+                                    <p>Hiện chưa có sản phẩm nào trong danh mục này</p>
+                                }
         }
-        
-        
+
+
     </div>
 </section>

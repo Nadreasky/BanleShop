@@ -49,6 +49,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -383,6 +391,7 @@
     <Content Include="Content\HelpCenter\Step 3.png" />
     <Content Include="Content\HelpCenter\Truck-orange.png" />
     <Content Include="Content\HelpCenter\Truck-white.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Prac_Theme\css\base-light.css" />
     <Content Include="Content\Prac_Theme\css\bootstrap.min.css" />
     <Content Include="Content\Prac_Theme\css\colors\blue.css" />
@@ -461,13 +470,6 @@
     <Content Include="Content\bootstrap-3.3.6-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap-3.3.6-dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\font\VNF-Oswald Regular.ttf" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Agency\AgencyOrder\Danh sach cac san pham cua shop.xlsx" />
     <Content Include="Content\dataonhom\.gitignore" />
     <Content Include="Content\dataonhom\less\agency.less" />
@@ -531,6 +533,13 @@
     <Content Include="Content\Prac_Theme\fonts\Pe-icon-7-stroked41d.eot" />
     <Content Include="Content\font\Lato-Regular.ttf" />
     <Content Include="Content\font\Roboto-Medium.ttf" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -582,7 +591,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sanpham\Index.cshtml" />
-    <Content Include="Views\Danhmuc\Index.cshtml" />
     <Content Include="Views\Quanli\Category.cshtml" />
     <Content Include="Views\Quanli\Product.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
@@ -611,6 +619,7 @@
     <Content Include="Views\OrderGroupShirt\OrderGroupShirt.cshtml" />
     <Content Include="Views\HelpCenter\IframeIndex.cshtml" />
     <Content Include="Views\Order\Search2.cshtml" />
+    <Content Include="Views\Danhmuc\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />

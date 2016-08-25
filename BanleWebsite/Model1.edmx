@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BanleShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BanleShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agency">
           <Key>
             <PropertyRef Name="ID" />
@@ -442,83 +442,11 @@
             <End Role="SizeProductDetail" EntitySet="SizeProductDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BanleShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="BanleShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Agencies" EntityType="BanleShopModel.Agency" />
-          <EntitySet Name="AspNetRoles" EntityType="BanleShopModel.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="BanleShopModel.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="BanleShopModel.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="BanleShopModel.AspNetUser" />
-          <EntitySet Name="Categories" EntityType="BanleShopModel.Category" />
-          <EntitySet Name="Colors" EntityType="BanleShopModel.Color" />
-          <EntitySet Name="ColorProductDetails" EntityType="BanleShopModel.ColorProductDetail" />
-          <EntitySet Name="Images" EntityType="BanleShopModel.Image" />
-          <EntitySet Name="News" EntityType="BanleShopModel.News" />
-          <EntitySet Name="Orders" EntityType="BanleShopModel.Order" />
-          <EntitySet Name="OrderDetails" EntityType="BanleShopModel.OrderDetail" />
-          <EntitySet Name="Products" EntityType="BanleShopModel.Product" />
-          <EntitySet Name="Sizes" EntityType="BanleShopModel.Size" />
-          <EntitySet Name="SizeProductDetails" EntityType="BanleShopModel.SizeProductDetail" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Category" Association="BanleShopModel.FK_Product_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColorProductDetail_Color" Association="BanleShopModel.FK_ColorProductDetail_Color">
-            <End Role="Color" EntitySet="Colors" />
-            <End Role="ColorProductDetail" EntitySet="ColorProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Image_Color" Association="BanleShopModel.FK_Image_Color">
-            <End Role="Color" EntitySet="Colors" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Color" Association="BanleShopModel.FK_OrderDetail_Color">
-            <End Role="Color" EntitySet="Colors" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColorProductDetail_Product" Association="BanleShopModel.FK_ColorProductDetail_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ColorProductDetail" EntitySet="ColorProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Image_Product" Association="BanleShopModel.FK_Image_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Order" Association="BanleShopModel.FK_OrderDetail_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Product" Association="BanleShopModel.FK_OrderDetail_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Size" Association="BanleShopModel.FK_OrderDetail_Size">
-            <End Role="Size" EntitySet="Sizes" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SizeProductDetail_Product" Association="BanleShopModel.FK_SizeProductDetail_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="SizeProductDetail" EntitySet="SizeProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SizeProductDetail_Size" Association="BanleShopModel.FK_SizeProductDetail_Size">
-            <End Role="Size" EntitySet="Sizes" />
-            <End Role="SizeProductDetail" EntitySet="SizeProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="BanleShopModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Agency">
           <Key>
             <PropertyRef Name="ID" />
@@ -535,19 +463,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="BanleShopModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -555,16 +483,16 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -575,21 +503,21 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="AspNetRoles" Relationship="BanleShopModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PreCateID" Type="Int32" />
           <Property Name="isActived" Type="Boolean" />
           <Property Name="Rank" Type="Int32" />
-          <NavigationProperty Name="Products" Relationship="BanleShopModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -598,9 +526,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ColorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Color" FromRole="Color" ToRole="ColorProductDetail" />
-          <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Color" FromRole="Color" ToRole="Image" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Color" FromRole="Color" ToRole="OrderDetail" />
+          <NavigationProperty Name="ColorProductDetails" Relationship="Self.FK_ColorProductDetail_Color" FromRole="Color" ToRole="ColorProductDetail" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Image_Color" FromRole="Color" ToRole="Image" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Color" FromRole="Color" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="ColorProductDetail">
           <Key>
@@ -609,8 +537,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProID" Type="Int32" />
           <Property Name="ColorID" Type="Int32" />
-          <NavigationProperty Name="Color" Relationship="BanleShopModel.FK_ColorProductDetail_Color" FromRole="ColorProductDetail" ToRole="Color" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="ColorProductDetail" ToRole="Product" />
+          <NavigationProperty Name="Color" Relationship="Self.FK_ColorProductDetail_Color" FromRole="ColorProductDetail" ToRole="Color" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ColorProductDetail_Product" FromRole="ColorProductDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -620,15 +548,15 @@
           <Property Name="IDColor" Type="Int32" />
           <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IDProduct" Type="Int32" />
-          <NavigationProperty Name="Color" Relationship="BanleShopModel.FK_Image_Color" FromRole="Image" ToRole="Color" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_Image_Product" FromRole="Image" ToRole="Product" />
+          <NavigationProperty Name="Color" Relationship="Self.FK_Image_Color" FromRole="Image" ToRole="Color" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Image_Product" FromRole="Image" ToRole="Product" />
         </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ShortDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MainImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -648,7 +576,7 @@
           <Property Name="Staff" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -660,17 +588,17 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Color" Type="Int32" />
           <Property Name="Size" Type="Int32" />
-          <NavigationProperty Name="Color1" Relationship="BanleShopModel.FK_OrderDetail_Color" FromRole="OrderDetail" ToRole="Color" />
-          <NavigationProperty Name="Order" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
-          <NavigationProperty Name="Size1" Relationship="BanleShopModel.FK_OrderDetail_Size" FromRole="OrderDetail" ToRole="Size" />
+          <NavigationProperty Name="Color1" Relationship="Self.FK_OrderDetail_Color" FromRole="OrderDetail" ToRole="Color" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Size1" Relationship="Self.FK_OrderDetail_Size" FromRole="OrderDetail" ToRole="Size" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CateID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" />
           <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -685,11 +613,11 @@
           <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="isPromoted" Type="Boolean" />
           <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Category" Relationship="BanleShopModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="ColorProductDetails" Relationship="BanleShopModel.FK_ColorProductDetail_Product" FromRole="Product" ToRole="ColorProductDetail" />
-          <NavigationProperty Name="Images" Relationship="BanleShopModel.FK_Image_Product" FromRole="Product" ToRole="Image" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="Product" ToRole="SizeProductDetail" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ColorProductDetails" Relationship="Self.FK_ColorProductDetail_Product" FromRole="Product" ToRole="ColorProductDetail" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Image_Product" FromRole="Product" ToRole="Image" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="SizeProductDetails" Relationship="Self.FK_SizeProductDetail_Product" FromRole="Product" ToRole="SizeProductDetail" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -697,8 +625,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Size" FromRole="Size" ToRole="OrderDetail" />
-          <NavigationProperty Name="SizeProductDetails" Relationship="BanleShopModel.FK_SizeProductDetail_Size" FromRole="Size" ToRole="SizeProductDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Size" FromRole="Size" ToRole="OrderDetail" />
+          <NavigationProperty Name="SizeProductDetails" Relationship="Self.FK_SizeProductDetail_Size" FromRole="Size" ToRole="SizeProductDetail" />
         </EntityType>
         <EntityType Name="SizeProductDetail">
           <Key>
@@ -707,40 +635,40 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProID" Type="Int32" />
           <Property Name="SizeID" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="BanleShopModel.FK_SizeProductDetail_Product" FromRole="SizeProductDetail" ToRole="Product" />
-          <NavigationProperty Name="Size" Relationship="BanleShopModel.FK_SizeProductDetail_Size" FromRole="SizeProductDetail" ToRole="Size" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_SizeProductDetail_Product" FromRole="SizeProductDetail" ToRole="Product" />
+          <NavigationProperty Name="Size" Relationship="Self.FK_SizeProductDetail_Size" FromRole="SizeProductDetail" ToRole="Size" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="BanleShopModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="BanleShopModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaim">
+            <Dependent Role="AspNetUserClaims">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="BanleShopModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="BanleShopModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogin">
+            <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Category">
-          <End Type="BanleShopModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="BanleShopModel.Product" Role="Product" Multiplicity="*" />
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="ID" />
@@ -751,8 +679,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ColorProductDetail_Color">
-          <End Type="BanleShopModel.Color" Role="Color" Multiplicity="0..1" />
-          <End Type="BanleShopModel.ColorProductDetail" Role="ColorProductDetail" Multiplicity="*" />
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="ColorProductDetail" Type="Self.ColorProductDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Color">
               <PropertyRef Name="ID" />
@@ -763,8 +691,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Image_Color">
-          <End Type="BanleShopModel.Color" Role="Color" Multiplicity="0..1" />
-          <End Type="BanleShopModel.Image" Role="Image" Multiplicity="*" />
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Color">
               <PropertyRef Name="ID" />
@@ -775,8 +703,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Color">
-          <End Type="BanleShopModel.Color" Role="Color" Multiplicity="0..1" />
-          <End Type="BanleShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Color">
               <PropertyRef Name="ID" />
@@ -787,8 +715,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ColorProductDetail_Product">
-          <End Type="BanleShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="BanleShopModel.ColorProductDetail" Role="ColorProductDetail" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ColorProductDetail" Type="Self.ColorProductDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -799,8 +727,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Image_Product">
-          <End Type="BanleShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="BanleShopModel.Image" Role="Image" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -811,8 +739,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Order">
-          <End Type="BanleShopModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="BanleShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="ID" />
@@ -823,8 +751,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Product">
-          <End Type="BanleShopModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="BanleShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -835,8 +763,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Size">
-          <End Type="BanleShopModel.Size" Role="Size" Multiplicity="0..1" />
-          <End Type="BanleShopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Size">
               <PropertyRef Name="ID" />
@@ -847,8 +775,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SizeProductDetail_Product">
-          <End Type="BanleShopModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="BanleShopModel.SizeProductDetail" Role="SizeProductDetail" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="SizeProductDetail" Type="Self.SizeProductDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ID" />
@@ -859,8 +787,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SizeProductDetail_Size">
-          <End Type="BanleShopModel.Size" Role="Size" Multiplicity="0..1" />
-          <End Type="BanleShopModel.SizeProductDetail" Role="SizeProductDetail" Multiplicity="*" />
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="SizeProductDetail" Type="Self.SizeProductDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Size">
               <PropertyRef Name="ID" />
@@ -871,10 +799,83 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Type="BanleShopModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="BanleShopModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        </Schema>
+        <EntityContainer Name="BanleShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agencies" EntityType="Self.Agency" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Colors" EntityType="Self.Color" />
+          <EntitySet Name="ColorProductDetails" EntityType="Self.ColorProductDetail" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sizes" EntityType="Self.Size" />
+          <EntitySet Name="SizeProductDetails" EntityType="Self.SizeProductDetail" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColorProductDetail_Color" Association="Self.FK_ColorProductDetail_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="ColorProductDetail" EntitySet="ColorProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Color" Association="Self.FK_Image_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Color" Association="Self.FK_OrderDetail_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColorProductDetail_Product" Association="Self.FK_ColorProductDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ColorProductDetail" EntitySet="ColorProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Product" Association="Self.FK_Image_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Size" Association="Self.FK_OrderDetail_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SizeProductDetail_Product" Association="Self.FK_SizeProductDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SizeProductDetail" EntitySet="SizeProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SizeProductDetail_Size" Association="Self.FK_SizeProductDetail_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="SizeProductDetail" EntitySet="SizeProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -883,185 +884,185 @@
           <EntitySetMapping Name="Agencies">
             <EntityTypeMapping TypeName="BanleShopModel.Agency">
               <MappingFragment StoreEntitySet="Agency">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ExcelPath" ColumnName="ExcelPath" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="BanleShopModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="BanleShopModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="BanleShopModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="BanleShopModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="BanleShopModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-                <ScalarProperty Name="isActived" ColumnName="isActived" />
-                <ScalarProperty Name="PreCateID" ColumnName="PreCateID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PreCateID" ColumnName="PreCateID" />
+                <ScalarProperty Name="isActived" ColumnName="isActived" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Colors">
             <EntityTypeMapping TypeName="BanleShopModel.Color">
               <MappingFragment StoreEntitySet="Color">
-                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ColorProductDetails">
             <EntityTypeMapping TypeName="BanleShopModel.ColorProductDetail">
               <MappingFragment StoreEntitySet="ColorProductDetail">
-                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
-                <ScalarProperty Name="ProID" ColumnName="ProID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="BanleShopModel.Image">
               <MappingFragment StoreEntitySet="Image">
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDColor" ColumnName="IDColor" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="BanleShopModel.News">
               <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Popular" ColumnName="Popular" />
-                <ScalarProperty Name="MainImage" ColumnName="MainImage" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="ShortDes" ColumnName="ShortDes" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortDes" ColumnName="ShortDes" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="MainImage" ColumnName="MainImage" />
+                <ScalarProperty Name="Popular" ColumnName="Popular" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="BanleShopModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Staff" ColumnName="Staff" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="BanleShopModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="BanleShopModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
-                <ScalarProperty Name="isPromoted" ColumnName="isPromoted" />
-                <ScalarProperty Name="Promotion" ColumnName="Promotion" />
-                <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
-                <ScalarProperty Name="Featured" ColumnName="Featured" />
-                <ScalarProperty Name="isActived" ColumnName="isActived" />
-                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
-                <ScalarProperty Name="Img3" ColumnName="Img3" />
-                <ScalarProperty Name="Img2" ColumnName="Img2" />
-                <ScalarProperty Name="Img1" ColumnName="Img1" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="CateID" ColumnName="CateID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CateID" ColumnName="CateID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Img1" ColumnName="Img1" />
+                <ScalarProperty Name="Img2" ColumnName="Img2" />
+                <ScalarProperty Name="Img3" ColumnName="Img3" />
+                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
+                <ScalarProperty Name="isActived" ColumnName="isActived" />
+                <ScalarProperty Name="Featured" ColumnName="Featured" />
+                <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
+                <ScalarProperty Name="Promotion" ColumnName="Promotion" />
+                <ScalarProperty Name="isPromoted" ColumnName="isPromoted" />
+                <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sizes">
             <EntityTypeMapping TypeName="BanleShopModel.Size">
               <MappingFragment StoreEntitySet="Size">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SizeProductDetails">
             <EntityTypeMapping TypeName="BanleShopModel.SizeProductDetail">
               <MappingFragment StoreEntitySet="SizeProductDetail">
-                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
-                <ScalarProperty Name="ProID" ColumnName="ProID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="BanleShopModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
+            <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
