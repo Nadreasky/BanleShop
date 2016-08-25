@@ -16,6 +16,8 @@ namespace BanleWebsite.Controllers
         // GET: Danhmuc
         public ActionResult Index(int? id)
         {
+            if(_categoryServices.getProductByCate(id.Value).Count != 0)
+            { 
             List<Product> productList = _categoryServices.getProductByCate(id.Value).OrderByDescending(i => i.ID).ToList();
             ViewBag.productList = productList;
 
@@ -28,8 +30,21 @@ namespace BanleWebsite.Controllers
             // cap nhat link cho "Quay lai mua sam"
             AddressBar ab = new AddressBar();
             ab.UpdateLinkBackToShopping();
+                return View();
+            }
+            else
+            {
+                List<Category> categoryTree = _categoryServices.getCategoryTree(id.Value);
+                ViewBag.categoryTree = categoryTree;
 
-            return View();
+                Category mainCate = _categoryServices.findByid(id.Value);
+                ViewBag.mainCate = mainCate;
+                List<Product> productList = new List<Product>();
+                ViewBag.productList = productList;
+                return View();
+            }
+
+            
         }
     }
 }

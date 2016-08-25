@@ -111,17 +111,17 @@
 
 /* Timers */
 
-.ls-bar-timer {
+/*.ls-bar-timer {
 	position: absolute;
 	width: 0;
 	height: 2px;
-	background: white;
+	/*background: none;*/
 	/*border-bottom: 2px solid #555;*/
-	opacity: .55;
+	/*opacity: 0;*/
 	filter: alpha(opacity=55);
 	z-index: 4;
 	top: 0;
-}
+}*/
 
 .ls-circle-timer {
 	width: 16px;

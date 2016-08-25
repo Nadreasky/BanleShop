@@ -530,6 +530,7 @@
     <Content Include="Content\Prac_Theme\fonts\Pe-icon-7-strokebb1d.woff" />
     <Content Include="Content\Prac_Theme\fonts\Pe-icon-7-stroked41d.eot" />
     <Content Include="Content\font\Lato-Regular.ttf" />
+    <Content Include="Content\font\Roboto-Medium.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
