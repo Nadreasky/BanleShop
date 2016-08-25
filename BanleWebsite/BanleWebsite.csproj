@@ -202,12 +202,25 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderGroupShirtController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\QuanliController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Controllers\SanphamNoibatController.cs" />
     <Compile Include="CustomFilters\AuthLogAttribute.cs" />
+    <Compile Include="EventBackToSchool_Color.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventBackToSchool_Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventBackToSchool_ShirtType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventBackToSchool_Size.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -426,6 +439,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
+    <Folder Include="Views\EventBackToSchool\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\ProductDetail\" />
   </ItemGroup>
