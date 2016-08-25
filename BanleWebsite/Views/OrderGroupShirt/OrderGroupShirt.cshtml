@@ -166,9 +166,7 @@
                     </div>
                     <div id="pSize">
                         <label class="row"><strong>Size</strong></label>
-                        <ul id="chooseSize" class="list-inline">
-                            
-                        </ul>
+                        <ul id="chooseSize" class="list-inline"></ul>
                     </div>
 
                     <br />
@@ -303,25 +301,40 @@
     <!--Script load va chon mau-->
     <script type="text/javascript">
         //Function load mau ao
-        function loadMauAo() {
+        $(document).ready(loadMauAo(1));
+        $(document).ready(loadSizeAo(1));
+        function loadMauAo(id) {
             jQuery("#chooseColor").empty();
             $.ajax({
-                url: "",
+                url: "/OrderGroupShirt/GetListColor",
+                type: "get",
+                data: {
+                    format: 'json',
+                    id: id
+                },
                 success: function (result) {
-                    for (i = 0; i <= result.length; i++) {
-                        jQuery("#chooseColor").append("<li><a href='#1'><i class='fa fa-circle' id='"+ result[i] + "' style='color:" + result[i] + "'></i></a></li>");
+                    var listColorCode = JSON.parse(result);
+                    for (i = 0; i < listColorCode.length; i++) {
+                        jQuery("#chooseColor").append("<li><a href='#1'><i class='fa fa-circle' id='" + listColorCode[i] + "' style='color:" + listColorCode[i] + "'></i></a></li>");
                     }
-                }
+                },
+
             });
         }
         //Function load size ao
-        function loadSizeAo() {
+        function loadSizeAo(id) {
             jQuery("#chooseSize").empty();
             $.ajax({
-                url: "",
+                url: "/OrderGroupShirt/GetListSize",
+                type: "get",
+                data: {
+                    format: 'json',
+                    id: id
+                },
                 success: function (result) {
-                    for (i = 0; i <= result.length; i++) {
-                        jQuery("#chooseSize").append("<li><a href='#1' class='btn btn-sm boxcolor'>" + result[i] + "</a></li>");
+                    var listSizeName = JSON.parse(result);
+                    for (i = 0; i < listSizeName.length; i++) {
+                        jQuery("#chooseSize").append("<li><a href='#1' class='btn btn-sm boxcolor'>" + listSizeName[i] + "</a></li>");
                     }
                 }
             });
@@ -331,7 +344,7 @@
             jQuery(khunghienmau).css("background-color", colorId);
         };
 
-        
+
     </script>
 
     <!-- jQuery -->

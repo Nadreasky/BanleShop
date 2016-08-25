@@ -1,5 +1,6 @@
 ﻿using BanleWebsite.Models;
 using BanleWebsite.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,26 +23,39 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
-        public ActionResult GetListColor(int? id)
+        public Object GetListColor(int id)
         {
             db = new BanleShopEntities();
-            List<EventBackToSchool_Color> listColor = db.EventBackToSchool_Color.Where(c => c.ShirtTypeId == id.Value).ToList();
+            List<EventBackToSchool_Color> listColor = db.EventBackToSchool_Color.Where(c => c.ShirtTypeId == id).ToList();
 
-            result = new ResultViewModels();
-            result.data = listColor;
+            //List<Color> listColor = db.Colors.Where(c => c.ID == id.Value).ToList();
 
-            return Json(result);
+            List<string> listColorCode = new List<string>();
+            foreach (var item in listColor)
+            {
+                listColorCode.Add(db.Colors.First(c => c.ID==item.ColorId).ColorCode);
+            }
+
+            return JsonConvert.SerializeObject(listColorCode);
+
+            //return Json(JsonConvert.SerializeObject(listColorCode));
+
+
+            //return Json(result);
         }
 
-        public ActionResult GetListSize(int? id)
+        public Object GetListSize(int id)
         {
             db = new BanleShopEntities();
-            List<EventBackToSchool_Size> listSize = db.EventBackToSchool_Size.Where(s => s.ShirtTypeId == id.Value).ToList();
+            List<EventBackToSchool_Size> listSize = db.EventBackToSchool_Size.Where(s => s.ShirtTypeId == id).ToList();
 
-            result = new ResultViewModels();
-            result.data = listSize;
+            List<string> listSizeName = new List<string>();
+            foreach (var item in listSize)
+            {
+                listSizeName.Add(db.Sizes.First(c => c.ID == item.SizeId).Name);
+            }
 
-            return Json(result);
+            return JsonConvert.SerializeObject(listSizeName);
         }
 
         public ActionResult Save(int? shirtTypeId, int? colorId, int? sizeId, HttpPostedFileBase image, int quantity,
