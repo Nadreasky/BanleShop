@@ -455,7 +455,7 @@ namespace BanleWebsite.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public Object getProductInfo(int proId)
         {
             return JsonConvert.SerializeObject(_productServices.findByIDMapping(proId));
@@ -615,7 +615,7 @@ namespace BanleWebsite.Controllers
         //=========================START FUNCTION OF ORDER============================
 
         //Tìm detail cua order theo OrderID
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public Object getOrderDetail(int id)
         {
 
@@ -623,7 +623,7 @@ namespace BanleWebsite.Controllers
         }
 
         //Tim order theo orderID
-        [Authorize(Roles = "Admin, Manager")]
+        //[Authorize(Roles = "Admin, Manager")]
         public Object getOrderInfo(int id)
         {
             return JsonConvert.SerializeObject(_orderServices.findOrderByIDMapping(id));

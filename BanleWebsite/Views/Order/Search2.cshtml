@@ -22,7 +22,8 @@
     <link href="~/Content/Prac_Theme/css/royal_preloader.css" rel="stylesheet">
 
     <!-- jQuery Files -->
-    <script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.min.js"></script>
+    @*<script type="text/javascript" src="~/Content/Prac_Theme/js/jquery.min.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 
     <!-- Parallax File -->
     <script type="text/javascript" src="~/Content/Prac_Theme/js/parallax.min.js"></script>
@@ -216,7 +217,7 @@
     <script>
     function updateOrderStatus(id) {
         var status = $("#orderStatus").val();
-        console.log(status);
+        //console.log(status);
         $.ajax({
             url: "/Quanli/UpdateOrderStatus",
             data: {
@@ -256,7 +257,7 @@
                 order += data
             }
         })
-        console.log(order);
+        //console.log(order);
         return order;
     }
     function getproductItem(id) {
@@ -373,7 +374,7 @@
                 alert("Get order detail fail!")
             },
             success: function (data) {
-                console.log("receiveData: " + data);
+                //console.log("receiveData: " + data);
                 var orderDetailList = JSON.parse(data);
                 var total = 0;
                 for (var i = orderDetailList.length - 1; i >= 0; i--) {
@@ -383,7 +384,7 @@
                     var item = getproductItem(orderDetailList[i].ProductID);
                     var product = JSON.parse(item);
                     //alert(item);
-                    console.log("Product: "+product);
+                    //console.log("Product: "+product);
                     if(product==null){
                         continue
                     }
