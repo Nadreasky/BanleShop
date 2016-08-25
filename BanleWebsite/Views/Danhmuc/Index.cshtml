@@ -1,4 +1,10 @@
-﻿
+﻿@model PagedList.IPagedList<BanleWebsite.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+
+
 @{
     Category mainCate = ViewBag.mainCate;
     ViewBag.Title = mainCate.Name;
@@ -14,7 +20,7 @@
     <meta property="og:title" content="@mainCate.Name" />
     <meta property="og:description" content="@mainCate.Name" />
     <meta property="og:image" content="@ogImgUrl" />
-    }
+}
 
 
 
@@ -33,7 +39,7 @@
                             }
 
                         }
-                     
+
                     </div>
                 </div>
             </div>
@@ -45,46 +51,46 @@
 
 
                 @*<div class="listing_header_row1">
-                    <div class="pull-left">
-                        <form class="woocommerce-ordering" method="get">
-                            <label>Sort by:</label>
-                            <select name="orderby" class="orderby_ajax">
-                                <option value="menu_order" selected='selected'>Default</option>
-                                <option value="popularity">Popularity</option>
-                                <option value="rating">Average rating</option>
-                                <option value="date">Newness</option>
-                                <option value="price">Price: low to high</option>
-                                <option value="price_desc">Price: high to low</option>
-                            </select>
-                            <input type="hidden" name="product_cat" value="dresses" />
-                            <input type="hidden" name="product_cat" value="dresses" />
+                        <div class="pull-left">
+                            <form class="woocommerce-ordering" method="get">
+                                <label>Sort by:</label>
+                                <select name="orderby" class="orderby_ajax">
+                                    <option value="menu_order" selected='selected'>Default</option>
+                                    <option value="popularity">Popularity</option>
+                                    <option value="rating">Average rating</option>
+                                    <option value="date">Newness</option>
+                                    <option value="price">Price: low to high</option>
+                                    <option value="price_desc">Price: high to low</option>
+                                </select>
+                                <input type="hidden" name="product_cat" value="dresses" />
+                                <input type="hidden" name="product_cat" value="dresses" />
 
-                        </form>
-                    </div>
-
-                </div>
-                <div class="line1"></div>*@
-                @*<div class="listing_header_row2">
-                    <div class="pull-left">
-                        <p class="woocommerce-result-count">
-                            Showing 1–9 of 18 results
-                        </p>
-                    </div>
-                    <div class="pull-right wft_pagination">
-                        <div class="num pagination_ajax">
-                            <span class='page-numbers current'>1</span>
-                            <a class='page-numbers' href='index55d1.html?product_cat=dresses&amp;paged=2'>2</a>
-                            <a class="next page-numbers" href="index55d1.html?product_cat=dresses&amp;paged=2">&rarr;</a>
+                            </form>
                         </div>
+
                     </div>
-                </div>*@
+                    <div class="line1"></div>*@
+                @*<div class="listing_header_row2">
+                        <div class="pull-left">
+                            <p class="woocommerce-result-count">
+                                Showing 1–9 of 18 results
+                            </p>
+                        </div>
+                        <div class="pull-right wft_pagination">
+                            <div class="num pagination_ajax">
+                                <span class='page-numbers current'>1</span>
+                                <a class='page-numbers' href='index55d1.html?product_cat=dresses&amp;paged=2'>2</a>
+                                <a class="next page-numbers" href="index55d1.html?product_cat=dresses&amp;paged=2">&rarr;</a>
+                            </div>
+                        </div>
+                    </div>*@
                 <div class="clearfix"></div>
 
 
 
                 <div class="row big_with_description">
                     @{
-                        foreach (var item in productList)
+                        foreach (var item in Model)
                         {
                             <div class="span3 product carousel_item post-78 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
                                 <div class="product-image-wrapper onhover animate scale" style="height:300px;">
@@ -113,16 +119,16 @@
                                         <div class="product-price" style="color:red;font-size:17px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(item.Price.ToString())&#8363</strong></span></div>
                                         <div class="product-tocart">
                                             @*<a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
-                                                <i class="icon-basket"></i>
-                                            </a>*@
+                                                    <i class="icon-basket"></i>
+                                                </a>*@
                                             @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                            {
-                                                <input type="hidden" name="id" value="@item.ID" />
-                                                <input type="submit" value="Submit" />
-                                                <button type="submit" style="border-radius:50%; background-color:transparent;">
-                                                    <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                </button>
-                                            }*@
+                                                {
+                                                    <input type="hidden" name="id" value="@item.ID" />
+                                                    <input type="submit" value="Submit" />
+                                                    <button type="submit" style="border-radius:50%; background-color:transparent;">
+                                                        <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                    </button>
+                                                }*@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -178,165 +184,172 @@
                                                 {
                                                     <div class="product-price"><span class="amount"><s>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(item.OldPrice.ToString())&#8363</s></span></div>
                                                 }
-                                                <div class="product-price"style="color:red;font-size:20px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(item.Price.ToString())&#8363</strong></span></div>
+                                                <div class="product-price" style="color:red;font-size:20px"><span class="amount"><strong>@BanleWebsite.Models.ChangeCurrency.NayThiCurrency(item.Price.ToString())&#8363</strong></span></div>
 
 
                                                 <div class="product-tocart">
                                                     @*<a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple">
-                                                        <i class="icon-basket"></i>
-                                                    </a>*@
+                                                            <i class="icon-basket"></i>
+                                                        </a>*@
                                                     @*@using (Html.BeginForm("Index", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                    {
-                                                        <input type="hidden" name="id" value="@item.ID" />
-                                                        <input type="submit" value="Submit" />
-                                                        <button type="submit" style="border-radius:50%; background-color:transparent;">
-                                                            <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
-                                                        </button>
-                                                    }*@
+                                                        {
+                                                            <input type="hidden" name="id" value="@item.ID" />
+                                                            <input type="submit" value="Submit" />
+                                                            <button type="submit" style="border-radius:50%; background-color:transparent;">
+                                                                <i style="color:#9D3BC6; font-size:20px;" class="icon-basket"></i>
+                                                            </button>
+                                                        }*@
                                                 </div>
 
                                             </div>
                                             <div class="clearfix"></div>
 
                                             @*<div class="product-link">
-                                                <a class="wft_add_to_wishlist" href="index324a.html?product_cat=dresses&amp;add_to_wishlist=78" data-product-id="78" data-product-type="simple">Add to Wishlist</a>
-                                            </div>*@
+                                                    <a class="wft_add_to_wishlist" href="index324a.html?product_cat=dresses&amp;add_to_wishlist=78" data-product-id="78" data-product-type="simple">Add to Wishlist</a>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         }
+
                     }
+
 
 
                     @*<div class="span3 product carousel_item post-78 type-product status-publish has-post-thumbnail product_cat-dresses product_cat-jackets product_cat-prom-dresses product_cat-women featured shipping-taxable purchasable product-type-simple product-cat-dresses product-cat-jackets product-cat-prom-dresses product-cat-women instock">
 
 
-                        <div class="product-image-wrapper onhover animate scale">
-                            <a href="/sanpham/@productList.">
-                                <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (22)" />
-                            </a>
+                            <div class="product-image-wrapper onhover animate scale">
+                                <a href="/sanpham/@productList.">
+                                    <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (22)" />
+                                </a>
+                            </div>
+
+
+                            <div class="wrapper-hover">
+
+                                <div class="product-name">
+                                    <a href="indexb436.html?product=a-l-c-gerry-dress">
+                                        A.L.C &#8211; Gerry Dress
+                                    </a>
+                                </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78">Quick View</a>
+                                <div class="wrapper">
+
+
+                                    <div class="product-price"><span class="amount">&pound;260.00</span></div>
+
+
+                                    <div class="product-tocart"><a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+
+
+                            <span class="sort-date hidden">1386767309</span>
+                            <span class="sort-price hidden">260</span>
+                            <span class="sort-product_name hidden">A.L.C &#8211; Gerry Dress</span>
+                            <span class="sort-rating hidden">0</span>
+
                         </div>
 
 
-                        <div class="wrapper-hover">
-
-                            <div class="product-name">
-                                <a href="indexb436.html?product=a-l-c-gerry-dress">
-                                    A.L.C &#8211; Gerry Dress
-                                </a>
-                            </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78">Quick View</a>
+                        <div class="preview hidden-tablet hidden-phone " style="display: none;">
                             <div class="wrapper">
 
+                                <div class="col-1">
 
-                                <div class="product-price"><span class="amount">&pound;260.00</span></div>
+
+                                    <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg" href="#">
+                                        <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-63x63.jpg" />
+                                    </a>
 
 
-                                <div class="product-tocart"><a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-                                <div class="clearfix"></div>
+                                    <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-23.jpg" href="#">
+                                        <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-23-63x63.jpg" />
+                                    </a>
+
+
+                                </div>
+                                <div class="col-2 with_media">
+                                    <div class="big_image">
+                                        <a href="indexb436.html?product=a-l-c-gerry-dress">
+
+                                            <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (22)" />
+                                        </a>
+                                    </div>
+
+                                    <div class="wrapper-hover">
+
+                                        <div class="product-name">
+                                            <a href="indexb436.html?product=a-l-c-gerry-dress">
+                                                A.L.C &#8211; Gerry Dress
+                                            </a>
+                                        </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78">Quick View</a>
+                                        <div class="wrapper">
+
+
+                                            <div class="product-price"><span class="amount">&pound;260.00</span></div>
+
+
+                                            <div class="product-tocart"><a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
+
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div class="product-link">
+                                            <a class="wft_add_to_wishlist" href="index324a.html?product_cat=dresses&amp;add_to_wishlist=78" data-product-id="78" data-product-type="simple">Add to Wishlist</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>*@
 
+
+
+
+                </div>
+                
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, }))
+
+                @*<div class="listing_header_row1">
+                        <div class="pull-left">
+                            <form class="woocommerce-ordering" method="get">
+                                <label>Sort by:</label>
+                                <select name="orderby" class="orderby_ajax">
+                                    <option value="menu_order" selected='selected'>Default</option>
+                                    <option value="popularity">Popularity</option>
+                                    <option value="rating">Average rating</option>
+                                    <option value="date">Newness</option>
+                                    <option value="price">Price: low to high</option>
+                                    <option value="price_desc">Price: high to low</option>
+                                </select>
+                                <input type="hidden" name="product_cat" value="dresses" />
+                                <input type="hidden" name="product_cat" value="dresses" />
+
+                            </form>
                         </div>
 
-
-                        <span class="sort-date hidden">1386767309</span>
-                        <span class="sort-price hidden">260</span>
-                        <span class="sort-product_name hidden">A.L.C &#8211; Gerry Dress</span>
-                        <span class="sort-rating hidden">0</span>
-
-                    </div>
-
-
-                    <div class="preview hidden-tablet hidden-phone " style="display: none;">
-                        <div class="wrapper">
-
-                            <div class="col-1">
-
-
-                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-22.jpg" href="#">
-                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-63x63.jpg" />
-                                </a>
-
-
-                                <a class="image" data-rel="http://demo.ethemeuk.com/buyshop/woocommerce/demo/wp-content/uploads/2014/04/wclo_ad_1_1-23.jpg" href="#">
-                                    <img class="thumb" alt="" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-23-63x63.jpg" />
-                                </a>
-
-
-                            </div>
-                            <div class="col-2 with_media">
-                                <div class="big_image">
-                                    <a href="indexb436.html?product=a-l-c-gerry-dress">
-
-                                        <img width="300" height="300" src="~/Content/Buyshop/wp-content/uploads/2014/04/wclo_ad_1_1-22-300x300.jpg" class="attachment-shop_single wp-post-image" alt="wclo_ad_1_1 (22)" />
-                                    </a>
-                                </div>
-
-                                <div class="wrapper-hover">
-
-                                    <div class="product-name">
-                                        <a href="indexb436.html?product=a-l-c-gerry-dress">
-                                            A.L.C &#8211; Gerry Dress
-                                        </a>
-                                    </div><a class="quickview img-circle hidden-phone hidden-small-desktop hidden-tablet" data-product-id="78">Quick View</a>
-                                    <div class="wrapper">
-
-
-                                        <div class="product-price"><span class="amount">&pound;260.00</span></div>
-
-
-                                        <div class="product-tocart"><a href="index465b.html?product_cat=dresses&amp;add-to-cart=78" rel="nofollow" data-product_id="78" data-product_sku="13" data-wooclass="add_to_cart_button button product_type_simple" class="wft_add_to_cart_button product_type_simple"><i class="icon-basket"></i></a></div>
-
-                                    </div>
-                                    <div class="clearfix"></div>
-
-                                    <div class="product-link">
-                                        <a class="wft_add_to_wishlist" href="index324a.html?product_cat=dresses&amp;add_to_wishlist=78" data-product-id="78" data-product-type="simple">Add to Wishlist</a>
-                                    </div>
-                                </div>
+                    </div>*@
+                <div class="line1"></div>
+                @*<div class="listing_header_row2">
+                        <div class="pull-left">
+                            <p class="woocommerce-result-count">
+                                Showing 1–9 of 18 results
+                            </p>
+                        </div>
+                        <div class="pull-right wft_pagination">
+                            <div class="num pagination_ajax">
+                                <span class='page-numbers current'>1</span>
+                                <a class='page-numbers' href='index55d1.html?product_cat=dresses&amp;paged=2'>2</a>
+                                <a class="next page-numbers" href="index55d1.html?product_cat=dresses&amp;paged=2">&rarr;</a>
                             </div>
                         </div>
                     </div>*@
-
-
-                   
-
-                </div>
-
-                @*<div class="listing_header_row1">
-                    <div class="pull-left">
-                        <form class="woocommerce-ordering" method="get">
-                            <label>Sort by:</label>
-                            <select name="orderby" class="orderby_ajax">
-                                <option value="menu_order" selected='selected'>Default</option>
-                                <option value="popularity">Popularity</option>
-                                <option value="rating">Average rating</option>
-                                <option value="date">Newness</option>
-                                <option value="price">Price: low to high</option>
-                                <option value="price_desc">Price: high to low</option>
-                            </select>
-                            <input type="hidden" name="product_cat" value="dresses" />
-                            <input type="hidden" name="product_cat" value="dresses" />
-
-                        </form>
-                    </div>
-
-                </div>*@
-                <div class="line1"></div>			
-                @*<div class="listing_header_row2">
-                    <div class="pull-left">
-                        <p class="woocommerce-result-count">
-                            Showing 1–9 of 18 results
-                        </p>
-                    </div>
-                    <div class="pull-right wft_pagination">
-                        <div class="num pagination_ajax">
-                            <span class='page-numbers current'>1</span>
-                            <a class='page-numbers' href='index55d1.html?product_cat=dresses&amp;paged=2'>2</a>
-                            <a class="next page-numbers" href="index55d1.html?product_cat=dresses&amp;paged=2">&rarr;</a>
-                        </div>
-                    </div>
-                </div>*@
                 <div class="clearfix"></div>
 
             </div>
@@ -346,74 +359,74 @@
                 <div class="row">
                     <div class="span3">
                         @*<div id="product_categories-3" class="block woocommerce widget_product_categories">
-                            <div class="block-title"><strong><span>Listing</span></strong></div><ul class="product-categories collapsed-menu">
-                                <li class="level1 cat-item cat-item-38">
-                                    <a href="indexefad.html?product_cat=man">Man</a><span class="collapse_button">+</span><ul class="level1 children" style="display: none;">
-                                        <li class="level2 cat-item cat-item-42"><a href="index3218.html?product_cat=jeans-man">Jeans</a></li>
-                                        <li class="level2 cat-item cat-item-41"><a href="indexc842.html?product_cat=jumpers">Jumpers</a></li>
-                                        <li class="level2 cat-item cat-item-39"><a href="index2b84.html?product_cat=polo-shirts">Polo Shirts</a></li>
-                                        <li class="level2 cat-item cat-item-40"><a href="index90fd.html?product_cat=shirts-man">Shirts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="level1 cat-item cat-item-26 current-cat-parent">
-                                    <a href="index90fa.html?product_cat=women">Women</a><span class="collapse_button">+</span><ul class="level1 children" style="display: none;">
-                                        <li class="level2 cat-item cat-item-32"><a href="index0835.html?product_cat=coats">Coats</a></li>
-                                        <li class="level2 cat-item cat-item-27 current-cat">
-                                            <a href="index3a7f.html?product_cat=dresses">Dresses</a><span class="collapse_button">+</span>	<ul class="level2 children" style="display: none;">
-                                                <li class="level3 cat-item cat-item-28"><a href="index156d.html?product_cat=club-dresses">Club Dresses</a></li>
-                                                <li class="level3 cat-item cat-item-29"><a href="index8c35.html?product_cat=evening-dresses">Evening Dresses</a></li>
-                                                <li class="level3 cat-item cat-item-30"><a href="index1e07.html?product_cat=prom-dresses">Prom Dresses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level2 cat-item cat-item-33"><a href="index18d8.html?product_cat=jackets">Jackets</a></li>
-                                        <li class="level2 cat-item cat-item-35"><a href="indexd1f0.html?product_cat=jeans">Jeans</a></li>
-                                        <li class="level2 cat-item cat-item-37"><a href="index8104.html?product_cat=lingerie">Lingerie</a></li>
-                                        <li class="level2 cat-item cat-item-31"><a href="index6b3e.html?product_cat=shirts">Shirts</a></li>
-                                        <li class="level2 cat-item cat-item-34"><a href="indexe20d.html?product_cat=shorts">Shorts</a></li>
-                                        <li class="level2 cat-item cat-item-36"><a href="index64d2.html?product_cat=skirts">Skirts</a></li>
-                                    </ul>
-                                </li>
-                            </ul><div class="clearfix"></div>
-                        </div>*@
+                                <div class="block-title"><strong><span>Listing</span></strong></div><ul class="product-categories collapsed-menu">
+                                    <li class="level1 cat-item cat-item-38">
+                                        <a href="indexefad.html?product_cat=man">Man</a><span class="collapse_button">+</span><ul class="level1 children" style="display: none;">
+                                            <li class="level2 cat-item cat-item-42"><a href="index3218.html?product_cat=jeans-man">Jeans</a></li>
+                                            <li class="level2 cat-item cat-item-41"><a href="indexc842.html?product_cat=jumpers">Jumpers</a></li>
+                                            <li class="level2 cat-item cat-item-39"><a href="index2b84.html?product_cat=polo-shirts">Polo Shirts</a></li>
+                                            <li class="level2 cat-item cat-item-40"><a href="index90fd.html?product_cat=shirts-man">Shirts</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="level1 cat-item cat-item-26 current-cat-parent">
+                                        <a href="index90fa.html?product_cat=women">Women</a><span class="collapse_button">+</span><ul class="level1 children" style="display: none;">
+                                            <li class="level2 cat-item cat-item-32"><a href="index0835.html?product_cat=coats">Coats</a></li>
+                                            <li class="level2 cat-item cat-item-27 current-cat">
+                                                <a href="index3a7f.html?product_cat=dresses">Dresses</a><span class="collapse_button">+</span>	<ul class="level2 children" style="display: none;">
+                                                    <li class="level3 cat-item cat-item-28"><a href="index156d.html?product_cat=club-dresses">Club Dresses</a></li>
+                                                    <li class="level3 cat-item cat-item-29"><a href="index8c35.html?product_cat=evening-dresses">Evening Dresses</a></li>
+                                                    <li class="level3 cat-item cat-item-30"><a href="index1e07.html?product_cat=prom-dresses">Prom Dresses</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="level2 cat-item cat-item-33"><a href="index18d8.html?product_cat=jackets">Jackets</a></li>
+                                            <li class="level2 cat-item cat-item-35"><a href="indexd1f0.html?product_cat=jeans">Jeans</a></li>
+                                            <li class="level2 cat-item cat-item-37"><a href="index8104.html?product_cat=lingerie">Lingerie</a></li>
+                                            <li class="level2 cat-item cat-item-31"><a href="index6b3e.html?product_cat=shirts">Shirts</a></li>
+                                            <li class="level2 cat-item cat-item-34"><a href="indexe20d.html?product_cat=shorts">Shorts</a></li>
+                                            <li class="level2 cat-item cat-item-36"><a href="index64d2.html?product_cat=skirts">Skirts</a></li>
+                                        </ul>
+                                    </li>
+                                </ul><div class="clearfix"></div>
+                            </div>*@
                         <!-- //sidebar-widget -->
                         @*<div id="woocommerce_price_filter-2" class="block woocommerce widget_price_filter">
-                            <div class="block-title"><strong><span>Filter by price</span></strong></div><form method="get" action="http://demo.ethemeuk.com/buyshop/woocommerce/demo?product_cat=dresses">
-                                <div class="price_slider_wrapper">
-                                    <div class="price_slider" style="display:none;"></div>
-                                    <div class="price_slider_amount">
-                                        <input type="text" id="min_price" name="min_price" value="" data-min="40" placeholder="Min price" />
-                                        <input type="text" id="max_price" name="max_price" value="" data-max="2300" placeholder="Max price" />
-                                        <button type="submit" class="button">Filter</button>
-                                        <div class="price_label" style="display:none;">
-                                            Price: <span class="from"></span> &mdash; <span class="to"></span>
+                                <div class="block-title"><strong><span>Filter by price</span></strong></div><form method="get" action="http://demo.ethemeuk.com/buyshop/woocommerce/demo?product_cat=dresses">
+                                    <div class="price_slider_wrapper">
+                                        <div class="price_slider" style="display:none;"></div>
+                                        <div class="price_slider_amount">
+                                            <input type="text" id="min_price" name="min_price" value="" data-min="40" placeholder="Min price" />
+                                            <input type="text" id="max_price" name="max_price" value="" data-max="2300" placeholder="Max price" />
+                                            <button type="submit" class="button">Filter</button>
+                                            <div class="price_label" style="display:none;">
+                                                Price: <span class="from"></span> &mdash; <span class="to"></span>
+                                            </div>
+                                            <input type="hidden" name="product_cat" value="dresses" />
+                                            <div class="clear"></div>
                                         </div>
-                                        <input type="hidden" name="product_cat" value="dresses" />
-                                        <div class="clear"></div>
                                     </div>
-                                </div>
-                            </form><div class="clearfix"></div>
-                        </div>*@<!-- //sidebar-widget -->
+                                </form><div class="clearfix"></div>
+                            </div>*@<!-- //sidebar-widget -->
                         @*<div id="tag_cloud-2" class="block widget_tag_cloud">
-                            <div class="block-title"><strong><span>Popular Tags</span></strong></div><div class="tagcloud">
-                                <a href='index85f0.html?product_tag=club-dresses' class='tag-link-28' title='24 topics' style='font-size: 20.504854368932pt;'>Club Dresses</a>
-                                <a href='index58b0.html?product_tag=coats' class='tag-link-32' title='7 topics' style='font-size: 13.708737864078pt;'>Coats</a>
-                                <a href='indexf3cf.html?product_tag=dress' class='tag-link-20' title='6 topics' style='font-size: 13.029126213592pt;'>dress</a>
-                                <a href='index29d8.html?product_tag=dresses' class='tag-link-27' title='31 topics' style='font-size: 22pt;'>Dresses</a>
-                                <a href='index5cca.html?product_tag=evening-dresses' class='tag-link-29' title='7 topics' style='font-size: 13.708737864078pt;'>Evening Dresses</a>
-                                <a href='index4463.html?product_tag=jackets' class='tag-link-33' title='15 topics' style='font-size: 17.78640776699pt;'>Jackets</a>
-                                <a href='index9b10.html?product_tag=jeans' class='tag-link-35' title='7 topics' style='font-size: 13.708737864078pt;'>Jeans</a>
-                                <a href='index1edb.html?product_tag=lingerie' class='tag-link-37' title='16 topics' style='font-size: 18.194174757282pt;'>Lingerie</a>
-                                <a href='index93dd.html?product_tag=prom-dresses' class='tag-link-30' title='7 topics' style='font-size: 13.708737864078pt;'>Prom Dresses</a>
-                                <a href='indexdcd6.html?product_tag=sexy' class='tag-link-22' title='6 topics' style='font-size: 13.029126213592pt;'>sexy</a>
-                                <a href='index926a.html?product_tag=shirts' class='tag-link-31' title='15 topics' style='font-size: 17.78640776699pt;'>Shirts</a>
-                                <a href='indexa20d.html?product_tag=shorts' class='tag-link-34' title='16 topics' style='font-size: 18.194174757282pt;'>Shorts</a>
-                                <a href='indexe67f.html?product_tag=silk' class='tag-link-23' title='2 topics' style='font-size: 8pt;'>silk</a>
-                                <a href='index696b.html?product_tag=skirts' class='tag-link-36' title='16 topics' style='font-size: 18.194174757282pt;'>Skirts</a>
-                                <a href='indexce0e.html?product_tag=strapless' class='tag-link-24' title='2 topics' style='font-size: 8pt;'>strapless</a>
-                                <a href='indexcffa.html?product_tag=style' class='tag-link-25' title='4 topics' style='font-size: 10.990291262136pt;'>style</a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>*@
+                                <div class="block-title"><strong><span>Popular Tags</span></strong></div><div class="tagcloud">
+                                    <a href='index85f0.html?product_tag=club-dresses' class='tag-link-28' title='24 topics' style='font-size: 20.504854368932pt;'>Club Dresses</a>
+                                    <a href='index58b0.html?product_tag=coats' class='tag-link-32' title='7 topics' style='font-size: 13.708737864078pt;'>Coats</a>
+                                    <a href='indexf3cf.html?product_tag=dress' class='tag-link-20' title='6 topics' style='font-size: 13.029126213592pt;'>dress</a>
+                                    <a href='index29d8.html?product_tag=dresses' class='tag-link-27' title='31 topics' style='font-size: 22pt;'>Dresses</a>
+                                    <a href='index5cca.html?product_tag=evening-dresses' class='tag-link-29' title='7 topics' style='font-size: 13.708737864078pt;'>Evening Dresses</a>
+                                    <a href='index4463.html?product_tag=jackets' class='tag-link-33' title='15 topics' style='font-size: 17.78640776699pt;'>Jackets</a>
+                                    <a href='index9b10.html?product_tag=jeans' class='tag-link-35' title='7 topics' style='font-size: 13.708737864078pt;'>Jeans</a>
+                                    <a href='index1edb.html?product_tag=lingerie' class='tag-link-37' title='16 topics' style='font-size: 18.194174757282pt;'>Lingerie</a>
+                                    <a href='index93dd.html?product_tag=prom-dresses' class='tag-link-30' title='7 topics' style='font-size: 13.708737864078pt;'>Prom Dresses</a>
+                                    <a href='indexdcd6.html?product_tag=sexy' class='tag-link-22' title='6 topics' style='font-size: 13.029126213592pt;'>sexy</a>
+                                    <a href='index926a.html?product_tag=shirts' class='tag-link-31' title='15 topics' style='font-size: 17.78640776699pt;'>Shirts</a>
+                                    <a href='indexa20d.html?product_tag=shorts' class='tag-link-34' title='16 topics' style='font-size: 18.194174757282pt;'>Shorts</a>
+                                    <a href='indexe67f.html?product_tag=silk' class='tag-link-23' title='2 topics' style='font-size: 8pt;'>silk</a>
+                                    <a href='index696b.html?product_tag=skirts' class='tag-link-36' title='16 topics' style='font-size: 18.194174757282pt;'>Skirts</a>
+                                    <a href='indexce0e.html?product_tag=strapless' class='tag-link-24' title='2 topics' style='font-size: 8pt;'>strapless</a>
+                                    <a href='indexcffa.html?product_tag=style' class='tag-link-25' title='4 topics' style='font-size: 10.990291262136pt;'>style</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>*@
                         <!-- //sidebar-widget -->
                         <div id="wft-static-block-2" class="block wft_widget_satic_block">
                             <div class="banners_outer">
@@ -433,10 +446,7 @@
                         </div><!-- //sidebar-widget -->
                     </div>
                 </div>
-            </div>
-
-
-
+            </div>     
         </div>
     </div>
 </section>

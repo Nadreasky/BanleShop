@@ -1,5 +1,6 @@
 ﻿using BanleWebsite.Models;
 using BanleWebsite.Services;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,31 @@ namespace BanleWebsite.Controllers
         CategoryServices _categoryServices = new CategoryServices();
 
         // GET: Danhmuc
-        public ActionResult Index(int? id)
+        //public ActionResult Index(int? id)
+        //{
+        //    List<Product> productList = _categoryServices.getProductByCate(id.Value).OrderByDescending(i => i.ID).ToList();
+        //    ViewBag.productList = productList;
+
+        //    List<Category> categoryTree = _categoryServices.getCategoryTree(id.Value);
+        //    ViewBag.categoryTree = categoryTree;
+
+        //    Category mainCate = _categoryServices.findByid(id.Value);
+        //    ViewBag.mainCate = mainCate;
+
+        //    // cap nhat link cho "Quay lai mua sam"
+        //    AddressBar ab = new AddressBar();
+        //    ab.UpdateLinkBackToShopping();
+
+        //    return View();
+        //}
+
+        public ActionResult Index(int? id, int? page)
         {
             List<Product> productList = _categoryServices.getProductByCate(id.Value).OrderByDescending(i => i.ID).ToList();
             ViewBag.productList = productList;
+            
 
-            List<Category> categoryTree = _categoryServices.getCategoryTree(id.Value);
+            List <Category> categoryTree = _categoryServices.getCategoryTree(id.Value);
             ViewBag.categoryTree = categoryTree;
 
             Category mainCate = _categoryServices.findByid(id.Value);
@@ -29,7 +49,9 @@ namespace BanleWebsite.Controllers
             AddressBar ab = new AddressBar();
             ab.UpdateLinkBackToShopping();
 
-            return View();
+            int pageSize = 9;
+            int pageNumber = (page ?? 1);
+            return View(productList.ToPagedList(pageNumber, pageSize));
         }
     }
 }
