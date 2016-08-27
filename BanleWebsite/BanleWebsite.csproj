@@ -551,7 +551,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Buyshop\" />
     <Folder Include="Content\ckeditor\" />
-    <Folder Include="Views\EventBackToSchool\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\ProductDetail\" />
   </ItemGroup>
