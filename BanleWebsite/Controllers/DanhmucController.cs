@@ -51,7 +51,7 @@ namespace BanleWebsite.Controllers
                 AddressBar ab = new AddressBar();
                 ab.UpdateLinkBackToShopping();
 
-                int pageSize = 9;
+                int pageSize = 12;
                 int pageNumber = (page ?? 1);
                 return View(productList.ToPagedList(pageNumber, pageSize));
             }
