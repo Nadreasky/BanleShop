@@ -113,21 +113,21 @@
                 </div>
             </div>
             <div class="row text-center" id="formchonao">
-                <div class="col-md-3" id="aokhoac" style="height:400px" onclick="chonAo(this.id)">
+                <div class="col-md-3" id="1" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo khoác</h4>
                     <img src="~/Content/dataonhom/img/aodaidien/aokhoac.jpg" class="img-responsive" alt="">
                 </div>
-                <div class="col-md-3" id="aothuncotraitim" style="height:400px" onclick="chonAo(this.id)">
+                <div class="col-md-3" id="2" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo thun cổ trái tim</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" style="height:300px" class="img-responsive" alt="">
+                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" class="img-responsive" alt="">
                 </div>
-                <div class="col-md-3" id="aothuncotron" style="height:400px" onclick="chonAo(this.id)">
+                <div class="col-md-3" id="3" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo thun cổ tròn</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotron.jpg" style="height:300px" class="img-responsive" alt="">
+                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotron.jpg" class="img-responsive" alt="">
                 </div>
-                <div class="col-md-3" id="aothuncotru" style="height:400px" onclick="chonAo(this.id)">
+                <div class="col-md-3" id="4" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo thun cổ trụ</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" style="height:300px" class="img-responsive" alt="">
+                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="">
                 </div>
             </div>
             <br />
@@ -153,8 +153,8 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-5">
                     <div>
-                        <div class="product-image text-center" id="khunghienmau">
-                            <div style="height:150px;width:150px; margin-right: 50px;" class="pull-right">
+                        <div class="product-image text-center">
+                            <div id="khunghienmau" style="height:150px;width:150px; margin-right: 50px;" class="pull-right">
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,10 @@
                         <label class="row"><strong>Size</strong></label>
                         <ul id="chooseSize" class="list-inline"></ul>
                     </div>
-
+                    <div id="pQuantity">
+                        <label class="row"><strong>Số lượng</strong></label><br />
+                        <input type="button" class="btn btn-danger" value="-" onclick="minus()" /><input id="quantity" value="1" style="width: 40px;height:32px; text-align:center" /><input type="button" class="btn btn-success" value="+" onclick="bonus()" />
+                    </div>
                     <br />
                     <div class="row bottom-left">
                         <a href="#chonhoatiet" class="page-scroll btn btn-primary">Chọn họa tiết</a>
@@ -191,20 +194,21 @@
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <form enctype="multipart/form-data">
+                        
+                            <!--Upload image-->
                             <input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
                             <br>
                             <div class="text-center">
                                 <button type="reset" class="btn btn-default">Reset</button>
-                                <a href="#xacnhan" class=" page-scroll btn btn-primary">Xác nhận</a>
+                                <a href="javascript:void(0)" class=" page-scroll btn btn-primary" onclick="xacnhan()">Xác nhận</a>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Chú thích.</p>
+                    <p class="large text-muted">Bạn có thể đính kèm 1 ảnh hoặc mô tả và đính kèm link trong phần mô tả bên dưới</p>
                 </div>
             </div>
             <br />
@@ -222,24 +226,24 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Xác nhận</h2>
-                    <h3 class="section-subheading text-muted">Xác nhận đơn hàng của bạn</h3>
+                    <h3 id="xacnhandonhang" class="section-subheading text-muted"></h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Tên *" id="name" required data-validation-required-message="Vui lòng nhập tên.">
+                                    <input type="text" class="form-control" placeholder="Tên *" id="name" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập tên!')">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email *" id="email" required data-validation-required-message="Vui lòng nhập địa chỉ email.">
+                                    <input type="email" class="form-control" placeholder="Email *" id="email" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập email!')">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Điện thoại *" id="phone" required data-validation-required-message="Vui lòng nhập số điện thoại.">
+                                    <input type="number" class="form-control" placeholder="Điện thoại *" id="phone" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại!')">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -249,6 +253,10 @@
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
+                            <input type="hidden" name="loaiao" id="loaiao" value="" />
+                            <input type="hidden" name="mausac" id="mausac" value="" />
+                            <input type="hidden" name="kichthuoc" id="kichthuoc" value="" />
+                            <input type="hidden" name="soluong" id="soluong" value="" />
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
@@ -284,9 +292,32 @@
             </div>
         </div>
     </footer>
-    <!--script chon loai ao-->
+
+    <!--Script-->
     <script type="text/javascript">
+        var tenAoHienTai = null;
+        var idAoHienTai = null;
+        var mauAoHienTai = null;
+        var sizeAoHienTai = null;
+        var soLuongAoHienTai = null;
+
+        //Function chon ao
         function chonAo(clickedId) {
+            idAoHienTai = clickedId;
+            if (clickedId == 1) {
+                tenAoHienTai = "Áo Khoác";
+            } else if (clickedId == 2) {
+                tenAoHienTai = "Áo thun cổ trái tim";
+            } else if (clickedId == 3) {
+                tenAoHienTai = "Áo thun cổ tròn";
+            } else {
+                tenAoHienTai = "Áo thun cổ trụ";
+            }
+            mauAoHienTai = null;
+            sizeAoHienTai = null;
+            soLuongAoHienTai = 1;
+            jQuery("#quantity").val(1);
+            jQuery("#khunghienmau").css("background-color", "");
             jQuery("#formchonao div").css({
                 "border-style": "",
                 "border-color": "",
@@ -295,14 +326,10 @@
                 "border-style": "solid",
                 "border-color": "orange",
             });
+            loadMauAo(clickedId);
+            loadSizeAo(clickedId);
         };
-    </script>
-
-    <!--Script load va chon mau-->
-    <script type="text/javascript">
         //Function load mau ao
-        $(document).ready(loadMauAo(1));
-        $(document).ready(loadSizeAo(1));
         function loadMauAo(id) {
             jQuery("#chooseColor").empty();
             $.ajax({
@@ -315,7 +342,7 @@
                 success: function (result) {
                     var listColorCode = JSON.parse(result);
                     for (i = 0; i < listColorCode.length; i++) {
-                        jQuery("#chooseColor").append("<li><a href='#1'><i class='fa fa-circle' id='" + listColorCode[i] + "' style='color:" + listColorCode[i] + "'></i></a></li>");
+                        jQuery("#chooseColor").append("<li><a href='javascript:void(0)'><i class='fa fa-circle' id='" + i + "' style='color:" + listColorCode[i] + "' onclick='hieThiMauAo(" + i + ")'></i></a></li>");
                     }
                 },
 
@@ -334,15 +361,78 @@
                 success: function (result) {
                     var listSizeName = JSON.parse(result);
                     for (i = 0; i < listSizeName.length; i++) {
-                        jQuery("#chooseSize").append("<li><a href='#1' class='btn btn-sm boxcolor'>" + listSizeName[i] + "</a></li>");
+                        jQuery("#chooseSize").append("<li><a href='javascript:void(0)' id='" + listSizeName[i] + "' class='btn btn-sm boxcolor' onclick='chonSizeAo(this.id)' >" + listSizeName[i] + "</a></li>");
                     }
                 }
             });
         }
         //Function hien thi mau ao
         function hieThiMauAo(colorId) {
-            jQuery(khunghienmau).css("background-color", colorId);
+            $.ajax({
+                url: "/OrderGroupShirt/GetListColor",
+                type: "get",
+                data: {
+                    format: 'json',
+                    id: idAoHienTai
+                },
+                success: function (result) {
+                    var listColorCode = JSON.parse(result);
+                    mauAoHienTai = listColorCode[colorId];
+                    jQuery("#khunghienmau").css("background-color", listColorCode[colorId]);
+                },
+
+            });
+
         };
+        //Function chon size ao
+        function chonSizeAo(clickedID) {
+            sizeAoHienTai = clickedID;
+            jQuery("#chooseSize li a").css({
+                "border": "",
+                "color": "",
+            });
+            jQuery("#" + clickedID).css({
+                "border": "1px solid orange",
+                "color": "orange",
+            });
+        }
+        //Function bonus
+        function bonus() {
+            var quantity = parseInt(jQuery("#quantity").val());
+            jQuery("#quantity").val(quantity + 1);
+            soLuongAoHienTai = jQuery("#quantity").val();
+        }
+        //Function minus
+        function minus() {
+            var quantity = parseInt(jQuery("#quantity").val());
+            if (quantity > 1) {
+                jQuery("#quantity").val(quantity - 1);
+            } else {
+                alert("Số lượng không được nhỏ hơn 1");
+            }
+            soLuongAoHienTai = jQuery("#quantity").val();
+        }
+        //Function xac nhan
+        function xacnhan() {
+            if (idAoHienTai == null) {
+                alert("Bạn chưa chọn áo! ");
+                location.href = "/OrderGroupShirt/Index#chonao";
+            } else if (mauAoHienTai == null) {
+                alert("Bạn chưa chọn màu! ");
+                location.href = "/OrderGroupShirt/Index#chonmaukichco";
+            } else if (sizeAoHienTai == null) {
+                alert("Bạn chưa chọn size! ");
+                location.href = "/OrderGroupShirt/Index#chonmaukichco";
+            } else {
+                location.href = "/OrderGroupShirt/Index#xacnhan";
+            }
+            jQuery("#xacnhandonhang").text("Bạn đã đặt " + tenAoHienTai + " với số lượng " + soLuongAoHienTai + " cái và màu sắc là: ");
+            jQuery("#xacnhandonhang").append("<input type='button' style='background-color:" + mauAoHienTai + ";height: 15px;width:10px;border: 0.1px solid'/>");
+            jQuery("#loaiao").val(idAoHienTai);
+            jQuery("#mauao").val(mauAoHienTai);
+            jQuery("#soluong").val(soLuongAoHienTai);
+            jQuery("#kichthuoc").val(sizeAoHienTai);
+        }
 
 
     </script>

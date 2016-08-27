@@ -544,7 +544,7 @@
     <Content Include="Views\Agencies\Index.cshtml" />
     <Content Include="Views\Agencies\SubmitAgencyCompleted.cshtml" />
     <Content Include="Views\ErrorHandle\Error.cshtml" />
-    <Content Include="Views\OrderGroupShirt\OrderGroupShirt.cshtml" />
+    <Content Include="Views\OrderGroupShirt\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />

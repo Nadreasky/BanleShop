@@ -18,7 +18,7 @@ namespace BanleWebsite.Controllers
         ResultViewModels result;
         ImageServices _imageServices;
 
-        public ActionResult OrderGroupShirt()
+        public ActionResult Index()
         {
             return View();
         }
