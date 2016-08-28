@@ -16,8 +16,8 @@ namespace BanleWebsite
     {
         public int Id { get; set; }
         public int ShirtTypeId { get; set; }
-        public int ColorId { get; set; }
-        public int SizeId { get; set; }
+        public string ColorId { get; set; }
+        public string SizeId { get; set; }
         public string LinkImage { get; set; }
         public int Quantity { get; set; }
         public string CustomerName { get; set; }

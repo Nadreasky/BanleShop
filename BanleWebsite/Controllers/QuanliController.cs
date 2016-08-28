@@ -53,6 +53,20 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        //EVENT BACK TO SCHOOL (DELETE WHEN CLOSED)
+        public ActionResult EventBackToSchool()
+        {
+            BanleShopEntities db = new BanleShopEntities();
+
+            List<EventBackToSchool_Order> orders = db.EventBackToSchool_Order.ToList();
+            ViewBag.orders = orders;
+            return View();
+        }
+
+
+
+        //===========END EVENT===================
+
         // Kun 4.8.16
         public ActionResult Blog()
         {

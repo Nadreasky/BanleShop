@@ -15,10 +15,15 @@ namespace BanleWebsite.Controllers
     {
         // GET: OrderGroupShirt
         BanleShopEntities db;
-        ResultViewModels result;
+        //ResultViewModels result;
         ImageServices _imageServices;
 
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Success()
         {
             return View();
         }
@@ -58,9 +63,10 @@ namespace BanleWebsite.Controllers
             return JsonConvert.SerializeObject(listSizeName);
         }
 
-        public ActionResult Save(int? shirtTypeId, int? colorId, int? sizeId, HttpPostedFileBase image, int quantity,
+        public ActionResult Save(int? shirtTypeId, string colorId, string sizeId, HttpPostedFileBase image, int quantity,
             string customerName, string email, string phone, string description)
         {
+            db = new BanleShopEntities();
             _imageServices = new ImageServices();
 
             string filePath = "";
@@ -75,16 +81,16 @@ namespace BanleWebsite.Controllers
                 if (image != null && image.FileName != null)
                 {
 
-                    string newPath = Server.MapPath(SLIMCONFIG.PRODUCT_IMG_PATH + "ProductImages");
-                    string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
+                    string newPath = Server.MapPath("~/PatternImages");
+                    //string newPathBig = Server.MapPath(SLIMCONFIG.BIG_PRODUCT_IMG_PATH + "ProductImages");
                     if (!Directory.Exists(newPath))
                     {
                         System.IO.Directory.CreateDirectory(newPath);
                     }
-                    if (!Directory.Exists(newPathBig))
-                    {
-                        System.IO.Directory.CreateDirectory(newPathBig);
-                    }
+                    //if (!Directory.Exists(newPathBig))
+                    //{
+                    //    System.IO.Directory.CreateDirectory(newPathBig);
+                    //}
                     WebImage imgBig = _imageServices.reSizeImgBig(image);
                     imgBig.FileName = image.FileName;
                     DateTime dateTime = DateTime.Now;
@@ -96,28 +102,29 @@ namespace BanleWebsite.Controllers
                         + "-" + dateTime.Second.ToString()
                         + "-" + dateTime.Millisecond.ToString();
                     string extensionBig = imgBig.FileName.Split('.').Last();
-                    string savePathBig = newPathBig + "\\" + shirtTypeId.Value + currentDateTime + "." + extensionBig;
+                    string savePathBig = newPath + "\\" + shirtTypeId.Value + currentDateTime + "." + extensionBig;
                     //imgBig.Save(newPathBig + "/" + imgBig.FileName);
                     imgBig.Save(savePathBig);
 
 
-                    WebImage img = _imageServices.reSizeImg(imgBig);
-                    img.FileName = image.FileName;
-                    string extension = img.FileName.Split('.').Last();
-                    string savePath = newPath + "\\" + shirtTypeId.Value + currentDateTime + "." + extension;
-                    //img.Save(newPath + "/" + img.FileName);
-                    img.Save(savePath);
-                    //productImg1.SaveAs(newPath + "/" + productImg1.FileName);
-                    //filePath1 = "/Images/" + "ProductImages/" + productImg1.FileName;
-                    filePath = "/Images/" + "ProductImages/" + shirtTypeId.Value + currentDateTime + "." + extension;
+                    //WebImage img = _imageServices.reSizeImg(imgBig);
+                    //img.FileName = image.FileName;
+                    //string extension = img.FileName.Split('.').Last();
+                    //string savePath = newPath + "\\" + shirtTypeId.Value + currentDateTime + "." + extension;
+                    ////img.Save(newPath + "/" + img.FileName);
+                    //img.Save(savePath);
+                    ////productImg1.SaveAs(newPath + "/" + productImg1.FileName);
+                    ////filePath1 = "/Images/" + "ProductImages/" + productImg1.FileName;
+                    //filePath = "/Images/" + "ProductImages/" + shirtTypeId.Value + currentDateTime + "." + extension;
+                    filePath = "/PatternImages/" + shirtTypeId.Value + currentDateTime + "." + extensionBig;
                 }
             }
 
             EventBackToSchool_Order order = new EventBackToSchool_Order();
 
             order.ShirtTypeId = shirtTypeId.Value;
-            order.ColorId = colorId.Value;
-            order.SizeId = sizeId.Value;
+            order.ColorId = colorId;
+            order.SizeId = sizeId;
             order.LinkImage = filePath;
             order.Quantity = quantity;
             order.CustomerName = customerName;
@@ -150,10 +157,10 @@ namespace BanleWebsite.Controllers
                 throw raise;
             }
 
-            result = new ResultViewModels();
-            result.data = order;
+            //result = new ResultViewModels();
+            //result.data = order;
 
-            return Json(result);
+            return RedirectToAction("Success");
         }
     }
 }

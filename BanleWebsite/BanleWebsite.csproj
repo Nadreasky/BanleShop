@@ -545,6 +545,8 @@
     <Content Include="Views\Agencies\SubmitAgencyCompleted.cshtml" />
     <Content Include="Views\ErrorHandle\Error.cshtml" />
     <Content Include="Views\OrderGroupShirt\Index.cshtml" />
+    <Content Include="Views\OrderGroupShirt\Success.cshtml" />
+    <Content Include="Views\Quanli\EventBackToSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />
