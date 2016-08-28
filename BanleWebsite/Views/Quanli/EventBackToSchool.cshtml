@@ -16,6 +16,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Ngày tạo</th>
                         <th>Tên khách hàng</th>
                         <th>Phone No.</th>
                         <th>Email</th>
@@ -24,6 +25,7 @@
                         <th>Size</th>
                         <th>Số lượng</th>
                         <th>Họa tiết</th>
+                        <th>Địa chỉ</th>
                         <th>Thông tin</th>
                     </tr>
                 </thead>
@@ -34,6 +36,7 @@
                         {
                             <tr>
                                 <td>@stt</td>
+                                <td>@item.CreateDate</td>
                                 <td>@item.CustomerName</td>
                                 <td>@item.Phone</td>
                                 <td>@item.Email</td>
@@ -46,6 +49,7 @@
                                 <td>
                                     <img src="@item.LinkImage" width="80" />
                                 </td>
+                                <td>@item.Address</td>
                                 <td>@item.Description</td>
                             </tr>
                             stt++;

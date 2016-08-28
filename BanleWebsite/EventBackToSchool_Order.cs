@@ -24,5 +24,7 @@ namespace BanleWebsite
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Description { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Address { get; set; }
     }
 }

@@ -23,8 +23,11 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
-        public ActionResult Success()
+        public ActionResult Success(int? id)
         {
+            db = new BanleShopEntities();
+            EventBackToSchool_Order order = db.EventBackToSchool_Order.First(o => o.Id == id.Value);
+            ViewBag.order = order;
             return View();
         }
 
@@ -64,7 +67,7 @@ namespace BanleWebsite.Controllers
         }
 
         public ActionResult Save(int? shirtTypeId, string colorId, string sizeId, HttpPostedFileBase image, int quantity,
-            string customerName, string email, string phone, string description)
+            string customerName, string email, string phone, string description, string address)
         {
             db = new BanleShopEntities();
             _imageServices = new ImageServices();
@@ -131,6 +134,8 @@ namespace BanleWebsite.Controllers
             order.Email = email;
             order.Phone = phone;
             order.Description = description;
+            order.Address = address;
+            order.CreateDate = DateTime.Now;
 
             db.EventBackToSchool_Order.Add(order);
 
@@ -160,7 +165,7 @@ namespace BanleWebsite.Controllers
             //result = new ResultViewModels();
             //result.data = order;
 
-            return RedirectToAction("Success");
+            return RedirectToAction("Success" , new { id = order.Id });
         }
     }
 }
