@@ -209,9 +209,10 @@
 </div>
 
 
-<script>
+<script type="text/javascript">
     function checkProduct(id)
     {
+        var rs = "";
         jQuery.ajax({
             url: "/Quanli/checkProductCategory",
             async: false,
@@ -224,24 +225,21 @@
             },
             success: function (data) {
                 console.log(data);
-                var rs = 1;
                 if (data === "True")
                 {
-                    rs = 1*1
+                    rs += "1";
                     console.log("rs" + "true")
                     console.log(rs)
-                    return rs;
                 }
                 else {
-                    rs = 0*1;
+                    rs += "0";
                     console.log("rs" + "false")
                     console.log(rs)
-                    return rs;
                 }
             },
             type:'get'
-
         })
+        return rs;
     }
 
     function updateOrderStatus(id) {
@@ -428,7 +426,7 @@
                     
                     var isFas = checkProduct(orderDetailList[i].ProductID);
                     console.log(isFas)
-                    if (checkProduct(orderDetailList[i].ProductID) == 1)
+                    if (checkProduct(orderDetailList[i].ProductID) === "1")
                     {
                         proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color) + "-" + getSize(orderDetailList[i].Size);
                     }
@@ -481,14 +479,6 @@
         var btnUpdateStt = document.getElementById("btnUpdateStt");
         btnUpdateStt.parentNode.removeChild(btnUpdateStt);
     });
-
-    function getOrderByStt()
-    {
-        var stt = document.getElementById("sttSelect").value;
-        jQuery.ajax({
-            
-        })
-    }
     
 
 </script>
