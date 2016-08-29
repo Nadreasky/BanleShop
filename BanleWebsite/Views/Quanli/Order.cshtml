@@ -4,7 +4,7 @@
     ViewBag.Title = "Quản lí đơn hàng";
     List<Order> orders = ViewBag.orders;
     int? status = ViewBag.status;
-
+    
     int soThuTu = 0;
 }
 
@@ -209,7 +209,39 @@
 </div>
 
 
-<script>
+<script type="text/javascript">
+    function checkProduct(id)
+    {
+        var rs = "";
+        jQuery.ajax({
+            url: "/Quanli/checkProductCategory",
+            async: false,
+            data: {
+                format: 'json',
+                productId: id
+            },
+            error: function() {
+                alert("Check fail!")
+            },
+            success: function (data) {
+                console.log(data);
+                if (data === "True")
+                {
+                    rs += "1";
+                    console.log("rs" + "true")
+                    console.log(rs)
+                }
+                else {
+                    rs += "0";
+                    console.log("rs" + "false")
+                    console.log(rs)
+                }
+            },
+            type:'get'
+        })
+        return rs;
+    }
+
     function updateOrderStatus(id) {
         var status = jQuery("#orderStatus").val();
         console.log(status);
@@ -361,6 +393,7 @@
     function getOrderDetail(id) {
         jQuery.ajax({
             url: "/Quanli/getOrderDetail",
+            async: false,
             data: {
                 format: 'json',
                 id: id
@@ -390,8 +423,18 @@
                     var price_Cell = row.insertCell(1);
                     var quantity_Cell = row.insertCell(2);
                     var thanhtien_Cell = row.insertCell(3)
+                    
+                    var isFas = checkProduct(orderDetailList[i].ProductID);
+                    console.log(isFas)
+                    if (checkProduct(orderDetailList[i].ProductID) === "1")
+                    {
+                        proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color) + "-" + getSize(orderDetailList[i].Size);
+                    }
+                    else
+                    {
+                        proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color);
+                    }
 
-                    proName_Cell.innerHTML = product.Name + " | " + getcolor(orderDetailList[i].Color) + "-" + getSize(orderDetailList[i].Size);
                     price_Cell.innerHTML = product.Price;
                     quantity_Cell.innerHTML = orderDetailList[i].Quantity;
                     thanhtien_Cell.innerHTML = product.Price * orderDetailList[i].Quantity;
@@ -442,14 +485,7 @@
         var btnUpdateStt = document.getElementById("btnUpdateStt");
         btnUpdateStt.parentNode.removeChild(btnUpdateStt);
     });
-
-    function getOrderByStt()
-    {
-        var stt = document.getElementById("sttSelect").value;
-        jQuery.ajax({
-            
-        })
-    }
+    
 
 </script>
 

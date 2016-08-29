@@ -999,5 +999,20 @@ namespace BanleWebsite.Controllers
 
             return JsonConvert.SerializeObject(resultList);
         }
+        //=======Ham tim category cua san pham======
+        public string checkProductCategory(int productId)
+        {
+            Product p = _productServices.findByID(productId);
+            string isFashionProduct = "False";
+
+            foreach (string categoryName in SLIMCONFIG.FASHION_PRODUCT_CATEGORIES)
+                                {
+                if (p.Category.Name.ToUpper().Contains(categoryName.ToUpper()))
+                {
+                    isFashionProduct = "True";
+                }
+            }
+            return isFashionProduct;
+        }
     }
 }

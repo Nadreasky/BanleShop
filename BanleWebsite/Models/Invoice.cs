@@ -46,6 +46,7 @@ namespace BanleWebsite.Models
                     it.size = item.size;
                     it.price = _productService.findByID(item.productId).Price.Value;
                     it.quantity = item.quantity;
+                    it.productId = item.productId;
 
                     listOrderDetail.Add(it);
                 }
