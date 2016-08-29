@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    EventBackToSchool_Order order = ViewBag.order;
+    BanleShopEntities db = new BanleShopEntities();
+}
+
+<style>
+    body {
+        background-image: url('../../Content/SiteImages/BGR1.jpg');
+        background-size: 100%;
+        background-attachment: fixed;
+    }
+
+    tr {
+        border-top: 1px solid #dbd7d7;
+    }
+
+    th {
+        border-top: 3px solid #8200d0;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .stt {
+        max-width: 20px;
+    }
+
+    td {
+        padding: 10px !important;
+        min-width: 80px;
+        vertical-align: middle;
+    }
+
+    #orderReview {
+        border: 3px solid #8200d0;
+    }
+
+    h2, h3, h4, h5, p {
+        font-family: Tahoma;
+    }
+</style>
+
+
+
+<div class="container">
+    <div style="background-color:#fff; margin:auto; width:85%; padding-bottom:20px;">
+
+        <div id="orderReview" style="display:block; margin:auto; font-family:Tahoma; max-width:75%; overflow-x:auto;">
+            <div id="cusName" style="display:block; width:80%; padding: 10px">
+                <h2><b>@order.CustomerName</b></h2>
+            </div>
+            <div id="cusInfo" style="display:block; float:left; text-align:left; width:55%; padding: 10px">
+
+                <p>Địa chỉ giao hàng: @order.Address</p>
+                <p>Điện thoại: @order.Phone</p>
+                <p>Email: @order.Email</p>
+            </div>
+            <div id="invInfo" style="display:block; float:right; text-align:left; width:30%; padding: 10px">
+                <h5><b>Đơn hàng số: @order.Id</b></h5>
+                <p>Ngày tạo: @order.CreateDate</p>
+                <p>Phương thức thanh toán: Khi nhận hàng</p>
+            </div>
+            <table id="table01" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>LOẠI ÁO</th>
+                        <th>SIZE</th>
+                        <th>SỐ LƯỢNG</th>
+                        <th>HỌA TIẾT</th>
+                        <th>GHI CHÚ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@db.EventBackToSchool_ShirtType.First(s => s.Id == order.ShirtTypeId).Name</td>
+                        <td>@order.SizeId</td>
+                        <td>@order.Quantity</td>
+                        <td><img src="@order.LinkImage" width="80" /></td>
+                        <td>@order.Description</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <p style="text-align:center; line-height: 1.5; color:#6e0ea8; font-size:16px; padding: 18px;">
+                    Đơn hàng của quý khách đã được ghi nhận! <br />
+                    Chúng tôi sẽ gọi đến quý khách để xác nhận đơn hàng một cách sớm nhất. <br />
+                    CẢM ƠN QUÝ KHÁCH ĐÃ MUA HÀNG TẠI YOUR FASHION! <br />
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+

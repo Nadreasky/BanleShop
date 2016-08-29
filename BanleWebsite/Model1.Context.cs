@@ -33,6 +33,10 @@ namespace BanleWebsite
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<ColorProductDetail> ColorProductDetails { get; set; }
+        public virtual DbSet<EventBackToSchool_Color> EventBackToSchool_Color { get; set; }
+        public virtual DbSet<EventBackToSchool_Order> EventBackToSchool_Order { get; set; }
+        public virtual DbSet<EventBackToSchool_ShirtType> EventBackToSchool_ShirtType { get; set; }
+        public virtual DbSet<EventBackToSchool_Size> EventBackToSchool_Size { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

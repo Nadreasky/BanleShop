@@ -1,0 +1,504 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Đặt áo nhóm</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/dataonhom/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/Content/dataonhom/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <link href="~/Content/dataonhom/css/agency.min.css" rel="stylesheet">
+
+    <!--Jquery-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    @*<script src="~/Content/dataonhom/js/jquery-3.1.0.js" type="text/javascript"></script>*@
+    <!--File input -->
+    <link href="~/Content/dataonhom/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="~/Content/dataonhom/js/fileinput.min.js" type="text/javascript"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .circlecolor {
+            border: 1px solid black;
+        }
+
+        .boxcolor {
+            background: white;
+            border: 1px solid black;
+            border-radius: 1px;
+            color: black;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="http://yourfashion.com.vn/">Your Fashion</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#chonao"><strong>1</strong> Chọn áo</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#chonmaukichco"><strong>2</strong> Chọn màu và kích cỡ</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#chonhoatiet"><strong>3</strong> Chọn họa tiết</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#xacnhan"><strong>4</strong> Xác nhận</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header style="background-image:url('/Content/dataonhom/img/aodaidien/Back To School - 3.1.jpg')">
+        <div class="container">
+            <div class="intro-text">
+                <!--                <div class="intro-lead-in">Chào mừng bạn đến với Your Fashion</div>-->
+                <a href="#chonao" class="page-scroll btn btn-xl">Tiến hành đặt hàng</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chon ao Section -->
+    <section id="chonao">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Chọn áo</h2>
+                    <h4 class="section-subheading text-muted">Mời bạn chọn loại áo cần đặt.</h4>
+                </div>
+            </div>
+            <div class="row text-center" id="formchonao">
+                <div class="col-md-3" id="1" onclick="chonAo(this.id)">
+                    <h4 class="service-heading">Áo khoác</h4>
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aokhoac.jpg" class="img-responsive" alt="">
+                </div>
+                <div class="col-md-3" id="2" onclick="chonAo(this.id)">
+                    <h4 class="service-heading">Áo thun cổ trái tim</h4>
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" class="img-responsive" alt="">
+                </div>
+                <div class="col-md-3" id="3" onclick="chonAo(this.id)">
+                    <h4 class="service-heading">Áo thun cổ tròn</h4>
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aothuncotron.jpg" class="img-responsive" alt="">
+                </div>
+                <div class="col-md-3" id="4" onclick="chonAo(this.id)">
+                    <h4 class="service-heading">Áo thun cổ trụ</h4>
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="">
+                </div>
+            </div>
+            <br />
+            <div class="text-center">
+                <a href="#chonmaukichco" class="page-scroll btn btn-primary">Chọn kích thước</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chon mau va kich co Grid Section -->
+    <section id="chonmaukichco" class="bg-light-gray">
+        <div class="container">
+            <!--Choose color-->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Màu áo và kích thước</h2>
+                    <h4 class="section-subheading text-muted">Vui lòng chọn màu áo và kích thước</h4>
+                </div>
+            </div>
+            <!--./choose color-->
+            <!--Choose size-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="product-image">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4" id="khunghienmau" style="height:150px;width:150px; border:solid 0.1px #808080;display:block;margin:auto">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="left" id="pColor">
+                        <label><strong>Màu sắc</strong></label>
+                        <ul id="chooseColor" class="list-inline" style="font-size:25px"></ul>
+                    </div>
+                    <div class="left" id="pSize">
+                        <label><strong>Size</strong></label>
+                        <ul id="chooseSize" class="list-inline"></ul>
+                    </div>
+                    <div class="left" id="pQuantity">
+                        <label><strong>Số lượng</strong></label><br />
+                        <input type="button" class="btn btn-danger" value="-" onclick="minus()" /><input id="quantity" value="1" style="width: 40px;height:32px; text-align:center" /><input type="button" class="btn btn-success" value="+" onclick="bonus()" />
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 text-center"><a href="#chonhoatiet" class="page-scroll btn btn-primary">Chọn họa tiết</a></div>
+                        <div class="col-sm-9"></div>
+
+                    </div>
+                </div>
+            </div>
+            <!--./choose size-->
+        </div>
+    </section>
+
+    @using (Html.BeginForm("Save", "OrderGroupShirt", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <!-- Chon hoa tiet Section -->
+        <section id="chonhoatiet" class="bg-light-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Chọn hình ảnh bạn muốn sử dụng</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+
+                            <!--Upload image-->
+                            <input id="file-0a" name="image" class="file" type="file" multiple data-min-file-count="1">
+                            <br>
+                            <div class="text-center">
+                                <button type="reset" class="btn btn-default">Reset</button>
+                                <a href="javascript:void(0)" id="xacnhanButton" class="page-scroll btn btn-primary" onclick="xacnhan()">Xác nhận</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <p class="large text-muted">Bạn có thể mô tả chi tiết về họa tiết ở mục "Xác nhận" bên dưới</p>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+            </div>
+        </section>
+
+    <!-- Xac nhan Section -->
+        <section id="xacnhan">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Xác nhận</h2>
+                        <h3 id="xacnhandonhang" class="section-subheading text-muted"></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        @*<form>*@
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="customerName" placeholder="Tên *" id="name" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập tên!')">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Email *" id="email" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập email!')">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="phone" placeholder="Điện thoại *" id="phone" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại!')">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="address" placeholder="Địa chỉ giao hàng *" id="address" required oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ giao hàng!')">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control" name="description" style="height:82px" placeholder="Bạn có thể miêu tả chi tiết về màu sắc áo, vị trí họa tiết..." id="message"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <input type="hidden" name="shirtTypeId" id="loaiao" value="" />
+                            <input type="hidden" name="colorId" id="mausac" value="" />
+                            <input type="hidden" name="sizeId" id="kichthuoc" value="" />
+                            <input type="hidden" name="quantity" id="soluong" value="" />
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-xl">Đặt hàng</button>
+                            </div>
+                        </div>
+                        @*</form>*@
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Your Fashion</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="https://www.facebook.com/yourfashionsp/"><i class="fa fa-facebook"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li>
+                            <a href="/Home/About">Về chúng tôi</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--Script-->
+    <script type="text/javascript">
+        var tenAoHienTai = null;
+        var idAoHienTai = null;
+        var mauAoHienTai = null;
+        var sizeAoHienTai = null;
+        var soLuongAoHienTai = null;
+        var section = null;
+        var currentLocation = location.href;
+
+        //Function chon ao
+        function chonAo(clickedId) {
+            idAoHienTai = clickedId;
+            if (clickedId == 1) {
+                tenAoHienTai = "Áo Khoác";
+            } else if (clickedId == 2) {
+                tenAoHienTai = "Áo thun cổ trái tim";
+            } else if (clickedId == 3) {
+                tenAoHienTai = "Áo thun cổ tròn";
+            } else {
+                tenAoHienTai = "Áo thun cổ trụ";
+            }
+            mauAoHienTai = null;
+            sizeAoHienTai = null;
+            soLuongAoHienTai = 1;
+            jQuery("#quantity").val(1);
+            jQuery("#khunghienmau").css("background-color", "");
+            jQuery("#formchonao div").css({
+                "border-style": "",
+                "border-color": "",
+            });
+            jQuery("#" + clickedId).css({
+                "border-style": "solid",
+                "border-color": "orange",
+            });
+            loadMauAo(clickedId);
+            loadSizeAo(clickedId);
+        };
+        //Function load mau ao
+        function loadMauAo(id) {
+            jQuery("#chooseColor").empty();
+            $.ajax({
+                url: "/OrderGroupShirt/GetListColor",
+                type: "get",
+                data: {
+                    format: 'json',
+                    id: id
+                },
+                success: function (result) {
+                    var listColorCode = JSON.parse(result);
+                    for (i = 0; i < listColorCode.length; i++) {
+                        jQuery("#chooseColor").append("<li><a href='javascript:void(0)'><i class='fa fa-circle' id='" + i + "' style='color:" + listColorCode[i] + "' onclick='hieThiMauAo(" + i + ")'></i></a></li>");
+                    }
+                },
+
+            });
+        }
+        //Function load size ao
+        function loadSizeAo(id) {
+            jQuery("#chooseSize").empty();
+            $.ajax({
+                url: "/OrderGroupShirt/GetListSize",
+                type: "get",
+                data: {
+                    format: 'json',
+                    id: id
+                },
+                success: function (result) {
+                    var listSizeName = JSON.parse(result);
+                    for (i = 0; i < listSizeName.length; i++) {
+                        jQuery("#chooseSize").append("<li><a href='javascript:void(0)' id='" + listSizeName[i] + "' class='btn btn-sm boxcolor' onclick='chonSizeAo(this.id)' >" + listSizeName[i] + "</a></li>");
+                    }
+                }
+            });
+        }
+        //Function hien thi mau ao
+        function hieThiMauAo(colorId) {
+            $.ajax({
+                url: "/OrderGroupShirt/GetListColor",
+                type: "get",
+                data: {
+                    format: 'json',
+                    id: idAoHienTai
+                },
+                success: function (result) {
+                    var listColorCode = JSON.parse(result);
+                    mauAoHienTai = listColorCode[colorId];
+                    jQuery("#khunghienmau").css("background-color", listColorCode[colorId]);
+                },
+
+            });
+
+        };
+        //Function chon size ao
+        function chonSizeAo(clickedID) {
+            sizeAoHienTai = clickedID;
+            jQuery("#chooseSize li a").css({
+                "border": "",
+                "color": "",
+            });
+            jQuery("#" + clickedID).css({
+                "border": "1px solid orange",
+                "color": "orange",
+            });
+        }
+        //Function bonus
+        function bonus() {
+            var quantity = parseInt(jQuery("#quantity").val());
+            jQuery("#quantity").val(quantity + 1);
+            soLuongAoHienTai = jQuery("#quantity").val();
+        }
+        //Function minus
+        function minus() {
+            var quantity = parseInt(jQuery("#quantity").val());
+            if (quantity > 1) {
+                jQuery("#quantity").val(quantity - 1);
+            } else {
+                alert("Số lượng không được nhỏ hơn 1");
+            }
+            soLuongAoHienTai = jQuery("#quantity").val();
+        }
+        //Function xac nhan
+        function xacnhan() {
+            if (idAoHienTai == null) {
+                modalAlert("Bạn chưa chọn áo!", "Vui lòng chọn một loại áo bạn muốn đặt hàng !", "#chonao");
+            } else if (mauAoHienTai == null) {
+                modalAlert("Bạn chưa chọn màu!", "Vui lòng chọn một màu áo bạn muốn đặt hàng !", "#chonmaukichco");
+            } else if (sizeAoHienTai == null) {
+                modalAlert("Bạn chưa chọn size!", "Vui lòng chọn một size áo bạn muốn đặt hàng !", "#chonmaukichco");
+            } else {
+                jQuery("#xacnhanButton").attr("href", "#xacnhan");
+            }
+            jQuery("#xacnhandonhang").text("Bạn đã đặt " + tenAoHienTai + " với số lượng " + soLuongAoHienTai + " cái và màu sắc là: ");
+            jQuery("#xacnhandonhang").append("<input type='button' style='background-color:" + mauAoHienTai + ";height: 15px;width:10px;border: 0.1px solid'/>");
+            jQuery("#loaiao").val(idAoHienTai);
+            jQuery("#mausac").val(mauAoHienTai);
+            jQuery("#soluong").val(soLuongAoHienTai);
+            jQuery("#kichthuoc").val(sizeAoHienTai);
+        }
+        //Function show alert modal
+        function modalAlert(header, content, part) {
+            section = null;
+            jQuery("#modalHeader").empty();
+            jQuery("#modalContent").empty();
+            jQuery("#modalHeader").text(header);
+            jQuery("#modalContent").text(content);
+            jQuery("#alertModal").modal("show");
+            section = part;
+        }
+        //Function go back
+        function goBack() {
+            location.href = currentLocation + section;
+        }
+
+
+    </script>
+
+
+    <!--Modal-->
+    <div class="modal fade" id="alertModal" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="modalHeader" class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalContent"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="modalOkButton" type="button" class="btn btn-default" data-dismiss="modal" onclick="goBack()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/Content/dataonhom/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/dataonhom/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="~/Content/dataonhom/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/dataonhom/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="~/Content/dataonhom/js/agency.min.js"></script>
+
+</body>
+</html>

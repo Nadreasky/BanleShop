@@ -218,6 +218,18 @@
     <Compile Include="Controllers\SanphamController.cs" />
     <Compile Include="Controllers\SanphamNoibatController.cs" />
     <Compile Include="CustomFilters\AuthLogAttribute.cs" />
+    <Compile Include="EventBackToSchool_Color.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventBackToSchool_Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventBackToSchool_ShirtType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventBackToSchool_Size.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -616,10 +628,12 @@
     <Content Include="Views\HelpCenter\QTTHMobile.cshtml" />
     <Content Include="Views\HelpCenter\QTGHMobile.cshtml" />
     <Content Include="Views\Order\Search.cshtml" />
-    <Content Include="Views\OrderGroupShirt\OrderGroupShirt.cshtml" />
     <Content Include="Views\HelpCenter\IframeIndex.cshtml" />
     <Content Include="Views\Order\Search2.cshtml" />
     <Content Include="Views\Danhmuc\Index.cshtml" />
+    <Content Include="Views\OrderGroupShirt\Index.cshtml" />
+    <Content Include="Views\OrderGroupShirt\Success.cshtml" />
+    <Content Include="Views\Quanli\EventBackToSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />
