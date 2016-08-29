@@ -51,6 +51,13 @@
             border-radius: 1px;
             color: black;
         }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            margin: 0;
+        }
     </style>
 
 </head>
@@ -75,16 +82,16 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#chonao">Chọn áo</a>
+                        <a class="page-scroll" href="#chonao"><strong>1</strong> Chọn áo</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#chonmaukichco">Chọn màu và kích cỡ</a>
+                        <a class="page-scroll" href="#chonmaukichco"><strong>2</strong> Chọn màu và kích cỡ</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#chonhoatiet">Chọn họa tiết</a>
+                        <a class="page-scroll" href="#chonhoatiet"><strong>3</strong> Chọn họa tiết</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#xacnhan">Xác nhận</a>
+                        <a class="page-scroll" href="#xacnhan"><strong>4</strong> Xác nhận</a>
                     </li>
                 </ul>
             </div>
@@ -115,19 +122,19 @@
             <div class="row text-center" id="formchonao">
                 <div class="col-md-3" id="1" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo khoác</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aokhoac.jpg" class="img-responsive" alt="">
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aokhoac.jpg" class="img-responsive" alt="">
                 </div>
                 <div class="col-md-3" id="2" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo thun cổ trái tim</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" class="img-responsive" alt="">
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" class="img-responsive" alt="">
                 </div>
                 <div class="col-md-3" id="3" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo thun cổ tròn</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotron.jpg" class="img-responsive" alt="">
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aothuncotron.jpg" class="img-responsive" alt="">
                 </div>
                 <div class="col-md-3" id="4" onclick="chonAo(this.id)">
                     <h4 class="service-heading">Áo thun cổ trụ</h4>
-                    <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="">
+                    <img style="display:block;margin:auto" src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="">
                 </div>
             </div>
             <br />
@@ -150,31 +157,31 @@
             <!--./choose color-->
             <!--Choose size-->
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-5">
-                    <div>
-                        <div class="product-image text-center">
-                            <div id="khunghienmau" style="height:150px;width:150px; margin-right: 50px;" class="pull-right">
-                            </div>
+                <div class="col-sm-6">
+                    <div class="product-image">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4" id="khunghienmau" style="height:150px;width:150px; border:solid 0.1px #808080;display:block;margin:auto">
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div id="pColor">
-                        <label class="row"><strong>Màu sắc</strong></label>
+                <div class="col-sm-6">
+                    <div class="left" id="pColor">
+                        <label><strong>Màu sắc</strong></label>
                         <ul id="chooseColor" class="list-inline" style="font-size:25px"></ul>
                     </div>
-                    <div id="pSize">
-                        <label class="row"><strong>Size</strong></label>
+                    <div class="left" id="pSize">
+                        <label><strong>Size</strong></label>
                         <ul id="chooseSize" class="list-inline"></ul>
                     </div>
-                    <div id="pQuantity">
-                        <label class="row"><strong>Số lượng</strong></label><br />
+                    <div class="left" id="pQuantity">
+                        <label><strong>Số lượng</strong></label><br />
                         <input type="button" class="btn btn-danger" value="-" onclick="minus()" /><input id="quantity" value="1" style="width: 40px;height:32px; text-align:center" /><input type="button" class="btn btn-success" value="+" onclick="bonus()" />
                     </div>
                     <br />
-                    <div class="row bottom-left">
-                        <a href="#chonhoatiet" class="page-scroll btn btn-primary">Chọn họa tiết</a>
+                    <div class="row">
+                        <div class="col-sm-3 text-center"><a href="#chonhoatiet" class="page-scroll btn btn-primary">Chọn họa tiết</a></div>
+                        <div class="col-sm-9"></div>
+
                     </div>
                 </div>
             </div>
@@ -183,57 +190,57 @@
     </section>
 
     @using (Html.BeginForm("Save", "OrderGroupShirt", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    { 
+    {
     <!-- Chon hoa tiet Section -->
-    <section id="chonhoatiet" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Chọn hình ảnh bạn muốn sử dụng</h2>
+        <section id="chonhoatiet" class="bg-light-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Chọn hình ảnh bạn muốn sử dụng</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+
                             <!--Upload image-->
                             <input id="file-0a" name="image" class="file" type="file" multiple data-min-file-count="1">
                             <br>
                             <div class="text-center">
                                 <button type="reset" class="btn btn-default">Reset</button>
-                                <a href="javascript:void(0)" class=" page-scroll btn btn-primary" onclick="xacnhan()">Xác nhận</a>
+                                <a href="javascript:void(0)" id="xacnhanButton" class="page-scroll btn btn-primary" onclick="xacnhan()">Xác nhận</a>
                             </div>
-                        
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Bạn có thể đính kèm 1 ảnh hoặc mô tả và đính kèm link trong phần mô tả bên dưới</p>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <p class="large text-muted">Bạn có thể mô tả chi tiết về họa tiết ở mục "Xác nhận" bên dưới</p>
+                    </div>
                 </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
-        </div>
-    </section>
+            </div>
+        </section>
 
     <!-- Xac nhan Section -->
-    <section id="xacnhan">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Xác nhận</h2>
-                    <h3 id="xacnhandonhang" class="section-subheading text-muted"></h3>
+        <section id="xacnhan">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Xác nhận</h2>
+                        <h3 id="xacnhandonhang" class="section-subheading text-muted"></h3>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    @*<form>*@
+                <div class="row">
+                    <div class="col-lg-12">
+                        @*<form>*@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -256,7 +263,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control" name="description" placeholder="Chú thích" id="message"></textarea>
+                                    <textarea class="form-control" name="description" style="height:82px" placeholder="Bạn có thể miêu tả chi tiết về màu sắc áo, vị trí họa tiết..." id="message"></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -270,11 +277,11 @@
                                 <button type="submit" class="btn btn-xl">Đặt hàng</button>
                             </div>
                         </div>
-                    @*</form>*@
+                        @*</form>*@
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     }
 
     <footer>
@@ -293,7 +300,7 @@
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
                         <li>
-                            <a href="#">Về chúng tôi</a>
+                            <a href="/Home/About">Về chúng tôi</a>
                         </li>
                     </ul>
                 </div>
@@ -308,6 +315,8 @@
         var mauAoHienTai = null;
         var sizeAoHienTai = null;
         var soLuongAoHienTai = null;
+        var section = null;
+        var currentLocation = location.href;
 
         //Function chon ao
         function chonAo(clickedId) {
@@ -423,28 +432,57 @@
         //Function xac nhan
         function xacnhan() {
             if (idAoHienTai == null) {
-                alert("Bạn chưa chọn áo! ");
-                location.href = location.href + "#chonao";
+                modalAlert("Bạn chưa chọn áo!", "Vui lòng chọn một loại áo bạn muốn đặt hàng !", "#chonao");
             } else if (mauAoHienTai == null) {
-                alert("Bạn chưa chọn màu! ");
-                location.href = location.href + "#chonmaukichco";
+                modalAlert("Bạn chưa chọn màu!", "Vui lòng chọn một màu áo bạn muốn đặt hàng !", "#chonmaukichco");
             } else if (sizeAoHienTai == null) {
-                alert("Bạn chưa chọn size! ");
-                location.href = location.href + "#chonmaukichco";
+                modalAlert("Bạn chưa chọn size!", "Vui lòng chọn một size áo bạn muốn đặt hàng !", "#chonmaukichco");
             } else {
-                location.href = location.href + "#xacnhan";
+                jQuery("#xacnhanButton").attr("href", "#xacnhan");
             }
             jQuery("#xacnhandonhang").text("Bạn đã đặt " + tenAoHienTai + " với số lượng " + soLuongAoHienTai + " cái và màu sắc là: ");
             jQuery("#xacnhandonhang").append("<input type='button' style='background-color:" + mauAoHienTai + ";height: 15px;width:10px;border: 0.1px solid'/>");
             jQuery("#loaiao").val(idAoHienTai);
-            console.log(idAoHienTai)
             jQuery("#mausac").val(mauAoHienTai);
             jQuery("#soluong").val(soLuongAoHienTai);
             jQuery("#kichthuoc").val(sizeAoHienTai);
         }
+        //Function show alert modal
+        function modalAlert(header, content, part) {
+            section = null;
+            jQuery("#modalHeader").empty();
+            jQuery("#modalContent").empty();
+            jQuery("#modalHeader").text(header);
+            jQuery("#modalContent").text(content);
+            jQuery("#alertModal").modal("show");
+            section = part;
+        }
+        //Function go back
+        function goBack() {
+            location.href = currentLocation + section;
+        }
 
 
     </script>
+
+
+    <!--Modal-->
+    <div class="modal fade" id="alertModal" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="modalHeader" class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalContent"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="modalOkButton" type="button" class="btn btn-default" data-dismiss="modal" onclick="goBack()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="~/Content/dataonhom/vendor/jquery/jquery.min.js"></script>
