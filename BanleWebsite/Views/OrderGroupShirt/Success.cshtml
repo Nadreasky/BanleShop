@@ -77,7 +77,19 @@
                         <td>@db.EventBackToSchool_ShirtType.First(s => s.Id == order.ShirtTypeId).Name</td>
                         <td>@order.SizeId</td>
                         <td>@order.Quantity</td>
-                        <td><img src="@order.LinkImage" width="80" /></td>
+                        <td>
+                            @{
+                                if (order.LinkImage != "" && order.LinkImage != null)
+                                {
+                                    <img src="@order.LinkImage" width="80" />
+                                }
+                                if (order.Pattern != null)
+                                {
+                                    <img src="@db.EventBackToSchool_Pattern.First(p => p.ID == order.Pattern).Link" width="80" />
+                                }
+                            }
+                            
+                        </td>
                         <td>@order.Description</td>
                     </tr>
                 </tbody>

@@ -8,6 +8,10 @@
 
 }
 
+@section head{
+    <meta name="robots" content="noindex">
+}
+
 <style>
     body #myModal {
     /* new custom width */
@@ -20,7 +24,7 @@
 <div class="container">
     <section id="content">
         <div class="span12">
-            <table class="table">
+            <table class="table table-striped" id="tblOrder">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -28,13 +32,13 @@
                         <th>Tên khách hàng</th>
                         <th>Phone No.</th>
                         <th>Email</th>
-                        <th>Kiểu áo</th>
-                        <th>Màu</th>
-                        <th>Size</th>
-                        <th>Số lượng</th>
-                        <th>Họa tiết</th>
+                        @*<th>Kiểu áo</th>*@
+                        @*<th>Màu</th>*@
+                        @*<th>Size</th>*@
+                        @*<th>Số lượng</th>*@
+                        @*<th>Họa tiết</th>*@
                         <th>Địa chỉ</th>
-                        <th>Thông tin</th>
+                        @*<th>Thông tin</th>*@
                         <th>Trạng thái</th>
                         <th>Chi tiết</th>
                     </tr>
@@ -50,17 +54,17 @@
                                 <td>@item.CustomerName</td>
                                 <td>@item.Phone</td>
                                 <td>@item.Email</td>
-                                <td>@db.EventBackToSchool_ShirtType.First(s => s.Id == item.ShirtTypeId).Name</td>
-                                <td>
+                                @*<td>@db.EventBackToSchool_ShirtType.First(s => s.Id == item.ShirtTypeId).Name</td>*@
+                                @*<td>
                                     <div style="height:10px; width:30px;border:1px solid black;background-color:@item.ColorId;"></div>
-                                </td>
-                                <td>@item.SizeId</td>
-                                <td>@item.Quantity</td>
-                                <td>
+                                </td>*@
+                                @*<td>@item.SizeId</td>*@
+                                @*<td>@item.Quantity</td>*@
+                                @*<td>
                                     <img src="@item.LinkImage" width="80" />
-                                </td>
+                                </td>*@
                                 <td>@item.Address</td>
-                                <td>@item.Description</td>
+                                @*<td>@item.Description</td>*@
                                 <td>
                                     @{
                                         if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
@@ -81,7 +85,7 @@
                                         }
                                     }
                                 </td>
-                                @*<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="getOrderDetails(@item.Id)">Open Modal</button></td>*@
+                                <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="getOrderDetails(@item.Id)" style="font-family:VNOswald;">Chi tiết</button></td>
                             </tr>
                             stt++;
                         }
@@ -148,18 +152,38 @@
                     </select>
                 </div>
                 <div class="clearfix"></div>
-                <div style="margin-top:20px; text-align:center;">
-                    <strong>Họa tiết</strong><br />
-                    <img src="~/Content/Slider/Back-to-school.jpg" width="250" />
+                <div id="pattern" style="margin-top:20px; text-align:center;">
+                    
+                </div>
+                <div id="hoatiet" style="margin-top:20px; text-align:center;">
                 </div>
 
                 <div style="margin-top:20px; text-align:center;">
                     <strong>Ghi chú</strong><br />
-                    <textarea rows="4" style="width:550px;" id="des">eigiergibergb rbgsbgg gbg b g sbg df sdf gdbgf g sdg sg dsg sd gsdf gsdf g</textarea>
+                    <textarea rows="4" style="width:550px;" id="des"></textarea>
                 </div>
             </div>
+            <div class="modal-footer" id="modal_footer">
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--success modal-->
+<div id="successModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Cập nhật thành công</p>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="Update()">Update</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -169,7 +193,48 @@
 
 
 
+
 <script type="text/javascript">
+    function getPattern(id)
+    {
+        var pattern = "";
+        jQuery.ajax({
+            url: "/Quanli/getPattern",
+            async: false,
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function () {
+                alert("Get order detail fail!")
+            },
+            success: function (data) {
+                pattern += data;
+            },
+            type: 'GET'
+        })
+        return pattern;
+    }
+    function getShirtType(id)
+    {
+        var shirtType = "";
+        jQuery.ajax({
+            url: "/Quanli/getShirtType",
+            async: false,
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function () {
+                alert("Get order detail fail!")
+            },
+            success: function (data) {
+                shirtType += data;
+            },
+            type: 'GET'
+        })
+        return shirtType;
+    }
     function getOrderDetails(id)
     {
         jQuery.ajax({
@@ -185,18 +250,98 @@
                 var order = JSON.parse(data);
                 
                 //clear all fields
-                document.getElementById("cusName").innerHTML = "";
-                document.getElementById("address").innerHTML = "";
-                document.getElementById("phone").innerHTML = "";
-                document.getElementById("email").innerHTML = "";
-                document.getElementById("orderID").innerHTML = "";
-                document.getElementById("createDate").innerHTML = "";
-                document.getElementById("shirtType").innerHTML = "";
-                document.getElementById("quantity").innerHTML = "";
-                document.getElementById("size").innerHTML = "";
-                document.getElementById("des").innerHTML = "";
+                document.getElementById("cusName").innerText = "";
+                document.getElementById("address").innerText = "";
+                document.getElementById("phone").innerText = "";
+                document.getElementById("email").innerText = "";
+                document.getElementById("orderID").innerText = "";
+                document.getElementById("createDate").innerText = "";
+                document.getElementById("shirtType").innerText = "";
+                document.getElementById("quantity").innerText = "";
+                document.getElementById("size").innerText = "";
+                document.getElementById("des").innerText = "";
+                jQuery("#pattern").empty();
+                jQuery("#hoatiet").empty();
+                jQuery("#modal_footer").empty();
+
+                //add content
+                document.getElementById("cusName").innerText = order.CustomerName;
+                document.getElementById("address").innerText = "Địa chỉ giao hàng: " + order.Address;
+                document.getElementById("phone").innerText = "Điện thoại: " + order.Phone;
+                document.getElementById("email").innerText = "Email: " + order.Email;
+                document.getElementById("orderID").innerText = "Đơn hàng số: " + order.Id;
+                jQuery("#sttSelect").val(order.Status);
+
+                
+                var createDate = order.CreateDate;
+                var newCreateDate = createDate.replace("T", " ");
+                document.getElementById("createDate").innerHTML = "Ngày tạo: " + newCreateDate;
+
+                
+                //console.log(order.ShirtTypeId);
+                //console.log(getShirtType(order.ShirtTypeId));
+                document.getElementById("shirtType").innerHTML = getShirtType(order.ShirtTypeId);
+                document.getElementById("quantity").innerHTML = order.Quantity;
+                document.getElementById("size").innerHTML = order.SizeId;
+                document.getElementById("des").innerHTML = order.Description;
+
+                var color = document.getElementById("color");
+                color.style.backgroundColor = order.ColorId;
+                
+                if(order.LinkImage != null && order.LinkImage != "")
+                {
+                    jQuery("#hoatiet").append("<strong>Họa tiết của khách hàng</strong><br />");
+                    jQuery("#hoatiet").append("<img src='" + order.LinkImage + "' width='250' />")
+                }
+                else
+                {
+                    jQuery("#hoatiet").append("<strong>Họa tiết của khách hàng</strong><br />");
+                    jQuery("#hoatiet").append("<p>Không có</p>")
+                }
+
+                if (order.Pattern != null) {
+                    var link = getPattern(order.Pattern);
+                    //console.log(link);
+                    jQuery("#pattern").append("<strong>Họa tiết có sẵn</strong><br />")
+                    jQuery("#pattern").append("<img src='" + link + "' width='250' />")
+                }
+                else {
+                    jQuery("#pattern").append("<strong>Họa tiết có sẵn</strong><br />")
+                    jQuery("#pattern").append("<p>Không có</p>")
+                }
+
+                //btn update
+                jQuery("#modal_footer").append("<button class='btn btn-success' id='btnUpdateStt' onclick='updateOrderBTS(" + order.Id + ")'>Update</button>");
+                jQuery("#modal_footer").append("<button id='btnModal' type='button' class='btn btn-default' data-dismiss='modal'>Close</button>")
             },
             type: 'GET'
+        })
+    }
+
+    function updateOrderBTS(id)
+    {
+        var stt = jQuery("#sttSelect").val();
+        var des = jQuery("#des").val();
+        jQuery.ajax({
+            url: "/Quanli/updateOrderBTS",
+            data: {
+                format: 'json',
+                id: id,
+                status: stt,
+                des: des
+            },
+            error: function () {
+                alert("Get order detail fail!")
+            },
+            success: function (data) {
+                if(data === "success")
+                {
+                    jQuery("#successModal").modal("toggle");
+                    jQuery("#tblOrder").load("/Quanli/EventBackToSchool #tblOrder");
+                    jQuery("#myModal").modal("toggle");
+                }
+            },
+            type: 'POST'
         })
     }
 </script>

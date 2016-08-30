@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    List<EventBackToSchool_Pattern> patterns = ViewBag.patterns;
 }
 
 <!DOCTYPE html>
@@ -200,46 +201,17 @@
                     </div>
                 </div>
                 <div id="hoatietmau" class="row">
-                    <div id="hoatiet1" class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px" onclick="chonHoaTiet(this.id)">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div id="hoatiet2" class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px" onclick="chonHoaTiet(this.id)">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
-                        <a href="javascript:void(0)" class="portfolio-link">
-                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
-                        </a>
-                    </div>
+                    @{
+                        foreach (var item in patterns)
+                        {
+                            <div id="hoatiet_@item.ID" class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px" onclick="chonHoaTiet(@item.ID)">
+                                <a href="javascript:void(0)" class="portfolio-link">
+                                    <img src="@item.Link" class="img-responsive" alt="" style="display:block;margin:auto">
+                                </a>
+                            </div>
+                        }
+                    }
+
                 </div>
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 text-center" style="margin-top:20px">
@@ -532,7 +504,7 @@
             jQuery("#hoatietmau div").css({
                 "border": "",
             });
-            jQuery("#" + clickedID).css({
+            jQuery("#hoatiet_" + clickedID).css({
                 "border": "0.5px solid orange",
             });
         }

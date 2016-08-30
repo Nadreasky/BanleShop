@@ -74,6 +74,64 @@ namespace BanleWebsite.Controllers
             return JsonConvert.SerializeObject(od);
         }
 
+        public string getShirtType(int id)
+        {
+            BanleShopEntities db = new BanleShopEntities();
+
+            string type = db.EventBackToSchool_ShirtType.First(s => s.Id == id).Name;
+            return type;
+        }
+
+        public string getPattern(int id)
+        {
+            BanleShopEntities db = new BanleShopEntities();
+
+            string pt = db.EventBackToSchool_Pattern.First(s => s.ID == id).Link;
+            return pt;
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public string updateOrderBTS(string id, string status, string des)
+        {
+            int _id = -1;
+            int _status = -1;
+
+            if (id == null || id.Equals(""))
+            {
+                _id = -1;
+            }
+            else if (int.TryParse(id, out _id) == false)
+            {
+                ViewBag.Error += "Error: Không thể parse ID <br/>";
+            }
+            if (status == null || status.Equals(""))
+            {
+                _status = -1;
+            }
+            else if (int.TryParse(status, out _status) == false)
+            {
+                ViewBag.Error += "Error: Không thể parse status <br/>";
+            }
+
+            BanleShopEntities db = new BanleShopEntities();
+            EventBackToSchool_Order order = db.EventBackToSchool_Order.First(o => o.Id == _id);
+            if(order == null)
+            {
+                return "fail";
+            }
+            else
+            {
+                order.Status = _status;
+                order.Description = des;
+
+                db.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return "success";
+            }
+        }
+
         //===========END EVENT===================
 
         // Kun 4.8.16

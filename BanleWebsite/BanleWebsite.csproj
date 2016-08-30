@@ -449,8 +449,8 @@
     <Content Include="Content\SiteImages\logo.png" />
     <Content Include="Content\SiteImages\logo_vertical.jpg" />
     <Content Include="Content\Slider\Back-to-school.jpg" />
-    <Content Include="Content\Slider\yison.jpg" />
     <Content Include="Content\Slider\Banner_thoi_trang.jpg" />
+    <Content Include="Content\Slider\yison.jpg" />
     <Content Include="Content\Slider\Banner2.jpg" />
     <Content Include="Content\Slider\Banner_1001.jpg" />
     <Content Include="Content\TSS\TTS20.jpg" />

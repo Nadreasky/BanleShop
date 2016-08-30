@@ -20,6 +20,9 @@ namespace BanleWebsite.Controllers
 
         public ActionResult Index()
         {
+            db = new BanleShopEntities();
+            List<EventBackToSchool_Pattern> patterns = db.EventBackToSchool_Pattern.ToList();
+            ViewBag.patterns = patterns;
             return View();
         }
 
