@@ -65,7 +65,14 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public Object getOrderDetailBTS(int id)
+        {
+            BanleShopEntities db = new BanleShopEntities();
 
+            EventBackToSchool_Order od = db.EventBackToSchool_Order.First(o => o.Id == id);
+
+            return JsonConvert.SerializeObject(od);
+        }
 
         //===========END EVENT===================
 

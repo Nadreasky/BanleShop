@@ -8,6 +8,14 @@
 
 }
 
+<style>
+    body #myModal {
+    /* new custom width */
+    width: 750px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -375px;
+}
+</style>
 
 <div class="container">
     <section id="content">
@@ -27,6 +35,8 @@
                         <th>Họa tiết</th>
                         <th>Địa chỉ</th>
                         <th>Thông tin</th>
+                        <th>Trạng thái</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +61,27 @@
                                 </td>
                                 <td>@item.Address</td>
                                 <td>@item.Description</td>
+                                <td>
+                                    @{
+                                        if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                        {
+                                            <p>Mới tạo</p>
+                                        }
+                                        if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                        {
+                                            <p>Đã xác nhận</p>
+                                        }
+                                        if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                        {
+                                            <p>Đã thanh toán</p>
+                                        }
+                                        if (item.Status == SLIMCONFIG.ORDER_STATUS_CANCEL)
+                                        {
+                                            <p>Đã hủy đơn hàng</p>
+                                        }
+                                    }
+                                </td>
+                                @*<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="getOrderDetails(@item.Id)">Open Modal</button></td>*@
                             </tr>
                             stt++;
                         }
@@ -60,4 +91,112 @@
             </table>
         </div>
     </section>
+
+    <!-- Trigger the modal with a button -->
+    @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>*@
+
+    
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-family:VNOswald;">Thông tin đơn hàng</h4>
+            </div>
+            <div class="modal-body">
+                <h3 id="cusName">Huỳnh Thanh Quy</h3>
+                <div id="cusInfo" style="display:block; float:left;">
+                    <p id="address">Địa chỉ giao hàng: 41 Lê Văn Huân, P.13, Tân Bình, HCM</p>
+                    <p id="phone">Điện thoại: 01633 065 022</p>
+                    <p id="email">Email: nadreak@gmail.com</p>
+                </div>
+                <div id="ivInfo" style="display:block; float:right;">
+                    <h5 style="font-family:Lato;"><b id="orderID">Đơn hàng số: 12</b></h5>
+                    <p id="createDate">Ngày tạo: 30/08/2016 12:00</p>
+                    @*<p>Phương thức thanh toán: Khi nhận hàng</p>*@
+                </div>
+                <div class="clearfix"></div>
+                <h4 style="font-family:VNOswald;">Chi tiết đơn hàng</h4>
+                <div class="form-group" style="display:block;float:left; margin-right:20px;">
+                    <strong>Kiểu áo</strong>
+                    <p style="font-size:medium;" id="shirtType">Áo thun cổ trụ</p>
+                </div>
+                <div class="form-group" style="display:block;float:left; margin-right:20px;">
+                    <strong>Màu</strong>
+                    <div id="color" style="height:20px; width:60px;background-color:red;"></div>
+                </div>
+                <div class="form-group" style="display:block;float:left; margin-right:20px;">
+                    <strong>Số lượng</strong>
+                    <p style="font-size:medium;" id="quantity">10</p>
+                </div>
+                <div class="form-group" style="display:block;float:left; margin-right:20px;">
+                    <strong>Size</strong>
+                    <p style="font-size:medium;" id="size">M</p>
+                </div>
+                <div class="form-group" style="display:block;float:left; margin-right:20px; margin-left:10px;">
+                    <strong>Tình trạng</strong>
+                    <select id="sttSelect" name="status">
+                        <option value="@SLIMCONFIG.ORDER_STATUS_UNCHECK">Mới tạo</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_CHECKED">Đã xác nhận</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_PAID">Đã thanh toán</option>
+                        <option value="@SLIMCONFIG.ORDER_STATUS_CANCEL">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="clearfix"></div>
+                <div style="margin-top:20px; text-align:center;">
+                    <strong>Họa tiết</strong><br />
+                    <img src="~/Content/Slider/Back-to-school.jpg" width="250" />
+                </div>
+
+                <div style="margin-top:20px; text-align:center;">
+                    <strong>Ghi chú</strong><br />
+                    <textarea rows="4" style="width:550px;" id="des">eigiergibergb rbgsbgg gbg b g sbg df sdf gdbgf g sdg sg dsg sd gsdf gsdf g</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="Update()">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function getOrderDetails(id)
+    {
+        jQuery.ajax({
+            url: "/Quanli/getOrderDetailBTS",
+            data: {
+                format: 'json',
+                id: id
+            },
+            error: function () {
+                alert("Get order detail fail!")
+            },
+            success: function (data) {
+                var order = JSON.parse(data);
+                
+                //clear all fields
+                document.getElementById("cusName").innerHTML = "";
+                document.getElementById("address").innerHTML = "";
+                document.getElementById("phone").innerHTML = "";
+                document.getElementById("email").innerHTML = "";
+                document.getElementById("orderID").innerHTML = "";
+                document.getElementById("createDate").innerHTML = "";
+                document.getElementById("shirtType").innerHTML = "";
+                document.getElementById("quantity").innerHTML = "";
+                document.getElementById("size").innerHTML = "";
+                document.getElementById("des").innerHTML = "";
+            },
+            type: 'GET'
+        })
+    }
+</script>
