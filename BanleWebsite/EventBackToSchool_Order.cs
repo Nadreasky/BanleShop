@@ -26,5 +26,7 @@ namespace BanleWebsite
         public string Description { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string Address { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<int> Pattern { get; set; }
     }
 }

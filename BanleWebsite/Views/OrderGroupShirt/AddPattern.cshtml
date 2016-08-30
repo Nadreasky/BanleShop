@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "AddPattern";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<EventBackToSchool_Pattern> patterns = ViewBag.patterns;
+}
+
+<style>
+    .pattern{
+        width:220px;
+    }
+</style>
+
+<div class="container">
+    <section id="content">
+        <div class="row-fluid">
+            <div class="span4">
+                @using (Html.BeginForm("savePattern", "OrderGroupShirt", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <label>Tên họa tiết</label>
+                    <input type="text" class="form-control" id="patternName" name="patternName" />
+                    <label>Chọn hình</label>
+                    <input type="file" class="form-control" id="image" name="image" />
+                    <input type="submit" class="btn-mini" value="ADD" />
+                }
+            </div>
+            <div class="span8">
+                <div class="row">
+                    @{
+                        foreach (var item in patterns)
+                        {
+                            <div class="span4">
+                                <div class="img_top">
+                                    <img src="@item.Link" width="200" />
+                                </div>
+                                <div class="name_bot">
+                                    <h5 style="font-family:Lato;">@item.Name</h5>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

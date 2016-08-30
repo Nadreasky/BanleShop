@@ -23,6 +23,14 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public ActionResult AddPattern()
+        {
+            db = new BanleShopEntities();
+            List<EventBackToSchool_Pattern> patterns = db.EventBackToSchool_Pattern.ToList();
+            ViewBag.patterns = patterns;
+            return View();
+        }
+
         public ActionResult Success(int? id)
         {
             db = new BanleShopEntities();
@@ -66,8 +74,80 @@ namespace BanleWebsite.Controllers
             return JsonConvert.SerializeObject(listSizeName);
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult savePattern(string patternName, HttpPostedFileBase image)
+        {
+            db = new BanleShopEntities();
+            _imageServices = new ImageServices();
+
+            string filePath = "";
+
+            if (image == null)
+            {
+                ViewBag.Error += "Bạn chưa chọn hình ảnh cho sản phẩm";
+            }
+            else
+            {
+                if (image != null && image.FileName != null)
+                {
+                    string path = Server.MapPath("~/PatternShop");
+                    if(!Directory.Exists(path))
+                    {
+                        System.IO.Directory.CreateDirectory(path);
+                    }
+                    WebImage img = _imageServices.reSizeImgBig(image);
+                    img.FileName = image.FileName;
+                    DateTime dateTime = DateTime.Now;
+                    string currentDateTime = dateTime.Day.ToString()
+                        + "-" + dateTime.Month.ToString()
+                        + "-" + dateTime.Year.ToString()
+                        + "-" + dateTime.Hour.ToString()
+                        + "-" + dateTime.Minute.ToString()
+                        + "-" + dateTime.Second.ToString()
+                        + "-" + dateTime.Millisecond.ToString();
+                    string extension = img.FileName.Split('.').Last();
+                    string savePath = path + "\\" + currentDateTime + "." + extension;
+                    img.Save(savePath);
+                    filePath = "/PatternShop/" + currentDateTime + "." + extension;
+                }
+            }
+
+            EventBackToSchool_Pattern pattern = new EventBackToSchool_Pattern();
+
+            pattern.Name = patternName;
+            pattern.Link = filePath;
+
+            db.EventBackToSchool_Pattern.Add(pattern);
+
+            try
+            {
+                db.SaveChanges();
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
+            return RedirectToAction("AddPattern");
+        }
+
         public ActionResult Save(int? shirtTypeId, string colorId, string sizeId, HttpPostedFileBase image, int quantity,
-            string customerName, string email, string phone, string description, string address)
+            string customerName, string email, string phone, string description, string address, int pattern)
         {
             db = new BanleShopEntities();
             _imageServices = new ImageServices();
@@ -136,6 +216,8 @@ namespace BanleWebsite.Controllers
             order.Description = description;
             order.Address = address;
             order.CreateDate = DateTime.Now;
+            order.Status = SLIMCONFIG.ORDER_STATUS_UNCHECK;
+            order.Pattern = pattern;
 
             db.EventBackToSchool_Order.Add(order);
 

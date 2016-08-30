@@ -5,39 +5,40 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="19d6548f8fa249a5b13d8173a72dd962" Name="Diagram1">
-        <EntityTypeShape EntityType="BanleShopModel.Agency" Width="1.5" PointX="8.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.AspNetRole" Width="1.5" PointX="8.75" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.AspNetUser" Width="1.5" PointX="11" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.Category" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.Color" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.ColorProductDetail" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Color" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Order" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_ShirtType" Width="1.5" PointX="10.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Size" Width="1.5" PointX="10.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.Image" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.News" Width="1.5" PointX="12.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.Order" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.OrderDetail" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.Product" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BanleShopModel.SizeProductDetail" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_Product_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_ColorProductDetail_Color" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_Image_Color" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Color" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_ColorProductDetail_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_Image_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Size" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_SizeProductDetail_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.FK_SizeProductDetail_Size" ManuallyRouted="false" />
-        <AssociationConnector Association="BanleShopModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BanleShopModel.Agency" Width="1.5" PointX="8.75" PointY="1.5" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetRole" Width="1.5" PointX="8.75" PointY="12.25" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="10.75" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="13.5" />
+        <EntityTypeShape EntityType="BanleShopModel.AspNetUser" Width="1.5" PointX="11" PointY="11.125" />
+        <EntityTypeShape EntityType="BanleShopModel.Category" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BanleShopModel.Color" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="BanleShopModel.ColorProductDetail" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Color" Width="1.5" PointX="10.75" PointY="1.5" />
+        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Order" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Pattern" Width="1.5" PointX="10.75" PointY="4.5" />
+        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_ShirtType" Width="1.5" PointX="10.75" PointY="7.5" />
+        <EntityTypeShape EntityType="BanleShopModel.EventBackToSchool_Size" Width="1.5" PointX="12.75" PointY="1.5" />
+        <EntityTypeShape EntityType="BanleShopModel.Image" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="BanleShopModel.News" Width="1.5" PointX="2.75" PointY="13.5" />
+        <EntityTypeShape EntityType="BanleShopModel.Order" Width="1.5" PointX="6" PointY="13" />
+        <EntityTypeShape EntityType="BanleShopModel.OrderDetail" Width="1.5" PointX="8.25" PointY="6.375" />
+        <EntityTypeShape EntityType="BanleShopModel.Product" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="BanleShopModel.Size" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="BanleShopModel.SizeProductDetail" Width="1.5" PointX="5.25" PointY="6.75" />
+        <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BanleShopModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BanleShopModel.FK_Product_Category" />
+        <AssociationConnector Association="BanleShopModel.FK_ColorProductDetail_Color" />
+        <AssociationConnector Association="BanleShopModel.FK_Image_Color" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Color" />
+        <AssociationConnector Association="BanleShopModel.FK_ColorProductDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_Image_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Order" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_OrderDetail_Size" />
+        <AssociationConnector Association="BanleShopModel.FK_SizeProductDetail_Product" />
+        <AssociationConnector Association="BanleShopModel.FK_SizeProductDetail_Size" />
+        <AssociationConnector Association="BanleShopModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
