@@ -189,31 +189,73 @@
         </div>
     </section>
 
-    @using (Html.BeginForm("Save", "OrderGroupShirt", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Save", "OrderGroupShirt", FormMethod.Post, new { enctype = "multipart/form-data" , onsubmit="return checkData()"}))
     {
     <!-- Chon hoa tiet Section -->
-        <section id="chonhoatiet" class="bg-light-gray">
+        <section id="chonhoatiet">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2 class="section-heading">3. Chọn hình ảnh bạn muốn sử dụng</h2>
                     </div>
                 </div>
+                <div id="hoatietmau" class="row">
+                    <div id="hoatiet1" class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px" onclick="chonHoaTiet(this.id)">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div id="hoatiet2" class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px" onclick="chonHoaTiet(this.id)">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotru.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 portfolio-item" style="padding: 10px">
+                        <a href="javascript:void(0)" class="portfolio-link">
+                            <img src="~/Content/dataonhom/img/aodaidien/aothuncotim.jpg" class="img-responsive" alt="" style="display:block;margin:auto">
+                        </a>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8 col-sm-offset-2 text-center" style="margin-top:20px">
                         <div class="form-group">
-
+                            <p class="large text-muted">Hoặc bạn có thể upload mẫu họa tiết của bạn bên dưới</p>
                             <!--Upload image-->
-                            <input id="file-0a" name="image" class="file" type="file" multiple data-min-file-count="1">
+                            <input id="file-0a" name="image" class="file" type="file" multiple data-min-file-count="0">
                             <br>
-                            <div class="text-center">
-                                <button type="reset" class="btn btn-default">Reset</button>
-                                <a href="javascript:void(0)" id="xacnhanButton" class="page-scroll btn btn-primary" onclick="xacnhan()">Xác nhận</a>
-                            </div>
+
 
                         </div>
                     </div>
+                </div>
+                <div class="row text-center">
+                    <button type="reset" class="btn btn-default">Reset</button>
+                    <a href="javascript:void(0)" id="xacnhanButton" class="page-scroll btn btn-primary" onclick="xacnhan()">Xác nhận</a>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -230,7 +272,7 @@
         </section>
 
     <!-- Xac nhan Section -->
-        <section id="xacnhan">
+        <section id="xacnhan" class="bg-light-gray">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -271,6 +313,7 @@
                             <input type="hidden" name="colorId" id="mausac" value="" />
                             <input type="hidden" name="sizeId" id="kichthuoc" value="" />
                             <input type="hidden" name="quantity" id="soluong" value="" />
+                            <input type="hidden" name="pattern" id="hoatiet" value="" />
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
@@ -317,6 +360,7 @@
         var soLuongAoHienTai = null;
         var section = null;
         var currentLocation = location.href;
+        var hoaTietHienTai = null;
 
         //Function chon ao
         function chonAo(clickedId) {
@@ -333,6 +377,7 @@
             mauAoHienTai = null;
             sizeAoHienTai = null;
             soLuongAoHienTai = 1;
+            hoaTietHienTai = null;
             jQuery("#quantity").val(1);
             jQuery("#khunghienmau").css("background-color", "");
             jQuery("#formchonao div").css({
@@ -425,7 +470,7 @@
             if (quantity > 1) {
                 jQuery("#quantity").val(quantity - 1);
             } else {
-                alert("Số lượng không được nhỏ hơn 1");
+                modalAlert("Số lượng không hợp lệ!", "Vui lòng đặt hàng với số lượng ít nhất là 1", "#chonmaukichco");
             }
             soLuongAoHienTai = jQuery("#quantity").val();
         }
@@ -440,12 +485,31 @@
             } else {
                 jQuery("#xacnhanButton").attr("href", "#xacnhan");
             }
-            jQuery("#xacnhandonhang").text("Bạn đã đặt " + tenAoHienTai + " với số lượng " + soLuongAoHienTai + " cái và màu sắc là: ");
+            jQuery("#xacnhandonhang").text("Bạn đã đặt " + tenAoHienTai + " với số lượng " + soLuongAoHienTai + " cái, màu sắc là: ");
             jQuery("#xacnhandonhang").append("<input type='button' style='background-color:" + mauAoHienTai + ";height: 15px;width:10px;border: 0.1px solid'/>");
+            if (hoaTietHienTai != null) {
+                jQuery("#xacnhandonhang").append(" và họa tiết mã: " + hoaTietHienTai);
+            }
             jQuery("#loaiao").val(idAoHienTai);
             jQuery("#mausac").val(mauAoHienTai);
             jQuery("#soluong").val(soLuongAoHienTai);
             jQuery("#kichthuoc").val(sizeAoHienTai);
+            jQuery("#hoatiet").val(hoaTietHienTai);
+        }
+        //Function xac nhan truoc khi submit
+        function checkData() {
+            if (idAoHienTai == null) {
+                modalAlert("Bạn chưa chọn áo!", "Vui lòng chọn một loại áo bạn muốn đặt hàng !", "#chonao");
+                return false;
+            } else if (mauAoHienTai == null) {
+                modalAlert("Bạn chưa chọn màu!", "Vui lòng chọn một màu áo bạn muốn đặt hàng !", "#chonmaukichco");
+                return false;
+            } else if (sizeAoHienTai == null) {
+                modalAlert("Bạn chưa chọn size!", "Vui lòng chọn một size áo bạn muốn đặt hàng !", "#chonmaukichco");
+                return false;
+            } else {
+                return true;
+            }
         }
         //Function show alert modal
         function modalAlert(header, content, part) {
@@ -461,7 +525,17 @@
         function goBack() {
             location.href = currentLocation + section;
         }
-
+        //Function Chon hao tiet
+        function chonHoaTiet(clickedID) {
+            hoaTietHienTai = null;
+            hoaTietHienTai = clickedID;
+            jQuery("#hoatietmau div").css({
+                "border": "",
+            });
+            jQuery("#" + clickedID).css({
+                "border": "0.5px solid orange",
+            });
+        }
 
     </script>
 
