@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -250,7 +251,70 @@ namespace BanleWebsite.Controllers
             //result = new ResultViewModels();
             //result.data = order;
 
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Action: SaveOrderGroupShirt");
+            sb.Append(Environment.NewLine);
+            sb.Append("ShirtTypeId: ");
+            sb.Append(shirtTypeId.Value);
+            sb.Append(Environment.NewLine);
+            sb.Append("ColorId: ");
+            sb.Append(colorId);
+            sb.Append(Environment.NewLine);
+            sb.Append("SizeId: ");
+            sb.Append(sizeId);
+            sb.Append(Environment.NewLine);
+            sb.Append("Image: ");
+            sb.Append(filePath);
+            sb.Append(Environment.NewLine);
+            sb.Append("Quantity: ");
+            sb.Append(quantity);
+            sb.Append(Environment.NewLine);
+            sb.Append("CustomerName: ");
+            sb.Append(customerName);
+            sb.Append(Environment.NewLine);
+            sb.Append("Email: ");
+            sb.Append(email);
+            sb.Append(Environment.NewLine);
+            sb.Append("Phone: ");
+            sb.Append(phone);
+            sb.Append(Environment.NewLine);
+            sb.Append("Description: ");
+            sb.Append(description);
+            sb.Append(Environment.NewLine);
+            sb.Append("Address: ");
+            sb.Append(address);
+            sb.Append(Environment.NewLine);
+            sb.Append("Pattern: ");
+            sb.Append(pattern);
+            sb.Append(Environment.NewLine);
+
+            WriteLog(sb.ToString());
+
             return RedirectToAction("Success" , new { id = order.Id });
+        }
+
+        public void WriteLog(string text)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(DateTime.Now.ToLongDateString());
+            sb.Append(" - ");
+            sb.Append(DateTime.Now.ToLongTimeString());
+            sb.Append(Environment.NewLine);
+
+            sb.Append(text);
+            sb.Append(Environment.NewLine);
+            sb.Append(Environment.NewLine);
+
+            string path = Server.MapPath(Url.Content("~/"));
+            //string fileName = Server.MapPath("logYourFashion.txt");
+            if (!System.IO.File.Exists(path + "/logYourFashion.txt"))
+            {
+                System.IO.File.Create(path + "/logYourFashion.txt").Close();
+            }
+            System.IO.File.AppendAllText(path + "/logYourFashion.txt", sb.ToString());
+
+            sb.Clear();
         }
     }
 }
