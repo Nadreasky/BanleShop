@@ -23,8 +23,24 @@ namespace BanleWebsite.Controllers
             return View();
         }
 
+        public ActionResult Search2Mobile()
+        {
+            List<Order> filteredOrders;
+
+            filteredOrders = _orderServices.getOrderFilterByPhoneNumber(Request.Form["phoneNo"]);
+            ViewBag.orders = filteredOrders;
+            return View();
+        }
+
         public ActionResult Search()
         {
+            if(Request.Browser.IsMobileDevice)
+            {
+                List<Order> filteredOrders;
+                filteredOrders = _orderServices.getOrderFilterByPhoneNumber(Request.Form["phoneNo"]);
+                ViewBag.orders = filteredOrders;
+                return View("SearchMobile");
+            }
 
             //var orders = _orderServices.getOrderFilter("Q",2,null,null);
             //if (string.IsNullOrWhiteSpace(Request.Form["status"]) == false ||

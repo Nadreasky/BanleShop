@@ -176,7 +176,7 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="DateModified" Type="datetime" />
           <Property Name="Staff" Type="int" />
-          <Property Name="Address" Type="text" />
+          <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Email" Type="text" />
         </EntityType>
         <EntityType Name="OrderDetail">
@@ -756,7 +756,7 @@
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="Staff" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OrderDetails" Relationship="BanleShopModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>

@@ -638,6 +638,8 @@
     <Content Include="Views\OrderGroupShirt\Success.cshtml" />
     <Content Include="Views\Quanli\EventBackToSchool.cshtml" />
     <Content Include="Views\OrderGroupShirt\AddPattern.cshtml" />
+    <Content Include="Views\Order\SearchMobile.cshtml" />
+    <Content Include="Views\Order\Search2Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AgencyOrder\" />

@@ -61,7 +61,7 @@
                 {
                     <div class="center-vertically">
                         <div class="col-sm-8 col-sm-offset-2 text-center">
-                            @using (Html.BeginForm("Search2", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Search2Mobile", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <h2 style="color:#fff;" class="scaleReveal">Nhập số điện thoại bạn đã dùng để đặt hàng</h2>
                                 <hr class="bottomReveal" />
@@ -80,7 +80,7 @@
                 {
                     <div class="row">
                         <div class="col-md-12">
-                            @using (Html.BeginForm("Search2", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Search2Mobile", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <h3 class="scaleReveal" style="color:#fff;">Nhập số điện thoại bạn đã dùng để đặt hàng</h3>
                                 <div class="form-inline" style="color:#000;">
@@ -89,73 +89,59 @@
                                 <input type="submit" style="margin-top:10px;" value="Kiểm tra" class="btn btn-warning btn-lg" />
                             }
                         </div>
-                       
+
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table" id="orderTable" style="background-color:#fff; color:#000;">
-                                    <tr>
-                                        <th>Số thứ tự</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Tên khách hàng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Trạng thái</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    @{
-                                    foreach (var item in orders)
-                                    {
+                        <div class="col-sm-12" style="margin-bottom:100px;">
+                            @{ 
+                                foreach (var item in orders)
+                                {
+                                    ++soThuTu;
+                                    <div class="row" style="background-color:#fff; color:#000;">
+                                        <label>#</label>
+                                        <strong>@soThuTu</strong><br />
+                                        <label>Ngày tạo: </label>
+                                        <strong>@item.CreateDate</strong><br />
+                                        <label>Tên khách hàng: </label>
+                                        <strong>@item.Name</strong><br />
+                                        <label>Số điện thoại: </label>
+                                        <strong>@item.PhoneNo</strong><br />
+                                        <label>Tình trạng</label>
+                                        @{
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
+                                            {
+                                                <div class="alert alert-danger alert-dismissible">
+                                                    <i class="glyphicon glyphicon-cog" style="font-size:15px;">
+                                                        <span style="font-family:Arial;">Đang xử lí đơn hàng</span>
+                                                    </i>
+                                                </div>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
+                                            {
+                                                <div class="alert alert-info alert-dismissable">
+                                                    <i class="glyphicon glyphicon-send" style="font-size:15px;">
+                                                        <span style="font-family:Arial;">Đang giao hàng</span>
+                                                    </i>
+                                                </div>
+                                            }
+                                            if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
+                                            {
+                                                <div class="alert alert-success alert-dismissable">
+                                                    <i class="glyphicon glyphicon-ok" style="font-size:15px;">
+                                                        <span style="font-family:Arial;">Đã xong</span>
+                                                    </i>
+                                                </div>
+                                            }
 
-                                            <tr style="height:75px;">
-                                                @{++soThuTu;}
-                                                <td style="vertical-align:middle;">@soThuTu</td>
-                                                <td style="vertical-align:middle;">@item.CreateDate</td>
-                                                <td style="vertical-align:middle;">@item.Name</td>
-                                                <td style="vertical-align:middle;">@item.PhoneNo</td>
-                                                <td style="vertical-align:middle;">
-                                                    @{
-                                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_UNCHECK)
-                                                    {
-                                                            <div class="alert alert-danger alert-dismissible">
-                                                                <i class="glyphicon glyphicon-cog" style="font-size:15px;">
-                                                                    <span style="font-family:Arial;">Đang xử lí đơn hàng</span>
-                                                                </i>
-                                                            </div>
-                                                    }
-                                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_CHECKED)
-                                                    {
-                                                            <div class="alert alert-info alert-dismissable">
-                                                                <i class="glyphicon glyphicon-send" style="font-size:15px;">
-                                                                    <span style="font-family:Arial;">Đang giao hàng</span>
-                                                                </i>
-                                                            </div>
-                                                    }
-                                                    if (item.Status == SLIMCONFIG.ORDER_STATUS_PAID)
-                                                    {
-                                                            <div class="alert alert-success alert-dismissable">
-                                                                <i class="glyphicon glyphicon-ok" style="font-size:15px;">
-                                                                    <span style="font-family:Arial;">Đã xong</span>
-                                                                </i>
-                                                            </div>
-                                                    }
-
-                                                    }
-                                                </td>
-                                                <td style="vertical-align:middle;">
-                                                    <!-- Trigger the modal with a button -->
-                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Chi tiết</button>
-                                                </td>
-
-                                            </tr>
-                                                    }
-                                    }
-                                </table>
-                            </div>
+                                        }
+                                        @*<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="getOrderDetail(@item.ID)">Chi tiết</button>*@
+                                    </div>
+                                }
+                            }
+                            
                         </div>
-                        
+
                     </div>
 
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="display: none;">
@@ -207,14 +193,13 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div>
-                                                    }
+                                                        }
             }
 
 
         </div><!-- /.container -->
     </div>
     <!-- End Jumbotron -->
-
     <!--Script for order modal function-->
     <script>
     function updateOrderStatus(id) {
