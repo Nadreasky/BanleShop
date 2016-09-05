@@ -2,6 +2,7 @@
     News news = ViewBag.news;
     ViewBag.Title = news.Title;
     List<News> listNews5Items = ViewBag.listNews5Items;
+    string ogUrl = SLIMCONFIG.GenerateSlug(news.ID, news.Title);
 }
 
 @*<head>
@@ -17,6 +18,13 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="~/Content/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>*@
 
+@section head{
+    <meta property="og:url" content="@ogUrl" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="@news.Title" />
+    <meta property="og:description" content="@news.ShortDes" />
+    <meta property="og:image" content="@news.MainImage" />
+}
 
 <style>
     #mainNews img{
