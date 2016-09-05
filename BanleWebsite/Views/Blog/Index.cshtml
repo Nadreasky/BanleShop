@@ -2,7 +2,7 @@
     News news = ViewBag.news;
     ViewBag.Title = news.Title;
     List<News> listNews5Items = ViewBag.listNews5Items;
-    string ogUrl = SLIMCONFIG.GenerateSlug(news.ID, news.Title);
+    string ogUrl = "http://yourfashion.com.vn/Blog/" + SLIMCONFIG.GenerateSlug(news.ID, news.Title);
 }
 
 @*<head>
